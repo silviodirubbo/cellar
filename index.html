@@ -4,7 +4,9 @@ title: Home
 permalink: /
 ---
 
-{% assign upcoming = site.data.tastings | where: "status", "upcoming" | sort: "date" %}
+{% assign upcoming_fixed = site.data.tastings | where: "status", "upcoming" | where: "date_tbd", false | sort: "date" %}
+{% assign upcoming_tbd = site.data.tastings | where: "status", "upcoming" | where: "date_tbd", true %}
+{% assign upcoming = upcoming_fixed | concat: upcoming_tbd %}
 {% assign past     = site.data.tastings | where: "status", "past"     | sort: "date" | reverse %}
 {% assign next     = upcoming | first %}
 
