@@ -33,9 +33,10 @@ supabase: true
       {% for tasting in upcoming %}
       <div class="signup-block {% if tasting.featured %}signup-block--featured{% endif %}" id="{{ tasting.slug }}">
         <div class="signup-meta">
-          <time datetime="{{ tasting.date }}">{{ tasting.date | date: "%a %-d %b %Y" }}</time>
+          {% if tasting.date_tbd %}<span class="date-tbd">Date TBD</span>{% else %}<time datetime="{{ tasting.date }}">{{ tasting.date | date: "%a %-d %b %Y" }}</time>{% endif %}
           <span class="tag tag--green">Upcoming</span>
           <span class="label">{{ tasting.region }}</span>
+          {% if tasting.location %}<span class="label">· {{ tasting.location }}</span>{% endif %}
         </div>
         <h2 class="signup-title">{{ tasting.title }}</h2>
 
