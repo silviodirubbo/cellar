@@ -1357,3 +1357,21 @@ textarea.form-input {
 .avail-close:hover {
   color: var(--ink);
 }
+
+/* ── Planner v2 — no auth ─────────────────────────────────── */
+.planner-header { display: block; }
+
+/* Hide auth elements entirely */
+#login-btn, #logout-btn, .auth-bar,
+.auth-username, .btn--google, .btn--logout-inline {
+  display: none !important;
+}
+
+/* Spots — simplified */
+.tasting-banner__spots {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
