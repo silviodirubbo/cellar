@@ -6,7 +6,20 @@ const SUPABASE_URL      = 'https://iazxrxrimfakxdbulwsj.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlhenhyeHJpbWZha3hkYnVsd3NqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3MTk2ODksImV4cCI6MjA5NTI5NTY4OX0.mPMhsp0-9O3W9OcEwk39owNZee7rUpqB2_a9Ss-YUP0';
 
 const { createClient } = supabase;
-const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  auth: {
+    detectSessionInUrl: true,
+    persistSession: true,
+    autoRefreshToken: true
+  }
+});
+
+// Handle OAuth redirect — recover session from URL hash
+db.auth.getSession().then(({ data: { session } }) => {
+  if (session) {
+    document.dispatchEvent(new CustomEvent('user:ready', { detail: session.user }));
+  }
+});
 
 // ── Auth helpers ─────────────────────────────────────────────
 
