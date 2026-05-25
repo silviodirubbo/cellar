@@ -37,7 +37,7 @@
     - Rhône
     - France
   status: upcoming
-  spots_total: 6
+  spots_total: 5
   cost_estimate: "37 CHF"
   featured: true
 
@@ -57,40 +57,62 @@
     - Rhône
     - France
   status: upcoming
-  spots_total: 6
+  spots_total: 5
   cost_estimate: "46 CHF"
   featured: false
 
 # ── Past ──────────────────────────────────────────────────────
 
+- slug: northern-rhone-syrahs
+  title: "3 Northern Rhône Syrahs"
+  date: 2026-05-23
+  region: "Northern Rhône"
+  description: >
+    A deep dive into the north — three Syrahs from Cornas, Côte-Rôtie
+    and Hermitage, exploring how terroir shapes one grape across the
+    most celebrated appellations of the Northern Rhône.
+  tags:
+    - Syrah
+    - Cornas
+    - Côte-Rôtie
+    - Hermitage
+    - Rhône
+    - France
+  status: past
+  featured: false
+
 - slug: syrah-rhone-cortona
   title: "Syrah — from the Rhône to Cortona"
-  date: 2025-03-15
+  date: 2026-04-11
   region: "Rhône Valley & Tuscany"
   description: >
-    Three expressions of Syrah across three climates:
-    a Cortona DOC, a Saint-Joseph, and a Châteauneuf-du-Pape.
-    A grape that travels well.
+    A first contact with Syrah — its home in the Rhône and its journey
+    to Cortona. Three expressions across the north, the south, and Tuscany,
+    showing how the grape adapts to each place it calls home.
   tags:
     - Syrah
     - Rhône
     - Cortona
     - Tuscany
+    - France
+    - Italy
   status: past
   featured: false
-  wines:
-    - name: "Cortona Syrah"
-      producer: "TBC"
-      vintage: 2021
-      appellation: "Cortona DOC"
-      blend: "100% Syrah"
-    - name: "Saint-Joseph"
-      producer: "TBC"
-      vintage: 2020
-      appellation: "Saint-Joseph AOC"
-      blend: "100% Syrah"
-    - name: "Châteauneuf-du-Pape"
-      producer: "Le Vieux Donjon"
-      vintage: 2019
-      appellation: "Châteauneuf-du-Pape AOC"
-      blend: "Grenache, Syrah, Mourvèdre"
+
+- slug: chardonnay-across-countries
+  title: "Chardonnay across Countries"
+  date: 2026-03-07
+  region: "Bourgogne · Südtirol · Friuli"
+  description: >
+    A pilot evening and the first of the series — one grape, three terroirs.
+    A Bourgogne, a Südtirol and a Friuli Chardonnay side by side, exploring
+    how the same variety expresses itself across radically different soils and climates.
+  tags:
+    - Chardonnay
+    - Bourgogne
+    - Südtirol
+    - Friuli
+    - France
+    - Italy
+  status: past
+  featured: false
