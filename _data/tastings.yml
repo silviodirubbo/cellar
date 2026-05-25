@@ -129,7 +129,7 @@
       producer: "Le Vieux Donjon"
       vintage: 2022
       appellation: "Châteauneuf-du-Pape AOC"
-      blend: "Grenache, Syrah, Mourvèdre"
+      blend: "Grenache 70%, Syrah 15%, Mourvèdre 15%"
 
 - slug: chardonnay-across-countries
   title: "Chardonnay across Countries"
@@ -150,7 +150,7 @@
   featured: false
   wines:
     - name: "Montagny Premier Cru"
-      producer: "Drouhin"
+      producer: "Joseph Drouhin"
       vintage: 2022
       appellation: "Côte Chalonnaise"
       blend: "100% Chardonnay"
