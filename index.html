@@ -4,14 +4,111 @@ title: Home
 permalink: /
 ---
 
-<!-- Home page — coming soon -->
-<section class="section section--warm-white" style="padding-top: calc(var(--section-pad) + 4rem);">
+{% assign upcoming = site.data.tastings | where: "status", "upcoming" | sort: "date" %}
+{% assign past     = site.data.tastings | where: "status", "past"     | sort: "date" | reverse %}
+{% assign next     = upcoming | first %}
+
+<!-- ── Hero ─────────────────────────────────────────────────── -->
+<section class="home-hero">
   <div class="container">
-    <span class="section-label">Silvio's Cellar</span>
-    <h1>Coming soon.</h1>
-    <p class="mt-3">Friendly wine tastings in Geneva.</p>
-    <div class="mt-6">
-      <a href="/cellar/tastings/" class="btn btn--solid">Browse tastings</a>
+    <span class="section-label">Geneva</span>
+    <div class="hero-grid">
+      <div>
+        <h1>Friendly wine tastings<br>in <em>Geneva.</em></h1>
+        <div class="hero-body">
+          <p>A structured yet convivial way to share moments together while discovering the complexity of the wine world — one bottle at a time.</p>
+          <p>This website is the infrastructure behind those evenings. A place to keep track of what we have tasted, to plan what comes next, and to make it easier for friends to join, propose, and shape where we go. <em>Not a single drop wasted.</em></p>
+          <p>Upcoming tastings also show an indicative cost — this refers only to the expected price of the bottles used for that evening. Nothing is charged on top. Wine prices can vary sensibly depending on the theme, so you can choose when to join based on what you feel like spending that month.</p>
+        </div>
+      </div>
+      <div class="hero-aside">
+        <span class="hero-aside-label">So far</span>
+        <div class="hero-stat">
+          <div class="hero-stat-num">{{ past | size }}</div>
+          <div class="hero-stat-desc">Tasting{% if past.size != 1 %}s{% endif %} held</div>
+        </div>
+        <div class="hero-stat">
+          {% assign wine_count = 0 %}
+          {% for t in past %}
+            {% assign wine_count = wine_count | plus: t.wines.size %}
+          {% endfor %}
+          <div class="hero-stat-num">{{ wine_count }}</div>
+          <div class="hero-stat-desc">Wines opened</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">{{ upcoming | size }}</div>
+          <div class="hero-stat-desc">Coming up</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- ── Two-column preview ─────────────────────────────────── -->
+<div class="preview-grid">
+
+  <!-- Tastings preview -->
+  <div class="preview-col preview-col--left">
+    <span class="col-label">Tastings</span>
+
+    {% if next %}
+    <div class="preview-event preview-event--featured">
+      <div class="preview-event-meta">
+        <time datetime="{{ next.date }}">{{ next.date | date: "%a %-d %b %Y" }}</time>
+        <span class="tag tag--green">Upcoming</span>
+      </div>
+      <div class="preview-event-title">{{ next.title }}</div>
+      <div class="preview-event-region">{{ next.region }}</div>
+      {% if next.spots_remaining %}
+      <div class="preview-spots">{{ next.spots_remaining }} / {{ next.spots_total }} spots available</div>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    {% for tasting in past limit: 2 %}
+    <div class="preview-event preview-event--past">
+      <div class="preview-event-meta">
+        <time datetime="{{ tasting.date }}">{{ tasting.date | date: "%-d %b %Y" }}</time>
+      </div>
+      <div class="preview-event-title">{{ tasting.title }}</div>
+      <div class="preview-event-region">{{ tasting.region }}</div>
+    </div>
+    {% endfor %}
+
+    <a class="preview-link" href="{{ '/tastings/' | relative_url }}">Browse all tastings →</a>
+  </div>
+
+  <!-- vertical rule -->
+  <div class="preview-rule"></div>
+
+  <!-- Planner preview -->
+  <div class="preview-col preview-col--right">
+    <span class="col-label">Planner</span>
+
+    <span class="cal-label">Dates in the pipeline</span>
+
+    {% for tasting in upcoming limit: 3 %}
+    <div class="cal-row">
+      <div class="cal-dot"></div>
+      <time class="cal-date" datetime="{{ tasting.date }}">{{ tasting.date | date: "%-d %b %Y" }}</time>
+      <div class="cal-title">{{ tasting.title }}</div>
+    </div>
+    {% endfor %}
+
+    {% for tasting in past limit: 2 %}
+    <div class="cal-row cal-row--past">
+      <div class="cal-dot cal-dot--past"></div>
+      <time class="cal-date" datetime="{{ tasting.date }}">{{ tasting.date | date: "%-d %b %Y" }}</time>
+      <div class="cal-title">{{ tasting.title }}</div>
+    </div>
+    {% endfor %}
+
+    <div class="planner-cta">
+      {% if next %}
+      <a href="{{ '/planner/' | relative_url }}#{{ next.slug }}" class="btn btn--solid">Sign up for next tasting</a>
+      {% endif %}
+      <a href="{{ '/planner/' | relative_url }}#propose" class="btn btn--text">Propose a topic →</a>
+    </div>
+  </div>
+
+</div>
