@@ -64,7 +64,7 @@
 # ── Past ──────────────────────────────────────────────────────
 
 - slug: northern-rhone-syrahs
-  title: "Northern Rhône Syrahs"
+  title: "3 Northern Rhône Syrahs"
   date: 2026-05-23
   region: "Northern Rhône"
   description: >
@@ -80,6 +80,22 @@
     - France
   status: past
   featured: false
+  wines:
+    - name: "Les Eygats Cornas"
+      producer: "Domaine Courbis"
+      vintage: 2022
+      appellation: "Cornas AOC"
+      blend: "100% Syrah"
+    - name: "Les Schistes"
+      producer: "Clusel-Roch"
+      vintage: 2020
+      appellation: "Côte-Rôtie AOC"
+      blend: "100% Syrah"
+    - name: "Le Vignon"
+      producer: "J.M.B. Sorrel"
+      vintage: 2019
+      appellation: "Hermitage AOC"
+      blend: "100% Syrah"
 
 - slug: syrah-rhone-cortona
   title: "Syrah — from the Rhône to Cortona"
@@ -98,6 +114,22 @@
     - Italy
   status: past
   featured: false
+  wines:
+    - name: "Syrah"
+      producer: "Stefano Amerighi"
+      vintage: 2022
+      appellation: "Cortona DOC"
+      blend: "100% Syrah"
+    - name: "Saint-Joseph Le Ponts"
+      producer: "Domaine Les Alexandrins"
+      vintage: 2022
+      appellation: "Saint-Joseph AOC"
+      blend: "100% Syrah"
+    - name: "Châteauneuf-du-Pape"
+      producer: "Le Vieux Donjon"
+      vintage: 2022
+      appellation: "Châteauneuf-du-Pape AOC"
+      blend: "Grenache, Syrah, Mourvèdre"
 
 - slug: chardonnay-across-countries
   title: "Chardonnay across Countries"
@@ -116,3 +148,19 @@
     - Italy
   status: past
   featured: false
+  wines:
+    - name: "Montagny Premier Cru"
+      producer: "Drouhin"
+      vintage: 2022
+      appellation: "Côte Chalonnaise"
+      blend: "100% Chardonnay"
+    - name: "Sanct Valentin Chardonnay"
+      producer: "Sanct Valentin"
+      vintage: 2023
+      appellation: "Appiano"
+      blend: "100% Chardonnay"
+    - name: "Jurosa"
+      producer: "Lis Neris"
+      vintage: 2022
+      appellation: "Isonzo"
+      blend: "100% Chardonnay"
