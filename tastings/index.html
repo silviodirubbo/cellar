@@ -37,7 +37,7 @@ permalink: /tastings/
 {% assign upcoming_fixed = site.data.tastings | where: "status", "upcoming" | where: "date_tbd", false | sort: "date" %}
 {% assign upcoming_tbd = site.data.tastings | where: "status", "upcoming" | where: "date_tbd", true %}
 {% assign upcoming = upcoming_fixed | concat: upcoming_tbd %}
-{% assign past     = site.data.tastings | where: "status", "past"     | sort: "date" | reverse %}
+{% assign past = site.data.tastings | where: "status", "past" | sort: "date" | reverse %}
 
 <div class="tastings-grid">
 
@@ -51,9 +51,14 @@ permalink: /tastings/
                  data-tags="{{ tasting.tags | join: ',' }}">
           <div class="tasting-banner__body">
             <div class="tasting-banner__meta">
-              {% if tasting.date_tbd %}<span class="date-tbd">Date TBD</span>{% else %}<time datetime="{{ tasting.date }}">{{ tasting.date | date: "%a %-d %b %Y" }}</time>{% endif %}
+              {% if tasting.date_tbd %}
+                <span class="date-tbd">Date TBD</span>
+              {% else %}
+                <time datetime="{{ tasting.date }}">{{ tasting.date | date: "%a %-d %b %Y" }}</time>
+              {% endif %}
               <span class="tag tag--green">Upcoming</span>
-              <span class="label">{{ tasting.region }}</span>{% if tasting.location %}<span class="label">{{ tasting.location }}</span>{% endif %}
+              <span class="label">{{ tasting.region }}</span>
+              {% if tasting.location %}<span class="label">· {{ tasting.location }}</span>{% endif %}
             </div>
             <h2 class="tasting-banner__title">{{ tasting.title }}</h2>
             <p class="tasting-banner__desc">{{ tasting.description }}</p>
@@ -69,12 +74,16 @@ permalink: /tastings/
             </div>
           </div>
           <div class="tasting-banner__actions">
-            {% if tasting.spots_remaining %}
+            {% if tasting.spots_total %}
               <span class="tasting-banner__spots">{{ tasting.spots_total }} spots</span>
             {% endif %}
             <div class="tasting-banner__btns">
               <button class="share-btn" data-slug="{{ tasting.slug }}">Share</button>
-              <a href="{{ '/planner/' | relative_url }}#{{ tasting.slug }}" class="btn btn--solid">Sign up</a>
+              {% if tasting.date_tbd %}
+                <a href="{{ '/planner/' | relative_url }}#{{ tasting.slug }}" class="btn btn--solid">Tell me your availability</a>
+              {% else %}
+                <a href="{{ '/planner/' | relative_url }}#{{ tasting.slug }}" class="btn btn--solid">I'm coming</a>
+              {% endif %}
             </div>
           </div>
         </article>
@@ -100,7 +109,7 @@ permalink: /tastings/
             <div class="tasting-banner__meta">
               <time datetime="{{ tasting.date }}">{{ tasting.date | date: "%-d %b %Y" }}</time>
               <span class="tag">Past</span>
-              <span class="label">{{ tasting.region }}</span>{% if tasting.location %}<span class="label">{{ tasting.location }}</span>{% endif %}
+              <span class="label">{{ tasting.region }}</span>
             </div>
             <h2 class="tasting-banner__title">{{ tasting.title }}</h2>
             <p class="tasting-banner__desc">{{ tasting.description }}</p>
