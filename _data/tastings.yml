@@ -38,9 +38,9 @@
     - Rhône
     - France
   status: upcoming
-  spots_total: 10
+  spots_total: 5
   spots_remaining: 5
-  cost_estimate: ""
+  cost_estimate: "37 CHF"
   featured: true
 
 - slug: cote-rotie-horizontal
@@ -61,7 +61,7 @@
   status: upcoming
   spots_total: 5
   spots_remaining: 5
-  cost_estimate: ""
+  cost_estimate: "46 CHF"
   featured: false
 
 # ── Past ──────────────────────────────────────────────────────
