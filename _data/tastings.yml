@@ -12,8 +12,7 @@
 #   tags:              list of grape/region/theme tags
 #   status:            upcoming | past
 #   spots_total:       integer
-#   spots_remaining:   integer
-#   cost_estimate:     string e.g. "CHF 25–35 per person"
+#   cost_estimate:     string e.g. "CHF 37"
 #   featured:          true | false
 #   slides:            true once presentation is ready
 #   wines:             list of wines (for presentation slides)
@@ -38,8 +37,7 @@
     - Rhône
     - France
   status: upcoming
-  spots_total: 5
-  spots_remaining: 5
+  spots_total: 6
   cost_estimate: "37 CHF"
   featured: true
 
@@ -59,8 +57,7 @@
     - Rhône
     - France
   status: upcoming
-  spots_total: 5
-  spots_remaining: 5
+  spots_total: 6
   cost_estimate: "46 CHF"
   featured: false
 
