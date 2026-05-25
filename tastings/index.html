@@ -1,0 +1,125 @@
+---
+layout: default
+title: Tastings
+description: Past and upcoming wine tastings organised by Silvio di Rubbo in Geneva.
+permalink: /tastings/
+---
+
+<header class="page-header">
+  <div class="container">
+    <div class="page-header__inner">
+      <div>
+        <span class="section-label">Events</span>
+        <h1>Tastings</h1>
+        <p class="mt-3">Here you can find all the tastings we did together and those in the pipeline for the next weeks — navigate through the slides and check which wines we drank.</p>
+      </div>
+      <div class="page-header__filters">
+        {% assign all_tags = "" | split: "" %}
+        {% for tasting in site.data.tastings %}
+          {% for tag in tasting.tags %}
+            {% unless all_tags contains tag %}
+              {% assign all_tags = all_tags | push: tag %}
+            {% endunless %}
+          {% endfor %}
+        {% endfor %}
+        <span class="filter-label">Filter by</span>
+        <div class="filter-bar__tags">
+          <button class="filter-btn active" data-filter="all">All</button>
+          {% for tag in all_tags %}
+            <button class="filter-btn" data-filter="{{ tag }}">{{ tag }}</button>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% assign upcoming = site.data.tastings | where: "status", "upcoming" | sort: "date" %}
+{% assign past     = site.data.tastings | where: "status", "past"     | sort: "date" | reverse %}
+
+<div class="tastings-grid">
+
+  <!-- ── Upcoming ─────────────────────────────────────────── -->
+  <div class="tastings-col tastings-col--upcoming">
+    <div class="container-col">
+      <span class="col-label">Upcoming</span>
+      {% if upcoming.size > 0 %}
+        {% for tasting in upcoming %}
+        <article class="tasting-banner {% if tasting.featured %}tasting-banner--featured{% endif %}"
+                 data-tags="{{ tasting.tags | join: ',' }}">
+          <div class="tasting-banner__body">
+            <div class="tasting-banner__meta">
+              <time datetime="{{ tasting.date }}">{{ tasting.date | date: "%a %-d %b %Y" }}</time>
+              <span class="tag tag--green">Upcoming</span>
+              <span class="label">{{ tasting.region }}</span>
+            </div>
+            <h2 class="tasting-banner__title">{{ tasting.title }}</h2>
+            <p class="tasting-banner__desc">{{ tasting.description }}</p>
+            {% if tasting.cost_estimate != "" and tasting.cost_estimate %}
+            <p class="tasting-banner__cost mt-2">
+              <span class="label">Indicative cost —</span>
+              <span class="cost-value">{{ tasting.cost_estimate }}</span>
+              <span class="cost-note">bottles only, nothing charged on top</span>
+            </p>
+            {% endif %}
+            <div class="tasting-banner__tags mt-3">
+              {% for tag in tasting.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+            </div>
+          </div>
+          <div class="tasting-banner__actions">
+            {% if tasting.spots_remaining %}
+              <span class="tasting-banner__spots">{{ tasting.spots_remaining }} / {{ tasting.spots_total }} spots</span>
+            {% endif %}
+            <div class="tasting-banner__btns">
+              <button class="share-btn" data-slug="{{ tasting.slug }}">Share</button>
+              <a href="{{ '/planner/' | relative_url }}#{{ tasting.slug }}" class="btn btn--solid">Sign up</a>
+            </div>
+          </div>
+        </article>
+        {% endfor %}
+      {% else %}
+        <p class="text-light" style="padding-top:1rem;">Nothing planned yet — check back soon.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- vertical rule -->
+  <div class="tastings-rule"></div>
+
+  <!-- ── Archive ───────────────────────────────────────────── -->
+  <div class="tastings-col tastings-col--archive">
+    <div class="container-col">
+      <span class="col-label">Archive</span>
+      {% if past.size > 0 %}
+        {% for tasting in past %}
+        <article class="tasting-banner"
+                 data-tags="{{ tasting.tags | join: ',' }}">
+          <div class="tasting-banner__body">
+            <div class="tasting-banner__meta">
+              <time datetime="{{ tasting.date }}">{{ tasting.date | date: "%-d %b %Y" }}</time>
+              <span class="tag">Past</span>
+              <span class="label">{{ tasting.region }}</span>
+            </div>
+            <h2 class="tasting-banner__title">{{ tasting.title }}</h2>
+            <p class="tasting-banner__desc">{{ tasting.description }}</p>
+            <div class="tasting-banner__tags mt-3">
+              {% for tag in tasting.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+            </div>
+          </div>
+          <div class="tasting-banner__actions">
+            {% if tasting.slides %}
+              <a href="{{ '/tastings/' | relative_url }}{{ tasting.slug }}/" class="btn btn--text">View presentation →</a>
+            {% else %}
+              <span class="label" style="font-size:0.6rem;">Presentation coming</span>
+            {% endif %}
+            <button class="share-btn" data-slug="{{ tasting.slug }}">Share</button>
+          </div>
+        </article>
+        {% endfor %}
+      {% else %}
+        <p class="text-light" style="padding-top:1rem;">No tastings yet.</p>
+      {% endif %}
+    </div>
+  </div>
+
+</div>

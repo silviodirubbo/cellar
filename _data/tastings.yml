@@ -1,0 +1,80 @@
+# _data/tastings.yml
+# ─────────────────────────────────────────────────────────────
+# Schema for each tasting:
+#
+#   slug:              unique identifier, used in URLs
+#   title:             full name of the tasting
+#   date:              YYYY-MM-DD
+#   region:            primary region (displayed as label)
+#   description:       one or two sentences, kept short
+#   tags:              list of grape/region/theme tags
+#   status:            upcoming | past
+#   spots_total:       integer (upcoming only)
+#   spots_remaining:   integer (upcoming only)
+#   cost_estimate:     string e.g. "CHF 25–35 per person"
+#   featured:          true | false (shows 2px green border)
+#   wines:             list of wines (for presentation slides)
+#     - name:
+#       producer:
+#       vintage:
+#       appellation:
+#       blend:
+#       notes:
+#   slides:            auto-generated from wines if present
+# ─────────────────────────────────────────────────────────────
+
+- slug: syrah-rhone-cortona
+  title: "Syrah — from the Rhône to Cortona"
+  date: 2025-03-15
+  region: "Rhône Valley & Tuscany"
+  description: >
+    Three expressions of Syrah across three climates:
+    a Cortona DOC, a Saint-Joseph, and a Châteauneuf-du-Pape.
+    A grape that travels well.
+  tags:
+    - Syrah
+    - Rhône
+    - Cortona
+    - Tuscany
+  status: past
+  featured: false
+  wines:
+    - name: "Cortona Syrah"
+      producer: "TBC"
+      vintage: 2021
+      appellation: "Cortona DOC"
+      blend: "100% Syrah"
+    - name: "Saint-Joseph"
+      producer: "TBC"
+      vintage: 2020
+      appellation: "Saint-Joseph AOC"
+      blend: "100% Syrah"
+    - name: "Châteauneuf-du-Pape"
+      producer: "Le Vieux Donjon"
+      vintage: 2019
+      appellation: "Châteauneuf-du-Pape AOC"
+      blend: "Grenache, Syrah, Mourvèdre"
+
+# ─────────────────────────────────────────────────────────────
+# Upcoming tastings
+# ─────────────────────────────────────────────────────────────
+
+- slug: northern-rhone-whites
+  title: "Northern Rhône Whites"
+  date: 2026-05-29
+  region: "Northern Rhône"
+  description: >
+    An evening dedicated to the great white wines of the Northern Rhône —
+    Roussanne, Marsanne, Viognier. Structured, aromatic, and often overlooked
+    in favour of their red neighbours.
+  tags:
+    - Roussanne
+    - Marsanne
+    - Viognier
+    - Rhône
+    - France
+  status: upcoming
+  spots_total: 10
+  spots_remaining: 10
+  cost_estimate: ""
+  featured: true

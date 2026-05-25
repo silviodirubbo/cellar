@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+  <!-- Supabase (loaded on pages that need it) -->
+  {% if page.supabase %}
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  {% endif %}
+</head>
+<body class="{% if page.body_class %}{{ page.body_class }}{% endif %}">
+
+  {% include nav.html %}
+
+  <main>
+    {{ content }}
+  </main>
+
+  {% include footer.html %}
+
+  <!-- Global JS -->
+  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+
+  {% if page.supabase %}
+  <script src="{{ '/assets/js/supabase.js' | relative_url }}"></script>
+  {% endif %}
+
+</body>
+</html>

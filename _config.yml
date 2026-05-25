@@ -1,0 +1,30 @@
+title: Silvio's Cellar
+description: Friendly wine tastings in Geneva.
+baseurl: "/cellar"
+url: "https://silviodirubbo.github.io"
+
+# Build
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
+# Excludes
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+
+# Collections
+collections:
+  tastings:
+    output: true
+    permalink: /tastings/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "tastings"
+    values:
+      layout: "tasting"

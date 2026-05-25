@@ -1,0 +1,25 @@
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="{{ '/' | relative_url }}" class="nav__logo">Silvio's Cellar</a>
+    <ul class="nav__links">
+      <li class="nav__item">
+        <a href="{{ '/' | relative_url }}"
+           {% if page.url == '/' %}class="active"{% endif %}>
+          Home
+        </a>
+      </li>
+      <li class="nav__item">
+        <a href="{{ '/tastings/' | relative_url }}"
+           {% if page.url contains '/tastings' %}class="active"{% endif %}>
+          Tastings
+        </a>
+      </li>
+      <li class="nav__item">
+        <a href="{{ '/planner/' | relative_url }}"
+           {% if page.url contains '/planner' %}class="active"{% endif %}>
+          Planner
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,47 @@
+{% comment %}
+  Include: tasting-banner.html
+  Parameters:
+    tasting — the tasting object from _data/tastings.yml
+    show_link — true to wrap in a link
+{% endcomment %}
+
+<article class="tasting-banner {% if tasting.featured %}tasting-banner--featured{% endif %}">
+  <div class="tasting-banner__body">
+    <div class="tasting-banner__meta">
+      <time datetime="{{ tasting.date }}">
+        {{ tasting.date | date: "%d %b %Y" }}
+      </time>
+      {% if tasting.status == 'upcoming' %}
+        <span class="tag tag--green">Upcoming</span>
+      {% else %}
+        <span class="tag">Past</span>
+      {% endif %}
+      {% if tasting.region %}
+        <span class="label">{{ tasting.region }}</span>
+      {% endif %}
+    </div>
+
+    <h3 class="tasting-banner__title">{{ tasting.title }}</h3>
+    <p class="tasting-banner__desc">{{ tasting.description }}</p>
+
+    {% if tasting.tags %}
+    <div class="tasting-banner__tags">
+      {% for tag in tasting.tags %}
+        <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="tasting-banner__actions">
+    {% if tasting.status == 'upcoming' %}
+      {% if tasting.spots_remaining %}
+        <span class="tasting-banner__spots">{{ tasting.spots_remaining }} spots left</span>
+      {% endif %}
+      <a href="{{ '/planner/' | relative_url }}#{{ tasting.slug }}" class="btn btn--solid">Sign up</a>
+    {% else %}
+      <a href="{{ '/tastings/' | relative_url }}{{ tasting.slug }}/" class="btn btn--text">View tasting →</a>
+    {% endif %}
+    <button class="share-btn" data-slug="{{ tasting.slug }}" aria-label="Share this tasting">Share</button>
+  </div>
+</article>
