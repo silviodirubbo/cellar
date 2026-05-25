@@ -107,10 +107,146 @@ permalink: /
 
     <div class="planner-cta">
       {% if next %}
-      <a href="{{ '/planner/' | relative_url }}#{{ next.slug }}" class="btn btn--solid">Sign up for next tasting</a>
+      <button class="btn btn--solid signup-btn" data-slug="{{ next.slug }}" data-title="{{ next.title }}">I'm coming</button>
       {% endif %}
       <a href="{{ '/planner/' | relative_url }}#propose" class="btn btn--text">Propose a topic →</a>
     </div>
   </div>
 
 </div>
+
+<!-- ── Sign-up modal ───────────────────────────────────────── -->
+<div class="avail-overlay" id="signup-overlay" style="display:none;">
+  <div class="avail-modal">
+    <div class="avail-modal__header">
+      <span class="col-label" style="margin-bottom:0;" id="signup-tasting-name">Sign up</span>
+      <button class="avail-close" id="signup-close" aria-label="Close">✕</button>
+    </div>
+    <p class="propose-intro" style="margin-top:1rem;">Let me know you're coming and I'll be in touch with details.</p>
+    <form class="propose-form" action="https://formspree.io/f/xdajwkbv" method="POST" id="signup-form">
+      <input type="hidden" name="type" value="signup">
+      <input type="hidden" name="tasting" id="signup-tasting-field">
+      <div class="form-field">
+        <label class="form-label" for="signup-firstname">First name</label>
+        <input class="form-input" type="text" id="signup-firstname" name="first_name" placeholder="First name" required>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="signup-lastname">Last name</label>
+        <input class="form-input" type="text" id="signup-lastname" name="last_name" placeholder="Last name" required>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="signup-email">Email</label>
+        <input class="form-input" type="email" id="signup-email" name="email" placeholder="your@email.com" required>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="signup-people">Number of people <span class="label" style="font-size:0.55rem;">(including yourself)</span></label>
+        <input class="form-input" type="number" id="signup-people" name="people" min="1" max="10" placeholder="e.g. 1" required>
+      </div>
+      <button type="submit" class="btn btn--green">Confirm attendance</button>
+      <p class="form-success" id="signup-success" style="display:none;">You're in — see you there.</p>
+    </form>
+  </div>
+</div>
+
+<script>
+const signupOverlay = document.getElementById('signup-overlay');
+
+document.querySelectorAll('.signup-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.getElementById('signup-tasting-name').textContent = btn.dataset.title;
+    document.getElementById('signup-tasting-field').value = btn.dataset.title;
+    signupOverlay.style.display = 'flex';
+  });
+});
+
+document.getElementById('signup-close')?.addEventListener('click', () => {
+  signupOverlay.style.display = 'none';
+});
+
+signupOverlay?.addEventListener('click', e => {
+  if (e.target === signupOverlay) signupOverlay.style.display = 'none';
+});
+
+document.getElementById('signup-form')?.addEventListener('submit', async e => {
+  e.preventDefault();
+  const form = e.target;
+  const res = await fetch(form.action, {
+    method: 'POST',
+    body: new FormData(form),
+    headers: { 'Accept': 'application/json' }
+  });
+  if (res.ok) {
+    form.reset();
+    document.getElementById('signup-success').style.display = 'block';
+    setTimeout(() => { signupOverlay.style.display = 'none'; }, 2500);
+  }
+});
+</script>
+
+<!-- ── Availability modal ──────────────────────────────────── -->
+<div class="avail-overlay" id="avail-overlay" style="display:none;">
+  <div class="avail-modal">
+    <div class="avail-modal__header">
+      <span class="col-label" style="margin-bottom:0;" id="avail-tasting-name">Availability</span>
+      <button class="avail-close" id="avail-close" aria-label="Close">✕</button>
+    </div>
+    <p class="propose-intro" style="margin-top:1rem;">Let me know when you are free and I will pick the date that works for most people.</p>
+    <form class="propose-form" action="https://formspree.io/f/xdajwkbv" method="POST" id="avail-form">
+      <input type="hidden" name="type" value="availability">
+      <input type="hidden" name="tasting" id="avail-tasting-field">
+      <div class="form-field">
+        <label class="form-label" for="avail-name">Your name</label>
+        <input class="form-input" type="text" id="avail-name" name="name" placeholder="First name" required>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="avail-email">Your email</label>
+        <input class="form-input" type="email" id="avail-email" name="email" placeholder="your@email.com" required>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="avail-dates">Your availability</label>
+        <textarea class="form-input" id="avail-dates" name="availability" placeholder="e.g. Any Friday in June except the 12th…" required></textarea>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="avail-people">Number of people <span class="label" style="font-size:0.55rem;">(including yourself)</span></label>
+        <input class="form-input" type="number" id="avail-people" name="people" min="1" max="20" placeholder="e.g. 2">
+      </div>
+      <button type="submit" class="btn btn--green">Send availability</button>
+      <p class="form-success" id="avail-success" style="display:none;">Thank you — I will be in touch once the date is set.</p>
+    </form>
+  </div>
+</div>
+
+<script>
+const availOverlay = document.getElementById('avail-overlay');
+
+document.querySelectorAll('.avail-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.getElementById('avail-tasting-name').textContent = btn.dataset.title + ' — availability';
+    document.getElementById('avail-tasting-field').value = btn.dataset.title;
+    availOverlay.style.display = 'flex';
+  });
+});
+
+document.getElementById('avail-close')?.addEventListener('click', () => {
+  availOverlay.style.display = 'none';
+});
+
+availOverlay?.addEventListener('click', e => {
+  if (e.target === availOverlay) availOverlay.style.display = 'none';
+});
+
+document.getElementById('avail-form')?.addEventListener('submit', async e => {
+  e.preventDefault();
+  const form = e.target;
+  const res = await fetch(form.action, {
+    method: 'POST',
+    body: new FormData(form),
+    headers: { 'Accept': 'application/json' }
+  });
+  if (res.ok) {
+    form.reset();
+    document.getElementById('avail-success').style.display = 'block';
+    setTimeout(() => { availOverlay.style.display = 'none'; }, 2500);
+  }
+});
+</script>
