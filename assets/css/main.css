@@ -1306,3 +1306,12 @@ textarea.form-input {
 .page-header p {
   color: rgba(253,252,250,0.65);
 }
+
+/* ── Date TBD label ───────────────────────────────────────── */
+.date-tbd {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
