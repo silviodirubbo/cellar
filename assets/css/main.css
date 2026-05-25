@@ -1231,3 +1231,78 @@ textarea.form-input {
     align-items: flex-start;
   }
 }
+
+/* ── Planner header auth ──────────────────────────────────── */
+.planner-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.planner-auth {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.auth-username {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+
+.btn--logout-inline {
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: none;
+  color: rgba(255,255,255,0.3);
+  border: none;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 1px;
+  cursor: pointer;
+  transition: color 0.2s var(--ease);
+}
+
+.btn--logout-inline:hover {
+  color: rgba(255,255,255,0.6);
+}
+
+/* Readable subtitle on dark header */
+.page-header__sub {
+  color: rgba(253,252,250,0.65);
+}
+
+/* Cancel button */
+.btn--cancel {
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: none;
+  color: var(--ink-light);
+  border: 1px solid var(--rule);
+  padding: 0.65rem 1.25rem;
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+}
+
+.btn--cancel:hover {
+  border-color: #c0392b;
+  color: #c0392b;
+}
+
+/* Remove old auth bar */
+.auth-bar { display: none !important; }
+
+/* ── Page header subtitle readability ────────────────────── */
+.page-header p {
+  color: rgba(253,252,250,0.65);
+}
