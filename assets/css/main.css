@@ -945,3 +945,289 @@ hr, .rule {
     height: 1px;
   }
 }
+
+/* ── Planner page ─────────────────────────────────────────── */
+.auth-bar {
+  background: rgba(255,255,255,0.04);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 0.85rem 0;
+  margin-top: 2rem;
+}
+
+.auth-bar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.auth-state {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+
+.auth-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.auth-username {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+
+.btn--google {
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: var(--green);
+  color: var(--warm-white);
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s var(--ease);
+}
+
+.btn--google:hover {
+  background: #1e3329;
+}
+
+.btn--logout {
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: none;
+  color: rgba(255,255,255,0.3);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 0.45rem 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+}
+
+.btn--logout:hover {
+  color: rgba(255,255,255,0.6);
+  border-color: rgba(255,255,255,0.25);
+}
+
+/* Planner layout */
+.planner-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  min-height: 500px;
+  border-top: 1px solid var(--rule);
+}
+
+.planner-main {
+  padding: 3rem 2.5rem;
+  background: var(--warm-white);
+  border-right: 1px solid var(--rule);
+}
+
+.planner-aside {
+  padding: 3rem 2rem;
+  background: var(--off-white);
+}
+
+/* Sign-up block */
+.signup-block {
+  border: 1px solid var(--rule);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.signup-block--featured {
+  border-left: 2px solid var(--green);
+}
+
+.signup-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.signup-meta time {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+
+.signup-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.3rem;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+
+.signup-cost {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  color: var(--ink-mid);
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.4rem;
+  max-width: none;
+}
+
+.signup-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+}
+
+/* Who's coming */
+.who-section {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.who-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.who-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.who-pill {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--rule);
+  padding: 0.2rem 0.6rem;
+  color: var(--ink-mid);
+}
+
+.who-none {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+
+.login-prompt {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-top: 0.75rem;
+  max-width: none;
+}
+
+.login-prompt a {
+  color: var(--green);
+  border-bottom: 1px solid var(--green);
+}
+
+/* Proposal form */
+.propose-intro {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: var(--ink-light);
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+  max-width: none;
+}
+
+.propose-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.form-field {
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.form-input {
+  width: 100%;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--warm-white);
+  border: 1px solid var(--rule);
+  padding: 0.6rem 0.75rem;
+  outline: none;
+  resize: vertical;
+  min-height: 2.5rem;
+  transition: border-color 0.2s var(--ease);
+}
+
+.form-input:focus {
+  border-color: var(--ink-mid);
+}
+
+textarea.form-input {
+  min-height: 5rem;
+}
+
+.form-input--short {
+  min-height: 3.5rem;
+}
+
+.form-success {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-top: 0.75rem;
+  max-width: none;
+}
+
+@media (max-width: 768px) {
+  .planner-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .planner-main {
+    border-right: none;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .auth-bar__inner {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+}
