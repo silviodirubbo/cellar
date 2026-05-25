@@ -4,24 +4,67 @@
 #
 #   slug:              unique identifier, used in URLs
 #   title:             full name of the tasting
-#   date:              YYYY-MM-DD
+#   date:              YYYY-MM-DD or null if TBD
+#   date_tbd:          true if date not yet decided
+#   location:          venue name or address
 #   region:            primary region (displayed as label)
 #   description:       one or two sentences, kept short
 #   tags:              list of grape/region/theme tags
 #   status:            upcoming | past
-#   spots_total:       integer (upcoming only)
-#   spots_remaining:   integer (upcoming only)
+#   spots_total:       integer
+#   spots_remaining:   integer
 #   cost_estimate:     string e.g. "CHF 25–35 per person"
-#   featured:          true | false (shows 2px green border)
+#   featured:          true | false
+#   slides:            true once presentation is ready
 #   wines:             list of wines (for presentation slides)
-#     - name:
-#       producer:
-#       vintage:
-#       appellation:
-#       blend:
-#       notes:
-#   slides:            auto-generated from wines if present
 # ─────────────────────────────────────────────────────────────
+
+# ── Upcoming ──────────────────────────────────────────────────
+
+- slug: northern-rhone-whites
+  title: "Northern Rhône Whites"
+  date: 2026-05-29
+  date_tbd: false
+  location: "Filippo's"
+  region: "Northern Rhône"
+  description: >
+    An evening dedicated to the great white wines of the Northern Rhône —
+    Roussanne, Marsanne, Viognier. Structured, aromatic, and often overlooked
+    in favour of their red neighbours.
+  tags:
+    - Roussanne
+    - Marsanne
+    - Viognier
+    - Rhône
+    - France
+  status: upcoming
+  spots_total: 10
+  spots_remaining: 5
+  cost_estimate: ""
+  featured: true
+
+- slug: cote-rotie-horizontal
+  title: "Côte-Rôtie Horizontal"
+  date: null
+  date_tbd: true
+  location: "Krieg 13"
+  region: "Northern Rhône"
+  description: >
+    A horizontal tasting across several producers of Côte-Rôtie —
+    one of the great Syrah appellations of the Northern Rhône.
+    Date to be confirmed based on availability.
+  tags:
+    - Syrah
+    - Côte-Rôtie
+    - Rhône
+    - France
+  status: upcoming
+  spots_total: 5
+  spots_remaining: 5
+  cost_estimate: ""
+  featured: false
+
+# ── Past ──────────────────────────────────────────────────────
 
 - slug: syrah-rhone-cortona
   title: "Syrah — from the Rhône to Cortona"
@@ -54,27 +97,3 @@
       vintage: 2019
       appellation: "Châteauneuf-du-Pape AOC"
       blend: "Grenache, Syrah, Mourvèdre"
-
-# ─────────────────────────────────────────────────────────────
-# Upcoming tastings
-# ─────────────────────────────────────────────────────────────
-
-- slug: northern-rhone-whites
-  title: "Northern Rhône Whites"
-  date: 2026-05-29
-  region: "Northern Rhône"
-  description: >
-    An evening dedicated to the great white wines of the Northern Rhône —
-    Roussanne, Marsanne, Viognier. Structured, aromatic, and often overlooked
-    in favour of their red neighbours.
-  tags:
-    - Roussanne
-    - Marsanne
-    - Viognier
-    - Rhône
-    - France
-  status: upcoming
-  spots_total: 10
-  spots_remaining: 10
-  cost_estimate: ""
-  featured: true
