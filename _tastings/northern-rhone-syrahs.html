@@ -257,6 +257,11 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
     });
     const count = document.getElementById('presCount');
     count.style.color = dark ? 'rgba(255,255,255,.3)' : 'rgba(26,24,20,.25)';
+    const exit = document.querySelector('.deck-exit');
+    if (exit) {
+      exit.style.color       = dark ? 'rgba(255,255,255,.4)'  : 'rgba(26,24,20,.5)';
+      exit.style.borderColor = dark ? 'rgba(255,255,255,.1)'  : 'rgba(26,24,20,.15)';
+    }
   }
 
   // Init
@@ -278,4 +283,3 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
   document.getElementById('prevBtn').addEventListener('click', e => { e.stopPropagation(); goTo(cur - 1); });
   document.getElementById('nextBtn').addEventListener('click', e => { e.stopPropagation(); goTo(cur + 1); });
 </script>
-
