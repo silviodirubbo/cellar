@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', async () => {
       const slug   = btn.dataset.slug;
       const slides = btn.dataset.slides === 'true';
-      const base   = `${window.location.origin}${window.location.pathname.split('/tastings')[0]}`;
+      const base   = 'https://silviodirubbo.github.io/cellar';
       const url    = slides
         ? `${base}/tastings/${slug}/`   // links directly to the presentation
         : `${base}/tastings/`;          // links to the tastings page when no slides yet
