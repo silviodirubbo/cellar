@@ -78,7 +78,7 @@ permalink: /tastings/
               <span class="tasting-banner__spots">{{ tasting.spots_total }} spots</span>
             {% endif %}
             <div class="tasting-banner__btns">
-              <button class="share-btn" data-slug="{{ tasting.slug }}">Share</button>
+              <button class="share-btn" data-slug="{{ tasting.slug }}" data-slides="{{ tasting.slides }}">Share</button>
               {% if tasting.date_tbd %}
                 <a href="{{ '/planner/' | relative_url }}#{{ tasting.slug }}" class="btn btn--solid">Tell me your availability</a>
               {% else %}
@@ -123,7 +123,7 @@ permalink: /tastings/
             {% else %}
               <span class="label" style="font-size:0.6rem;">Presentation coming</span>
             {% endif %}
-            <button class="share-btn" data-slug="{{ tasting.slug }}">Share</button>
+            <button class="share-btn" data-slug="{{ tasting.slug }}" data-slides="{{ tasting.slides }}">Share</button>
           </div>
         </article>
         {% endfor %}
