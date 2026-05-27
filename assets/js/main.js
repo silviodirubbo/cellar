@@ -1,14 +1,16 @@
 /* ============================================================
    main.js — Global JavaScript
    ============================================================ */
-
 document.addEventListener('DOMContentLoaded', () => {
-
   // ── Share buttons ────────────────────────────────────────
   document.querySelectorAll('.share-btn').forEach(btn => {
     btn.addEventListener('click', async () => {
-      const slug = btn.dataset.slug;
-      const url  = `${window.location.origin}${window.location.pathname.split('/tastings')[0]}/tastings/${slug}/`;
+      const slug   = btn.dataset.slug;
+      const slides = btn.dataset.slides === 'true';
+      const base   = `${window.location.origin}${window.location.pathname.split('/tastings')[0]}`;
+      const url    = slides
+        ? `${base}/tastings/${slug}/`   // links directly to the presentation
+        : `${base}/tastings/`;          // links to the tastings page when no slides yet
 
       if (navigator.share) {
         try {
@@ -45,16 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Tasting filter (Tastings page) ───────────────────────
   const filterBtns = document.querySelectorAll('.filter-btn');
   const banners    = document.querySelectorAll('[data-tags]');
-
   if (filterBtns.length && banners.length) {
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         const filter = btn.dataset.filter;
-
         // Update active state
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
         // Filter banners
         banners.forEach(banner => {
           const tags = banner.dataset.tags ? banner.dataset.tags.split(',') : [];
@@ -64,5 +63,4 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-
 });
