@@ -251,19 +251,28 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
     cur = Math.max(0, Math.min(slides.length - 1, n));
     slides[cur].classList.add('active');
     document.getElementById('presCount').textContent = (cur + 1) + ' / ' + slides.length;
-    const dark = slides[cur].classList.contains('slide-cover');
+    const dark   = slides[cur].classList.contains('slide-cover');
+    const fg     = dark ? 'rgba(255,255,255,.45)' : 'rgba(26,24,20,.5)';
+    const subtle = dark ? 'rgba(255,255,255,.3)'  : 'rgba(26,24,20,.3)';
+    const bd     = dark ? 'rgba(255,255,255,.2)'  : 'rgba(26,24,20,.2)';
+
     ['prevBtn','nextBtn'].forEach(id => {
       const b = document.getElementById(id);
-      b.style.borderColor = dark ? 'rgba(255,255,255,.2)' : 'rgba(26,24,20,.15)';
-      b.style.color       = dark ? 'rgba(255,255,255,.45)' : 'rgba(26,24,20,.35)';
+      b.style.color       = fg;
+      b.style.borderColor = bd;
     });
-    const count = document.getElementById('presCount');
-    count.style.color = dark ? 'rgba(255,255,255,.3)' : 'rgba(26,24,20,.25)';
+    document.getElementById('presCount').style.color = subtle;
+
+    const exit = document.getElementById('deckExit');
+    if (exit) {
+      exit.style.color       = fg;
+      exit.style.borderColor = bd;
+    }
   }
 
   // Init
   slides[0].classList.add('active');
-  goTo(0);
+  document.addEventListener('DOMContentLoaded', () => goTo(0));
 
   // Keyboard
   document.addEventListener('keydown', e => {
@@ -280,4 +289,3 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
   document.getElementById('prevBtn').addEventListener('click', e => { e.stopPropagation(); goTo(cur - 1); });
   document.getElementById('nextBtn').addEventListener('click', e => { e.stopPropagation(); goTo(cur + 1); });
 </script>
-
