@@ -259,14 +259,16 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
     count.style.color = dark ? 'rgba(255,255,255,.3)' : 'rgba(26,24,20,.25)';
     const exit = document.querySelector('.deck-exit');
     if (exit) {
-      exit.style.color       = dark ? 'rgba(255,255,255,.4)'  : 'rgba(26,24,20,.5)';
-      exit.style.borderColor = dark ? 'rgba(255,255,255,.1)'  : 'rgba(26,24,20,.15)';
+      exit.style.color       = dark ? 'rgba(255,255,255,.5)'  : 'rgba(26,24,20,.8)';
+      exit.style.borderColor = dark ? 'rgba(255,255,255,.15)' : 'rgba(26,24,20,.3)';
     }
   }
 
-  // Init
-  slides[0].classList.add('active');
-  goTo(0);
+  // Init — wait for full DOM so deck-exit from layout is available
+  document.addEventListener('DOMContentLoaded', () => {
+    slides[0].classList.add('active');
+    goTo(0);
+  });
 
   // Keyboard
   document.addEventListener('keydown', e => {
