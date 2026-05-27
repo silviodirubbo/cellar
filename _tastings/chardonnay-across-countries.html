@@ -43,15 +43,14 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
 .w-hrule{width:100%;height:1px;background:var(--rule);margin-bottom:1.8rem}
 .wine-bottle{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;padding:.5rem 0}
 .wine-bottle img{max-height:100%;max-width:75%;object-fit:contain;filter:drop-shadow(0 4px 24px rgba(26,24,20,.07))}
-.wine-info{padding-top:1.4rem;border-top:1px solid var(--rule);position:relative;padding-right:105px}
-.wine-info-text{display:block}
+.wine-info{padding-top:1.4rem;border-top:1px solid var(--rule)}
 .w-name{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:300;color:var(--ink);line-height:1.15;margin-bottom:.2rem}
 .w-producer{font-size:clamp(.75rem,1vw,.88rem);font-weight:300;font-style:italic;color:var(--green);margin-bottom:.9rem}
 .w-meta{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.25rem}
 .w-ml{font-family:'DM Mono',monospace;font-weight:300;font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-light);min-width:2.8rem}
 .w-mv{font-size:.75rem;font-weight:300;color:var(--ink-mid)}
-.wine-qr{position:absolute;top:1.4rem;right:0;display:flex;flex-direction:column;align-items:center;gap:.4rem}
-.wine-qr img{width:90px;height:90px;object-fit:contain}
+.wine-qr{float:right;display:flex;flex-direction:column;align-items:center;gap:.4rem;margin:0 0 .8rem .8rem}
+.wine-qr img{width:88px;height:88px;object-fit:contain}
 .qr-label{font-family:'DM Mono',monospace;font-weight:300;font-size:.42rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-light);text-align:center;line-height:1.6}
 
 /* NAV */
@@ -103,16 +102,14 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
       <div class="w-hrule"></div>
       <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/bottle_drouhin.png.png" alt="Montagny<br>Premier Cru"></div>
       <div class="wine-info">
-        <div class="wine-info-text">
-        <div class="w-name">Montagny<br>Premier Cru</div>
-        <div class="w-producer">Joseph Drouhin</div>
-        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chardonnay 100%</span></div>
-        </div><!-- /wine-info-text -->
         <div class="wine-qr">
           <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/qr_drouhin.png.png" alt="QR">
           <div class="qr-label">Scan for<br>producer info</div>
         </div>
+        <div class="w-name">Montagny<br>Premier Cru</div>
+        <div class="w-producer">Joseph Drouhin</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chardonnay 100%</span></div>
       </div>
     </div>
   </div>
@@ -129,16 +126,14 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
       <div class="w-hrule"></div>
       <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/bottle_drouhin.png.png" alt="Montagny<br>Premier Cru"></div>
       <div class="wine-info">
-        <div class="wine-info-text">
-        <div class="w-name">Montagny<br>Premier Cru</div>
-        <div class="w-producer">Joseph Drouhin</div>
-        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chardonnay 100%</span></div>
-        </div><!-- /wine-info-text -->
         <div class="wine-qr">
           <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/qr_drouhin.png.png" alt="QR">
           <div class="qr-label">Scan for<br>producer info</div>
         </div>
+        <div class="w-name">Montagny<br>Premier Cru</div>
+        <div class="w-producer">Joseph Drouhin</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chardonnay 100%</span></div>
       </div>
     </div>
   </div>
@@ -155,16 +150,14 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
       <div class="w-hrule"></div>
       <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/bottle_drouhin.png.png" alt="Montagny<br>Premier Cru"></div>
       <div class="wine-info">
-        <div class="wine-info-text">
-        <div class="w-name">Montagny<br>Premier Cru</div>
-        <div class="w-producer">Joseph Drouhin</div>
-        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chardonnay 100%</span></div>
-        </div><!-- /wine-info-text -->
         <div class="wine-qr">
           <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/qr_drouhin.png.png" alt="QR">
           <div class="qr-label">Scan for<br>producer info</div>
         </div>
+        <div class="w-name">Montagny<br>Premier Cru</div>
+        <div class="w-producer">Joseph Drouhin</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chardonnay 100%</span></div>
       </div>
     </div>
   </div>
@@ -181,16 +174,14 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
       <div class="w-hrule"></div>
       <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/bottle_sanct_valentin.png.png" alt="Sanct Valentin<br>Chardonnay"></div>
       <div class="wine-info">
-        <div class="wine-info-text">
-        <div class="w-name">Sanct Valentin<br>Chardonnay</div>
-        <div class="w-producer">St. Michael-Eppan</div>
-        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chardonnay 100%</span></div>
-        </div><!-- /wine-info-text -->
         <div class="wine-qr">
           <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/qr_sanct_valentin.png.png" alt="QR">
           <div class="qr-label">Scan for<br>producer info</div>
         </div>
+        <div class="w-name">Sanct Valentin<br>Chardonnay</div>
+        <div class="w-producer">St. Michael-Eppan</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chardonnay 100%</span></div>
       </div>
     </div>
   </div>
@@ -207,16 +198,14 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
       <div class="w-hrule"></div>
       <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/bottle_sanct_valentin.png.png" alt="Sanct Valentin<br>Chardonnay"></div>
       <div class="wine-info">
-        <div class="wine-info-text">
-        <div class="w-name">Sanct Valentin<br>Chardonnay</div>
-        <div class="w-producer">St. Michael-Eppan</div>
-        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chardonnay 100%</span></div>
-        </div><!-- /wine-info-text -->
         <div class="wine-qr">
           <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/qr_sanct_valentin.png.png" alt="QR">
           <div class="qr-label">Scan for<br>producer info</div>
         </div>
+        <div class="w-name">Sanct Valentin<br>Chardonnay</div>
+        <div class="w-producer">St. Michael-Eppan</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chardonnay 100%</span></div>
       </div>
     </div>
   </div>
@@ -233,16 +222,14 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
       <div class="w-hrule"></div>
       <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/bottle_lis_neris.png.png" alt="Jurosa<br>Chardonnay"></div>
       <div class="wine-info">
-        <div class="wine-info-text">
-        <div class="w-name">Jurosa<br>Chardonnay</div>
-        <div class="w-producer">Lis Neris</div>
-        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chardonnay 100%</span></div>
-        </div><!-- /wine-info-text -->
         <div class="wine-qr">
           <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/qr_lis_neris.png.png" alt="QR">
           <div class="qr-label">Scan for<br>producer info</div>
         </div>
+        <div class="w-name">Jurosa<br>Chardonnay</div>
+        <div class="w-producer">Lis Neris</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chardonnay 100%</span></div>
       </div>
     </div>
   </div>
@@ -259,16 +246,14 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
       <div class="w-hrule"></div>
       <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/bottle_lis_neris.png.png" alt="Jurosa<br>Chardonnay"></div>
       <div class="wine-info">
-        <div class="wine-info-text">
-        <div class="w-name">Jurosa<br>Chardonnay</div>
-        <div class="w-producer">Lis Neris</div>
-        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chardonnay 100%</span></div>
-        </div><!-- /wine-info-text -->
         <div class="wine-qr">
           <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/qr_lis_neris.png.png" alt="QR">
           <div class="qr-label">Scan for<br>producer info</div>
         </div>
+        <div class="w-name">Jurosa<br>Chardonnay</div>
+        <div class="w-producer">Lis Neris</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chardonnay 100%</span></div>
       </div>
     </div>
   </div>
@@ -307,6 +292,7 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
       exit.style.color       = fg;
       exit.style.borderColor = bd;
     }
+    if (window.__updatePdfBtn) window.__updatePdfBtn(dark);
   }
 
   // Init
