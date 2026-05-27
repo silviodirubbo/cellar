@@ -10,284 +10,35 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --warm-white: #FDFCFA;
-      --off-white:  #F7F5F0;
-      --ink:        #1A1814;
-      --ink-mid:    #4A4640;
-      --ink-light:  #8A8480;
-      --rule:       #E2DED8;
-      --green:      #2C4A3E;
-      --gold:       #8B6914;
-      --font-serif: 'Cormorant Garamond', Georgia, serif;
-      --font-mono:  'DM Mono', monospace;
-    }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
       width: 100%; height: 100%;
       overflow: hidden;
-      background: var(--ink);
-      font-family: var(--font-serif);
+      background: #1A1814;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Deck container ─────────────────────────────────── */
-    .deck {
-      width: 100%; height: 100%;
-      position: relative;
-    }
-
-    /* ── Individual slide ───────────────────────────────── */
-    .slide {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
-    }
-
-    .slide.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .slide__inner {
-      width: 100%;
-      max-width: 1200px;
-      padding: 4rem 6rem;
-    }
-
-    /* ── Slide types ────────────────────────────────────── */
-
-    /* Cover slide — dark background */
-    .slide--cover {
-      background-color: var(--ink);
-    }
-
-    .slide--cover .slide__inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    .slide--cover h1 {
-      font-family: var(--font-serif);
-      font-weight: 300;
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      color: var(--warm-white);
-      line-height: 1.1;
-      letter-spacing: -0.01em;
-    }
-
-    .slide--cover h1 em {
-      color: var(--gold);
-      font-style: italic;
-    }
-
-    .slide--cover .cover-meta {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--ink-light);
-      margin-top: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .slide--cover .cover-image {
-      width: 100%;
-      aspect-ratio: 3/4;
-      object-fit: cover;
-      opacity: 0.7;
-    }
-
-    /* Light content slide */
-    .slide--light {
-      background-color: var(--warm-white);
-    }
-
-    .slide--light-alt {
-      background-color: var(--off-white);
-    }
-
-    /* Wine slide — two column */
-    .slide--wine {
-      background-color: var(--warm-white);
-    }
-
-    .slide--wine .slide__inner {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-
-    .slide--wine .wine-map {
-      width: 100%;
-      aspect-ratio: 4/3;
-      background-color: var(--off-white);
-      border: 1px solid var(--rule);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--ink-light);
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .slide--wine .wine-bottle {
-      width: 100%;
-      max-height: 60vh;
-      object-fit: contain;
-    }
-
-    /* ── Slide typography ───────────────────────────────── */
-    .slide-label {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--ink-light);
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .slide-label::after {
-      content: '';
-      display: block;
-      width: 3rem;
-      height: 1px;
-      background: var(--rule);
-    }
-
-    .slide h2 {
-      font-family: var(--font-serif);
-      font-weight: 300;
-      font-size: clamp(1.8rem, 3vw, 2.8rem);
-      color: var(--ink);
-      line-height: 1.1;
-      margin-bottom: 0.5rem;
-    }
-
-    .slide h3 {
-      font-family: var(--font-serif);
-      font-weight: 300;
-      font-size: 1rem;
-      color: var(--ink-light);
-      margin-bottom: 2rem;
-    }
-
-    .slide p {
-      font-family: var(--font-serif);
-      font-weight: 300;
-      font-size: 1rem;
-      color: var(--ink-mid);
-      line-height: 1.7;
-      max-width: 50ch;
-    }
-
-    .slide em { color: var(--green); font-style: italic; }
-
-    .wine-detail {
-      margin-top: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .wine-detail__row {
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
-    }
-
-    .wine-detail__label {
-      font-family: var(--font-mono);
-      font-size: 0.55rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--ink-light);
-    }
-
-    .wine-detail__value {
-      font-family: var(--font-serif);
-      font-size: 1rem;
-      color: var(--ink);
-    }
-
-    /* ── Navigation UI ──────────────────────────────────── */
-    .deck-nav {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      z-index: 50;
-    }
-
-    .deck-nav__btn {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink-light);
-      background: rgba(253, 252, 250, 0.08);
-      border: 1px solid rgba(253, 252, 250, 0.12);
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      backdrop-filter: blur(4px);
-    }
-
-    .deck-nav__btn:hover {
-      color: var(--warm-white);
-      border-color: rgba(253, 252, 250, 0.3);
-    }
-
-    .deck-nav__count {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.12em;
-      color: var(--ink-light);
-      min-width: 3rem;
-      text-align: center;
-    }
-
-    /* ── Exit to site ───────────────────────────────────── */
     .deck-exit {
       position: fixed;
       top: 1.5rem;
       right: 2rem;
-      font-family: var(--font-mono);
+      font-family: 'DM Mono', monospace;
       font-size: 0.6rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--ink-light);
+      color: rgba(253,252,250,.4);
       background: none;
-      border: 1px solid rgba(253, 252, 250, 0.1);
+      border: 1px solid rgba(253,252,250,.1);
       padding: 0.4rem 0.8rem;
-      cursor: pointer;
       text-decoration: none;
       transition: all 0.2s ease;
-      z-index: 50;
+      z-index: 200;
     }
 
     .deck-exit:hover {
-      color: var(--warm-white);
-      border-color: rgba(253, 252, 250, 0.3);
+      color: rgba(253,252,250,.9);
+      border-color: rgba(253,252,250,.3);
     }
   </style>
 </head>
@@ -295,52 +46,7 @@
 
   <a href="{{ '/tastings/' | relative_url }}" class="deck-exit">← Back to tastings</a>
 
-  <div class="deck" id="deck">
-    {{ content }}
-  </div>
-
-  <nav class="deck-nav" aria-label="Slide navigation">
-    <button class="deck-nav__btn" id="prev" aria-label="Previous slide">← Prev</button>
-    <span class="deck-nav__count" id="slide-count">1 / 1</span>
-    <button class="deck-nav__btn" id="next" aria-label="Next slide">Next →</button>
-  </nav>
-
-  <script>
-    const slides = document.querySelectorAll('.slide');
-    let current = 0;
-
-    function goTo(n) {
-      slides[current].classList.remove('active');
-      current = (n + slides.length) % slides.length;
-      slides[current].classList.add('active');
-      document.getElementById('slide-count').textContent =
-        `${current + 1} / ${slides.length}`;
-    }
-
-    // Initialise
-    if (slides.length > 0) {
-      slides[0].classList.add('active');
-      document.getElementById('slide-count').textContent = `1 / ${slides.length}`;
-    }
-
-    // Keyboard
-    document.addEventListener('keydown', e => {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ')  goTo(current + 1);
-      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')                     goTo(current - 1);
-      if (e.key === 'Escape') window.location.href = '{{ "/tastings/" | relative_url }}';
-    });
-
-    // Buttons
-    document.getElementById('next').addEventListener('click', () => goTo(current + 1));
-    document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
-
-    // Click anywhere on slide to advance
-    document.getElementById('deck').addEventListener('click', e => {
-      if (!e.target.closest('.deck-nav') && !e.target.closest('.deck-exit')) {
-        goTo(current + 1);
-      }
-    });
-  </script>
+  {{ content }}
 
 </body>
 </html>
