@@ -80,6 +80,7 @@
     - France
   status: past
   featured: false
+  slides: true
   wines:
     - name: "Les Eygats Cornas"
       producer: "Domaine Courbis"
@@ -114,6 +115,7 @@
     - Italy
   status: past
   featured: false
+  slides: true
   wines:
     - name: "Syrah"
       producer: "Stefano Amerighi"
@@ -148,6 +150,7 @@
     - Italy
   status: past
   featured: false
+  slides: true
   wines:
     - name: "Montagny Premier Cru"
       producer: "Joseph Drouhin"
