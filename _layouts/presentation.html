@@ -19,7 +19,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Matches .pres-btn exactly — starts white for dark cover */
     .deck-exit {
       position: fixed;
       top: 1.5rem;
@@ -41,13 +40,98 @@
       color: rgba(255,255,255,.9);
       border-color: rgba(255,255,255,.5);
     }
+
+    /* PDF button — same style as deck-exit, sits to its left */
+    .deck-pdf {
+      position: fixed;
+      top: 1.5rem;
+      right: 12rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.45);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.2);
+      padding: 0.45rem 0.75rem;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      z-index: 200;
+    }
+
+    .deck-pdf:hover {
+      color: rgba(255,255,255,.9);
+      border-color: rgba(255,255,255,.5);
+    }
+
+    /* ── Print / PDF stylesheet ─────────────────────────── */
+    @media print {
+      /* Reset screen layout */
+      html, body {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        background: #FDFCFA;
+      }
+
+      /* Hide navigation chrome */
+      .deck-exit,
+      .deck-pdf,
+      .pres-nav { display: none !important; }
+
+      /* Each slide becomes its own page */
+      .deck { position: static; width: 100%; height: auto; }
+
+      .slide {
+        display: flex !important;
+        opacity: 1 !important;
+        pointer-events: all !important;
+        position: relative !important;
+        width: 100%;
+        height: 100vh;
+        page-break-after: always;
+        break-after: page;
+      }
+
+      /* Cover slide — keep dark background */
+      .slide-cover {
+        background: #1A1814 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      /* Ensure background images print */
+      .cover-bg {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      /* Wine slides — ensure maps print */
+      .wine-map img,
+      .wine-bottle img,
+      .wine-qr img {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
   </style>
 </head>
 <body>
 
   <a href="{{ '/tastings/' | relative_url }}" class="deck-exit" id="deckExit">← Back to tastings</a>
+  <button class="deck-pdf" id="deckPdf" onclick="window.print()">↓ PDF</button>
 
   {{ content }}
+
+  <script>
+    // Keep PDF button colour in sync with current slide
+    window.__updatePdfBtn = function(dark) {
+      const btn = document.getElementById('deckPdf');
+      if (!btn) return;
+      btn.style.color       = dark ? 'rgba(255,255,255,.45)' : 'rgba(26,24,20,.5)';
+      btn.style.borderColor = dark ? 'rgba(255,255,255,.2)'  : 'rgba(26,24,20,.2)';
+    };
+  </script>
 
 </body>
 </html>
