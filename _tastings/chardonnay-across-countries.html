@@ -272,7 +272,7 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
 
   // Init
   slides[0].classList.add('active');
-  document.addEventListener('DOMContentLoaded', () => goTo(0));
+  setTimeout(() => goTo(0), 0);
 
   // Keyboard
   document.addEventListener('keydown', e => {
