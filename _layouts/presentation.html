@@ -24,29 +24,27 @@
       top: 1.5rem;
       right: 2rem;
       font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.14em;
+      font-size: 0.52rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(26,24,20,.6);
-      background: rgba(253,252,250,.75);
-      border: 1px solid rgba(26,24,20,.15);
-      padding: 0.4rem 0.8rem;
+      color: rgba(255,255,255,.4);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.2);
+      padding: 0.45rem 0.75rem;
       text-decoration: none;
-      transition: all 0.2s ease;
+      transition: color 0.2s ease, border-color 0.2s ease;
       z-index: 200;
-      backdrop-filter: blur(4px);
     }
 
     .deck-exit:hover {
-      color: rgba(26,24,20,.9);
-      border-color: rgba(26,24,20,.4);
-      background: rgba(253,252,250,.95);
+      color: rgba(255,255,255,.9);
+      border-color: rgba(255,255,255,.5);
     }
   </style>
 </head>
 <body>
 
-  <a href="{{ '/tastings/' | relative_url }}" class="deck-exit">← Back to tastings</a>
+  <a href="{{ '/tastings/' | relative_url }}" class="deck-exit" id="deckExit">← Back to tastings</a>
 
   {{ content }}
 
