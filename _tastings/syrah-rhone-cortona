@@ -37,15 +37,16 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
 .w-hrule{width:100%;height:1px;background:var(--rule);margin-bottom:1.8rem}
 .wine-bottle{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;padding:.5rem 0}
 .wine-bottle img{max-height:100%;max-width:75%;object-fit:contain;filter:drop-shadow(0 4px 24px rgba(26,24,20,.07))}
-.wine-info{padding-top:1.4rem;border-top:1px solid var(--rule)}
+.wine-info{padding-top:1.4rem;border-top:1px solid var(--rule);display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto auto;column-gap:1rem;align-items:start}
+.wine-info-text{grid-column:1;grid-row:1/4}
 .w-name{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:300;color:var(--ink);line-height:1.15;margin-bottom:.2rem}
 .w-producer{font-size:clamp(.75rem,1vw,.88rem);font-weight:300;font-style:italic;color:var(--green);margin-bottom:.9rem}
 .w-meta{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.25rem}
 .w-ml{font-family:'DM Mono',monospace;font-weight:300;font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-light);min-width:2.8rem}
 .w-mv{font-size:.75rem;font-weight:300;color:var(--ink-mid)}
-.wine-qr{margin-top:1.1rem;display:flex;align-items:center;gap:.75rem}
-.wine-qr img{width:52px;height:52px;object-fit:contain}
-.qr-label{font-family:'DM Mono',monospace;font-weight:300;font-size:.44rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-light);line-height:1.7}
+.wine-qr{grid-column:2;grid-row:1;display:flex;flex-direction:column;align-items:center;gap:.4rem}
+.wine-qr img{width:90px;height:90px;object-fit:contain}
+.qr-label{font-family:'DM Mono',monospace;font-weight:300;font-size:.42rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-light);text-align:center;line-height:1.6}
 
 
 
@@ -95,10 +96,12 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
       <div class="w-hrule"></div>
       <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle1.png" alt="Amerighi Syrah"></div>
       <div class="wine-info">
+        <div class="wine-info-text">
         <div class="w-name">Syrah</div>
         <div class="w-producer">Stefano Amerighi</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Syrah 100%</span></div>
+        </div><!-- /wine-info-text -->
         <div class="wine-qr">
           <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/qr1.png" alt="QR">
           <div class="qr-label">Scan for<br>producer info</div>
@@ -119,10 +122,12 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
       <div class="w-hrule"></div>
       <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle1.png" alt="Amerighi Syrah"></div>
       <div class="wine-info">
+        <div class="wine-info-text">
         <div class="w-name">Syrah</div>
         <div class="w-producer">Stefano Amerighi</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Syrah 100%</span></div>
+        </div><!-- /wine-info-text -->
         <div class="wine-qr">
           <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/qr1.png" alt="QR">
           <div class="qr-label">Scan for<br>producer info</div>
@@ -143,10 +148,12 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
       <div class="w-hrule"></div>
       <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle2.png" alt="Les Alexandrins Saint-Joseph"></div>
       <div class="wine-info">
+        <div class="wine-info-text">
         <div class="w-name">Saint-Joseph</div>
         <div class="w-producer">Les Alexandrins</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Syrah 100%</span></div>
+        </div><!-- /wine-info-text -->
         <div class="wine-qr">
           <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/qr2.png" alt="QR">
           <div class="qr-label">Scan for<br>producer info</div>
@@ -167,10 +174,12 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
       <div class="w-hrule"></div>
       <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle2.png" alt="Les Alexandrins Saint-Joseph"></div>
       <div class="wine-info">
+        <div class="wine-info-text">
         <div class="w-name">Saint-Joseph</div>
         <div class="w-producer">Les Alexandrins</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Syrah 100%</span></div>
+        </div><!-- /wine-info-text -->
         <div class="wine-qr">
           <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/qr2.png" alt="QR">
           <div class="qr-label">Scan for<br>producer info</div>
@@ -191,10 +200,12 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
       <div class="w-hrule"></div>
       <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle3.png" alt="Le Vieux Donjon"></div>
       <div class="wine-info">
+        <div class="wine-info-text">
         <div class="w-name">Châteauneuf-<br>du-Pape</div>
         <div class="w-producer">Le Vieux Donjon</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Grenache 70% · Syrah 15% · Mourvèdre 15%</span></div>
+        </div><!-- /wine-info-text -->
         <div class="wine-qr">
           <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/qr3.png" alt="QR">
           <div class="qr-label">Scan for<br>producer info</div>
@@ -215,10 +226,12 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
       <div class="w-hrule"></div>
       <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle3.png" alt="Le Vieux Donjon"></div>
       <div class="wine-info">
+        <div class="wine-info-text">
         <div class="w-name">Châteauneuf-<br>du-Pape</div>
         <div class="w-producer">Le Vieux Donjon</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Grenache 70% · Syrah 15% · Mourvèdre 15%</span></div>
+        </div><!-- /wine-info-text -->
         <div class="wine-qr">
           <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/qr3.png" alt="QR">
           <div class="qr-label">Scan for<br>producer info</div>
@@ -261,11 +274,12 @@ body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidde
       exit.style.color       = fg;
       exit.style.borderColor = bd;
     }
+    if (window.__updatePdfBtn) window.__updatePdfBtn(dark);
   }
 
   // Init
   slides[0].classList.add('active');
-  document.addEventListener('DOMContentLoaded', () => goTo(0));
+  setTimeout(() => goTo(0), 0);
 
   // Keyboard
   document.addEventListener('keydown', e => {
