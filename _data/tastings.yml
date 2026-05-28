@@ -66,6 +66,7 @@
 - slug: northern-rhone-syrahs
   title: "Northern Rhône Syrahs"
   date: 2026-05-23
+  location: "Krieg 13"
   region: "Northern Rhône"
   description: >
     A deep dive into the north — three Syrahs from Cornas, Côte-Rôtie
@@ -101,6 +102,7 @@
 - slug: syrah-rhone-cortona
   title: "Syrah — from the Rhône to Cortona"
   date: 2026-04-11
+  location: "Krieg 13"
   region: "Rhône Valley & Tuscany"
   description: >
     A first contact with Syrah — its home in the Rhône and its journey
@@ -136,6 +138,7 @@
 - slug: chardonnay-across-countries
   title: "Chardonnay across Countries"
   date: 2026-03-07
+  location: "Krieg 13"
   region: "Bourgogne · Südtirol · Friuli"
   description: >
     A pilot evening and the first of the series — one grape, three terroirs.
