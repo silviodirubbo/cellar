@@ -10,10 +10,11 @@ permalink: pretty
 
 # Excludes
 exclude:
-  - README.md
+  - vendor
   - Gemfile
   - Gemfile.lock
-  - node_modules
+  - scripts
+  - README.md
 
 # Collections
 collections:
