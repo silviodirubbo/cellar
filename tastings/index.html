@@ -110,6 +110,7 @@ permalink: /tastings/
               <time datetime="{{ tasting.date }}">{{ tasting.date | date: "%-d %b %Y" }}</time>
               <span class="tag">Past</span>
               <span class="label">{{ tasting.region }}</span>
+              {% if tasting.location %}<span class="label">· {{ tasting.location }}</span>{% endif %}
             </div>
             <h2 class="tasting-banner__title">{{ tasting.title }}</h2>
             <p class="tasting-banner__desc">{{ tasting.description }}</p>
@@ -118,12 +119,17 @@ permalink: /tastings/
             </div>
           </div>
           <div class="tasting-banner__actions">
-            {% if tasting.slides %}
-              <a href="{{ '/tastings/' | relative_url }}{{ tasting.slug }}/" class="btn btn--text">View presentation →</a>
-            {% else %}
-              <span class="label" style="font-size:0.6rem;">Presentation coming</span>
-            {% endif %}
-            <button class="share-btn" data-slug="{{ tasting.slug }}" data-slides="{{ tasting.slides }}">Share</button>
+            <div class="tasting-banner__btns">
+              {% if tasting.slides %}
+                <a href="{{ site.baseurl }}/assets/tastings/{{ tasting.slug }}/presentation.pdf"
+                   class="btn btn--text"
+                   target="_blank"
+                   rel="noopener">View presentation →</a>
+              {% else %}
+                <span class="label" style="font-size:0.6rem;">Presentation coming</span>
+              {% endif %}
+              <button class="share-btn" data-slug="{{ tasting.slug }}" data-slides="{{ tasting.slides }}">Share</button>
+            </div>
           </div>
         </article>
         {% endfor %}
