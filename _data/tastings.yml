@@ -20,27 +20,6 @@
 
 # ── Upcoming ──────────────────────────────────────────────────
 
-- slug: northern-rhone-whites
-  title: "Northern Rhône Whites"
-  date: 2026-05-29
-  date_tbd: false
-  location: "Filippo's"
-  region: "Northern Rhône"
-  description: >
-    An evening dedicated to the great white wines of the Northern Rhône —
-    Roussanne, Marsanne, Viognier. Structured, aromatic, and often overlooked
-    in favour of their red neighbours.
-  tags:
-    - Roussanne
-    - Marsanne
-    - Viognier
-    - Rhône
-    - France
-  status: upcoming
-  spots_total: 5
-  cost_estimate: "37 CHF"
-  featured: true
-
 - slug: cote-rotie-horizontal
   title: "Côte-Rôtie Horizontal"
   date: null
@@ -63,9 +42,45 @@
 
 # ── Past ──────────────────────────────────────────────────────
 
+- slug: northern-rhone-whites
+  title: "Northern Rhône Whites"
+  date: 2026-05-29
+  date_tbd: false
+  location: "Filippo's"
+  region: "Northern Rhône"
+  description: >
+    An evening dedicated to the great white wines of the Northern Rhône —
+    Marsanne and Viognier. Structured, aromatic, and often overlooked
+    in favour of their red neighbours.
+  tags:
+    - Marsanne
+    - Viognier
+    - Rhône
+    - France
+  status: past
+  featured: false
+  slides: true
+  wines:
+    - name: "Les Chaillets"
+      producer: "Yves Cuilleron"
+      vintage: 2023
+      appellation: "Condrieu AOC"
+      blend: "100% Viognier"
+    - name: "Pur Blanc"
+      producer: "Domaine du Tunnel"
+      vintage: 2023
+      appellation: "Saint-Péray AOC"
+      blend: "100% Marsanne · Vieilles Vignes"
+    - name: "Chante-Alouette"
+      producer: "M. Chapoutier"
+      vintage: 2021
+      appellation: "Hermitage AOC"
+      blend: "100% Marsanne"
+
 - slug: northern-rhone-syrahs
   title: "Northern Rhône Syrahs"
   date: 2026-05-23
+  date_tbd: false
   location: "Krieg 13"
   region: "Northern Rhône"
   description: >
@@ -102,6 +117,7 @@
 - slug: syrah-rhone-cortona
   title: "Syrah — from the Rhône to Cortona"
   date: 2026-04-11
+  date_tbd: false
   location: "Krieg 13"
   region: "Rhône Valley & Tuscany"
   description: >
@@ -138,6 +154,7 @@
 - slug: chardonnay-across-countries
   title: "Chardonnay across Countries"
   date: 2026-03-07
+  date_tbd: false
   location: "Krieg 13"
   region: "Bourgogne · Südtirol · Friuli"
   description: >
