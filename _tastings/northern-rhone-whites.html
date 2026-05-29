@@ -1,0 +1,314 @@
+---
+layout: presentation
+title: "Northern Rhône Whites"
+date: 2026-05-29
+---
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap');
+:root{--warm-white:#FDFCFA;--off-white:#F7F5F0;--ink:#1A1814;--ink-mid:#4A4640;--ink-light:#8A8480;--green:#2C4A3E;--gold:#8B6914;--rule:#E2DED8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cormorant Garamond',serif;background:var(--ink);overflow:hidden;width:100vw;height:100vh}
+.deck{width:100vw;height:100vh;position:relative}
+.slide{position:absolute;inset:0;width:100%;height:100%;display:none}
+.slide.active{display:flex}
+
+/* ── COVER ── */
+.slide-cover{background:var(--ink);flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
+.cover-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.22}
+.cover-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center}
+.eyebrow{font-family:'DM Mono',monospace;font-weight:300;font-size:clamp(.55rem,1vw,.7rem);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-light);margin-bottom:2.5rem}
+.cover-title{font-size:clamp(3.5rem,8vw,7rem);font-weight:300;line-height:1;color:var(--warm-white)}
+.cover-subtitle{font-size:clamp(1.8rem,3.5vw,3.2rem);font-weight:300;font-style:italic;color:var(--warm-white);margin-top:.4rem}
+.cover-rule{width:40px;height:1px;background:var(--gold);margin:2rem auto}
+.cover-meta{font-family:'DM Mono',monospace;font-weight:300;font-size:clamp(.5rem,.85vw,.65rem);letter-spacing:.14em;text-transform:uppercase;color:rgba(253,252,250,.55)}
+.cover-meta-gold{font-family:'DM Mono',monospace;font-weight:300;font-size:clamp(.5rem,.85vw,.65rem);letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-top:.4rem}
+
+/* ── INTRO ── */
+.slide-intro{background:var(--warm-white);color:var(--ink);flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5rem}
+.intro-label{font-family:'DM Mono',monospace;font-weight:300;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-light);margin-bottom:2rem}
+.intro-grapes{display:flex;align-items:flex-start;gap:0;width:100%;max-width:700px}
+.intro-grape-col{flex:1;display:flex;flex-direction:column;align-items:center;padding:0 2.5rem}
+.ig-name{font-size:clamp(2.8rem,5vw,4.5rem);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.02em}
+.ig-direction{font-size:clamp(.8rem,1.2vw,1rem);font-weight:300;font-style:italic;color:var(--green);margin-top:.4rem;margin-bottom:1rem}
+.ig-apps{font-family:'DM Mono',monospace;font-weight:300;font-size:.52rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-light);line-height:2}
+.intro-divider{width:1px;background:var(--rule);align-self:stretch;margin:0.5rem 0}
+.intro-vline{width:1px;height:40px;background:var(--rule);margin:2.5rem auto}
+.intro-throughline{font-size:clamp(.9rem,1.4vw,1.2rem);font-weight:300;font-style:italic;color:var(--green)}
+
+/* ── FRANCE MAP ── */
+.slide-france{background:var(--warm-white);align-items:center;justify-content:center}
+.france-map-wrap{display:flex;align-items:center;justify-content:center;width:100%;height:100%;padding:3rem}
+.france-map-wrap img{max-width:100%;max-height:100%;object-fit:contain}
+
+/* ── WINE SLIDES ── */
+.slide-wine{background:var(--warm-white);color:var(--ink);flex-direction:row}
+.wine-map{flex:2;position:relative;overflow:hidden;background:var(--off-white)}
+.wine-map img{width:100%;height:100%;object-fit:cover;object-position:center}
+.map-tag{position:absolute;bottom:1.2rem;left:1.2rem;font-family:'DM Mono',monospace;font-weight:300;font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:rgba(253,252,250,.9);padding:.3rem .55rem}
+.wine-panel{flex:1;display:flex;flex-direction:column;padding:2.8rem 2.2rem;border-left:1px solid var(--rule);background:var(--warm-white)}
+.w-counter{font-family:'DM Mono',monospace;font-weight:300;font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-light);margin-bottom:.35rem}
+.w-appellation{font-family:'DM Mono',monospace;font-weight:300;font-size:.52rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);margin-bottom:1.8rem}
+.w-hrule{width:100%;height:1px;background:var(--rule);margin-bottom:1.8rem}
+.wine-bottle{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;padding:.5rem 0}
+.wine-bottle img{max-height:100%;max-width:75%;object-fit:contain;filter:drop-shadow(0 4px 24px rgba(26,24,20,.07))}
+.wine-info{padding-top:1.4rem;border-top:1px solid var(--rule);display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto auto;column-gap:1rem;align-items:start}
+.wine-info-text{grid-column:1;grid-row:1/4}
+.w-name{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:300;color:var(--ink);line-height:1.15;margin-bottom:.2rem}
+.w-producer{font-size:clamp(.75rem,1vw,.88rem);font-weight:300;font-style:italic;color:var(--green);margin-bottom:.9rem}
+.w-meta{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.25rem}
+.w-ml{font-family:'DM Mono',monospace;font-weight:300;font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-light);min-width:2.8rem}
+.w-mv{font-size:.75rem;font-weight:300;color:var(--ink-mid)}
+.wine-qr{grid-column:2;grid-row:1;display:flex;flex-direction:column;align-items:center}
+.wine-qr img{width:72px;height:72px;object-fit:contain}
+
+/* ── NAV ── */
+.pres-nav{position:fixed;bottom:1.8rem;right:1.8rem;display:flex;align-items:center;gap:.5rem;z-index:100}
+.pres-btn{font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;padding:.45rem .75rem;border:1px solid;background:transparent;cursor:pointer;transition:all .2s}
+.pres-count{font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.14em;min-width:2.8rem;text-align:center}
+</style>
+
+<div class="deck" id="deck">
+
+  <!-- 1: COVER -->
+  <div class="slide slide-cover active">
+    <div class="cover-bg" style="background-image:url('{{ site.baseurl }}/assets/tastings/northern-rhone-whites/cover.jpg')"></div>
+    <div class="cover-content">
+      <div class="eyebrow">Wine Tasting · 29 May 2026</div>
+      <div class="cover-title">Northern Rhône</div>
+      <div class="cover-subtitle">Whites</div>
+      <div class="cover-rule"></div>
+      <div class="cover-meta">Three wines · Two grapes</div>
+      <div class="cover-meta-gold">Condrieu · Saint-Péray · Hermitage</div>
+    </div>
+  </div>
+
+  <!-- 2: GRAPE INTRO -->
+  <div class="slide slide-intro">
+    <div class="intro-label">The Grapes</div>
+    <div class="intro-grapes">
+      <div class="intro-grape-col">
+        <div class="ig-name">Viognier</div>
+        <div class="ig-direction">north</div>
+        <div class="ig-apps">Condrieu</div>
+      </div>
+      <div class="intro-divider"></div>
+      <div class="intro-grape-col">
+        <div class="ig-name">Marsanne</div>
+        <div class="ig-direction">south</div>
+        <div class="ig-apps">Saint-Péray<br>Hermitage</div>
+      </div>
+    </div>
+    <div class="intro-vline"></div>
+    <div class="intro-throughline">Viognier · Marsanne — north to south</div>
+  </div>
+
+  <!-- 3: FRANCE MAP -->
+  <div class="slide slide-france">
+    <div class="france-map-wrap">
+      <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-whites/map_france.png" alt="France wine regions">
+    </div>
+  </div>
+
+  <!-- 4: WINE 01 — Cuilleron Condrieu · Northern Rhône map -->
+  <div class="slide slide-wine">
+    <div class="wine-map">
+      <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-whites/map_rhone_n.jpg" alt="Northern Rhône map" style="object-position:center top">
+      <div class="map-tag">Condrieu · Northern Rhône</div>
+    </div>
+    <div class="wine-panel">
+      <div class="w-counter">01 / 03</div>
+      <div class="w-appellation">Condrieu · Northern Rhône</div>
+      <div class="w-hrule"></div>
+      <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/northern-rhone-whites/bottle1.png" alt="Cuilleron Les Chaillets"></div>
+      <div class="wine-info">
+        <div class="wine-info-text">
+          <div class="w-name">Les Chaillets</div>
+          <div class="w-producer">Yves Cuilleron</div>
+          <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
+          <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Viognier</span></div>
+        </div>
+        <div class="wine-qr">
+          <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-whites/qr1.png" alt="QR">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5: WINE 01 — Cuilleron Condrieu · detail map -->
+  <div class="slide slide-wine">
+    <div class="wine-map">
+      <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-whites/map_condrieu.jpg" alt="Condrieu detail" style="object-position:center center">
+      <div class="map-tag">Condrieu · Chavanay</div>
+    </div>
+    <div class="wine-panel">
+      <div class="w-counter">01 / 03</div>
+      <div class="w-appellation">Condrieu · Northern Rhône</div>
+      <div class="w-hrule"></div>
+      <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/northern-rhone-whites/bottle1.png" alt="Cuilleron Les Chaillets"></div>
+      <div class="wine-info">
+        <div class="wine-info-text">
+          <div class="w-name">Les Chaillets</div>
+          <div class="w-producer">Yves Cuilleron</div>
+          <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
+          <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Viognier</span></div>
+        </div>
+        <div class="wine-qr">
+          <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-whites/qr1.png" alt="QR">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6: WINE 02 — Tunnel Saint-Péray · Northern Rhône map -->
+  <div class="slide slide-wine">
+    <div class="wine-map">
+      <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-whites/map_rhone_n.jpg" alt="Northern Rhône map" style="object-position:center bottom">
+      <div class="map-tag">Saint-Péray · Northern Rhône</div>
+    </div>
+    <div class="wine-panel">
+      <div class="w-counter">02 / 03</div>
+      <div class="w-appellation">Saint-Péray · Northern Rhône</div>
+      <div class="w-hrule"></div>
+      <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/northern-rhone-whites/bottle2.png" alt="Tunnel Pur Blanc"></div>
+      <div class="wine-info">
+        <div class="wine-info-text">
+          <div class="w-name">Pur Blanc</div>
+          <div class="w-producer">Domaine du Tunnel</div>
+          <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
+          <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Marsanne · Vieilles Vignes</span></div>
+        </div>
+        <div class="wine-qr">
+          <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-whites/qr2.png" alt="QR">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7: WINE 02 — Tunnel Saint-Péray · detail map -->
+  <div class="slide slide-wine">
+    <div class="wine-map">
+      <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-whites/map_saint_peray.jpg" alt="Saint-Péray detail" style="object-position:center center">
+      <div class="map-tag">Saint-Péray · Granitic Slopes</div>
+    </div>
+    <div class="wine-panel">
+      <div class="w-counter">02 / 03</div>
+      <div class="w-appellation">Saint-Péray · Northern Rhône</div>
+      <div class="w-hrule"></div>
+      <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/northern-rhone-whites/bottle2.png" alt="Tunnel Pur Blanc"></div>
+      <div class="wine-info">
+        <div class="wine-info-text">
+          <div class="w-name">Pur Blanc</div>
+          <div class="w-producer">Domaine du Tunnel</div>
+          <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
+          <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Marsanne · Vieilles Vignes</span></div>
+        </div>
+        <div class="wine-qr">
+          <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-whites/qr2.png" alt="QR">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8: WINE 03 — Chapoutier Hermitage · Northern Rhône map -->
+  <div class="slide slide-wine">
+    <div class="wine-map">
+      <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-whites/map_rhone_n.jpg" alt="Northern Rhône map" style="object-position:center 60%">
+      <div class="map-tag">Hermitage · Northern Rhône</div>
+    </div>
+    <div class="wine-panel">
+      <div class="w-counter">03 / 03</div>
+      <div class="w-appellation">Hermitage · Northern Rhône</div>
+      <div class="w-hrule"></div>
+      <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/northern-rhone-whites/bottle3.png" alt="Chapoutier Chante-Alouette"></div>
+      <div class="wine-info">
+        <div class="wine-info-text">
+          <div class="w-name">Chante-Alouette</div>
+          <div class="w-producer">M. Chapoutier</div>
+          <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2021</span></div>
+          <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Marsanne</span></div>
+        </div>
+        <div class="wine-qr">
+          <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-whites/qr3.png" alt="QR">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9: WINE 03 — Chapoutier Hermitage · detail map -->
+  <div class="slide slide-wine">
+    <div class="wine-map">
+      <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-whites/map_hermitage.jpg" alt="Hermitage hill detail" style="object-position:center center">
+      <div class="map-tag">Hermitage · Tain l'Hermitage</div>
+    </div>
+    <div class="wine-panel">
+      <div class="w-counter">03 / 03</div>
+      <div class="w-appellation">Hermitage · Northern Rhône</div>
+      <div class="w-hrule"></div>
+      <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/northern-rhone-whites/bottle3.png" alt="Chapoutier Chante-Alouette"></div>
+      <div class="wine-info">
+        <div class="wine-info-text">
+          <div class="w-name">Chante-Alouette</div>
+          <div class="w-producer">M. Chapoutier</div>
+          <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2021</span></div>
+          <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Marsanne</span></div>
+        </div>
+        <div class="wine-qr">
+          <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-whites/qr3.png" alt="QR">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="pres-nav">
+  <button class="pres-btn" id="prevBtn">← Prev</button>
+  <span class="pres-count" id="presCount"></span>
+  <button class="pres-btn" id="nextBtn">Next →</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let cur = 0;
+
+  function goTo(n) {
+    slides[cur].classList.remove('active');
+    cur = Math.max(0, Math.min(slides.length - 1, n));
+    slides[cur].classList.add('active');
+    document.getElementById('presCount').textContent = (cur + 1) + ' / ' + slides.length;
+    const dark = slides[cur].classList.contains('slide-cover');
+    const fg     = dark ? 'rgba(255,255,255,.45)' : 'rgba(26,24,20,.5)';
+    const subtle = dark ? 'rgba(255,255,255,.3)'  : 'rgba(26,24,20,.3)';
+    const bd     = dark ? 'rgba(255,255,255,.2)'  : 'rgba(26,24,20,.2)';
+
+    ['prevBtn','nextBtn'].forEach(id => {
+      const b = document.getElementById(id);
+      b.style.color       = fg;
+      b.style.borderColor = bd;
+    });
+    document.getElementById('presCount').style.color = subtle;
+
+    const exit = document.getElementById('deckExit');
+    if (exit) {
+      exit.style.color       = fg;
+      exit.style.borderColor = bd;
+    }
+    if (window.__updatePdfBtn) window.__updatePdfBtn(dark);
+  }
+
+  slides[0].classList.add('active');
+  setTimeout(() => goTo(0), 0);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') goTo(cur + 1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')                    goTo(cur - 1);
+    if (e.key === 'Escape') window.location.href = '{{ site.baseurl }}/tastings/';
+  });
+
+  document.getElementById('deck').addEventListener('click', e => {
+    if (!e.target.closest('.pres-nav')) goTo(cur + 1);
+  });
+
+  document.getElementById('prevBtn').addEventListener('click', e => { e.stopPropagation(); goTo(cur - 1); });
+  document.getElementById('nextBtn').addEventListener('click', e => { e.stopPropagation(); goTo(cur + 1); });
+</script>
