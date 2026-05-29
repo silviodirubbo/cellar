@@ -121,10 +121,8 @@ permalink: /tastings/
           <div class="tasting-banner__actions">
             <div class="tasting-banner__btns">
               {% if tasting.slides %}
-                <a href="{{ site.baseurl }}/assets/tastings/{{ tasting.slug }}/presentation.pdf"
-                   class="btn btn--text"
-                   target="_blank"
-                   rel="noopener">View presentation →</a>
+                <a href="{{ site.baseurl }}/tastings/{{ tasting.slug }}/"
+                   class="btn btn--text">View presentation →</a>
               {% else %}
                 <span class="label" style="font-size:0.6rem;">Presentation coming</span>
               {% endif %}
