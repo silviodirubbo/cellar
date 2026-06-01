@@ -28,7 +28,7 @@ date: 2026-04-11
   flex-direction: column; align-items: center; justify-content: center;
   text-align: center; position: relative; overflow: hidden; cursor: pointer;
 }
-.cover-bg { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: .22; }
+.cover-bg { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: .28; }
 .cover-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
 .eyebrow {
   font-family: 'DM Mono', monospace; font-weight: 300; font-size: 11px;
@@ -42,7 +42,7 @@ date: 2026-04-11
   letter-spacing: .14em; text-transform: uppercase; color: rgba(253,252,250,.55);
 }
 
-/* ── INTRO ── */
+/* ── INTRO GRAPE ── */
 .slide-intro {
   background: var(--warm-white); color: var(--ink);
   flex-direction: column; align-items: center; justify-content: center;
@@ -61,6 +61,17 @@ date: 2026-04-11
 }
 .ig-val { font-size: 14px; font-weight: 300; color: var(--ink-mid); line-height: 1.5; }
 .ig-val em { color: var(--green); font-style: italic; }
+
+/* ── WORLD MAP (full-bleed, contain) ── */
+.slide-world {
+  background: var(--warm-white);
+  align-items: center; justify-content: center; cursor: pointer;
+}
+.world-map-wrap {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 100%; padding: 40px;
+}
+.world-map-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
 /* ── WINE SLIDES ── */
 .slide-wine { background: var(--warm-white); color: var(--ink); flex-direction: row; }
@@ -132,7 +143,7 @@ date: 2026-04-11
 
 <!-- 1: COVER -->
 <div class="slide slide-cover active">
-  <div class="cover-bg" style="background-image:url('{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/cover.jpg')"></div>
+  <div class="cover-bg" style="background-image:url('{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/cover.jpg.png')"></div>
   <div class="cover-content">
     <div class="eyebrow">Wine Tasting · 11 April 2026</div>
     <div class="cover-title">Syrah</div>
@@ -155,10 +166,17 @@ date: 2026-04-11
   </div>
 </div>
 
-<!-- 3: WINE 01 — Amerighi Cortona (Italy overview) -->
+<!-- 3: WORLD MAP — Syrah global distribution -->
+<div class="slide slide-world">
+  <div class="world-map-wrap">
+    <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/map_world_syrah.jpg.png" alt="Syrah — world distribution">
+  </div>
+</div>
+
+<!-- 4: AMERIGHI — Italy overview -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/map_italy.jpg" alt="Italy wine map">
+    <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/map_italy.jpg.png" alt="Italy wine map">
     <div class="map-tag">Cortona DOC · Tuscany · Italy</div>
   </div>
   <div class="wine-panel">
@@ -167,7 +185,7 @@ date: 2026-04-11
       <div class="w-appellation">Cortona DOC · Tuscany</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle1.png" alt="Amerighi Syrah"></div>
+    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle_amerighi.png.png" alt="Amerighi Syrah"></div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Syrah</div>
@@ -176,17 +194,17 @@ date: 2026-04-11
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Syrah 100%</span></div>
       </div>
       <div class="wine-qr">
-        <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/qr1.png" alt="QR">
+        <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/qr_amerighi.png.png" alt="QR">
         <div class="qr-label">Scan for<br>producer info</div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 4: WINE 01 detail — Tuscany map -->
+<!-- 5: AMERIGHI — Tuscany detail -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/map_tuscany.jpg" alt="Tuscany wine map">
+    <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/map_tuscany.jpg.png" alt="Tuscany wine map">
     <div class="map-tag">Cortona · Tuscany</div>
   </div>
   <div class="wine-panel">
@@ -195,7 +213,7 @@ date: 2026-04-11
       <div class="w-appellation">Cortona DOC · Tuscany</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle1.png" alt="Amerighi Syrah"></div>
+    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle_amerighi.png.png" alt="Amerighi Syrah"></div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Syrah</div>
@@ -204,17 +222,73 @@ date: 2026-04-11
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Syrah 100%</span></div>
       </div>
       <div class="wine-qr">
-        <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/qr1.png" alt="QR">
+        <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/qr_amerighi.png.png" alt="QR">
         <div class="qr-label">Scan for<br>producer info</div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 5: WINE 02 — Les Alexandrins Saint-Joseph (Rhône overview) -->
+<!-- 6: AMERIGHI — Cortona detail -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/map_rhone_n.jpg" alt="Northern Rhône map">
+    <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/map_cortona.jpg.png" alt="Cortona detail map">
+    <div class="map-tag">Cortona DOC · Detail</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">01 / 03</div>
+      <div class="w-appellation">Cortona DOC · Tuscany</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle_amerighi.png.png" alt="Amerighi Syrah"></div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Syrah</div>
+        <div class="w-producer">Stefano Amerighi</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Syrah 100%</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/qr_amerighi.png.png" alt="QR">
+        <div class="qr-label">Scan for<br>producer info</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 7: LES ALEXANDRINS — France overview -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/map_france.jpg.png" alt="France wine map">
+    <div class="map-tag">Saint-Joseph · France</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">02 / 03</div>
+      <div class="w-appellation">Saint-Joseph · Vallée du Rhône</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle_alexandrins.png.png" alt="Les Alexandrins Saint-Joseph"></div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Saint-Joseph</div>
+        <div class="w-producer">Les Alexandrins</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Syrah 100%</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/qr_alexandrins.png.png" alt="QR">
+        <div class="qr-label">Scan for<br>producer info</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 8: LES ALEXANDRINS — Northern Rhône overview -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/map_rhone_north.jpg.png" alt="Northern Rhône map">
     <div class="map-tag">Saint-Joseph · Northern Rhône</div>
   </div>
   <div class="wine-panel">
@@ -223,7 +297,7 @@ date: 2026-04-11
       <div class="w-appellation">Saint-Joseph · Vallée du Rhône</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle2.png" alt="Les Alexandrins Saint-Joseph"></div>
+    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle_alexandrins.png.png" alt="Les Alexandrins Saint-Joseph"></div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Saint-Joseph</div>
@@ -232,18 +306,18 @@ date: 2026-04-11
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Syrah 100%</span></div>
       </div>
       <div class="wine-qr">
-        <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/qr2.png" alt="QR">
+        <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/qr_alexandrins.png.png" alt="QR">
         <div class="qr-label">Scan for<br>producer info</div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 6: WINE 02 detail — Rhône close-up -->
+<!-- 9: LES ALEXANDRINS — Saint-Joseph detail -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/map_rhone_close.jpg" alt="Rhône appellations close-up">
-    <div class="map-tag">Saint-Joseph · Rhône Valley</div>
+    <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/map_saint_joseph.jpg.png" alt="Saint-Joseph detail map">
+    <div class="map-tag">Saint-Joseph · Detail</div>
   </div>
   <div class="wine-panel">
     <div class="panel-head">
@@ -251,7 +325,7 @@ date: 2026-04-11
       <div class="w-appellation">Saint-Joseph · Vallée du Rhône</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle2.png" alt="Les Alexandrins Saint-Joseph"></div>
+    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle_alexandrins.png.png" alt="Les Alexandrins Saint-Joseph"></div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Saint-Joseph</div>
@@ -260,17 +334,45 @@ date: 2026-04-11
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Syrah 100%</span></div>
       </div>
       <div class="wine-qr">
-        <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/qr2.png" alt="QR">
+        <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/qr_alexandrins.png.png" alt="QR">
         <div class="qr-label">Scan for<br>producer info</div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 7: WINE 03 — Le Vieux Donjon CdP (Rhône full) -->
+<!-- 10: LE VIEUX DONJON — France overview -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/map_rhone.jpg" alt="Rhône full map">
+    <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/map_france.jpg.png" alt="France wine map">
+    <div class="map-tag">Châteauneuf-du-Pape · France</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">03 / 03</div>
+      <div class="w-appellation">Châteauneuf-du-Pape · Vallée du Rhône</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle_vieux_donjon.png.png" alt="Le Vieux Donjon"></div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Châteauneuf-<br>du-Pape</div>
+        <div class="w-producer">Le Vieux Donjon</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Grenache 70% · Syrah 15% · Mourvèdre 15%</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/qr_vieux_donjon.png.png" alt="QR">
+        <div class="qr-label">Scan for<br>producer info</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 11: LE VIEUX DONJON — Rhône full -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/map_rhone_full.jpg.png" alt="Rhône full map">
     <div class="map-tag">Châteauneuf-du-Pape · Southern Rhône</div>
   </div>
   <div class="wine-panel">
@@ -279,7 +381,7 @@ date: 2026-04-11
       <div class="w-appellation">Châteauneuf-du-Pape · Vallée du Rhône</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle3.png" alt="Le Vieux Donjon"></div>
+    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle_vieux_donjon.png.png" alt="Le Vieux Donjon"></div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Châteauneuf-<br>du-Pape</div>
@@ -288,18 +390,18 @@ date: 2026-04-11
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Grenache 70% · Syrah 15% · Mourvèdre 15%</span></div>
       </div>
       <div class="wine-qr">
-        <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/qr3.png" alt="QR">
+        <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/qr_vieux_donjon.png.png" alt="QR">
         <div class="qr-label">Scan for<br>producer info</div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 8: WINE 03 detail — CdP detailed map -->
+<!-- 12: LE VIEUX DONJON — Châteauneuf detail -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/map_cdp.jpg" alt="Châteauneuf-du-Pape detail">
-    <div class="map-tag">Châteauneuf-du-Pape · Soils &amp; Zones</div>
+    <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/map_chateauneuf.jpg.png" alt="Châteauneuf-du-Pape detail map">
+    <div class="map-tag">Châteauneuf-du-Pape · Detail</div>
   </div>
   <div class="wine-panel">
     <div class="panel-head">
@@ -307,7 +409,7 @@ date: 2026-04-11
       <div class="w-appellation">Châteauneuf-du-Pape · Vallée du Rhône</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle3.png" alt="Le Vieux Donjon"></div>
+    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle_vieux_donjon.png.png" alt="Le Vieux Donjon"></div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Châteauneuf-<br>du-Pape</div>
@@ -316,7 +418,7 @@ date: 2026-04-11
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Grenache 70% · Syrah 15% · Mourvèdre 15%</span></div>
       </div>
       <div class="wine-qr">
-        <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/qr3.png" alt="QR">
+        <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/qr_vieux_donjon.png.png" alt="QR">
         <div class="qr-label">Scan for<br>producer info</div>
       </div>
     </div>
