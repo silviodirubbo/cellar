@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1280">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>{{ page.title }} — Silvio di Rubbo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,7 +10,6 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* The real viewport — fills the window, clips everything */
     html, body {
       width: 100%;
       height: 100%;
@@ -19,81 +18,80 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Outer shell — full window, holds the scaled canvas + the unscaled chrome */
-    #shell {
+    /* Fills the window, centres the stage, clips overflow. Never scaled. */
+    #viewport {
       position: fixed;
       inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       background: #1A1814;
+      overflow: hidden;
     }
 
-    /* The 1280×800 canvas — this is the ONLY thing that gets scaled */
-    #canvas {
+    /* THE STAGE — fixed 1280×800. The ONLY element that is scaled. */
+    /* Everything (slides + buttons) lives inside it, so nothing can */
+    /* ever misalign regardless of zoom or device size.              */
+    #stage {
       width: 1280px;
       height: 800px;
-      flex-shrink: 0;
-      overflow: hidden;
+      flex: 0 0 auto;
       position: relative;
+      overflow: hidden;
       transform-origin: center center;
       font-family: 'Cormorant Garamond', serif;
+      background: #1A1814;
     }
 
-    /* Chrome lives outside the canvas — never scaled, always in real px */
-    #chrome {
-      position: fixed;
-      inset: 0;
-      pointer-events: none; /* clicks pass through to canvas by default */
-      z-index: 999;
-    }
-    #chrome .c-btn {
-      pointer-events: all;
+    /* ── Chrome: absolute INSIDE the stage → scales with it ──────── */
+    .chrome {
       position: absolute;
+      z-index: 50;
       font-family: 'DM Mono', monospace;
       font-size: 11px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       background: transparent;
-      padding: 7px 14px;
+      padding: 8px 14px;
       border: 1px solid;
       cursor: pointer;
       text-decoration: none;
+      white-space: nowrap;
       transition: color 0.2s, border-color 0.2s;
     }
-    #btn-back { top: 24px; right: 24px; }
-    #btn-pdf  { top: 24px; right: 168px; }
+    #btn-back { top: 22px; right: 24px; }
+    #btn-pdf  { top: 22px; right: 162px; }
 
-    /* Nav sits at bottom-right, also unscaled */
     #nav {
-      pointer-events: all;
       position: absolute;
-      bottom: 24px;
+      z-index: 50;
+      bottom: 22px;
       right: 24px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
-    #nav .c-btn { position: static; }
+    #nav .chrome { position: static; }
     #nav-count {
       font-family: 'DM Mono', monospace;
-      font-size: 10px;
+      font-size: 11px;
       letter-spacing: 0.14em;
-      min-width: 48px;
+      min-width: 50px;
       text-align: center;
     }
+    .chrome:disabled { opacity: 0.25; cursor: default; }
 
-    /* ── Print ─────────────────────────────────────────── */
+    /* ── Print: unscale, one slide per page ─────────────────────── */
     @media print {
       html, body { overflow: visible; background: #FDFCFA; }
-      #shell { position: static; display: block; background: none; }
-      #chrome { display: none; }
-      #canvas {
+      #viewport { position: static; display: block; overflow: visible; background: none; }
+      #stage {
         width: 100% !important;
         height: auto !important;
         transform: none !important;
         overflow: visible;
       }
+      .chrome, #nav { display: none !important; }
       .slide {
         display: flex !important;
         position: relative !important;
@@ -102,86 +100,92 @@
         page-break-after: always;
         break-after: page;
       }
-      .slide-cover {
-        background: #1A1814 !important;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
+      .slide-cover { background: #1A1814 !important; }
       * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
   </style>
 </head>
 <body>
-  <div id="shell">
+  <div id="viewport">
+    <div id="stage">
 
-    <!-- Scaled canvas — content injected here -->
-    <div id="canvas">
       {{ content }}
-    </div>
 
-    <!-- Unscaled chrome — buttons always in real screen px -->
-    <div id="chrome">
-      <a href="{{ '/tastings/' | relative_url }}" class="c-btn" id="btn-back">← Back to tastings</a>
-      <button class="c-btn" id="btn-pdf" onclick="window.print()">↓ PDF</button>
+      <!-- Chrome lives inside the stage, scales with it, always aligned -->
+      <a href="{{ '/tastings/' | relative_url }}" class="chrome" id="btn-back">← Back to tastings</a>
+      <button class="chrome" id="btn-pdf" onclick="window.print()">↓ PDF</button>
       <div id="nav">
-        <button class="c-btn" id="btn-prev" onclick="window.__goTo(window.__cur - 1)">← Prev</button>
+        <button class="chrome" id="btn-prev">← Prev</button>
         <span id="nav-count"></span>
-        <button class="c-btn" id="btn-next" onclick="window.__goTo(window.__cur + 1)">Next →</button>
+        <button class="chrome" id="btn-next">Next →</button>
       </div>
-    </div>
 
+    </div>
   </div>
 
   <script>
-    // ── Scale canvas to fit window, maintaining 1280×800 aspect ──
-    var canvas = document.getElementById('canvas');
-    function scaleCanvas() {
-      var scaleX = window.innerWidth  / 1280;
-      var scaleY = window.innerHeight / 800;
-      canvas.style.transform = 'scale(' + Math.min(scaleX, scaleY) + ')';
+  (function () {
+    var stage = document.getElementById('stage');
+
+    /* ── Scale the stage to fit the window (zoom- and device-proof) ── */
+    function fit() {
+      var vw = (window.visualViewport ? window.visualViewport.width  : window.innerWidth);
+      var vh = (window.visualViewport ? window.visualViewport.height : window.innerHeight);
+      var scale = Math.min(vw / 1280, vh / 800);
+      stage.style.transform = 'scale(' + scale + ')';
     }
-    scaleCanvas();
-    window.addEventListener('resize', scaleCanvas);
+    fit();
+    window.addEventListener('resize', fit);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', fit);
+      window.visualViewport.addEventListener('scroll', fit);
+    }
 
-    // ── Slide controller (called by tasting file) ──
-    window.__cur = 0;
-    window.__goTo = function(n) {
-      var slides = document.querySelectorAll('.slide');
-      if (!slides.length) return;
-      slides[window.__cur].classList.remove('active');
-      window.__cur = Math.max(0, Math.min(slides.length - 1, n));
-      slides[window.__cur].classList.add('active');
+    /* ── Slide navigation ── */
+    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var total  = slides.length;
+    var cur    = 0;
 
-      var total = slides.length;
-      document.getElementById('nav-count').textContent = (window.__cur + 1) + ' / ' + total;
+    function show(n) {
+      if (!total) return;
+      slides[cur].classList.remove('active');
+      cur = Math.max(0, Math.min(total - 1, n));
+      slides[cur].classList.add('active');
 
-      // Colour chrome to match slide (dark cover vs light wine slides)
-      var dark = slides[window.__cur].classList.contains('slide-cover');
-      var fg = dark ? 'rgba(255,255,255,.5)' : 'rgba(26,24,20,.55)';
+      document.getElementById('nav-count').textContent = (cur + 1) + ' / ' + total;
+      document.getElementById('btn-prev').disabled = (cur === 0);
+      document.getElementById('btn-next').disabled = (cur === total - 1);
+
+      // Colour the chrome to suit the slide (dark cover vs light slides)
+      var dark = slides[cur].classList.contains('slide-cover');
+      var fg = dark ? 'rgba(255,255,255,.5)'  : 'rgba(26,24,20,.55)';
       var bd = dark ? 'rgba(255,255,255,.22)' : 'rgba(26,24,20,.22)';
       var ct = dark ? 'rgba(255,255,255,.35)' : 'rgba(26,24,20,.4)';
-      document.querySelectorAll('.c-btn').forEach(function(b) {
+      document.querySelectorAll('.chrome').forEach(function (b) {
         b.style.color = fg; b.style.borderColor = bd;
       });
       document.getElementById('nav-count').style.color = ct;
+    }
 
-      document.getElementById('btn-prev').disabled = (window.__cur === 0);
-      document.getElementById('btn-next').disabled = (window.__cur === total - 1);
-    };
+    document.getElementById('btn-prev').addEventListener('click', function (e) { e.stopPropagation(); show(cur - 1); });
+    document.getElementById('btn-next').addEventListener('click', function (e) { e.stopPropagation(); show(cur + 1); });
 
-    // Keyboard
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') window.__goTo(window.__cur + 1);
-      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')                    window.__goTo(window.__cur - 1);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') show(cur + 1);
+      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')                    show(cur - 1);
       if (e.key === 'Escape') window.location.href = '{{ "/tastings/" | relative_url }}';
     });
 
-    // Click anywhere on map area to advance
-    document.getElementById('canvas').addEventListener('click', function(e) {
-      if (e.target.closest('.wine-map') || e.target.closest('.intro-map') || e.target.closest('.slide-cover')) {
-        window.__goTo(window.__cur + 1);
+    // Click on the map / cover advances; clicks on chrome are ignored
+    stage.addEventListener('click', function (e) {
+      if (e.target.closest('.chrome') || e.target.closest('#nav')) return;
+      if (e.target.closest('.wine-map') || e.target.closest('.slide-cover') || e.target.closest('.slide-intro')) {
+        show(cur + 1);
       }
     });
+
+    show(0);
+  })();
   </script>
 </body>
 </html>
