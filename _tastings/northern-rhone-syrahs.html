@@ -64,10 +64,20 @@ date: 2026-05-23
 .ia-name { font-size: 17px; font-weight: 300; color: var(--ink-mid); }
 .ia-div { width: 1px; height: 36px; background: var(--rule); }
 
+/* ── FULL-BLEED MAP SLIDES ── */
+.slide-map {
+  background: var(--warm-white);
+  align-items: center; justify-content: center; cursor: pointer;
+}
+.map-wrap {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 100%; padding: 40px;
+}
+.map-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
 /* ── WINE SLIDES ── */
 .slide-wine { background: var(--warm-white); color: var(--ink); flex-direction: row; }
 
-/* Map — 2/3, contain, WHITE background to blend with map images */
 .wine-map {
   width: 853px; height: 720px; flex: 0 0 853px;
   position: relative; overflow: hidden; background: var(--warm-white); cursor: pointer;
@@ -81,7 +91,6 @@ date: 2026-05-23
   background: rgba(253,252,250,.9); padding: 5px 9px;
 }
 
-/* Panel — 1/3 */
 .wine-panel {
   width: 427px; height: 720px; flex: 0 0 427px;
   display: flex; flex-direction: column;
@@ -160,10 +169,24 @@ date: 2026-05-23
   </div>
 </div>
 
-<!-- 3: WINE 01 — Courbis Cornas (Rhône overview) -->
+<!-- 3: FRANCE MAP — full bleed -->
+<div class="slide slide-map">
+  <div class="map-wrap">
+    <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-syrahs/map_france.jpg.png" alt="France wine regions">
+  </div>
+</div>
+
+<!-- 4: RHÔNE VALLEY — full bleed -->
+<div class="slide slide-map">
+  <div class="map-wrap">
+    <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-syrahs/map_rhone_north.jpg.png" alt="Rhône Valley">
+  </div>
+</div>
+
+<!-- 5: COURBIS — Northern Rhône overview -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-syrahs/map_rhone_n.jpg" alt="Northern Rhône map">
+    <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-syrahs/map_rhone_n.jpg.png" alt="Northern Rhône map">
     <div class="map-tag">Cornas · Northern Rhône</div>
   </div>
   <div class="wine-panel">
@@ -188,7 +211,7 @@ date: 2026-05-23
   </div>
 </div>
 
-<!-- 4: WINE 01 detail — Cornas detailed map -->
+<!-- 6: COURBIS — Cornas detail -->
 <div class="slide slide-wine">
   <div class="wine-map">
     <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-syrahs/map_cornas.png" alt="Cornas detailed map">
@@ -216,10 +239,10 @@ date: 2026-05-23
   </div>
 </div>
 
-<!-- 5: WINE 02 — Clusel-Roch Côte-Rôtie (Rhône close-up) -->
+<!-- 7: CLUSEL-ROCH — Northern Rhône overview -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-syrahs/map_rhone_close.jpg" alt="Rhône appellations">
+    <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-syrahs/map_rhone_n.jpg.png" alt="Northern Rhône map">
     <div class="map-tag">Côte-Rôtie · Northern Rhône</div>
   </div>
   <div class="wine-panel">
@@ -244,10 +267,10 @@ date: 2026-05-23
   </div>
 </div>
 
-<!-- 6: WINE 02 detail — Côte-Rôtie detailed map -->
+<!-- 8: CLUSEL-ROCH — Côte-Rôtie detail -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-syrahs/map_cote_rotie.jpg" alt="Côte-Rôtie detail">
+    <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-syrahs/map_cote_rotie.jpg.png" alt="Côte-Rôtie detail">
     <div class="map-tag">Côte-Rôtie · Côte Blonde &amp; Côte Brune</div>
   </div>
   <div class="wine-panel">
@@ -272,10 +295,10 @@ date: 2026-05-23
   </div>
 </div>
 
-<!-- 7: WINE 03 — Sorrel Hermitage (Rhône full) -->
+<!-- 9: SORREL — Rhône North overview -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-syrahs/map_rhone.jpg" alt="Rhône full map">
+    <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-syrahs/map_rhone_n.jpg.png" alt="Northern Rhône map">
     <div class="map-tag">Hermitage · Northern Rhône</div>
   </div>
   <div class="wine-panel">
@@ -300,10 +323,10 @@ date: 2026-05-23
   </div>
 </div>
 
-<!-- 8: WINE 03 detail — Hermitage detailed map -->
+<!-- 10: SORREL — Hermitage detail -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-syrahs/map_hermitage.jpg" alt="Hermitage detail">
+    <img src="{{ site.baseurl }}/assets/tastings/northern-rhone-syrahs/map_hermitage.jpg.png" alt="Hermitage detail">
     <div class="map-tag">Hermitage · Tain l'Hermitage</div>
   </div>
   <div class="wine-panel">
