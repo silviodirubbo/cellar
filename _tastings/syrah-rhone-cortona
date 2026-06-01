@@ -177,7 +177,7 @@ date: 2026-04-11
 <div class="slide slide-wine">
   <div class="wine-map">
     <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/map_italy.jpg.png" alt="Italy wine map">
-    <div class="map-tag">Cortona DOC · Tuscany · Italy</div>
+    <div class="map-tag">Cortona DOC · Italy</div>
   </div>
   <div class="wine-panel">
     <div class="panel-head">
@@ -233,7 +233,7 @@ date: 2026-04-11
 <div class="slide slide-wine">
   <div class="wine-map">
     <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/map_cortona.jpg.png" alt="Cortona detail map">
-    <div class="map-tag">Cortona DOC · Detail</div>
+    <div class="map-tag">Pietro da Cortona · Trionfo della Divina Provvidenza · 1632-1639</div>
   </div>
   <div class="wine-panel">
     <div class="panel-head">
@@ -289,7 +289,7 @@ date: 2026-04-11
 <div class="slide slide-wine">
   <div class="wine-map">
     <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/map_rhone_north.jpg.png" alt="Northern Rhône map">
-    <div class="map-tag">Saint-Joseph · Northern Rhône</div>
+    <div class="map-tag">Saint-Joseph · Vallée du Rhône</div>
   </div>
   <div class="wine-panel">
     <div class="panel-head">
@@ -317,7 +317,7 @@ date: 2026-04-11
 <div class="slide slide-wine">
   <div class="wine-map">
     <img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/map_saint_joseph.jpg.png" alt="Saint-Joseph detail map">
-    <div class="map-tag">Saint-Joseph · Detail</div>
+    <div class="map-tag">Saint-Joseph · Northern Rhône</div>
   </div>
   <div class="wine-panel">
     <div class="panel-head">
@@ -406,7 +406,7 @@ date: 2026-04-11
   <div class="wine-panel">
     <div class="panel-head">
       <div class="w-counter">03 / 03</div>
-      <div class="w-appellation">Châteauneuf-du-Pape · Vallée du Rhône</div>
+      <div class="w-appellation">Châteauneuf-du-Pape AOP</div>
       <div class="w-hrule"></div>
     </div>
     <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/syrah-rhone-cortona/bottle_vieux_donjon.png.png" alt="Le Vieux Donjon"></div>
