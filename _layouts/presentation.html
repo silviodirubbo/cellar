@@ -18,7 +18,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Fills the window, centres the stage, clips overflow. Never scaled. */
     #viewport {
       position: fixed;
       inset: 0;
@@ -29,12 +28,10 @@
       overflow: hidden;
     }
 
-    /* THE STAGE — fixed 1280×800. The ONLY element that is scaled. */
-    /* Everything (slides + buttons) lives inside it, so nothing can */
-    /* ever misalign regardless of zoom or device size.              */
+    /* THE STAGE — fixed 1280×720 (16:9). The ONLY scaled element. */
     #stage {
       width: 1280px;
-      height: 800px;
+      height: 720px;
       flex: 0 0 auto;
       position: relative;
       overflow: hidden;
@@ -43,7 +40,8 @@
       background: #1A1814;
     }
 
-    /* ── Chrome: absolute INSIDE the stage → scales with it ──────── */
+    /* ── Chrome: absolute INSIDE the stage, with a translucent chip ── */
+    /* so it stays legible on dark AND light slides.                   */
     .chrome {
       position: absolute;
       z-index: 50;
@@ -51,16 +49,17 @@
       font-size: 11px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      background: transparent;
       padding: 8px 14px;
-      border: 1px solid;
+      border: 1px solid rgba(255,255,255,.35);
+      background: rgba(0,0,0,.28);
+      color: rgba(255,255,255,.85);
       cursor: pointer;
       text-decoration: none;
       white-space: nowrap;
-      transition: color 0.2s, border-color 0.2s;
+      backdrop-filter: blur(2px);
+      transition: color .2s, border-color .2s, background .2s;
     }
     #btn-back { top: 22px; right: 24px; }
-    #btn-pdf  { top: 22px; right: 162px; }
 
     #nav {
       position: absolute;
@@ -78,10 +77,16 @@
       letter-spacing: 0.14em;
       min-width: 50px;
       text-align: center;
+      padding: 8px 6px;
+      border-radius: 2px;
+      background: rgba(0,0,0,.28);
+      color: rgba(255,255,255,.7);
+      backdrop-filter: blur(2px);
+      transition: color .2s, background .2s;
     }
-    .chrome:disabled { opacity: 0.25; cursor: default; }
+    .chrome:disabled { opacity: 0.3; cursor: default; }
 
-    /* ── Print: unscale, one slide per page ─────────────────────── */
+    /* ── Print: one slide per page ──────────────────────────────── */
     @media print {
       html, body { overflow: visible; background: #FDFCFA; }
       #viewport { position: static; display: block; overflow: visible; background: none; }
@@ -111,9 +116,8 @@
 
       {{ content }}
 
-      <!-- Chrome lives inside the stage, scales with it, always aligned -->
+      <!-- Chrome inside the stage → scales with it, always aligned -->
       <a href="{{ '/tastings/' | relative_url }}" class="chrome" id="btn-back">← Back to tastings</a>
-      <button class="chrome" id="btn-pdf" onclick="window.print()">↓ PDF</button>
       <div id="nav">
         <button class="chrome" id="btn-prev">← Prev</button>
         <span id="nav-count"></span>
@@ -127,12 +131,10 @@
   (function () {
     var stage = document.getElementById('stage');
 
-    /* ── Scale the stage to fit the window (zoom- and device-proof) ── */
     function fit() {
       var vw = (window.visualViewport ? window.visualViewport.width  : window.innerWidth);
       var vh = (window.visualViewport ? window.visualViewport.height : window.innerHeight);
-      var scale = Math.min(vw / 1280, vh / 800);
-      stage.style.transform = 'scale(' + scale + ')';
+      stage.style.transform = 'scale(' + Math.min(vw / 1280, vh / 720) + ')';
     }
     fit();
     window.addEventListener('resize', fit);
@@ -141,7 +143,6 @@
       window.visualViewport.addEventListener('scroll', fit);
     }
 
-    /* ── Slide navigation ── */
     var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
     var total  = slides.length;
     var cur    = 0;
@@ -156,15 +157,17 @@
       document.getElementById('btn-prev').disabled = (cur === 0);
       document.getElementById('btn-next').disabled = (cur === total - 1);
 
-      // Colour the chrome to suit the slide (dark cover vs light slides)
+      // Chrome chip adapts to slide background for guaranteed legibility
       var dark = slides[cur].classList.contains('slide-cover');
-      var fg = dark ? 'rgba(255,255,255,.5)'  : 'rgba(26,24,20,.55)';
-      var bd = dark ? 'rgba(255,255,255,.22)' : 'rgba(26,24,20,.22)';
-      var ct = dark ? 'rgba(255,255,255,.35)' : 'rgba(26,24,20,.4)';
+      var txt = dark ? 'rgba(255,255,255,.85)' : 'rgba(26,24,20,.7)';
+      var brd = dark ? 'rgba(255,255,255,.35)' : 'rgba(26,24,20,.28)';
+      var bg  = dark ? 'rgba(0,0,0,.28)'       : 'rgba(253,252,250,.78)';
       document.querySelectorAll('.chrome').forEach(function (b) {
-        b.style.color = fg; b.style.borderColor = bd;
+        b.style.color = txt; b.style.borderColor = brd; b.style.background = bg;
       });
-      document.getElementById('nav-count').style.color = ct;
+      var c = document.getElementById('nav-count');
+      c.style.color = dark ? 'rgba(255,255,255,.7)' : 'rgba(26,24,20,.6)';
+      c.style.background = bg;
     }
 
     document.getElementById('btn-prev').addEventListener('click', function (e) { e.stopPropagation(); show(cur - 1); });
@@ -176,7 +179,6 @@
       if (e.key === 'Escape') window.location.href = '{{ "/tastings/" | relative_url }}';
     });
 
-    // Click on the map / cover advances; clicks on chrome are ignored
     stage.addEventListener('click', function (e) {
       if (e.target.closest('.chrome') || e.target.closest('#nav')) return;
       if (e.target.closest('.wine-map') || e.target.closest('.slide-cover') || e.target.closest('.slide-intro')) {
