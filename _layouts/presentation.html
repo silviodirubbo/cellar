@@ -10,76 +10,95 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html {
-      /* Fixed canvas — never scrolls, never reflows */
-      width: 1280px;
-      height: 800px;
-      overflow: hidden;
-      background: #1A1814;
-    }
-
-    body {
-      width: 1280px;
-      height: 800px;
+    /* The real viewport — fills the window, clips everything */
+    html, body {
+      width: 100%;
+      height: 100%;
       overflow: hidden;
       background: #1A1814;
       -webkit-font-smoothing: antialiased;
-      /* Scale anchored to top-left; JS sets the actual value */
-      transform-origin: top left;
     }
 
-    /* ── Chrome: Back + PDF buttons ───────────────────── */
-    .deck-exit {
+    /* Outer shell — full window, holds the scaled canvas + the unscaled chrome */
+    #shell {
       position: fixed;
-      top: 1.5rem;
-      right: 2rem;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #1A1814;
+    }
+
+    /* The 1280×800 canvas — this is the ONLY thing that gets scaled */
+    #canvas {
+      width: 1280px;
+      height: 800px;
+      flex-shrink: 0;
+      overflow: hidden;
+      position: relative;
+      transform-origin: center center;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* Chrome lives outside the canvas — never scaled, always in real px */
+    #chrome {
+      position: fixed;
+      inset: 0;
+      pointer-events: none; /* clicks pass through to canvas by default */
+      z-index: 999;
+    }
+    #chrome .c-btn {
+      pointer-events: all;
+      position: absolute;
       font-family: 'DM Mono', monospace;
-      font-size: 0.52rem;
+      font-size: 11px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(255,255,255,.45);
       background: transparent;
-      border: 1px solid rgba(255,255,255,.2);
-      padding: 0.45rem 0.75rem;
+      padding: 7px 14px;
+      border: 1px solid;
+      cursor: pointer;
       text-decoration: none;
       transition: color 0.2s, border-color 0.2s;
-      z-index: 200;
     }
-    .deck-exit:hover { color: rgba(255,255,255,.9); border-color: rgba(255,255,255,.5); }
+    #btn-back { top: 24px; right: 24px; }
+    #btn-pdf  { top: 24px; right: 168px; }
 
-    .deck-pdf {
-      position: fixed;
-      top: 1.5rem;
-      right: 12rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.52rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.45);
-      background: transparent;
-      border: 1px solid rgba(255,255,255,.2);
-      padding: 0.45rem 0.75rem;
-      cursor: pointer;
-      transition: color 0.2s, border-color 0.2s;
-      z-index: 200;
+    /* Nav sits at bottom-right, also unscaled */
+    #nav {
+      pointer-events: all;
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .deck-pdf:hover { color: rgba(255,255,255,.9); border-color: rgba(255,255,255,.5); }
+    #nav .c-btn { position: static; }
+    #nav-count {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      min-width: 48px;
+      text-align: center;
+    }
 
     /* ── Print ─────────────────────────────────────────── */
     @media print {
-      html, body {
-        width: 100%; height: auto;
-        overflow: visible;
-        background: #FDFCFA;
+      html, body { overflow: visible; background: #FDFCFA; }
+      #shell { position: static; display: block; background: none; }
+      #chrome { display: none; }
+      #canvas {
+        width: 100% !important;
+        height: auto !important;
         transform: none !important;
-        margin: 0 !important;
+        overflow: visible;
       }
-      .deck-exit, .deck-pdf, .pres-nav { display: none !important; }
-      .deck { position: static; width: 100%; height: auto; }
       .slide {
         display: flex !important;
         position: relative !important;
-        width: 100%; height: 100vh;
+        width: 100% !important;
+        height: 100vh !important;
         page-break-after: always;
         break-after: page;
       }
@@ -93,35 +112,76 @@
   </style>
 </head>
 <body>
-  <a href="{{ '/tastings/' | relative_url }}" class="deck-exit" id="deckExit">← Back to tastings</a>
-  <button class="deck-pdf" id="deckPdf" onclick="window.print()">↓ PDF</button>
+  <div id="shell">
 
-  {{ content }}
+    <!-- Scaled canvas — content injected here -->
+    <div id="canvas">
+      {{ content }}
+    </div>
+
+    <!-- Unscaled chrome — buttons always in real screen px -->
+    <div id="chrome">
+      <a href="{{ '/tastings/' | relative_url }}" class="c-btn" id="btn-back">← Back to tastings</a>
+      <button class="c-btn" id="btn-pdf" onclick="window.print()">↓ PDF</button>
+      <div id="nav">
+        <button class="c-btn" id="btn-prev" onclick="window.__goTo(window.__cur - 1)">← Prev</button>
+        <span id="nav-count"></span>
+        <button class="c-btn" id="btn-next" onclick="window.__goTo(window.__cur + 1)">Next →</button>
+      </div>
+    </div>
+
+  </div>
 
   <script>
-    // ── Scale-to-fit: keeps 1280×800 canvas pixel-perfect on any screen ──
-    function scaleToFit() {
+    // ── Scale canvas to fit window, maintaining 1280×800 aspect ──
+    var canvas = document.getElementById('canvas');
+    function scaleCanvas() {
       var scaleX = window.innerWidth  / 1280;
       var scaleY = window.innerHeight / 800;
-      var scale  = Math.min(scaleX, scaleY);
-      var offX   = Math.max(0, (window.innerWidth  - 1280 * scale) / 2);
-      var offY   = Math.max(0, (window.innerHeight - 800  * scale) / 2);
-      document.body.style.transform  = 'scale(' + scale + ')';
-      document.body.style.marginLeft = offX + 'px';
-      document.body.style.marginTop  = offY + 'px';
+      canvas.style.transform = 'scale(' + Math.min(scaleX, scaleY) + ')';
     }
-    scaleToFit();
-    window.addEventListener('resize', scaleToFit);
+    scaleCanvas();
+    window.addEventListener('resize', scaleCanvas);
 
-    // Keep PDF/Back button colour in sync with current slide
-    window.__updatePdfBtn = function(dark) {
-      var btn  = document.getElementById('deckPdf');
-      var exit = document.getElementById('deckExit');
-      var fg   = dark ? 'rgba(255,255,255,.45)' : 'rgba(26,24,20,.5)';
-      var bd   = dark ? 'rgba(255,255,255,.2)'  : 'rgba(26,24,20,.2)';
-      if (btn)  { btn.style.color  = fg; btn.style.borderColor  = bd; }
-      if (exit) { exit.style.color = fg; exit.style.borderColor = bd; }
+    // ── Slide controller (called by tasting file) ──
+    window.__cur = 0;
+    window.__goTo = function(n) {
+      var slides = document.querySelectorAll('.slide');
+      if (!slides.length) return;
+      slides[window.__cur].classList.remove('active');
+      window.__cur = Math.max(0, Math.min(slides.length - 1, n));
+      slides[window.__cur].classList.add('active');
+
+      var total = slides.length;
+      document.getElementById('nav-count').textContent = (window.__cur + 1) + ' / ' + total;
+
+      // Colour chrome to match slide (dark cover vs light wine slides)
+      var dark = slides[window.__cur].classList.contains('slide-cover');
+      var fg = dark ? 'rgba(255,255,255,.5)' : 'rgba(26,24,20,.55)';
+      var bd = dark ? 'rgba(255,255,255,.22)' : 'rgba(26,24,20,.22)';
+      var ct = dark ? 'rgba(255,255,255,.35)' : 'rgba(26,24,20,.4)';
+      document.querySelectorAll('.c-btn').forEach(function(b) {
+        b.style.color = fg; b.style.borderColor = bd;
+      });
+      document.getElementById('nav-count').style.color = ct;
+
+      document.getElementById('btn-prev').disabled = (window.__cur === 0);
+      document.getElementById('btn-next').disabled = (window.__cur === total - 1);
     };
+
+    // Keyboard
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') window.__goTo(window.__cur + 1);
+      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')                    window.__goTo(window.__cur - 1);
+      if (e.key === 'Escape') window.location.href = '{{ "/tastings/" | relative_url }}';
+    });
+
+    // Click anywhere on map area to advance
+    document.getElementById('canvas').addEventListener('click', function(e) {
+      if (e.target.closest('.wine-map') || e.target.closest('.intro-map') || e.target.closest('.slide-cover')) {
+        window.__goTo(window.__cur + 1);
+      }
+    });
   </script>
 </body>
 </html>
