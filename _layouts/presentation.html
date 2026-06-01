@@ -2,23 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=1280">
   <title>{{ page.title }} — Silvio di Rubbo</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
-
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html, body {
-      width: 100%; height: 100%;
+    html {
+      /* Fixed canvas — never scrolls, never reflows */
+      width: 1280px;
+      height: 800px;
+      overflow: hidden;
+      background: #1A1814;
+    }
+
+    body {
+      width: 1280px;
+      height: 800px;
       overflow: hidden;
       background: #1A1814;
       -webkit-font-smoothing: antialiased;
+      /* Scale anchored to top-left; JS sets the actual value */
+      transform-origin: top left;
     }
 
+    /* ── Chrome: Back + PDF buttons ───────────────────── */
     .deck-exit {
       position: fixed;
       top: 1.5rem;
@@ -35,13 +45,8 @@
       transition: color 0.2s, border-color 0.2s;
       z-index: 200;
     }
+    .deck-exit:hover { color: rgba(255,255,255,.9); border-color: rgba(255,255,255,.5); }
 
-    .deck-exit:hover {
-      color: rgba(255,255,255,.9);
-      border-color: rgba(255,255,255,.5);
-    }
-
-    /* PDF button — same style as deck-exit, sits to its left */
     .deck-pdf {
       position: fixed;
       top: 1.5rem;
@@ -58,80 +63,65 @@
       transition: color 0.2s, border-color 0.2s;
       z-index: 200;
     }
+    .deck-pdf:hover { color: rgba(255,255,255,.9); border-color: rgba(255,255,255,.5); }
 
-    .deck-pdf:hover {
-      color: rgba(255,255,255,.9);
-      border-color: rgba(255,255,255,.5);
-    }
-
-    /* ── Print / PDF stylesheet ─────────────────────────── */
+    /* ── Print ─────────────────────────────────────────── */
     @media print {
-      /* Reset screen layout */
       html, body {
-        width: 100%;
-        height: auto;
+        width: 100%; height: auto;
         overflow: visible;
         background: #FDFCFA;
+        transform: none !important;
+        margin: 0 !important;
       }
-
-      /* Hide navigation chrome */
-      .deck-exit,
-      .deck-pdf,
-      .pres-nav { display: none !important; }
-
-      /* Each slide becomes its own page */
+      .deck-exit, .deck-pdf, .pres-nav { display: none !important; }
       .deck { position: static; width: 100%; height: auto; }
-
       .slide {
         display: flex !important;
-        opacity: 1 !important;
-        pointer-events: all !important;
         position: relative !important;
-        width: 100%;
-        height: 100vh;
+        width: 100%; height: 100vh;
         page-break-after: always;
         break-after: page;
       }
-
-      /* Cover slide — keep dark background */
       .slide-cover {
         background: #1A1814 !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
-
-      /* Ensure background images print */
-      .cover-bg {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
-
-      /* Wine slides — ensure maps print */
-      .wine-map img,
-      .wine-bottle img,
-      .wine-qr img {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
   </style>
 </head>
 <body>
-
   <a href="{{ '/tastings/' | relative_url }}" class="deck-exit" id="deckExit">← Back to tastings</a>
   <button class="deck-pdf" id="deckPdf" onclick="window.print()">↓ PDF</button>
 
   {{ content }}
 
   <script>
-    // Keep PDF button colour in sync with current slide
+    // ── Scale-to-fit: keeps 1280×800 canvas pixel-perfect on any screen ──
+    function scaleToFit() {
+      var scaleX = window.innerWidth  / 1280;
+      var scaleY = window.innerHeight / 800;
+      var scale  = Math.min(scaleX, scaleY);
+      var offX   = Math.max(0, (window.innerWidth  - 1280 * scale) / 2);
+      var offY   = Math.max(0, (window.innerHeight - 800  * scale) / 2);
+      document.body.style.transform  = 'scale(' + scale + ')';
+      document.body.style.marginLeft = offX + 'px';
+      document.body.style.marginTop  = offY + 'px';
+    }
+    scaleToFit();
+    window.addEventListener('resize', scaleToFit);
+
+    // Keep PDF/Back button colour in sync with current slide
     window.__updatePdfBtn = function(dark) {
-      const btn = document.getElementById('deckPdf');
-      if (!btn) return;
-      btn.style.color       = dark ? 'rgba(255,255,255,.45)' : 'rgba(26,24,20,.5)';
-      btn.style.borderColor = dark ? 'rgba(255,255,255,.2)'  : 'rgba(26,24,20,.2)';
+      var btn  = document.getElementById('deckPdf');
+      var exit = document.getElementById('deckExit');
+      var fg   = dark ? 'rgba(255,255,255,.45)' : 'rgba(26,24,20,.5)';
+      var bd   = dark ? 'rgba(255,255,255,.2)'  : 'rgba(26,24,20,.2)';
+      if (btn)  { btn.style.color  = fg; btn.style.borderColor  = bd; }
+      if (exit) { exit.style.color = fg; exit.style.borderColor = bd; }
     };
   </script>
-
 </body>
 </html>
