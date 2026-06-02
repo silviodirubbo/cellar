@@ -1,0 +1,86 @@
+---
+layout: default
+title: "Page not found"
+permalink: /404.html
+---
+
+<style>
+  .error-page {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 7rem 2rem;
+  }
+
+  .error-code {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(7rem, 18vw, 14rem);
+    line-height: 1;
+    color: var(--rule, #E2DED8);
+    letter-spacing: -.04em;
+    margin-bottom: 0;
+    user-select: none;
+  }
+
+  .error-rule {
+    width: 40px;
+    height: 1px;
+    background: var(--gold, #8B6914);
+    margin: 2rem auto;
+  }
+
+  .error-label {
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-light, #8A8480);
+    margin-bottom: 1.2rem;
+  }
+
+  .error-message {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(1.2rem, 3vw, 1.7rem);
+    color: var(--ink-mid, #4A4640);
+    line-height: 1.5;
+    max-width: 420px;
+    margin: 0 auto 2.8rem;
+  }
+
+  .error-message em {
+    color: var(--green, #2C4A3E);
+    font-style: italic;
+  }
+
+  .error-back {
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink, #1A1814);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink, #1A1814);
+    padding-bottom: 2px;
+    transition: color .2s, border-color .2s;
+  }
+
+  .error-back:hover {
+    color: var(--green, #2C4A3E);
+    border-color: var(--green, #2C4A3E);
+  }
+</style>
+
+<div class="error-page">
+  <div class="error-code">404</div>
+  <div class="error-rule"></div>
+  <div class="error-label">Page not found</div>
+  <p class="error-message">This glass is <em>empty</em> — the page you were looking for doesn't exist or has been moved.</p>
+  <a href="{{ site.baseurl }}/" class="error-back">← Back to the cellar</a>
+</div>
