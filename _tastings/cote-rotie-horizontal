@@ -326,11 +326,11 @@ date: 2026-06-20
       <div class="w-hrule"></div>
     </div>
     <div class="wine-bottle">
-      <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/bottle_cuilleron.png.png" alt="Lieu-dit La Viallière">
+      <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/bottle_cuilleron.png.png" alt="La Viallière">
     </div>
     <div class="wine-info">
       <div class="info-text">
-        <div class="w-name">Lieu-dit<br>La Viallière</div>
+        <div class="w-name">La Viallière</div>
         <div class="w-producer">Yves Cuilleron</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Syrah</span></div>
