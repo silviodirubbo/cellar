@@ -22,14 +22,13 @@
 
 - slug: cote-rotie-horizontal
   title: "Côte-Rôtie Horizontal"
-  date: null
-  date_tbd: true
+  date: 2026-06-20
+  date_tbd: false
   location: "Krieg 13"
   region: "Northern Rhône"
   description: >
     A horizontal tasting across several producers of Côte-Rôtie —
     one of the great Syrah appellations of the Northern Rhône.
-    Date to be confirmed based on availability.
   tags:
     - Syrah
     - Côte-Rôtie
@@ -38,6 +37,69 @@
   status: upcoming
   spots_total: 5
   cost_estimate: "46 CHF"
+  featured: false
+
+- slug: condrieu-horizontal
+  title: "Condrieu Horizontal"
+  date: null
+  date_tbd: true
+  location: "Krieg 13"
+  region: "Northern Rhône"
+  description: >
+    A focused horizontal across several producers of Condrieu —
+    Viognier at its most precise and aromatic, exploring how terroir
+    and hand shape one of the Rhône's most singular whites.
+  tags:
+    - Viognier
+    - Condrieu
+    - Rhône
+    - France
+  status: upcoming
+  spots_total: 5
+  cost_estimate: "40 CHF"
+  featured: false
+
+- slug: saint-joseph
+  title: "Saint-Joseph"
+  date: null
+  date_tbd: true
+  location: "Krieg 13"
+  region: "Northern Rhône"
+  description: >
+    A cross-varietal evening dedicated to the Saint-Joseph appellation —
+    red and white side by side, letting the place speak across grape varieties.
+  tags:
+    - Syrah
+    - Marsanne
+    - Roussanne
+    - Saint-Joseph
+    - Rhône
+    - France
+  status: upcoming
+  spots_total: 5
+  cost_estimate: "30 CHF"
+  featured: false
+
+- slug: crozes-hermitage
+  title: "Crozes-Hermitage"
+  date: null
+  date_tbd: true
+  location: "Krieg 13"
+  region: "Northern Rhône"
+  description: >
+    A cross-varietal evening dedicated to the Crozes-Hermitage appellation —
+    red and white together, exploring the largest Northern Rhône appellation
+    in all its expressive range.
+  tags:
+    - Syrah
+    - Marsanne
+    - Roussanne
+    - Crozes-Hermitage
+    - Rhône
+    - France
+  status: upcoming
+  spots_total: 5
+  cost_estimate: "30 CHF"
   featured: false
 
 # ── Past ──────────────────────────────────────────────────────
