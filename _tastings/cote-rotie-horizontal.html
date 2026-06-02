@@ -1,0 +1,351 @@
+---
+layout: presentation
+title: "Côte-Rôtie Horizontal"
+date: 2026-06-20
+---
+<style>
+:root {
+  --warm-white: #FDFCFA;
+  --off-white:  #F7F5F0;
+  --ink:        #1A1814;
+  --ink-mid:    #4A4640;
+  --ink-light:  #8A8480;
+  --green:      #2C4A3E;
+  --gold:       #8B6914;
+  --rule:       #E2DED8;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 1280px;
+  height: 720px;
+  display: none;
+}
+.slide.active { display: flex; }
+
+/* ── COVER ──────────────────────────────────────────── */
+.slide-cover {
+  background: var(--ink);
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; cursor: pointer;
+}
+.cover-content { display: flex; flex-direction: column; align-items: center; }
+.eyebrow {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 11px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 36px;
+}
+.cover-title { font-size: 104px; font-weight: 300; line-height: 1; color: var(--warm-white); }
+.cover-subtitle { font-size: 28px; font-weight: 300; font-style: italic; color: var(--warm-white); margin-top: 12px; }
+.cover-rule { width: 40px; height: 1px; background: var(--gold); margin: 28px auto; }
+.cover-meta {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 10px;
+  letter-spacing: .14em; text-transform: uppercase; color: rgba(253,252,250,.55);
+}
+
+/* ── GRAPE INTRO ────────────────────────────────────── */
+.slide-intro {
+  background: var(--warm-white); color: var(--ink);
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 72px; cursor: pointer;
+}
+.intro-label {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 10px;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 18px;
+}
+
+/* Two-grape layout: Syrah dominant, Viognier small */
+.intro-grapes {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0;
+  line-height: 1;
+}
+.intro-grape-primary {
+  font-size: 112px; font-weight: 300; color: var(--ink); letter-spacing: -.02em;
+}
+.intro-grape-separator {
+  font-size: 28px; font-weight: 300; color: var(--rule);
+  margin: 0 18px;
+  align-self: center;
+  padding-bottom: 8px;
+}
+.intro-grape-secondary {
+  font-size: 32px; font-weight: 300; color: var(--ink-light); letter-spacing: -.01em;
+}
+.intro-grape-secondary em {
+  font-style: italic; color: var(--green); font-size: 13px;
+  display: block; letter-spacing: .06em; margin-top: 4px; font-family: 'DM Mono', monospace;
+  font-weight: 300; text-transform: uppercase;
+}
+
+.intro-vline { width: 1px; height: 38px; background: var(--rule); margin: 28px auto; }
+.intro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; max-width: 640px; }
+.ig-label {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 8px;
+}
+.ig-val { font-size: 14px; font-weight: 300; color: var(--ink-mid); line-height: 1.5; }
+.ig-val em { color: var(--green); font-style: italic; }
+
+/* ── MAP-ONLY SLIDE ─────────────────────────────────── */
+.slide-map {
+  background: var(--warm-white);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.slide-map img {
+  max-width: 100%; max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.map-label-center {
+  position: absolute;
+  bottom: 24px; left: 50%; transform: translateX(-50%);
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light);
+}
+
+/* ── WINE SLIDE ─────────────────────────────────────── */
+.slide-wine { background: var(--warm-white); color: var(--ink); flex-direction: row; }
+
+.wine-map {
+  width: 853px; height: 720px; flex: 0 0 853px;
+  position: relative; overflow: hidden; background: var(--warm-white); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.wine-map img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+.map-tag {
+  position: absolute; bottom: 16px; left: 16px;
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
+  background: rgba(253,252,250,.9); padding: 5px 9px;
+}
+
+.wine-panel {
+  width: 427px; height: 720px; flex: 0 0 427px;
+  display: flex; flex-direction: column;
+  padding: 62px 35px 60px;
+  border-left: 1px solid var(--rule); background: var(--warm-white);
+}
+
+.panel-head { flex: 0 0 auto; }
+.w-counter {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 6px;
+}
+.w-appellation {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .13em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+}
+.w-hrule { width: 100%; height: 1px; background: var(--rule); }
+
+.wine-bottle {
+  flex: 1 1 auto; min-height: 0;
+  display: flex; align-items: center; justify-content: center; padding: 16px 0;
+}
+.wine-bottle img {
+  max-height: 100%; max-width: 68%; object-fit: contain;
+  filter: drop-shadow(0 4px 24px rgba(26,24,20,.07));
+}
+
+.wine-info {
+  flex: 0 0 auto;
+  padding-top: 18px; border-top: 1px solid var(--rule);
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
+}
+.info-text { flex: 1 1 auto; min-width: 0; }
+.w-name { font-size: 26px; font-weight: 300; color: var(--ink); line-height: 1.12; margin-bottom: 3px; }
+.w-producer { font-size: 14px; font-weight: 300; font-style: italic; color: var(--green); margin-bottom: 11px; }
+.w-meta { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.w-ml {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink-light); min-width: 46px;
+}
+.w-mv { font-size: 13px; font-weight: 300; color: var(--ink-mid); }
+
+.wine-qr { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.wine-qr img { width: 74px; height: 74px; object-fit: contain; display: block; }
+.qr-label {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 7px;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-light);
+  text-align: center; line-height: 1.6;
+}
+</style>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 1 · COVER
+     Image: assets/tastings/cote-rotie-horizontal/cover.jpg
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-cover active">
+  <div class="cover-content">
+    <div class="eyebrow">Wine Tasting · 20 June 2026</div>
+    <div class="cover-title">Côte-Rôtie</div>
+    <div class="cover-subtitle">Horizontal</div>
+    <div class="cover-rule"></div>
+    <div class="cover-meta">Three wines · One appellation</div>
+    <div class="cover-meta" style="margin-top:6px;color:#C8A84B">Rostaing · Vernay · Cuilleron</div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 2 · GRAPE INTRO
+     No images needed.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-intro">
+  <div class="intro-label">The Grapes</div>
+  <div class="intro-grapes">
+    <div class="intro-grape-primary">Syrah</div>
+    <div class="intro-grape-separator">&amp;</div>
+    <div class="intro-grape-secondary">
+      Viognier
+      <em>up to 20%</em>
+    </div>
+  </div>
+  <div class="intro-vline"></div>
+  <div class="intro-grid">
+    <div><div class="ig-label">Appellation</div><div class="ig-val">Côte-Rôtie AOC<br>Northern Rhône</div></div>
+    <div><div class="ig-label">Character</div><div class="ig-val"><em>Floral · Pepper<br>Olive · Dark fruit</em></div></div>
+    <div><div class="ig-label">Côtes</div><div class="ig-val">Blonde &amp; Brune<br>granitic soils</div></div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 3 · FRANCE MAP
+     Image: assets/tastings/cote-rotie-horizontal/map_france.jpg
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-map" style="position:relative;">
+  <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/map_france.jpg" alt="France · Wine Regions">
+  <div class="map-label-center">France · Wine Regions</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 4 · RHÔNE VALLEY MAP
+     Image: assets/tastings/cote-rotie-horizontal/map_rhone_valley.jpg
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-map" style="position:relative;">
+  <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/map_rhone_valley.jpg" alt="Rhône Valley · Overview">
+  <div class="map-label-center">Rhône Valley · Overview</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 5 · NORTHERN RHÔNE MAP
+     Image: assets/tastings/cote-rotie-horizontal/map_northern_rhone.jpg
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-map" style="position:relative;">
+  <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/map_northern_rhone.jpg" alt="Northern Rhône · Appellations">
+  <div class="map-label-center">Northern Rhône · Appellations</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 6 · WINE 1 · ROSTAING
+     Map:    assets/tastings/cote-rotie-horizontal/map_cote_rotie.jpg
+     Bottle: assets/tastings/cote-rotie-horizontal/bottle_rostaing.png
+     QR:     assets/tastings/cote-rotie-horizontal/qr_rostaing.png
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/map_cote_rotie.jpg" alt="Côte-Rôtie · Northern Rhône">
+    <div class="map-tag">Côte-Rôtie · Northern Rhône</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">01 / 03</div>
+      <div class="w-appellation">Côte-Rôtie AOC · Ampodium</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/bottle_rostaing.png" alt="Ampodium">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Ampodium</div>
+        <div class="w-producer">Domaine Rostaing</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Syrah</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/qr_rostaing.png" alt="QR">
+        <div class="qr-label">Scan for<br>producer info</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 7 · WINE 2 · VERNAY
+     Map:    assets/tastings/cote-rotie-horizontal/map_cote_rotie.jpg   ← same map
+     Bottle: assets/tastings/cote-rotie-horizontal/bottle_vernay.png
+     QR:     assets/tastings/cote-rotie-horizontal/qr_vernay.png
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/map_cote_rotie.jpg" alt="Côte-Rôtie · Northern Rhône">
+    <div class="map-tag">Côte-Rôtie · Northern Rhône</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">02 / 03</div>
+      <div class="w-appellation">Côte-Rôtie AOC · Côte Blonde</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/bottle_vernay.png" alt="Blonde du Seigneur">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Blonde<br>du Seigneur</div>
+        <div class="w-producer">Domaine Georges Vernay</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Syrah</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/qr_vernay.png" alt="QR">
+        <div class="qr-label">Scan for<br>producer info</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 8 · WINE 3 · CUILLERON
+     Map:    assets/tastings/cote-rotie-horizontal/map_cote_rotie.jpg   ← same map
+     Bottle: assets/tastings/cote-rotie-horizontal/bottle_cuilleron.png
+     QR:     assets/tastings/cote-rotie-horizontal/qr_cuilleron.png
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/map_cote_rotie.jpg" alt="Côte-Rôtie · Northern Rhône">
+    <div class="map-tag">Côte-Rôtie · Northern Rhône</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">03 / 03</div>
+      <div class="w-appellation">Côte-Rôtie AOC · Lieu-dit La Viallière</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/bottle_cuilleron.png" alt="Lieu-dit La Viallière">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Lieu-dit<br>La Viallière</div>
+        <div class="w-producer">Yves Cuilleron</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Syrah</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/qr_cuilleron.png" alt="QR">
+        <div class="qr-label">Scan for<br>producer info</div>
+      </div>
+    </div>
+  </div>
+</div>
