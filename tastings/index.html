@@ -79,6 +79,10 @@ permalink: /tastings/
             {% endif %}
             <div class="tasting-banner__btns">
               <button class="share-btn" data-slug="{{ tasting.slug }}" data-slides="{{ tasting.slides }}">Share</button>
+              {% if tasting.slides %}
+                <a href="{{ site.baseurl }}/tastings/{{ tasting.slug }}/"
+                   class="btn btn--text">View presentation →</a>
+              {% endif %}
               {% if tasting.date_tbd %}
                 <a href="{{ '/planner/' | relative_url }}#{{ tasting.slug }}" class="btn btn--solid">Tell me your availability</a>
               {% else %}
