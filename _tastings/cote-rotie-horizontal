@@ -2,7 +2,6 @@
 layout: presentation
 title: "Côte-Rôtie Horizontal"
 date: 2026-06-20
-published: true
 ---
 <style>
 :root {
@@ -275,7 +274,7 @@ published: true
       </div>
       <div class="wine-qr">
         <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/qr_rostaing.png.png" alt="QR">
-        <div class="qr-label">Scan for<br>producer info</div>
+
       </div>
     </div>
   </div>
@@ -310,7 +309,7 @@ published: true
       </div>
       <div class="wine-qr">
         <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/qr_vernay.png.png" alt="QR">
-        <div class="qr-label">Scan for<br>producer info</div>
+
       </div>
     </div>
   </div>
@@ -345,7 +344,7 @@ published: true
       </div>
       <div class="wine-qr">
         <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/qr_cuilleron.png.png" alt="QR">
-        <div class="qr-label">Scan for<br>producer info</div>
+
       </div>
     </div>
   </div>
