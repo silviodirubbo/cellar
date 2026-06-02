@@ -28,9 +28,15 @@ date: 2026-06-20
 .slide-cover {
   background: var(--ink) url('{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/cover.jpg') center/cover no-repeat;
   flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; cursor: pointer;
+  text-align: center; cursor: pointer; position: relative;
 }
-.cover-content { display: flex; flex-direction: column; align-items: center; }
+.slide-cover::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(26,24,20,.62);
+  z-index: 0;
+}
+.cover-content { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
 .eyebrow {
   font-family: 'DM Mono', monospace; font-weight: 300; font-size: 11px;
   letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 36px;
