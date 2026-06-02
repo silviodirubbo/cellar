@@ -38,6 +38,7 @@
   spots_total: 6
   cost_estimate: "46 CHF"
   featured: false
+  slides: true
 
 - slug: condrieu-horizontal
   title: "Condrieu Horizontal"
