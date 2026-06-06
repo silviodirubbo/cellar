@@ -60,6 +60,74 @@
   cost_estimate: "40 CHF"
   featured: false
 
+- slug: southern-rhone-reds
+  title: "Southern Rhône Reds"
+  date: null
+  date_tbd: true
+  location: "Krieg 13"
+  region: "Southern Rhône"
+  description: >
+    Four appellations, one grape — Grenache across Rasteau, Cairanne,
+    Gigondas and Vacqueyras, tracing how place shapes the variety
+    at the heart of the Southern Rhône.
+  tags:
+    - Grenache
+    - Rasteau
+    - Cairanne
+    - Gigondas
+    - Vacqueyras
+    - Rhône
+    - France
+  status: upcoming
+  spots_total: 6
+  cost_estimate: "28 CHF"
+  featured: false
+
+- slug: chateauneuf-du-pape-the-whites
+  title: "Châteauneuf-du-Pape — The Whites"
+  date: null
+  date_tbd: true
+  location: "Krieg 13"
+  region: "Southern Rhône"
+  description: >
+    Two expressions of Châteauneuf-du-Pape blanc alongside a Lirac blanc
+    and a Muscat de Beaumes-de-Venise — tracing the white Southern Rhône
+    from dry and structured to the appellation's most aromatic fortified wine.
+  tags:
+    - Grenache Blanc
+    - Clairette
+    - Muscat
+    - Châteauneuf-du-Pape
+    - Lirac
+    - Rhône
+    - France
+  status: upcoming
+  spots_total: 6
+  cost_estimate: "40 CHF"
+  featured: false
+
+- slug: chateauneuf-du-pape-the-reds
+  title: "Châteauneuf-du-Pape — The Reds"
+  date: null
+  date_tbd: true
+  location: "Krieg 13"
+  region: "Southern Rhône"
+  description: >
+    Tavel opens as a structural counterpoint before Lirac rouge
+    and two expressions of Châteauneuf-du-Pape — a reading of the
+    Southern Rhône's most celebrated red appellations side by side.
+  tags:
+    - Grenache
+    - Tavel
+    - Lirac
+    - Châteauneuf-du-Pape
+    - Rhône
+    - France
+  status: upcoming
+  spots_total: 6
+  cost_estimate: "40 CHF"
+  featured: false
+
 - slug: saint-joseph
   title: "Saint-Joseph"
   date: null
