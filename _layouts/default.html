@@ -6,9 +6,13 @@
   <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title }}</title>
   <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="{{ '/assets/favicon.svg' | relative_url }}">
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap">
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
@@ -19,21 +23,15 @@
   {% endif %}
 </head>
 <body class="{% if page.body_class %}{{ page.body_class }}{% endif %}">
-
   {% include nav.html %}
-
   <main>
     {{ content }}
   </main>
-
   {% include footer.html %}
-
   <!-- Global JS -->
   <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
-
   {% if page.supabase %}
   <script src="{{ '/assets/js/supabase.js' | relative_url }}"></script>
   {% endif %}
-
 </body>
 </html>
