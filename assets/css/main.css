@@ -1375,3 +1375,29 @@ textarea.form-input {
   text-transform: uppercase;
   color: var(--gold);
 }
+
+/* ── Nav logo mark + wordmark ─────────────────────────────── */
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.nav__wordmark {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+/* ── Footer logo lockup ───────────────────────────────────── */
+.footer__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  font-style: normal;
+}
