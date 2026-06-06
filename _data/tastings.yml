@@ -33,6 +33,7 @@
     - Syrah
     - Côte-Rôtie
     - Rhône
+    - Northern Rhône
     - France
   status: upcoming
   spots_total: 6
@@ -54,6 +55,7 @@
     - Viognier
     - Condrieu
     - Rhône
+    - Northern Rhône
     - France
   status: upcoming
   spots_total: 6
@@ -67,16 +69,19 @@
   location: "Krieg 13"
   region: "Southern Rhône"
   description: >
-    Four appellations, one grape — Grenache across Rasteau, Cairanne,
-    Gigondas and Vacqueyras, tracing how place shapes the variety
-    at the heart of the Southern Rhône.
+    Four appellations, one style — Rasteau, Cairanne, Gigondas and
+    Vacqueyras through the GSM blend, tracing how place shapes the
+    signature expression of the Southern Rhône.
   tags:
     - Grenache
+    - Syrah
+    - Mourvèdre
     - Rasteau
     - Cairanne
     - Gigondas
     - Vacqueyras
     - Rhône
+    - Southern Rhône
     - France
   status: upcoming
   spots_total: 6
@@ -99,7 +104,9 @@
     - Muscat
     - Châteauneuf-du-Pape
     - Lirac
+    - Beaumes-de-Venise
     - Rhône
+    - Southern Rhône
     - France
   status: upcoming
   spots_total: 6
@@ -118,10 +125,13 @@
     Southern Rhône's most celebrated red appellations side by side.
   tags:
     - Grenache
+    - Syrah
+    - Mourvèdre
     - Tavel
     - Lirac
     - Châteauneuf-du-Pape
     - Rhône
+    - Southern Rhône
     - France
   status: upcoming
   spots_total: 6
@@ -143,6 +153,7 @@
     - Roussanne
     - Saint-Joseph
     - Rhône
+    - Northern Rhône
     - France
   status: upcoming
   spots_total: 6
@@ -165,6 +176,7 @@
     - Roussanne
     - Crozes-Hermitage
     - Rhône
+    - Northern Rhône
     - France
   status: upcoming
   spots_total: 6
@@ -186,7 +198,11 @@
   tags:
     - Marsanne
     - Viognier
+    - Condrieu
+    - Saint-Péray
+    - Hermitage
     - Rhône
+    - Northern Rhône
     - France
   status: past
   featured: false
@@ -224,6 +240,7 @@
     - Côte-Rôtie
     - Hermitage
     - Rhône
+    - Northern Rhône
     - France
   status: past
   featured: false
@@ -257,8 +274,14 @@
     showing how the grape adapts to each place it calls home.
   tags:
     - Syrah
-    - Rhône
+    - Grenache
+    - Mourvèdre
+    - Saint-Joseph
+    - Châteauneuf-du-Pape
     - Cortona
+    - Rhône
+    - Northern Rhône
+    - Southern Rhône
     - Tuscany
     - France
     - Italy
@@ -295,6 +318,7 @@
   tags:
     - Chardonnay
     - Bourgogne
+    - Côte Chalonnaise
     - Südtirol
     - Friuli
     - France
