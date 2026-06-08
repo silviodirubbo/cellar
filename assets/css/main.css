@@ -641,42 +641,168 @@ textarea.form-input { min-height: 5rem; }
   .tasting-banner__actions { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
   .tasting-banner__btns { flex-wrap: wrap; }
 }
-
-/* ── Grouped tag filter ───────────────────────────────────── */
-.page-header__filters {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  margin-top: 0.5rem;
+/* ── Filter bar ───────────────────────────────────────────── */
+.filter-bar-wrap {
+  background: var(--warm-white);
+  border-bottom: 1px solid var(--rule);
+  padding: 1rem 0;
+  position: sticky;
+  top: 56px; /* height of fixed nav */
+  z-index: 50;
 }
 
-.filter-group {
+.filter-bar-inner {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* All / reset button */
+.filter-reset {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  background: transparent;
+  border: 1px solid var(--rule);
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+  white-space: nowrap;
+}
+.filter-reset.active {
+  background: var(--ink);
+  color: var(--warm-white);
+  border-color: var(--ink);
+}
+
+/* Category pills */
+.filter-categories {
+  display: flex;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
-.filter-group__label {
+.filter-cat-btn {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  background: transparent;
+  border: 1px solid var(--rule);
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+  white-space: nowrap;
+}
+.filter-cat-btn em {
+  font-style: normal;
+  color: var(--green);
+}
+.filter-cat-btn:hover {
+  color: var(--ink);
+  border-color: var(--ink-mid);
+}
+.filter-cat-btn--active {
+  border-color: var(--green);
+  color: var(--ink);
+}
+.filter-cat-btn--open {
+  background: var(--off-white);
+  border-color: var(--ink-mid);
+  color: var(--ink);
+}
+
+/* Active chips */
+.filter-active-chips {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--warm-white);
+  background: var(--green);
+  padding: 0.25rem 0.6rem;
+}
+.filter-chip__remove {
+  background: none;
+  border: none;
+  color: rgba(253,252,250,0.6);
+  cursor: pointer;
+  font-size: 0.8rem;
+  line-height: 1;
+  padding: 0;
+  transition: color 0.15s;
+}
+.filter-chip__remove:hover { color: var(--warm-white); }
+
+/* Expansion panel */
+.filter-expansion {
+  padding: 1rem 0 0.5rem;
+  border-top: 1px solid var(--rule);
+  margin-top: 0.75rem;
+}
+
+.filter-expansion__label {
   font-family: var(--font-mono);
   font-size: 0.5rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.25);
-  display: block;
+  color: var(--ink-light);
+  margin-bottom: 0.6rem;
 }
 
-.filter-group__tags {
+.filter-expansion__tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
 }
 
-/* Responsive: on mobile stack below title */
-@media (max-width: 768px) {
-  .page-header__inner {
-    grid-template-columns: 1fr;
+/* Individual tag buttons inside expansion */
+.filter-tag-btn {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  background: transparent;
+  border: 1px solid var(--rule);
+  padding: 0.28rem 0.65rem;
+  cursor: pointer;
+  transition: all 0.15s var(--ease);
+}
+.filter-tag-btn:hover {
+  color: var(--ink);
+  border-color: var(--ink-mid);
+}
+.filter-tag-btn--active {
+  background: var(--green);
+  color: var(--warm-white);
+  border-color: var(--green);
+}
+.filter-tag-btn--unavailable {
+  opacity: 0.25;
+  cursor: default;
+}
+
+/* ── Mobile adjustments ───────────────────────────────────── */
+@media (max-width: 640px) {
+  .filter-bar-wrap {
+    top: 52px;
+    padding: 0.75rem 0;
   }
-  .page-header__filters {
-    margin-top: 1.5rem;
+  .filter-bar-inner {
+    gap: 0.5rem;
   }
 }
