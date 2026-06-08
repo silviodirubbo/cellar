@@ -20,13 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
         burger.setAttribute('aria-expanded', false);
       });
     });
-    document.addEventListener('click', e => {
-      if (!burger.contains(e.target) && !navLinks.contains(e.target)) {
-        navLinks.classList.remove('nav__links--open');
-        burger.classList.remove('nav__burger--open');
-        burger.setAttribute('aria-expanded', false);
-      }
-    });
   }
 
   // ── Nav scroll state ──────────────────────────────────────
@@ -55,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const original = btn.textContent;
           btn.textContent = 'Copied';
           setTimeout(() => btn.textContent = original, 2000);
-        } catch (e) { console.warn('Could not copy to clipboard'); }
+        } catch (e) {}
       }
     });
   });
@@ -63,147 +56,144 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── A2 Tag filter ─────────────────────────────────────────
   if (!window.CELLAR) return;
 
-  const { tags, tastings } = window.CELLAR;
+  const allTags    = window.CELLAR.tags;
+  const allTastings = window.CELLAR.tastings;
+  const banners    = document.querySelectorAll('[data-tags]');
+  const catEl      = document.getElementById('filter-categories');
+  const expEl      = document.getElementById('filter-expansion');
+  const expLbl     = document.getElementById('filter-expansion-label');
+  const expTags    = document.getElementById('filter-expansion-tags');
+  const resetBtn   = document.getElementById('filter-reset');
+  const chipsEl    = document.getElementById('filter-active-chips');
+
+  if (!catEl) return;
 
   // State
-  let activeFilters = {}; // { category: tagName }
-  let openCategory  = null;
+  const activeFilters = {}; // { category: tagName }
+  let openCat = null;
 
-  // DOM refs
-  const categoriesEl  = document.getElementById('filter-categories');
-  const chipsEl       = document.getElementById('filter-active-chips');
-  const expansionEl   = document.getElementById('filter-expansion');
-  const expansionLbl  = document.getElementById('filter-expansion-label');
-  const expansionTags = document.getElementById('filter-expansion-tags');
-  const resetBtn      = document.getElementById('filter-reset');
-  const banners       = document.querySelectorAll('[data-tags]');
+  // Get unique categories
+  const categories = [];
+  allTags.forEach(t => {
+    if (!categories.includes(t.category)) categories.push(t.category);
+  });
 
-  if (!categoriesEl) return;
-
-  // Get unique categories in order
-  const categories = [...new Set(tags.map(t => t.category))];
-
-  // ── Helpers ───────────────────────────────────────────────
-
-  // Returns tastings matching ALL active filters
-  function matchingTastings(extraFilter) {
-    const filters = { ...activeFilters };
-    if (extraFilter) filters[extraFilter.category] = extraFilter.tag;
-    const activeTags = Object.values(filters).filter(Boolean);
-    if (!activeTags.length) return tastings;
-    return tastings.filter(t =>
-      activeTags.every(tag => t.tags && t.tags.includes(tag))
-    );
-  }
-
-  // Does adding this tag produce at least one result?
-  function wouldMatch(category, tagName) {
-    return matchingTastings({ category, tag: tagName }).length > 0;
-  }
-
-  // ── Render category pills ─────────────────────────────────
-  function renderCategories() {
-    categoriesEl.innerHTML = '';
-    categories.forEach(cat => {
-      const hasActive = !!activeFilters[cat];
-      const btn = document.createElement('button');
-      btn.className = 'filter-cat-btn' +
-        (hasActive ? ' filter-cat-btn--active' : '') +
-        (openCategory === cat ? ' filter-cat-btn--open' : '');
-      btn.dataset.category = cat;
-      btn.innerHTML = hasActive
-        ? `${cat}: <em>${activeFilters[cat]}</em>`
-        : cat;
-      btn.addEventListener('click', (e) => { e.stopPropagation(); toggleCategory(cat); });
-      categoriesEl.appendChild(btn);
+  // Build static category buttons once
+  categories.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-cat-btn';
+    btn.dataset.category = cat;
+    btn.textContent = cat;
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (openCat === cat) {
+        closePicker();
+      } else {
+        openPicker(cat);
+      }
     });
-  }
+    catEl.appendChild(btn);
+  });
 
-  // ── Render active chips ───────────────────────────────────
-  function renderChips() {
-    chipsEl.innerHTML = '';
-    Object.entries(activeFilters).forEach(([cat, tag]) => {
-      if (!tag) return;
-      const chip = document.createElement('span');
-      chip.className = 'filter-chip';
-      chip.innerHTML = `${tag} <button class="filter-chip__remove" aria-label="Remove ${tag}">×</button>`;
-      chip.querySelector('button').addEventListener('click', () => {
-        delete activeFilters[cat];
-        if (openCategory === cat) closeExpansion();
-        applyFilters();
-      });
-      chipsEl.appendChild(chip);
+  function openPicker(cat) {
+    openCat = cat;
+
+    // Update pill styles
+    catEl.querySelectorAll('.filter-cat-btn').forEach(b => {
+      b.classList.toggle('filter-cat-btn--open', b.dataset.category === cat);
     });
-  }
 
-  // ── Toggle category expansion ─────────────────────────────
-  function toggleCategory(cat) {
-    if (openCategory === cat) {
-      closeExpansion();
-      return;
-    }
-    openCategory = cat;
-    renderCategoryExpansion(cat);
-    renderCategories();
-  }
+    // Build tag buttons
+    expLbl.textContent = cat;
+    expTags.innerHTML = '';
+    const tagsInCat = allTags.filter(t => t.category === cat);
 
-  function closeExpansion() {
-    openCategory = null;
-    expansionEl.style.display = 'none';
-    renderCategories();
-  }
-
-  // ── Render expanded tag list for a category ───────────────
-  function renderCategoryExpansion(cat) {
-    const catTags = tags.filter(t => t.category === cat);
-
-    expansionLbl.textContent = cat;
-    expansionTags.innerHTML = '';
-
-    catTags.forEach(({ name }) => {
-      const isActive  = activeFilters[cat] === name;
-      const available = isActive || wouldMatch(cat, name);
+    tagsInCat.forEach(({ name }) => {
+      const isActive = activeFilters[cat] === name;
+      const canMatch = wouldMatch(cat, name);
 
       const btn = document.createElement('button');
       btn.className = 'filter-tag-btn' +
-        (isActive    ? ' filter-tag-btn--active'      : '') +
-        (!available  ? ' filter-tag-btn--unavailable' : '');
+        (isActive ? ' filter-tag-btn--active' : '') +
+        (!canMatch && !isActive ? ' filter-tag-btn--unavailable' : '');
       btn.textContent = name;
-      btn.disabled = !available && !isActive;
+      if (!canMatch && !isActive) btn.disabled = true;
 
-      btn.addEventListener('click', (e) => { e.stopPropagation();
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
         if (isActive) {
           delete activeFilters[cat];
         } else {
           activeFilters[cat] = name;
         }
-        closeExpansion();
-        applyFilters();
+        closePicker();
+        applyAll();
       });
 
-      expansionTags.appendChild(btn);
+      expTags.appendChild(btn);
     });
 
-    expansionEl.style.display = '';
+    expEl.style.display = '';
   }
 
-  // ── Apply filters to banners ──────────────────────────────
-  function applyFilters() {
-    const activeTags = Object.values(activeFilters).filter(Boolean);
-    const hasFilters = activeTags.length > 0;
+  function closePicker() {
+    openCat = null;
+    expEl.style.display = 'none';
+    catEl.querySelectorAll('.filter-cat-btn').forEach(b => {
+      b.classList.remove('filter-cat-btn--open');
+    });
+  }
 
-    // Reset button state
+  function wouldMatch(cat, tagName) {
+    const testFilters = Object.assign({}, activeFilters, { [cat]: tagName });
+    const active = Object.values(testFilters).filter(Boolean);
+    return allTastings.some(t =>
+      active.every(tag => t.tags && t.tags.includes(tag))
+    );
+  }
+
+  function applyAll() {
+    const active = Object.values(activeFilters).filter(Boolean);
+    const hasFilters = active.length > 0;
+
+    // Reset button
     resetBtn.classList.toggle('active', !hasFilters);
 
+    // Update pill labels
+    catEl.querySelectorAll('.filter-cat-btn').forEach(b => {
+      const cat = b.dataset.category;
+      const sel = activeFilters[cat];
+      b.classList.toggle('filter-cat-btn--active', !!sel);
+      if (sel) {
+        b.innerHTML = cat + ': <em>' + sel + '</em>';
+      } else {
+        b.textContent = cat;
+      }
+    });
+
+    // Chips
+    chipsEl.innerHTML = '';
+    Object.entries(activeFilters).forEach(([cat, tag]) => {
+      if (!tag) return;
+      const chip = document.createElement('span');
+      chip.className = 'filter-chip';
+      chip.innerHTML = tag + ' <button class="filter-chip__remove" aria-label="Remove">×</button>';
+      chip.querySelector('button').addEventListener('click', function(e) {
+        e.stopPropagation();
+        delete activeFilters[cat];
+        applyAll();
+      });
+      chipsEl.appendChild(chip);
+    });
+
+    // Filter banners
     banners.forEach(banner => {
-      const bannerTags = (banner.dataset.tags || '')
-        .split(',').map(t => t.trim());
-      const show = !hasFilters ||
-        activeTags.every(tag => bannerTags.includes(tag));
+      const tags = (banner.dataset.tags || '').split(',').map(t => t.trim());
+      const show = !hasFilters || active.every(tag => tags.includes(tag));
       banner.style.display = show ? '' : 'none';
     });
 
-    // Show/hide empty messages per column
+    // Empty messages
     ['tastings-col--upcoming', 'tastings-col--archive'].forEach(cls => {
       const col = document.querySelector('.' + cls);
       if (!col) return;
@@ -212,29 +202,27 @@ document.addEventListener('DOMContentLoaded', () => {
       const empty = col.querySelector('.filter-empty');
       if (empty) empty.style.display = anyVisible ? 'none' : '';
     });
-
-    renderCategories();
-    renderChips();
   }
 
-  // ── Reset ─────────────────────────────────────────────────
-  resetBtn.addEventListener('click', (e) => { e.stopPropagation();
-    activeFilters = {};
-    closeExpansion();
-    applyFilters();
+  // Reset
+  resetBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    Object.keys(activeFilters).forEach(k => delete activeFilters[k]);
+    closePicker();
+    applyAll();
   });
 
-  // Close expansion on outside click
-  document.addEventListener('click', e => {
-    if (openCategory &&
-        !expansionEl.contains(e.target) &&
-        !categoriesEl.contains(e.target)) {
-      closeExpansion();
-    }
+  // Close on outside click
+  document.addEventListener('click', function() {
+    if (openCat) closePicker();
   });
 
-  // ── Init ──────────────────────────────────────────────────
-  renderCategories();
-  applyFilters();
+  // Prevent expansion panel clicks from closing
+  expEl.addEventListener('click', function(e) {
+    e.stopPropagation();
+  });
+
+  // Init
+  applyAll();
 
 });
