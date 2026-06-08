@@ -10,7 +10,6 @@
       <span class="nav__wordmark">CELLAR</span>
     </a>
 
-    <!-- Hamburger toggle (mobile only) -->
     <button class="nav__burger" id="nav-burger" aria-label="Toggle menu" aria-expanded="false">
       <span></span>
       <span></span>
@@ -25,21 +24,3 @@
 
   </div>
 </nav>
-
-<script>
-  const burger = document.getElementById('nav-burger');
-  const links  = document.getElementById('nav-links');
-  burger.addEventListener('click', () => {
-    const open = links.classList.toggle('nav__links--open');
-    burger.setAttribute('aria-expanded', open);
-    burger.classList.toggle('nav__burger--open', open);
-  });
-  // Close on link click
-  links.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      links.classList.remove('nav__links--open');
-      burger.classList.remove('nav__burger--open');
-      burger.setAttribute('aria-expanded', false);
-    });
-  });
-</script>
