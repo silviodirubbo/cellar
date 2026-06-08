@@ -10,7 +10,14 @@
       <span class="nav__wordmark">CELLAR</span>
     </a>
 
-    <ul class="nav__links">
+    <!-- Hamburger toggle (mobile only) -->
+    <button class="nav__burger" id="nav-burger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav__links" id="nav-links">
       <li class="nav__item"><a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a></li>
       <li class="nav__item"><a href="{{ '/tastings/' | relative_url }}" {% if page.url contains '/tastings' %}class="active"{% endif %}>Tastings</a></li>
       <li class="nav__item"><a href="{{ '/planner/' | relative_url }}" {% if page.url contains '/planner' %}class="active"{% endif %}>Planner</a></li>
@@ -18,3 +25,21 @@
 
   </div>
 </nav>
+
+<script>
+  const burger = document.getElementById('nav-burger');
+  const links  = document.getElementById('nav-links');
+  burger.addEventListener('click', () => {
+    const open = links.classList.toggle('nav__links--open');
+    burger.setAttribute('aria-expanded', open);
+    burger.classList.toggle('nav__burger--open', open);
+  });
+  // Close on link click
+  links.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      links.classList.remove('nav__links--open');
+      burger.classList.remove('nav__burger--open');
+      burger.setAttribute('aria-expanded', false);
+    });
+  });
+</script>
