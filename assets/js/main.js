@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.innerHTML = hasActive
         ? `${cat}: <em>${activeFilters[cat]}</em>`
         : cat;
-      btn.addEventListener('click', () => toggleCategory(cat));
+      btn.addEventListener('click', (e) => { e.stopPropagation(); toggleCategory(cat); });
       categoriesEl.appendChild(btn);
     });
   }
@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.textContent = name;
       btn.disabled = !available && !isActive;
 
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => { e.stopPropagation();
         if (isActive) {
           delete activeFilters[cat];
         } else {
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ── Reset ─────────────────────────────────────────────────
-  resetBtn.addEventListener('click', () => {
+  resetBtn.addEventListener('click', (e) => { e.stopPropagation();
     activeFilters = {};
     closeExpansion();
     applyFilters();
