@@ -1,0 +1,75 @@
+# _data/tags.yml
+# Add new tags here with their category.
+# Categories: Region, Appellation, Grape, Country
+
+- name: Rhône
+  category: Region
+- name: Northern Rhône
+  category: Region
+- name: Southern Rhône
+  category: Region
+- name: Bourgogne
+  category: Region
+- name: Côte Chalonnaise
+  category: Region
+- name: Tuscany
+  category: Region
+
+- name: Côte-Rôtie
+  category: Appellation
+- name: Condrieu
+  category: Appellation
+- name: Saint-Joseph
+  category: Appellation
+- name: Crozes-Hermitage
+  category: Appellation
+- name: Hermitage
+  category: Appellation
+- name: Cornas
+  category: Appellation
+- name: Saint-Péray
+  category: Appellation
+- name: Châteauneuf-du-Pape
+  category: Appellation
+- name: Gigondas
+  category: Appellation
+- name: Vacqueyras
+  category: Appellation
+- name: Rasteau
+  category: Appellation
+- name: Cairanne
+  category: Appellation
+- name: Lirac
+  category: Appellation
+- name: Tavel
+  category: Appellation
+- name: Beaumes-de-Venise
+  category: Appellation
+- name: Cortona
+  category: Appellation
+
+- name: Syrah
+  category: Grape
+- name: Viognier
+  category: Grape
+- name: Marsanne
+  category: Grape
+- name: Roussanne
+  category: Grape
+- name: Grenache
+  category: Grape
+- name: Mourvèdre
+  category: Grape
+- name: Grenache Blanc
+  category: Grape
+- name: Clairette
+  category: Grape
+- name: Muscat
+  category: Grape
+- name: Chardonnay
+  category: Grape
+
+- name: France
+  category: Country
+- name: Italy
+  category: Country
