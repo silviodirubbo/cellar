@@ -8,36 +8,59 @@ permalink: /tastings/
 <header class="page-header">
   <div class="container">
     <div class="page-header__inner">
+
       <div>
         <span class="section-label">Events</span>
         <h1>Tastings</h1>
-        <p class="mt-3">Here you can find all the tastings we did together and those in the pipeline for the next weeks — navigate through the slides and check which wines we drank.</p>
+        <p class="mt-3">Here you can find all the tastings we did together and those in the pipeline for the next weeks. Navigate through the slides and check which wines we drank.</p>
       </div>
+
       <div class="page-header__filters">
-        {% assign all_tags = "" | split: "" %}
-        {% for tasting in site.data.tastings %}
-          {% for tag in tasting.tags %}
-            {% unless all_tags contains tag %}
-              {% assign all_tags = all_tags | push: tag %}
-            {% endunless %}
-          {% endfor %}
-        {% endfor %}
-        <span class="filter-label">Filter by</span>
-        <div class="filter-bar__tags">
+
+        <div class="filter-group">
           <button class="filter-btn active" data-filter="all">All</button>
-          {% for tag in all_tags %}
-            <button class="filter-btn" data-filter="{{ tag }}">{{ tag }}</button>
-          {% endfor %}
         </div>
+
+        {% assign categories = site.data.tags | map: "category" | uniq %}
+        {% for category in categories %}
+          {% assign tags_in_category = site.data.tags | where: "category", category %}
+          {% assign any_used = false %}
+          {% for tag in tags_in_category %}
+            {% for tasting in site.data.tastings %}
+              {% if tasting.tags contains tag.name %}
+                {% assign any_used = true %}
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+          {% if any_used %}
+          <div class="filter-group">
+            <span class="filter-group__label">{{ category }}</span>
+            <div class="filter-group__tags">
+              {% for tag in tags_in_category %}
+                {% assign tag_used = false %}
+                {% for tasting in site.data.tastings %}
+                  {% if tasting.tags contains tag.name %}
+                    {% assign tag_used = true %}
+                  {% endif %}
+                {% endfor %}
+                {% if tag_used %}
+                  <button class="filter-btn" data-filter="{{ tag.name }}">{{ tag.name }}</button>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+        {% endfor %}
+
       </div>
     </div>
   </div>
 </header>
 
 {% assign upcoming_fixed = site.data.tastings | where: "status", "upcoming" | where: "date_tbd", false | sort: "date" %}
-{% assign upcoming_tbd = site.data.tastings | where: "status", "upcoming" | where: "date_tbd", true %}
-{% assign upcoming = upcoming_fixed | concat: upcoming_tbd %}
-{% assign past = site.data.tastings | where: "status", "past" | sort: "date" | reverse %}
+{% assign upcoming_tbd   = site.data.tastings | where: "status", "upcoming" | where: "date_tbd", true %}
+{% assign upcoming       = upcoming_fixed | concat: upcoming_tbd %}
+{% assign past           = site.data.tastings | where: "status", "past" | sort: "date" | reverse %}
 
 <div class="tastings-grid">
 
@@ -64,7 +87,7 @@ permalink: /tastings/
             <p class="tasting-banner__desc">{{ tasting.description }}</p>
             {% if tasting.cost_estimate != "" and tasting.cost_estimate %}
             <p class="tasting-banner__cost mt-2">
-              <span class="label">Indicative cost —</span>
+              <span class="label">Indicative cost</span>
               <span class="cost-value">{{ tasting.cost_estimate }}</span>
               <span class="cost-note">bottles only, nothing charged on top</span>
             </p>
@@ -80,8 +103,7 @@ permalink: /tastings/
             <div class="tasting-banner__btns">
               <button class="share-btn" data-slug="{{ tasting.slug }}" data-slides="{{ tasting.slides }}">Share</button>
               {% if tasting.slides %}
-                <a href="{{ site.baseurl }}/tastings/{{ tasting.slug }}/"
-                   class="btn btn--text">View presentation →</a>
+                <a href="{{ site.baseurl }}/tastings/{{ tasting.slug }}/" class="btn btn--text">View presentation →</a>
               {% endif %}
               {% if tasting.date_tbd %}
                 <a href="{{ '/planner/' | relative_url }}#{{ tasting.slug }}" class="btn btn--solid">Tell me your availability</a>
@@ -125,8 +147,7 @@ permalink: /tastings/
           <div class="tasting-banner__actions">
             <div class="tasting-banner__btns">
               {% if tasting.slides %}
-                <a href="{{ site.baseurl }}/tastings/{{ tasting.slug }}/"
-                   class="btn btn--text">View presentation →</a>
+                <a href="{{ site.baseurl }}/tastings/{{ tasting.slug }}/" class="btn btn--text">View presentation →</a>
               {% else %}
                 <span class="label" style="font-size:0.6rem;">Presentation coming</span>
               {% endif %}
