@@ -59,33 +59,32 @@
     - France
   status: upcoming
   spots_total: 6
-  cost_estimate: "40 CHF"
+  cost_estimate: "35 CHF"
   featured: false
 
-- slug: southern-rhone-reds
-  title: "Southern Rhône Reds"
+- slug: southern-rhone-overview
+  title: "Southern Rhône Overview"
   date: null
   date_tbd: true
   location: "Krieg 13"
   region: "Southern Rhône"
   description: >
-    Four appellations, one style — Rasteau, Cairanne, Gigondas and
-    Vacqueyras through the GSM blend, tracing how place shapes the
-    signature expression of the Southern Rhône.
+    Four appellations, three colours, and even more grapes, tracing how 
+    the terrorir shapes the signature expression of the Southern Rhône.
   tags:
     - Grenache
     - Syrah
     - Mourvèdre
     - Rasteau
-    - Cairanne
     - Gigondas
-    - Vacqueyras
+    - Lirac
+    - Tavel
     - Rhône
     - Southern Rhône
     - France
   status: upcoming
   spots_total: 6
-  cost_estimate: "28 CHF"
+  cost_estimate: "32 CHF"
   featured: false
 
 - slug: chateauneuf-du-pape-the-whites
@@ -95,22 +94,19 @@
   location: "Krieg 13"
   region: "Southern Rhône"
   description: >
-    Two expressions of Châteauneuf-du-Pape blanc alongside a Lirac blanc
-    and a Muscat de Beaumes-de-Venise — tracing the white Southern Rhône
-    from dry and structured to the appellation's most aromatic fortified wine.
+    Four expressions of White Châteauneuf-du-Pape blanc to discover the variety of
+    this appelation based on the dominante grapes in the blend, and the vintage.
   tags:
     - Grenache Blanc
     - Clairette
-    - Muscat
+    - Roussanne
     - Châteauneuf-du-Pape
-    - Lirac
-    - Beaumes-de-Venise
     - Rhône
     - Southern Rhône
     - France
   status: upcoming
   spots_total: 6
-  cost_estimate: "40 CHF"
+  cost_estimate: "42 CHF"
   featured: false
 
 - slug: chateauneuf-du-pape-the-reds
@@ -120,22 +116,19 @@
   location: "Krieg 13"
   region: "Southern Rhône"
   description: >
-    Tavel opens as a structural counterpoint before Lirac rouge
-    and two expressions of Châteauneuf-du-Pape — a reading of the
-    Southern Rhône's most celebrated red appellations side by side.
+    Three expressions of Red Châteauneuf-du-Pape — a reading of the
+    Southern Rhône's most celebrated appellation across grapes.
   tags:
     - Grenache
     - Syrah
     - Mourvèdre
-    - Tavel
-    - Lirac
     - Châteauneuf-du-Pape
     - Rhône
     - Southern Rhône
     - France
   status: upcoming
   spots_total: 6
-  cost_estimate: "40 CHF"
+  cost_estimate: "44 CHF"
   featured: false
 
 - slug: saint-joseph
