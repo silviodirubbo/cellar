@@ -27,7 +27,7 @@
   location: "Krieg 13"
   region: "Northern Rhône"
   description: >
-    A horizontal tasting across several producers of Côte-Rôtie —
+    A horizontal tasting across several producers of Côte-Rôtie,
     one of the great Syrah appellations of the Northern Rhône.
   tags:
     - Syrah
@@ -40,6 +40,22 @@
   cost_estimate: "46 CHF"
   featured: false
   slides: true
+  wines:
+    - name: "Ampodium"
+      producer: "Domaine René Rostaing"
+      vintage: 2022
+      appellation: "Côte-Rôtie AOC"
+      blend: "100% Syrah"
+    - name: "Blonde du Seigneur"
+      producer: "Domaine Georges Vernay"
+      vintage: 2022
+      appellation: "Côte-Rôtie AOC"
+      blend: "Syrah 95%, Viognier 5%"
+    - name: "Lieu-dit La Viallière"
+      producer: "Yves Cuilleron"
+      vintage: 2022
+      appellation: "Côte-Rôtie AOC"
+      blend: "100% Syrah"
 
 - slug: condrieu-horizontal
   title: "Condrieu Horizontal"
@@ -48,9 +64,9 @@
   location: "Krieg 13"
   region: "Northern Rhône"
   description: >
-    A focused horizontal across several producers of Condrieu —
-    Viognier at its most precise and aromatic, exploring how terroir
-    and hand shape one of the Rhône's most singular whites.
+    Three Condrieus exploring the appellation through three lenses simultaneously:
+    the hierarchy of a landmark producer, the contrast between two distinct parcels,
+    and the evolution of Viognier over time.
   tags:
     - Viognier
     - Condrieu
@@ -61,6 +77,22 @@
   spots_total: 6
   cost_estimate: "35 CHF"
   featured: false
+  wines:
+    - name: "Les Terrasses de l'Empire"
+      producer: "Domaine Georges Vernay"
+      vintage: 2023
+      appellation: "Condrieu AOC"
+      blend: "100% Viognier"
+    - name: "Les Chaillées de l'Enfer"
+      producer: "Domaine Georges Vernay"
+      vintage: 2023
+      appellation: "Condrieu AOC"
+      blend: "100% Viognier"
+    - name: "Villa Pontciana"
+      producer: "François Villard"
+      vintage: 2020
+      appellation: "Condrieu AOC"
+      blend: "100% Viognier"
 
 - slug: southern-rhone-overview
   title: "Southern Rhône Overview"
@@ -69,12 +101,15 @@
   location: "Krieg 13"
   region: "Southern Rhône"
   description: >
-    Four appellations, three colours, and even more grapes, tracing how 
-    the terrorir shapes the signature expression of the Southern Rhône.
+    Four appellations, three colours, tracing the Southern Rhône through
+    its most distinctive expressions. From a declassified Rasteau to a Gigondas
+    from old vines on the Dentelles plateau, via the rosé and blanc of the right bank.
   tags:
     - Grenache
-    - Syrah
     - Mourvèdre
+    - Clairette
+    - Viognier
+    - Roussanne
     - Rasteau
     - Gigondas
     - Lirac
@@ -86,6 +121,27 @@
   spots_total: 6
   cost_estimate: "32 CHF"
   featured: false
+  wines:
+    - name: "La Plume du Peintre"
+      producer: "Domaine de la Mordorée"
+      vintage: 2023
+      appellation: "Tavel AOC"
+      blend: "Grenache 50%, Syrah 20%, Clairette 15%, Cinsault 15%"
+    - name: "La Plume du Peintre"
+      producer: "Domaine de la Mordorée"
+      vintage: 2023
+      appellation: "Lirac AOC"
+      blend: "Viognier 33%, Roussanne 34%, Marsanne 33%"
+    - name: "IGP Vaucluse"
+      producer: "Domaine Gourt de Mautens"
+      vintage: 2012
+      appellation: "IGP Vaucluse"
+      blend: "Grenache, Mourvèdre, Syrah, Carignan, Counoise, Vaccarèse"
+    - name: "Les Hautes Garrigues"
+      producer: "Domaine Santa Duc"
+      vintage: 2022
+      appellation: "Gigondas AOC"
+      blend: "Grenache 50%, Mourvèdre 50%"
 
 - slug: chateauneuf-du-pape-the-whites
   title: "Châteauneuf-du-Pape — The Whites"
@@ -94,8 +150,9 @@
   location: "Krieg 13"
   region: "Southern Rhône"
   description: >
-    Four expressions of White Châteauneuf-du-Pape blanc to discover the variety of
-    this appelation based on the dominante grapes in the blend, and the vintage.
+    Four expressions of white Châteauneuf-du-Pape across two grape directions
+    and two vintages, tracing how Grenache Blanc, Clairette and Roussanne each
+    shape the appellation's most overlooked colour, and what a decade does to it.
   tags:
     - Grenache Blanc
     - Clairette
@@ -108,6 +165,27 @@
   spots_total: 6
   cost_estimate: "42 CHF"
   featured: false
+  wines:
+    - name: "Clos La Roquète"
+      producer: "Domaine du Vieux Télégraphe"
+      vintage: 2021
+      appellation: "Châteauneuf-du-Pape AOC"
+      blend: "Grenache Blanc, Clairette, Roussanne"
+    - name: "Châteauneuf-du-Pape Blanc"
+      producer: "Clos des Papes"
+      vintage: 2021
+      appellation: "Châteauneuf-du-Pape AOC"
+      blend: "Grenache Blanc, Roussanne, Clairette, Bourboulenc"
+    - name: "Châteauneuf-du-Pape Blanc"
+      producer: "Famille Isabel Ferrando"
+      vintage: 2021
+      appellation: "Châteauneuf-du-Pape AOC"
+      blend: "Clairette 60%, Roussanne 40%"
+    - name: "Châteauneuf-du-Pape Blanc"
+      producer: "Clos des Papes"
+      vintage: 2014
+      appellation: "Châteauneuf-du-Pape AOC"
+      blend: "Grenache Blanc, Roussanne, Clairette, Bourboulenc"
 
 - slug: chateauneuf-du-pape-the-reds
   title: "Châteauneuf-du-Pape — The Reds"
@@ -116,8 +194,9 @@
   location: "Krieg 13"
   region: "Southern Rhône"
   description: >
-    Three expressions of Red Châteauneuf-du-Pape — a reading of the
-    Southern Rhône's most celebrated appellation across grapes.
+    Three readings of red Châteauneuf-du-Pape: a single terroir, a multi-plot blend,
+    and a Mourvèdre-dominant assemblage with age, tracing how grape, place and time
+    each pull the appellation in a different direction.
   tags:
     - Grenache
     - Syrah
@@ -130,6 +209,22 @@
   spots_total: 6
   cost_estimate: "44 CHF"
   featured: false
+  wines:
+    - name: "La Crau"
+      producer: "Domaine du Vieux Télégraphe"
+      vintage: 2023
+      appellation: "Châteauneuf-du-Pape AOC"
+      blend: "Grenache 65%, Mourvèdre 15%, Syrah 15%, Cinsault 5%"
+    - name: "Châteauneuf-du-Pape"
+      producer: "Clos des Papes"
+      vintage: 2021
+      appellation: "Châteauneuf-du-Pape AOC"
+      blend: "Grenache 65%, Mourvèdre 20%, Syrah 10%, autres 5%"
+    - name: "Châteauneuf-du-Pape"
+      producer: "Château de Beaucastel"
+      vintage: 2017
+      appellation: "Châteauneuf-du-Pape AOC"
+      blend: "Grenache 30%, Mourvèdre 30%, Syrah 10%, Counoise 10%, autres 20%"
 
 - slug: saint-joseph
   title: "Saint-Joseph"
@@ -138,7 +233,7 @@
   location: "Krieg 13"
   region: "Northern Rhône"
   description: >
-    A cross-varietal evening dedicated to the Saint-Joseph appellation —
+    A cross-varietal evening dedicated to the Saint-Joseph appellation,
     red and white side by side, letting the place speak across grape varieties.
   tags:
     - Syrah
@@ -160,7 +255,7 @@
   location: "Krieg 13"
   region: "Northern Rhône"
   description: >
-    A cross-varietal evening dedicated to the Crozes-Hermitage appellation —
+    A cross-varietal evening dedicated to the Crozes-Hermitage appellation,
     red and white together, exploring the largest Northern Rhône appellation
     in all its expressive range.
   tags:
@@ -185,7 +280,7 @@
   location: "Filippo's"
   region: "Northern Rhône"
   description: >
-    An evening dedicated to the great white wines of the Northern Rhône —
+    An evening dedicated to the great white wines of the Northern Rhône,
     Marsanne and Viognier. Structured, aromatic, and often overlooked
     in favour of their red neighbours.
   tags:
@@ -224,7 +319,7 @@
   location: "Krieg 13"
   region: "Northern Rhône"
   description: >
-    A deep dive into the north — three Syrahs from Cornas, Côte-Rôtie
+    A deep dive into the north, three Syrahs from Cornas, Côte-Rôtie
     and Hermitage, exploring how terroir shapes one grape across the
     most celebrated appellations of the Northern Rhône.
   tags:
@@ -262,7 +357,7 @@
   location: "Krieg 13"
   region: "Rhône Valley & Tuscany"
   description: >
-    A first contact with Syrah — its home in the Rhône and its journey
+    A first contact with Syrah, its home in the Rhône and its journey
     to Cortona. Three expressions across the north, the south, and Tuscany,
     showing how the grape adapts to each place it calls home.
   tags:
@@ -305,7 +400,7 @@
   location: "Krieg 13"
   region: "Bourgogne · Südtirol · Friuli"
   description: >
-    A pilot evening and the first of the series — one grape, three terroirs.
+    A pilot evening and the first of the series, one grape, three terroirs.
     A Bourgogne, a Südtirol and a Friuli Chardonnay side by side, exploring
     how the same variety expresses itself across radically different soils and climates.
   tags:
