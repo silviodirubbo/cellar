@@ -59,8 +59,8 @@
 
 - slug: condrieu-horizontal
   title: "Condrieu Horizontal"
-  date: null
-  date_tbd: true
+  date: 2026-07-04
+  date_tbd: false
   location: "Krieg 13"
   region: "Northern Rhône"
   description: >
@@ -96,8 +96,8 @@
 
 - slug: southern-rhone-overview
   title: "Southern Rhône Overview"
-  date: null
-  date_tbd: true
+  date: 2026-07-18
+  date_tbd: false
   location: "Krieg 13"
   region: "Southern Rhône"
   description: >
