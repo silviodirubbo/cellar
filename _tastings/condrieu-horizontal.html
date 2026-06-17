@@ -1,0 +1,334 @@
+---
+layout: presentation
+title: "Condrieu Horizontal"
+date: 2026-07-04
+---
+<style>
+:root {
+  --warm-white: #FDFCFA;
+  --off-white:  #F7F5F0;
+  --ink:        #1A1814;
+  --ink-mid:    #4A4640;
+  --ink-light:  #8A8480;
+  --green:      #2C4A3E;
+  --gold:       #8B6914;
+  --rule:       #E2DED8;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 1280px;
+  height: 720px;
+  display: none;
+}
+.slide.active { display: flex; }
+
+/* ── COVER ──────────────────────────────────────────── */
+.slide-cover {
+  background: var(--ink) url('{{ site.baseurl }}/assets/tastings/condrieu-horizontal/cover.jpg') center/cover no-repeat;
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; cursor: pointer; position: relative;
+}
+.slide-cover::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(26,24,20,.62);
+  z-index: 0;
+}
+.cover-content { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
+.eyebrow {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 11px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 36px;
+}
+.cover-title { font-size: 104px; font-weight: 300; line-height: 1; color: var(--warm-white); }
+.cover-subtitle { font-size: 28px; font-weight: 300; font-style: italic; color: var(--warm-white); margin-top: 12px; }
+.cover-rule { width: 40px; height: 1px; background: var(--gold); margin: 28px auto; }
+.cover-meta {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 10px;
+  letter-spacing: .14em; text-transform: uppercase; color: rgba(253,252,250,.55);
+}
+
+/* ── GRAPE INTRO ────────────────────────────────────── */
+.slide-intro {
+  background: var(--warm-white); color: var(--ink);
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 72px; cursor: pointer;
+}
+.intro-label {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 10px;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 18px;
+}
+.intro-grapes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.intro-grape-primary {
+  font-size: 112px; font-weight: 300; color: var(--ink); letter-spacing: -.02em;
+}
+
+.intro-vline { width: 1px; height: 38px; background: var(--rule); margin: 28px auto; }
+.intro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; max-width: 640px; }
+.ig-label {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 8px;
+}
+.ig-val { font-size: 14px; font-weight: 300; color: var(--ink-mid); line-height: 1.5; }
+.ig-val em { color: var(--green); font-style: italic; }
+
+/* ── MAP-ONLY SLIDE ─────────────────────────────────── */
+.slide-map {
+  background: var(--warm-white);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.slide-map img {
+  max-width: 100%; max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.map-label-center {
+  position: absolute;
+  bottom: 16px; left: 16px;
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
+  background: rgba(253,252,250,.9); padding: 5px 9px;
+}
+
+/* ── WINE SLIDE ─────────────────────────────────────── */
+.slide-wine { background: var(--warm-white); color: var(--ink); flex-direction: row; }
+
+.wine-map {
+  width: 853px; height: 720px; flex: 0 0 853px;
+  position: relative; overflow: hidden; background: var(--warm-white); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.wine-map img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+.map-tag {
+  position: absolute; bottom: 16px; left: 16px;
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
+  background: rgba(253,252,250,.9); padding: 5px 9px;
+}
+
+.wine-panel {
+  width: 427px; height: 720px; flex: 0 0 427px;
+  display: flex; flex-direction: column;
+  padding: 62px 35px 60px;
+  border-left: 1px solid var(--rule); background: var(--warm-white);
+}
+
+.panel-head { flex: 0 0 auto; }
+.w-counter {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 6px;
+}
+.w-appellation {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .13em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+}
+.w-hrule { width: 100%; height: 1px; background: var(--rule); }
+
+.wine-bottle {
+  flex: 1 1 auto; min-height: 0;
+  display: flex; align-items: center; justify-content: center; padding: 16px 0;
+}
+.wine-bottle img {
+  max-height: 100%; max-width: 68%; object-fit: contain;
+  filter: drop-shadow(0 4px 24px rgba(26,24,20,.07));
+}
+
+.wine-info {
+  flex: 0 0 auto;
+  padding-top: 18px; border-top: 1px solid var(--rule);
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
+}
+.info-text { flex: 1 1 auto; min-width: 0; }
+.w-name { font-size: 26px; font-weight: 300; color: var(--ink); line-height: 1.12; margin-bottom: 3px; }
+.w-producer { font-size: 14px; font-weight: 300; font-style: italic; color: var(--green); margin-bottom: 11px; }
+.w-meta { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.w-ml {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink-light); min-width: 46px;
+}
+.w-mv { font-size: 13px; font-weight: 300; color: var(--ink-mid); }
+
+.wine-qr { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.wine-qr img { width: 74px; height: 74px; object-fit: contain; display: block; }
+.qr-label {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 7px;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-light);
+  text-align: center; line-height: 1.6;
+}
+</style>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 1 · COVER
+     Image: assets/tastings/condrieu-horizontal/cover.jpg
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-cover active">
+  <div class="cover-content">
+    <div class="eyebrow">Wine Tasting · 4 July 2026</div>
+    <div class="cover-title">Condrieu</div>
+    <div class="cover-subtitle">Horizontal</div>
+    <div class="cover-rule"></div>
+    <div class="cover-meta">Three wines · One appellation</div>
+    <div class="cover-meta" style="margin-top:6px;color:#C8A84B">Vernay · Vernay · Villard</div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 2 · GRAPE INTRO
+     No images needed.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-intro">
+  <div class="intro-label">The Grape</div>
+  <div class="intro-grapes">
+    <div class="intro-grape-primary">Viognier</div>
+  </div>
+  <div class="intro-vline"></div>
+  <div class="intro-grid">
+    <div><div class="ig-label">Appellation</div><div class="ig-val">Condrieu AOC<br>Northern Rhône</div></div>
+    <div><div class="ig-label">Character</div><div class="ig-val"><em>Apricot · Peach<br>Violet · White flower</em></div></div>
+    <div><div class="ig-label">Terroir</div><div class="ig-val">Granite slopes<br>chaillées terraces</div></div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 3 · FRANCE MAP
+     Image: assets/tastings/condrieu-horizontal/map_france.jpg
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-map" style="position:relative;">
+  <img src="{{ site.baseurl }}/assets/tastings/condrieu-horizontal/map_france.jpg" alt="France · Wine Regions">
+  <div class="map-label-center">France · Wine Regions</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 4 · RHÔNE VALLEY MAP
+     Image: assets/tastings/condrieu-horizontal/map_rhone_valley.jpg
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-map" style="position:relative;">
+  <img src="{{ site.baseurl }}/assets/tastings/condrieu-horizontal/map_rhone_valley.jpg" alt="Rhône Valley · Overview">
+  <div class="map-label-center">Rhône Valley · Overview</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 5 · NORTHERN RHÔNE MAP
+     Image: assets/tastings/condrieu-horizontal/map_northern_rhone.jpg
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-map" style="position:relative;">
+  <img src="{{ site.baseurl }}/assets/tastings/condrieu-horizontal/map_northern_rhone.jpg" alt="Northern Rhône · Appellations">
+  <div class="map-label-center">Northern Rhône · Appellations</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 6 · WINE 1 · VERNAY · TERRASSES DE L'EMPIRE
+     Map:    assets/tastings/condrieu-horizontal/map_condrieu.jpg
+     Bottle: assets/tastings/condrieu-horizontal/bottle_vernay_terrasses.png.png
+     QR:     assets/tastings/condrieu-horizontal/qr_vernay_terrasses.png.png
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/condrieu-horizontal/map_condrieu.jpg" alt="Condrieu · Northern Rhône">
+    <div class="map-tag">Condrieu · Northern Rhône</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">01 / 03</div>
+      <div class="w-appellation">Condrieu AOC · Terrasses de l'Empire</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/condrieu-horizontal/bottle_vernay_terrasses.png.png" alt="Les Terrasses de l'Empire">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Les Terrasses<br>de l'Empire</div>
+        <div class="w-producer">Domaine Georges Vernay</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Viognier</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/condrieu-horizontal/qr_vernay_terrasses.png.png" alt="QR">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 7 · WINE 2 · VERNAY · CHAILLÉES DE L'ENFER
+     Map:    assets/tastings/condrieu-horizontal/map_condrieu.jpg   ← same map
+     Bottle: assets/tastings/condrieu-horizontal/bottle_vernay_chaillees.png.png
+     QR:     assets/tastings/condrieu-horizontal/qr_vernay_chaillees.png.png
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/condrieu-horizontal/map_condrieu.jpg" alt="Condrieu · Northern Rhône">
+    <div class="map-tag">Condrieu · Northern Rhône</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">02 / 03</div>
+      <div class="w-appellation">Condrieu AOC · Chaillées de l'Enfer</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/condrieu-horizontal/bottle_vernay_chaillees.png.png" alt="Les Chaillées de l'Enfer">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Les Chaillées<br>de l'Enfer</div>
+        <div class="w-producer">Domaine Georges Vernay</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Viognier</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/condrieu-horizontal/qr_vernay_chaillees.png.png" alt="QR">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 8 · WINE 3 · VILLARD · VILLA PONTCIANA
+     Map:    assets/tastings/condrieu-horizontal/map_condrieu.jpg   ← same map
+     Bottle: assets/tastings/condrieu-horizontal/bottle_villard.png.png
+     QR:     assets/tastings/condrieu-horizontal/qr_villard.png.png
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/condrieu-horizontal/map_condrieu.jpg" alt="Condrieu · Northern Rhône">
+    <div class="map-tag">Condrieu · Northern Rhône</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">03 / 03</div>
+      <div class="w-appellation">Condrieu AOC · Villa Pontciana</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/condrieu-horizontal/bottle_villard.png.png" alt="Villa Pontciana">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Villa Pontciana</div>
+        <div class="w-producer">François Villard</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2020</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Viognier</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/condrieu-horizontal/qr_villard.png.png" alt="QR">
+      </div>
+    </div>
+  </div>
+</div>
