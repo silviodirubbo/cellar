@@ -77,6 +77,7 @@
   spots_total: 6
   cost_estimate: "35 CHF"
   featured: false
+  slides: true
   wines:
     - name: "Les Terrasses de l'Empire"
       producer: "Domaine Georges Vernay"
