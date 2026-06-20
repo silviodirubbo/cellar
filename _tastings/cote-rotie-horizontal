@@ -342,3 +342,379 @@ date: 2026-06-20
     </div>
   </div>
 </div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 9 · PRODUCERS LANDSCAPE + VINTAGE CHART
+     No images needed.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-producers" style="cursor:pointer;">
+
+<style>
+.slide-producers {
+  background: var(--warm-white);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── TOP: producers ─────────────────────────────────────── */
+.prod-top {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid var(--rule);
+}
+
+.prod-left {
+  width: 200px;
+  flex: 0 0 200px;
+  border-right: 1px solid var(--rule);
+  padding: 40px 28px 28px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.prod-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-weight: 300;
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.prod-eyebrow::after {
+  content: '';
+  display: block;
+  height: 1px;
+  width: 20px;
+  background: var(--rule);
+}
+
+.prod-title {
+  font-size: 42px;
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--ink);
+}
+.prod-title em { font-style: italic; color: var(--green); }
+
+.prod-disclaimer {
+  font-family: 'DM Mono', monospace;
+  font-weight: 300;
+  font-size: 7px;
+  letter-spacing: .07em;
+  color: var(--ink-light);
+  line-height: 1.6;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+}
+
+.prod-right {
+  flex: 1 1 auto;
+  padding: 22px 36px 18px 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 40px;
+  align-content: start;
+}
+
+.prod-col { display: flex; flex-direction: column; }
+
+.prow {
+  display: flex;
+  align-items: baseline;
+  padding: 3.5px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.prow.first { border-top: 1px solid var(--rule); }
+
+.pname {
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.pname.tasted { color: var(--green); font-style: italic; }
+
+.tdot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.leader {
+  flex: 1 1 auto;
+  border-bottom: 1px dotted var(--rule);
+  margin: 0 6px;
+  position: relative;
+  top: -2px;
+}
+
+.cuvees {
+  font-family: 'DM Mono', monospace;
+  font-size: 7px;
+  font-weight: 300;
+  letter-spacing: .03em;
+  color: var(--ink-light);
+  white-space: nowrap;
+  text-align: right;
+  flex-shrink: 0;
+}
+.csep { margin: 0 3px; opacity: 0.35; }
+
+.cv-hi {
+  color: var(--green);
+  font-style: italic;
+  font-family: 'DM Mono', monospace;
+  font-size: 7px;
+  font-weight: 300;
+}
+
+/* ── BOTTOM: vintage chart ──────────────────────────────── */
+.prod-bottom {
+  flex: 1 1 auto;
+  padding: 10px 36px 14px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.vint-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.vint-label {
+  font-family: 'DM Mono', monospace;
+  font-weight: 300;
+  font-size: 7px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  white-space: nowrap;
+}
+.vint-rule { flex: 1; height: 1px; background: var(--rule); }
+
+.vint-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 58px;
+}
+
+.vint-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  flex: 1;
+}
+
+.vint-score {
+  font-family: 'DM Mono', monospace;
+  font-size: 6px;
+  font-weight: 300;
+  color: var(--ink-light);
+  text-align: center;
+  line-height: 1;
+}
+.vint-score.cls  { color: var(--green); }
+.vint-score.out  { color: var(--green); opacity: 0.8; }
+
+.vint-bar-wrap {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  height: 38px;
+}
+
+.vint-bar {
+  width: 100%;
+  border-radius: 1px 1px 0 0;
+  background: var(--rule);
+}
+.vint-bar.cls  { background: var(--green); }
+.vint-bar.out  { background: var(--green); opacity: 0.65; }
+.vint-bar.vg   { background: var(--ink-light); opacity: 0.45; }
+.vint-bar.gd   { background: var(--ink-light); opacity: 0.25; }
+.vint-bar.hi   { outline: 1.5px solid var(--gold); outline-offset: 1px; }
+
+.vint-year {
+  font-family: 'DM Mono', monospace;
+  font-size: 6px;
+  font-weight: 300;
+  color: var(--ink-light);
+  text-align: center;
+  line-height: 1;
+}
+.vint-year.hi { color: var(--gold); }
+</style>
+
+<div class="prod-top">
+
+  <!-- LEFT PANEL -->
+  <div class="prod-left">
+    <div>
+      <div class="prod-eyebrow">Côte-Rôtie</div>
+      <div class="prod-title">The<br><em>producers</em></div>
+    </div>
+    <div class="prod-disclaimer">
+      A partial and subjective list aimed at providing<br>
+      a broad framework of the appellation's winemakers.
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="prod-right">
+
+    <!-- COLUMN LEFT -->
+    <div class="prod-col">
+      <div class="prow first">
+        <div class="pname">Guigal</div><div class="leader"></div>
+        <div class="cuvees">Brune et Blonde<span class="csep">·</span>Château d'Ampuis<span class="csep">·</span>La Mouline<span class="csep">·</span>La Landonne<span class="csep">·</span>La Turque</div>
+      </div>
+      <div class="prow">
+        <div class="pname">Jamet</div><div class="leader"></div>
+        <div class="cuvees">Côte-Rôtie<span class="csep">·</span>Fructus Voluptas<span class="csep">·</span>Côte Brune<span class="csep">·</span>La Landonne</div>
+      </div>
+      <div class="prow">
+        <div class="pname tasted"><span class="tdot"></span>Rostaing</div><div class="leader"></div>
+        <div class="cuvees"><span class="cv-hi">Ampodium</span><span class="csep">·</span>Côte Blonde<span class="csep">·</span>La Landonne</div>
+      </div>
+      <div class="prow">
+        <div class="pname tasted"><span class="tdot"></span>Vernay</div><div class="leader"></div>
+        <div class="cuvees"><span class="cv-hi">Blonde du Seigneur</span><span class="csep">·</span>Maison Rouge</div>
+      </div>
+      <div class="prow">
+        <div class="pname tasted"><span class="tdot"></span>Cuilleron</div><div class="leader"></div>
+        <div class="cuvees"><span class="cv-hi">La Viallière</span><span class="csep">·</span>Bassenon<span class="csep">·</span>Bonnivières<span class="csep">·</span>Madinière</div>
+      </div>
+      <div class="prow">
+        <div class="pname">Gangloff</div><div class="leader"></div>
+        <div class="cuvees">La Barbarine<span class="csep">·</span>La Sereine Noire</div>
+      </div>
+      <div class="prow">
+        <div class="pname">Clusel-Roch</div><div class="leader"></div>
+        <div class="cuvees">Les Schistes<span class="csep">·</span>La Viallière<span class="csep">·</span>Le Champon<span class="csep">·</span>Les Grandes Places<span class="csep">·</span>Les Cinq Lieux</div>
+      </div>
+      <div class="prow">
+        <div class="pname">Chapoutier</div><div class="leader"></div>
+        <div class="cuvees">Les Bécasses<span class="csep">·</span>La Mordorée</div>
+      </div>
+      <div class="prow">
+        <div class="pname">Villard</div><div class="leader"></div>
+        <div class="cuvees">Le Gallet Blanc<span class="csep">·</span>Montlys<span class="csep">·</span>La Brocarde</div>
+      </div>
+    </div>
+
+    <!-- COLUMN RIGHT -->
+    <div class="prod-col">
+      <div class="prow first">
+        <div class="pname">Jasmin</div><div class="leader"></div>
+        <div class="cuvees">La Giroflarie<span class="csep">·</span>Oléa</div>
+      </div>
+      <div class="prow">
+        <div class="pname">Stephan</div><div class="leader"></div>
+        <div class="cuvees">Coteaux de Bassenon<span class="csep">·</span>Coteaux de Tupin<span class="csep">·</span>Cuvée 36<span class="csep">·</span>L'Ultime<span class="csep">·</span>Le Bordel<span class="csep">·</span>Les Binardes<span class="csep">·</span>So'Brune<span class="csep">·</span>Vieille Vigne</div>
+      </div>
+      <div class="prow">
+        <div class="pname">Gerin</div><div class="leader"></div>
+        <div class="cuvees">Champin le Seigneur<span class="csep">·</span>La Viallière<span class="csep">·</span>Les Grandes Places<span class="csep">·</span>Côte Bodin<span class="csep">·</span>La Landonne</div>
+      </div>
+      <div class="prow">
+        <div class="pname">Bonnefond</div><div class="leader"></div>
+        <div class="cuvees">Colline de Couzou<span class="csep">·</span>Côte Rozier<span class="csep">·</span>Les Rochins<span class="csep">·</span>Dans les vignes de mon père</div>
+      </div>
+      <div class="prow">
+        <div class="pname">Garon</div><div class="leader"></div>
+        <div class="cuvees">La Triote<span class="csep">·</span>Lancement<span class="csep">·</span>Le Combard<span class="csep">·</span>Les Rochins<span class="csep">·</span>La Sybarine</div>
+      </div>
+      <div class="prow">
+        <div class="pname">Pierre Gaillard</div><div class="leader"></div>
+        <div class="cuvees">Côte-Rôtie</div>
+      </div>
+      <div class="prow">
+        <div class="pname">Pierre-Jean Villa</div><div class="leader"></div>
+        <div class="cuvees">Fongeant<span class="csep">·</span>Carmina</div>
+      </div>
+      <div class="prow">
+        <div class="pname">Ogier</div><div class="leader"></div>
+        <div class="cuvees">Lieu-dits selon millésime</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- VINTAGE CHART -->
+<div class="prod-bottom">
+  <div class="vint-header">
+    <span class="vint-label">Vintages · Wine Spectator</span>
+    <div class="vint-rule"></div>
+  </div>
+  <div class="vint-chart" id="vint-chart-9"></div>
+</div>
+
+<script>
+(function() {
+  var data = [
+    {y:1995,s:91},{y:1996,s:90},{y:1997,s:88},{y:1998,s:90},
+    {y:1999,s:96},{y:2000,s:88},{y:2001,s:89},{y:2002,s:82},
+    {y:2003,s:94},{y:2004,s:90},{y:2005,s:94},{y:2006,s:92},
+    {y:2007,s:91},{y:2008,s:86},{y:2009,s:96},{y:2010,s:98},
+    {y:2011,s:92},{y:2012,s:92},{y:2013,s:91},{y:2014,s:89},
+    {y:2015,s:99},{y:2016,s:97},{y:2017,s:97},{y:2018,s:92},
+    {y:2019,s:96},{y:2020,s:96},{y:2021,s:87},{y:2022,s:94},
+    {y:2023,s:93}
+  ];
+  var tasted = [2022];
+  var minS = 80, range = 20;
+  var chart = document.getElementById('vint-chart-9');
+
+  data.forEach(function(v) {
+    var isTasted = tasted.indexOf(v.y) > -1;
+    var pct = (v.s - minS) / range;
+    var barH = Math.round(pct * 38) + 'px';
+
+    var tier = v.s >= 95 ? 'cls' : v.s >= 90 ? 'out' : v.s >= 85 ? 'vg' : 'gd';
+
+    var col = document.createElement('div');
+    col.className = 'vint-col';
+
+    var score = document.createElement('div');
+    score.className = 'vint-score ' + tier;
+    score.textContent = v.s;
+
+    var wrap = document.createElement('div');
+    wrap.className = 'vint-bar-wrap';
+
+    var bar = document.createElement('div');
+    bar.className = 'vint-bar ' + tier + (isTasted ? ' hi' : '');
+    bar.style.height = barH;
+
+    var year = document.createElement('div');
+    year.className = 'vint-year' + (isTasted ? ' hi' : '');
+    year.textContent = String(v.y).slice(2);
+
+    wrap.appendChild(bar);
+    col.appendChild(score);
+    col.appendChild(wrap);
+    col.appendChild(year);
+    chart.appendChild(col);
+  });
+})();
+</script>
+
+</div>
