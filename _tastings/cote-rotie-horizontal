@@ -154,9 +154,9 @@ date: 2026-06-20
   background: var(--warm-white);
   flex-direction: column;
   cursor: pointer;
-  /* fixed top padding for nav bar, bottom padding for prev/next buttons */
-  padding-top: 52px;
-  padding-bottom: 46px;
+  /* generous top padding so the block sits clear of the nav bar */
+  padding-top: 70px;
+  padding-bottom: 44px;
 }
 
 .prod-top {
@@ -242,11 +242,11 @@ date: 2026-06-20
   font-family: 'DM Mono', monospace; font-size: 6.5px; font-weight: 300;
 }
 
-/* vintage chart — sits directly below producers, no gap */
+/* vintage chart — centered in the band below the producers */
 .prod-bottom {
-  flex: 0 0 auto;
-  padding: 10px 28px 0 28px;
-  display: flex; flex-direction: column; gap: 4px;
+  flex: 1 1 auto;
+  padding: 20px 28px 0 28px;
+  display: flex; flex-direction: column; justify-content: center; gap: 8px;
 }
 
 .vint-header {
@@ -259,22 +259,22 @@ date: 2026-06-20
 .vint-rule { flex: 1; height: 1px; background: var(--rule); }
 
 .vint-chart {
-  display: flex; align-items: flex-end; gap: 4px; height: 68px;
+  display: flex; align-items: flex-end; gap: 4px; height: 84px;
 }
 
 .vint-col {
-  display: flex; flex-direction: column; align-items: center; gap: 2px; flex: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1;
 }
 
 .vint-score {
-  font-family: 'DM Mono', monospace; font-size: 5.5px; font-weight: 300;
+  font-family: 'DM Mono', monospace; font-size: 6px; font-weight: 300;
   color: var(--ink-light); text-align: center; line-height: 1;
 }
 .vint-score.cls { color: var(--green); }
 .vint-score.out { color: var(--green); opacity: 0.8; }
 
 .vint-bar-wrap {
-  width: 100%; display: flex; align-items: flex-end; height: 44px;
+  width: 100%; display: flex; align-items: flex-end; height: 48px;
 }
 
 .vint-bar {
@@ -287,8 +287,8 @@ date: 2026-06-20
 .vint-bar.hi  { outline: 1.5px solid var(--gold); outline-offset: 1px; }
 
 .vint-year {
-  font-family: 'DM Mono', monospace; font-size: 5.5px; font-weight: 300;
-  color: var(--ink-light); text-align: center; line-height: 1;
+  font-family: 'DM Mono', monospace; font-size: 6px; font-weight: 300;
+  letter-spacing: .01em; color: var(--ink-light); text-align: center; line-height: 1;
 }
 .vint-year.hi { color: var(--gold); }
 </style>
@@ -572,7 +572,7 @@ date: 2026-06-20
     {y:2023,s:93}
   ];
   var tasted = [2022];
-  var minS = 80, maxH = 44;
+  var minS = 80, maxH = 48;
   var chart = document.getElementById('vint-chart-9');
   if (!chart) return;
 
@@ -598,7 +598,7 @@ date: 2026-06-20
 
     var year = document.createElement('div');
     year.className = 'vint-year' + (isTasted ? ' hi' : '');
-    year.textContent = String(v.y).slice(2);
+    year.textContent = v.y;
 
     wrap.appendChild(bar);
     col.appendChild(score);
