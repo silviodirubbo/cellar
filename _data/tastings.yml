@@ -20,43 +20,6 @@
 
 # ── Upcoming ──────────────────────────────────────────────────
 
-- slug: cote-rotie-horizontal
-  title: "Côte-Rôtie Horizontal"
-  date: 2026-06-20
-  date_tbd: false
-  location: "Krieg 13"
-  region: "Northern Rhône"
-  description: >
-    A horizontal tasting across several producers of Côte-Rôtie,
-    one of the great Syrah appellations of the Northern Rhône.
-  tags:
-    - Syrah
-    - Côte-Rôtie
-    - Rhône
-    - Northern Rhône
-    - France
-  status: upcoming
-  spots_total: 6
-  cost_estimate: "46 CHF"
-  featured: false
-  slides: true
-  wines:
-    - name: "Ampodium"
-      producer: "Domaine René Rostaing"
-      vintage: 2022
-      appellation: "Côte-Rôtie AOC"
-      blend: "100% Syrah"
-    - name: "Blonde du Seigneur"
-      producer: "Domaine Georges Vernay"
-      vintage: 2022
-      appellation: "Côte-Rôtie AOC"
-      blend: "Syrah 95%, Viognier 5%"
-    - name: "Lieu-dit La Viallière"
-      producer: "Yves Cuilleron"
-      vintage: 2022
-      appellation: "Côte-Rôtie AOC"
-      blend: "100% Syrah"
-
 - slug: condrieu-horizontal
   title: "Condrieu Horizontal"
   date: 2026-07-18
@@ -273,6 +236,41 @@
   featured: false
 
 # ── Past ──────────────────────────────────────────────────────
+
+- slug: cote-rotie-horizontal
+  title: "Côte-Rôtie Horizontal"
+  date: 2026-06-20
+  date_tbd: false
+  location: "Krieg 13"
+  region: "Northern Rhône"
+  description: >
+    A horizontal tasting across several producers of Côte-Rôtie,
+    one of the great Syrah appellations of the Northern Rhône.
+  tags:
+    - Syrah
+    - Côte-Rôtie
+    - Rhône
+    - Northern Rhône
+    - France
+  status: past
+  featured: false
+  slides: true
+  wines:
+    - name: "Ampodium"
+      producer: "Domaine René Rostaing"
+      vintage: 2022
+      appellation: "Côte-Rôtie AOC"
+      blend: "100% Syrah"
+    - name: "Blonde du Seigneur"
+      producer: "Domaine Georges Vernay"
+      vintage: 2022
+      appellation: "Côte-Rôtie AOC"
+      blend: "Syrah 95%, Viognier 5%"
+    - name: "La Viallière"
+      producer: "Yves Cuilleron"
+      vintage: 2022
+      appellation: "Côte-Rôtie AOC"
+      blend: "100% Syrah"
 
 - slug: northern-rhone-whites
   title: "Northern Rhône Whites"
