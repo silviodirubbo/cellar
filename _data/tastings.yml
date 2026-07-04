@@ -20,9 +20,58 @@
 
 # ── Upcoming ──────────────────────────────────────────────────
 
+- slug: southern-rhone-overview
+  title: "Southern Rhône Overview"
+  date: 2026-07-18
+  date_tbd: false
+  location: "Filippo's"
+  region: "Southern Rhône"
+  description: >
+    Four appellations, three colours, tracing the Southern Rhône through
+    its most distinctive expressions. From a declassified Rasteau to a Gigondas
+    from old vines on the Dentelles plateau, via the rosé and blanc of the right bank.
+  tags:
+    - Grenache
+    - Mourvèdre
+    - Clairette
+    - Viognier
+    - Roussanne
+    - Rasteau
+    - Gigondas
+    - Lirac
+    - Tavel
+    - Rhône
+    - Southern Rhône
+    - France
+  status: upcoming
+  spots_total: 7
+  cost_estimate: "32 CHF"
+  featured: false
+  wines:
+    - name: "La Plume du Peintre"
+      producer: "Domaine de la Mordorée"
+      vintage: 2023
+      appellation: "Tavel AOC"
+      blend: "Grenache 50%, Syrah 20%, Clairette 15%, Cinsault 15%"
+    - name: "La Plume du Peintre"
+      producer: "Domaine de la Mordorée"
+      vintage: 2023
+      appellation: "Lirac AOC"
+      blend: "Viognier 33%, Roussanne 34%, Marsanne 33%"
+    - name: "IGP Vaucluse"
+      producer: "Domaine Gourt de Mautens"
+      vintage: 2012
+      appellation: "IGP Vaucluse"
+      blend: "Grenache, Mourvèdre, Syrah, Carignan, Counoise, Vaccarèse"
+    - name: "Les Hautes Garrigues"
+      producer: "Domaine Santa Duc"
+      vintage: 2022
+      appellation: "Gigondas AOC"
+      blend: "Grenache 50%, Mourvèdre 50%"
+      
 - slug: condrieu-horizontal
   title: "Condrieu Horizontal"
-  date: 2026-07-18
+  date: 2026-07-30
   date_tbd: false
   location: "Krieg 13"
   region: "Northern Rhône"
@@ -57,55 +106,6 @@
       vintage: 2020
       appellation: "Condrieu AOC"
       blend: "100% Viognier"
-
-- slug: southern-rhone-overview
-  title: "Southern Rhône Overview"
-  date: 2026-07-30
-  date_tbd: false
-  location: "Krieg 13"
-  region: "Southern Rhône"
-  description: >
-    Four appellations, three colours, tracing the Southern Rhône through
-    its most distinctive expressions. From a declassified Rasteau to a Gigondas
-    from old vines on the Dentelles plateau, via the rosé and blanc of the right bank.
-  tags:
-    - Grenache
-    - Mourvèdre
-    - Clairette
-    - Viognier
-    - Roussanne
-    - Rasteau
-    - Gigondas
-    - Lirac
-    - Tavel
-    - Rhône
-    - Southern Rhône
-    - France
-  status: upcoming
-  spots_total: 6
-  cost_estimate: "32 CHF"
-  featured: false
-  wines:
-    - name: "La Plume du Peintre"
-      producer: "Domaine de la Mordorée"
-      vintage: 2023
-      appellation: "Tavel AOC"
-      blend: "Grenache 50%, Syrah 20%, Clairette 15%, Cinsault 15%"
-    - name: "La Plume du Peintre"
-      producer: "Domaine de la Mordorée"
-      vintage: 2023
-      appellation: "Lirac AOC"
-      blend: "Viognier 33%, Roussanne 34%, Marsanne 33%"
-    - name: "IGP Vaucluse"
-      producer: "Domaine Gourt de Mautens"
-      vintage: 2012
-      appellation: "IGP Vaucluse"
-      blend: "Grenache, Mourvèdre, Syrah, Carignan, Counoise, Vaccarèse"
-    - name: "Les Hautes Garrigues"
-      producer: "Domaine Santa Duc"
-      vintage: 2022
-      appellation: "Gigondas AOC"
-      blend: "Grenache 50%, Mourvèdre 50%"
 
 - slug: chateauneuf-du-pape-the-whites
   title: "Châteauneuf-du-Pape — The Whites"
