@@ -802,7 +802,366 @@ textarea.form-input { min-height: 5rem; }
     top: 52px;
     padding: 0.75rem 0;
   }
+  /* One scrollable row instead of a tall wrapping block */
   .filter-bar-inner {
     gap: 0.5rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0.15rem;
+    margin-right: -2rem;
+    padding-right: 2rem;
   }
+  .filter-bar-inner::-webkit-scrollbar { display: none; }
+  .filter-categories, .filter-active-chips { flex-wrap: nowrap; }
+}
+
+/* ============================================================
+   TASTINGS PAGE — header stats, cards, archive, tabs
+   ============================================================ */
+
+/* ── Header stats strip ───────────────────────────────────── */
+.th-stats {
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 1.5rem;
+}
+.th-stat__num {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.8rem;
+  color: var(--warm-white);
+  line-height: 1;
+  display: block;
+}
+.th-stat__label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  display: block;
+  margin-top: 0.35rem;
+}
+
+/* ── Upcoming: event cards ────────────────────────────────── */
+.tasting-card {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 1.5rem;
+  border: 1px solid var(--rule);
+  background: var(--warm-white);
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+  transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+.tasting-card:hover {
+  border-color: var(--ink-light);
+  box-shadow: 0 10px 30px -18px rgba(26,24,20,0.25);
+}
+.tasting-card--next { border-left: 2px solid var(--green); }
+
+/* Calendar-style date block */
+.tasting-card__date {
+  text-align: center;
+  border-right: 1px solid var(--rule);
+  padding-right: 1.25rem;
+  align-self: start;
+  padding-top: 0.2rem;
+}
+.tasting-card__dow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+.tasting-card__day {
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 2.2rem;
+  line-height: 1.1;
+  color: var(--ink);
+}
+.tasting-card__day--tbd { color: var(--gold); }
+.tasting-card__month {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  white-space: nowrap;
+}
+
+.tasting-card__badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--warm-white);
+  background: var(--green);
+  padding: 0.25rem 0.6rem;
+  margin-bottom: 0.6rem;
+}
+.tasting-card__badge .js-countdown:not(:empty)::before { content: ' · '; }
+
+.tasting-card__title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.35rem;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+}
+.tasting-card__where {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 0.6rem;
+}
+.tasting-card__desc {
+  font-size: 0.9rem;
+  color: var(--ink-mid);
+  max-width: 55ch;
+}
+
+/* Facts strip: spots · cost · wines */
+.tasting-card__facts {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-top: 0.8rem;
+}
+.fact {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+}
+.fact--spots { color: var(--gold); }
+.fact--cost  { color: var(--ink-mid); }
+.fact__note  { color: var(--ink-light); }
+
+/* ── Wine lineup (shared by cards + archive) ──────────────── */
+.lineup { margin-top: 0.9rem; }
+.lineup__toggle {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  cursor: pointer;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.2s var(--ease);
+}
+.lineup__toggle::-webkit-details-marker { display: none; }
+.lineup__toggle::after {
+  content: '';
+  width: 0.45rem;
+  height: 0.45rem;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.2s var(--ease);
+}
+.lineup[open] .lineup__toggle::after { transform: rotate(225deg) translateY(-1px); }
+.lineup__toggle:hover { color: var(--ink); }
+
+.lineup__list {
+  list-style: none;
+  margin-top: 0.75rem;
+  border-left: 1px solid var(--rule);
+  padding-left: 1rem;
+}
+.lineup__wine { padding: 0.35rem 0; }
+.lineup__wine-name {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+.lineup__wine-detail {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-top: 0.1rem;
+}
+
+/* Card footer: tags left, buttons right */
+.tasting-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+}
+.tasting-card__tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.tag--count { border-style: dashed; }
+.tasting-card__btns { display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap; }
+
+/* ── Archive: compact expandable timeline ─────────────────── */
+.archive-item details { border-bottom: 1px solid var(--rule); }
+.archive-item:first-child details { border-top: 1px solid var(--rule); }
+
+.archive-item__head {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+  align-items: baseline;
+  gap: 0.85rem;
+  padding: 1rem 0.25rem;
+  cursor: pointer;
+  list-style: none;
+  transition: background-color 0.2s var(--ease);
+}
+.archive-item__head::-webkit-details-marker { display: none; }
+.archive-item__head:hover { background-color: rgba(26,24,20,0.03); }
+
+.archive-item__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rule);
+  align-self: center;
+  transition: background-color 0.2s var(--ease);
+}
+.archive-item details[open] .archive-item__dot { background: var(--green); }
+
+.archive-item__date {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  white-space: nowrap;
+  min-width: 5.5rem;
+}
+.archive-item__title {
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.05rem;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.archive-item__where {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-top: 0.15rem;
+}
+.archive-item__chevron {
+  align-self: center;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-right: 1px solid var(--ink-light);
+  border-bottom: 1px solid var(--ink-light);
+  transform: rotate(45deg);
+  transition: transform 0.2s var(--ease);
+}
+.archive-item details[open] .archive-item__chevron { transform: rotate(225deg); }
+
+.archive-item__body { padding: 0.25rem 0.25rem 1.25rem 1.35rem; }
+.archive-item__desc {
+  font-size: 0.9rem;
+  color: var(--ink-mid);
+  margin-bottom: 0.75rem;
+}
+.archive-item__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+/* ── Mobile tab switcher (hidden on desktop) ──────────────── */
+.tastings-tabs { display: none; }
+
+@media (max-width: 768px) {
+  .tastings-tabs {
+    display: flex;
+    position: sticky;
+    top: 96px; /* nav + filter bar */
+    z-index: 40;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--rule);
+  }
+  .tastings-tab {
+    flex: 1;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 0.85rem 0.5rem;
+    cursor: pointer;
+    transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
+  }
+  .tastings-tab--active {
+    color: var(--ink);
+    border-bottom-color: var(--green);
+  }
+  .tastings-tab__count { color: var(--gold); margin-left: 0.3rem; }
+
+  /* Tabs replace the stacked columns: show only the active one */
+  .tastings-grid .tastings-rule { display: none; }
+  .tastings-col { display: none; }
+  .tastings-grid[data-active="upcoming"] .tastings-col--upcoming { display: block; }
+  .tastings-grid[data-active="archive"]  .tastings-col--archive  { display: block; }
+  .tastings-col .col-label { display: none; }
+
+  .container-col { padding: 1.5rem 1.25rem 3rem; }
+}
+
+/* ── Cards on small screens ───────────────────────────────── */
+@media (max-width: 640px) {
+  .tasting-card {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+    padding: 1.15rem;
+  }
+  /* Date block becomes a horizontal line above the title */
+  .tasting-card__date {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    text-align: left;
+    border-right: none;
+    border-bottom: 1px solid var(--rule);
+    padding: 0 0 0.6rem;
+  }
+  .tasting-card__day { font-size: 1.4rem; }
+  .tasting-card__facts { gap: 0.9rem; }
+  .tasting-card__foot { flex-direction: column; align-items: flex-start; }
+  .tastings-tabs { top: 100px; }
+  .archive-item__head { grid-template-columns: auto auto 1fr auto; gap: 0.6rem; }
+  .archive-item__date { min-width: 0; }
+  .archive-item__body { padding-left: 0.25rem; }
+  .th-stats { gap: 1.75rem; }
+  .th-stat__num { font-size: 1.5rem; }
 }

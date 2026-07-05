@@ -53,6 +53,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ── Tastings: mobile tab switcher ─────────────────────────
+  const tabsWrap = document.getElementById('tastings-tabs');
+  const tastingsGrid = document.getElementById('tastings-grid');
+  if (tabsWrap && tastingsGrid) {
+    tabsWrap.querySelectorAll('.tastings-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        tastingsGrid.dataset.active = tab.dataset.tab;
+        tabsWrap.querySelectorAll('.tastings-tab').forEach(t =>
+          t.classList.toggle('tastings-tab--active', t === tab));
+      });
+    });
+  }
+
+  // ── Tastings: "in N days" countdown ───────────────────────
+  document.querySelectorAll('.js-countdown[data-date]').forEach(el => {
+    const target = new Date(el.dataset.date + 'T00:00:00');
+    if (isNaN(target)) return;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const days = Math.round((target - today) / 86400000);
+    if (days < 0) return;
+    el.textContent = days === 0 ? 'tonight'
+                   : days === 1 ? 'tomorrow'
+                   : 'in ' + days + ' days';
+  });
+
   // ── A2 Tag filter ─────────────────────────────────────────
   if (!window.CELLAR) return;
 
