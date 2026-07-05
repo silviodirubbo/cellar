@@ -53,18 +53,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ── Tastings: mobile tab switcher ─────────────────────────
-  const tabsWrap = document.getElementById('tastings-tabs');
-  const tastingsGrid = document.getElementById('tastings-grid');
-  if (tabsWrap && tastingsGrid) {
-    tabsWrap.querySelectorAll('.tastings-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        tastingsGrid.dataset.active = tab.dataset.tab;
-        tabsWrap.querySelectorAll('.tastings-tab').forEach(t =>
-          t.classList.toggle('tastings-tab--active', t === tab));
-      });
+  // ── Tastings: live "today" marker ─────────────────────────
+  document.querySelectorAll('.js-today').forEach(el => {
+    el.textContent = new Date().toLocaleDateString('en-GB', {
+      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
     });
-  }
+  });
 
   // ── Tastings: "in N days" countdown ───────────────────────
   document.querySelectorAll('.js-countdown[data-date]').forEach(el => {
@@ -79,180 +73,65 @@ document.addEventListener('DOMContentLoaded', () => {
                    : 'in ' + days + ' days';
   });
 
-  // ── A2 Tag filter ─────────────────────────────────────────
-  if (!window.CELLAR) return;
-
-  const allTags    = window.CELLAR.tags;
-  const allTastings = window.CELLAR.tastings;
-  const banners    = document.querySelectorAll('[data-tags]');
-  const catEl      = document.getElementById('filter-categories');
-  const expEl      = document.getElementById('filter-expansion');
-  const expLbl     = document.getElementById('filter-expansion-label');
-  const expTags    = document.getElementById('filter-expansion-tags');
-  const resetBtn   = document.getElementById('filter-reset');
-  const chipsEl    = document.getElementById('filter-active-chips');
-
-  if (!catEl) return;
-
-  // State
-  const activeFilters = {}; // { category: tagName }
-  let openCat = null;
-
-  // Get unique categories
-  const categories = [];
-  allTags.forEach(t => {
-    if (!categories.includes(t.category)) categories.push(t.category);
+  // ── Tastings: add to calendar (.ics download) ─────────────
+  document.querySelectorAll('.js-ics').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const { date, title, location } = btn.dataset;
+      if (!date || !title) return;
+      const d   = date.replace(/-/g, '');
+      const esc = s => (s || '').replace(/[\\;,]/g, m => '\\' + m);
+      // evenings start at 19:00 local time
+      const ics = [
+        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Cellar//Tastings//EN',
+        'BEGIN:VEVENT',
+        'UID:' + date + '-' + title.replace(/\W+/g, '') + '@cellar',
+        'DTSTAMP:' + d + 'T000000Z',
+        'DTSTART:' + d + 'T190000',
+        'DTEND:' + d + 'T220000',
+        'SUMMARY:' + esc('Wine tasting — ' + title),
+        'LOCATION:' + esc(location),
+        'END:VEVENT', 'END:VCALENDAR'
+      ].join('\r\n');
+      const a = document.createElement('a');
+      a.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+      a.download = title.toLowerCase().replace(/\W+/g, '-') + '.ics';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      const original = btn.textContent;
+      btn.textContent = 'Saved ✓';
+      setTimeout(() => btn.textContent = original, 2000);
+    });
   });
 
-  // Build static category buttons once
-  categories.forEach(cat => {
-    const btn = document.createElement('button');
-    btn.className = 'filter-cat-btn';
-    btn.dataset.category = cat;
-    btn.textContent = cat;
-    btn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      if (openCat === cat) {
-        closePicker();
-      } else {
-        openPicker(cat);
-      }
-    });
-    catEl.appendChild(btn);
-  });
+  // ── Tastings: one-tap tag chips ───────────────────────────
+  const chipbar = document.getElementById('chipbar');
+  if (chipbar) {
+    const rows = document.querySelectorAll('[data-tags]');
+    chipbar.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        // tapping the active chip resets to All
+        const isActive = chip.classList.contains('chip--active');
+        const target = isActive ? chipbar.querySelector('[data-tag=""]') : chip;
+        const tag = target.dataset.tag;
+        chipbar.querySelectorAll('.chip').forEach(c =>
+          c.classList.toggle('chip--active', c === target));
 
-  function openPicker(cat) {
-    openCat = cat;
+        rows.forEach(row => {
+          const tags = (row.dataset.tags || '').split(',').map(t => t.trim());
+          row.style.display = (!tag || tags.includes(tag)) ? '' : 'none';
+        });
 
-    // Update pill styles
-    catEl.querySelectorAll('.filter-cat-btn').forEach(b => {
-      b.classList.toggle('filter-cat-btn--open', b.dataset.category === cat);
-    });
-
-    // Build tag buttons
-    expLbl.textContent = cat;
-    expTags.innerHTML = '';
-    const tagsInCat = allTags.filter(t => t.category === cat);
-
-    tagsInCat.forEach(({ name }) => {
-      const isActive = activeFilters[cat] === name;
-      const canMatch = wouldMatch(cat, name);
-
-      const btn = document.createElement('button');
-      btn.className = 'filter-tag-btn' +
-        (isActive ? ' filter-tag-btn--active' : '') +
-        (!canMatch && !isActive ? ' filter-tag-btn--unavailable' : '');
-      btn.textContent = name;
-      if (!canMatch && !isActive) btn.disabled = true;
-
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        if (isActive) {
-          delete activeFilters[cat];
-        } else {
-          activeFilters[cat] = name;
-        }
-        closePicker();
-        applyAll();
+        const anyUp = [...document.querySelectorAll('.tl-row--upcoming')]
+          .some(r => r.style.display !== 'none');
+        const anyPast = [...document.querySelectorAll('.tl-row--past')]
+          .some(r => r.style.display !== 'none');
+        const eu = document.querySelector('.filter-empty--upcoming');
+        const ep = document.querySelector('.filter-empty--past');
+        if (eu) eu.style.display = anyUp ? 'none' : '';
+        if (ep) ep.style.display = anyPast ? 'none' : '';
       });
-
-      expTags.appendChild(btn);
-    });
-
-    expEl.style.display = '';
-  }
-
-  function closePicker() {
-    openCat = null;
-    expEl.style.display = 'none';
-    catEl.querySelectorAll('.filter-cat-btn').forEach(b => {
-      b.classList.remove('filter-cat-btn--open');
     });
   }
-
-  function wouldMatch(cat, tagName) {
-    const testFilters = Object.assign({}, activeFilters, { [cat]: tagName });
-    const active = Object.values(testFilters).filter(Boolean);
-    return allTastings.some(t =>
-      active.every(tag => t.tags && t.tags.includes(tag))
-    );
-  }
-
-  function applyAll() {
-    const active = Object.values(activeFilters).filter(Boolean);
-    const hasFilters = active.length > 0;
-
-    // Reset button
-    resetBtn.classList.toggle('active', !hasFilters);
-
-    // Update pill labels
-    catEl.querySelectorAll('.filter-cat-btn').forEach(b => {
-      const cat = b.dataset.category;
-      const sel = activeFilters[cat];
-      b.classList.toggle('filter-cat-btn--active', !!sel);
-      if (sel) {
-        b.innerHTML = cat + ': <em>' + sel + '</em>';
-      } else {
-        b.textContent = cat;
-      }
-    });
-
-    // Chips
-    chipsEl.innerHTML = '';
-    Object.entries(activeFilters).forEach(([cat, tag]) => {
-      if (!tag) return;
-      const chip = document.createElement('span');
-      chip.className = 'filter-chip';
-      chip.innerHTML = tag + ' <button class="filter-chip__remove" aria-label="Remove">×</button>';
-      chip.querySelector('button').addEventListener('click', function(e) {
-        e.stopPropagation();
-        delete activeFilters[cat];
-        applyAll();
-      });
-      chipsEl.appendChild(chip);
-    });
-
-    // Filter banners
-    banners.forEach(banner => {
-      const tags = (banner.dataset.tags || '').split(',').map(t => t.trim());
-      const show = !hasFilters || active.every(tag => tags.includes(tag));
-      banner.style.display = show ? '' : 'none';
-    });
-
-    // Empty messages (the next-tasting hero counts as upcoming)
-    const hero = document.getElementById('next-hero');
-    ['tastings-col--upcoming', 'tastings-col--archive'].forEach(cls => {
-      const col = document.querySelector('.' + cls);
-      if (!col) return;
-      let anyVisible = [...col.querySelectorAll('[data-tags]')]
-        .some(b => b.style.display !== 'none');
-      if (cls === 'tastings-col--upcoming' && hero && hero.style.display !== 'none') {
-        anyVisible = true;
-      }
-      const empty = col.querySelector('.filter-empty');
-      if (empty) empty.style.display = anyVisible ? 'none' : '';
-    });
-  }
-
-  // Reset
-  resetBtn.addEventListener('click', function(e) {
-    e.stopPropagation();
-    Object.keys(activeFilters).forEach(k => delete activeFilters[k]);
-    closePicker();
-    applyAll();
-  });
-
-  // Close on outside click
-  document.addEventListener('click', function() {
-    if (openCat) closePicker();
-  });
-
-  // Prevent expansion panel clicks from closing
-  expEl.addEventListener('click', function(e) {
-    e.stopPropagation();
-  });
-
-  // Init
-  applyAll();
 
 });

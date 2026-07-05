@@ -5,306 +5,249 @@ description: Past and upcoming wine tastings organised by Silvio di Rubbo in Gen
 permalink: /tastings/
 ---
 
-<!-- Build tag index from YAML for JS -->
-<script>
-window.CELLAR = {
-  tags: [
-    {% for tag in site.data.tags %}
-    { name: {{ tag.name | jsonify }}, category: {{ tag.category | jsonify }} }{% unless forloop.last %},{% endunless %}
-    {% endfor %}
-  ],
-  tastings: [
-    {% for tasting in site.data.tastings %}
-    { tags: {{ tasting.tags | jsonify }}, status: {{ tasting.status | jsonify }} }{% unless forloop.last %},{% endunless %}
-    {% endfor %}
-  ]
-};
-</script>
-
 {% assign upcoming_fixed = site.data.tastings | where: "status", "upcoming" | where: "date_tbd", false | sort: "date" %}
 {% assign upcoming_tbd   = site.data.tastings | where: "status", "upcoming" | where: "date_tbd", true %}
 {% assign upcoming       = upcoming_fixed | concat: upcoming_tbd %}
 {% assign past           = site.data.tastings | where: "status", "past" | sort: "date" | reverse %}
+{% assign first_ever     = site.data.tastings | where: "status", "past" | sort: "date" | first %}
 {% assign next           = upcoming_fixed | first %}
 {% assign wine_count = 0 %}
 {% for t in past %}{% assign wine_count = wine_count | plus: t.wines.size %}{% endfor %}
+{% assign all_tags = "" | split: "" %}
+{% for t in site.data.tastings %}{% assign all_tags = all_tags | concat: t.tags %}{% endfor %}
 
+<!-- ── Masthead ────────────────────────────────────────────── -->
 <header class="page-header page-header--tastings">
   <div class="container">
     <span class="section-label">Events</span>
     <h1 class="th-title">Tastings<span class="th-title__dot">.</span></h1>
-    <p class="mt-3">All the tastings we did together and those in the pipeline. Open a lineup to see which wines we drank, or grab a spot at the next table.</p>
+    <p class="mt-3">One grape, one place, one evening at a time. Everything we've poured and everything in the pipeline, on a single line from tonight backwards.</p>
     <div class="th-stats mt-4">
-      <div class="th-stat">
+      <a class="th-stat" href="#coming-up">
+        <span class="th-stat__num">{{ upcoming.size }}</span>
+        <span class="th-stat__label">Coming up ↓</span>
+      </a>
+      <a class="th-stat" href="#archive">
         <span class="th-stat__num">{{ past.size }}</span>
-        <span class="th-stat__label">Tasting{% if past.size != 1 %}s{% endif %} held</span>
-      </div>
-      <div class="th-stat">
+        <span class="th-stat__label">Evenings held ↓</span>
+      </a>
+      <span class="th-stat">
         <span class="th-stat__num">{{ wine_count }}</span>
         <span class="th-stat__label">Wines opened</span>
-      </div>
-      <div class="th-stat">
-        <span class="th-stat__num">{{ upcoming.size }}</span>
-        <span class="th-stat__label">Coming up</span>
-      </div>
-      {% if next %}
-      <div class="th-stat">
-        <span class="th-stat__num">{{ next.date | date: "%-d %b" }}</span>
-        <span class="th-stat__label">Next table</span>
-      </div>
-      {% endif %}
+      </span>
     </div>
   </div>
 </header>
 
-<!-- ── Filter bar ──────────────────────────────────────────── -->
-<div class="filter-bar-wrap">
+<!-- ── Tag chips ───────────────────────────────────────────── -->
+<div class="chipbar-wrap">
   <div class="container">
-    <div class="filter-bar-inner">
-
-      <button class="filter-reset active" id="filter-reset">All</button>
-
-      <div class="filter-categories" id="filter-categories">
-        <!-- injected by JS -->
-      </div>
-
-      <div class="filter-active-chips" id="filter-active-chips">
-        <!-- active filter chips injected by JS -->
-      </div>
-
-    </div>
-
-    <!-- Tag expansion panel -->
-    <div class="filter-expansion" id="filter-expansion" style="display:none;">
-      <div class="filter-expansion__label" id="filter-expansion-label"></div>
-      <div class="filter-expansion__tags" id="filter-expansion-tags"></div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ── Next tasting: full-bleed poster ─────────────────────── -->
-{% if next %}
-{% capture next_cover_prefix %}/assets/tastings/{{ next.slug }}/cover{% endcapture %}
-{% assign next_cover = site.static_files | where_exp: "f", "f.path contains next_cover_prefix" | first %}
-<section class="next-hero" id="next-hero" data-tags="{{ next.tags | join: ',' }}"
-  {% if next_cover %}style="background-image: linear-gradient(105deg, rgba(20,17,13,0.96) 30%, rgba(20,17,13,0.55) 100%), url('{{ next_cover.path | relative_url }}');"{% endif %}>
-  <span class="next-hero__ghost" aria-hidden="true">{{ next.date | date: "%-d" }}</span>
-  <div class="container next-hero__inner">
-
-    <div class="next-hero__datecol" aria-hidden="true">
-      <span class="next-hero__dow">{{ next.date | date: "%A" }}</span>
-      <span class="next-hero__day">{{ next.date | date: "%-d" }}</span>
-      <span class="next-hero__mon">{{ next.date | date: "%B %Y" }}</span>
-    </div>
-
-    <div class="next-hero__body">
-      <span class="next-hero__badge">Next tasting<span class="js-countdown" data-date="{{ next.date }}"></span></span>
-      <h2 class="next-hero__title">{{ next.title }}</h2>
-      <div class="next-hero__where">{{ next.region }}{% if next.location %} &middot; {{ next.location }}{% endif %}</div>
-      <p class="next-hero__desc">{{ next.description }}</p>
-
-      <div class="next-hero__facts">
-        {% if next.spots_total %}<span class="fact fact--hero-spots">{{ next.spots_total }} spots</span>{% endif %}
-        {% if next.cost_estimate != "" and next.cost_estimate %}
-          <span class="fact fact--hero">~{{ next.cost_estimate }} <span class="fact__note--hero">bottles only</span></span>
-        {% endif %}
-        {% if next.wines %}<span class="fact fact--hero">{{ next.wines.size }} wines</span>{% endif %}
-      </div>
-
-      {% if next.wines %}
-      <details class="lineup lineup--dark">
-        <summary class="lineup__toggle">The lineup</summary>
-        <ol class="lineup__list">
-          {% for wine in next.wines %}
-          <li class="lineup__wine">
-            <span class="lineup__wine-name">{{ wine.producer }} — {{ wine.name }} {{ wine.vintage }}</span>
-            <span class="lineup__wine-detail">{{ wine.appellation }}{% if wine.blend %} &middot; {{ wine.blend }}{% endif %}</span>
-          </li>
-          {% endfor %}
-        </ol>
-      </details>
-      {% endif %}
-
-      <div class="next-hero__cta">
-        <a href="{{ '/planner/' | relative_url }}#{{ next.slug }}" class="btn btn--hero">I'm coming</a>
-        {% if next.slides %}
-          <a href="{{ site.baseurl }}/tastings/{{ next.slug }}/" class="btn btn--text-light">Presentation →</a>
-        {% endif %}
-        <button class="share-btn share-btn--dark" data-slug="{{ next.slug }}" data-slides="{{ next.slides }}">Share</button>
-      </div>
-    </div>
-
-  </div>
-</section>
-{% endif %}
-
-<!-- ── Mobile tab switcher ─────────────────────────────────── -->
-<div class="tastings-tabs" id="tastings-tabs">
-  <button class="tastings-tab tastings-tab--active" data-tab="upcoming">
-    Upcoming <span class="tastings-tab__count">{{ upcoming.size }}</span>
-  </button>
-  <button class="tastings-tab" data-tab="archive">
-    Archive <span class="tastings-tab__count">{{ past.size }}</span>
-  </button>
-</div>
-
-<div class="tastings-grid" id="tastings-grid" data-active="upcoming">
-
-  <!-- ── Upcoming ─────────────────────────────────────────── -->
-  <div class="tastings-col tastings-col--upcoming">
-    <div class="container-col">
-      <span class="col-label">Upcoming</span>
-      {% if upcoming.size > 0 %}
-        {% for tasting in upcoming %}
-        {% if next and tasting.slug == next.slug %}{% continue %}{% endif %}
-        {% capture cover_prefix %}/assets/tastings/{{ tasting.slug }}/cover{% endcapture %}
-        {% assign cover = site.static_files | where_exp: "f", "f.path contains cover_prefix" | first %}
-        <article class="tasting-card" data-tags="{{ tasting.tags | join: ',' }}">
-
-          {% if cover %}
-          <div class="tasting-card__cover">
-            <img src="{{ cover.path | relative_url }}" alt="" loading="lazy">
-          </div>
+    <div class="chipbar" id="chipbar">
+      <button class="chip chip--active" data-tag="">All</button>
+      {% for tag in site.data.tags %}
+        {% unless tag.category == "Country" %}
+          {% assign c = 0 %}
+          {% for x in all_tags %}{% if x == tag.name %}{% assign c = c | plus: 1 %}{% endif %}{% endfor %}
+          {% if c >= 3 %}
+            <button class="chip" data-tag="{{ tag.name }}">{{ tag.name }}&nbsp;<span class="chip__n">{{ c }}</span></button>
           {% endif %}
+        {% endunless %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
 
-          <div class="tasting-card__inner">
-            <div class="tasting-card__date" aria-hidden="true">
-              {% if tasting.date_tbd %}
-                <span class="tasting-card__day tasting-card__day--tbd">?</span>
-                <span class="tasting-card__month">Date TBD</span>
-              {% else %}
-                <span class="tasting-card__dow">{{ tasting.date | date: "%a" }}</span>
-                <span class="tasting-card__day">{{ tasting.date | date: "%-d" }}</span>
-                <span class="tasting-card__month">{{ tasting.date | date: "%b %Y" }}</span>
-              {% endif %}
+<!-- ── The timeline ────────────────────────────────────────── -->
+<section class="timeline">
+  <div class="container">
+    <div class="tl">
+
+      <!-- Today -->
+      <div class="tl-row tl-row--today" id="coming-up">
+        <div class="tl-row__date"><span class="tl-row__today-word">Today</span></div>
+        <span class="tl-node tl-node--today" aria-hidden="true"></span>
+        <div class="tl-row__label">
+          <span class="js-today">{{ site.time | date: "%A %-d %B %Y" }}</span> — Geneva.
+          {% if upcoming.size > 0 %}The road ahead:{% endif %}
+        </div>
+      </div>
+
+      <!-- Upcoming -->
+      {% for tasting in upcoming %}
+      {% capture cover_prefix %}/assets/tastings/{{ tasting.slug }}/cover{% endcapture %}
+      {% assign cover = site.static_files | where_exp: "f", "f.path contains cover_prefix" | first %}
+      <article class="tl-row tl-row--upcoming {% if next and tasting.slug == next.slug %}tl-row--next{% endif %}"
+               data-tags="{{ tasting.tags | join: ',' }}">
+
+        <div class="tl-row__date" aria-hidden="true">
+          {% if tasting.date_tbd %}
+            <span class="tl-row__day tl-row__day--tbd">?</span>
+            <span class="tl-row__mon">date TBD</span>
+          {% else %}
+            <span class="tl-row__dow">{{ tasting.date | date: "%a" }}</span>
+            <span class="tl-row__day">{{ tasting.date | date: "%-d" }}</span>
+            <span class="tl-row__mon">{{ tasting.date | date: "%b %Y" }}</span>
+          {% endif %}
+        </div>
+        <span class="tl-node {% if tasting.date_tbd %}tl-node--tbd{% endif %}" aria-hidden="true"></span>
+
+        {% assign is_next = false %}
+        {% if next and tasting.slug == next.slug %}{% assign is_next = true %}{% endif %}
+        <div class="tl-card {% if is_next %}tl-card--feature{% endif %}"
+             {% if is_next and cover %}style="background-image: linear-gradient(110deg, rgba(20,17,13,0.95) 35%, rgba(20,17,13,0.6) 100%), url('{{ cover.path | relative_url }}');"{% endif %}>
+          {% if is_next %}<span class="tl-card__ghost" aria-hidden="true">{{ tasting.date | date: "%-d" }}</span>{% endif %}
+          {% if cover and is_next == false %}
+          <div class="tl-card__cover"><img src="{{ cover.path | relative_url }}" alt="" loading="lazy"></div>
+          {% endif %}
+          <div class="tl-card__body">
+            {% if is_next %}
+            <span class="tl-card__flag">Next tasting<span class="js-countdown" data-date="{{ tasting.date }}"></span></span>
+            {% endif %}
+            <h2 class="tl-card__title">{{ tasting.title }}</h2>
+            <div class="tl-card__where">
+              {{ tasting.region }}{% if tasting.location %} &middot; {{ tasting.location }}{% endif %}
+              {% if tasting.spots_total %} &middot; <span class="text-gold">{{ tasting.spots_total }} spots</span>{% endif %}
+              {% if tasting.cost_estimate != "" and tasting.cost_estimate %} &middot; ~{{ tasting.cost_estimate }}{% endif %}
             </div>
+            <p class="tl-card__desc">{{ tasting.description }}</p>
 
-            <div class="tasting-card__body">
-              <h2 class="tasting-card__title">{{ tasting.title }}</h2>
-              <div class="tasting-card__where">
-                {{ tasting.region }}{% if tasting.location %} &middot; {{ tasting.location }}{% endif %}
-                {% if tasting.date_tbd %} &middot; <span class="text-gold">date to be decided</span>{% endif %}
-              </div>
-
-              <p class="tasting-card__desc">{{ tasting.description }}</p>
-
-              <div class="tasting-card__facts">
-                {% if tasting.spots_total %}<span class="fact fact--spots">{{ tasting.spots_total }} spots</span>{% endif %}
-                {% if tasting.cost_estimate != "" and tasting.cost_estimate %}
-                  <span class="fact fact--cost" title="Bottles only, nothing charged on top">~{{ tasting.cost_estimate }} <span class="fact__note">bottles only</span></span>
-                {% endif %}
-                {% if tasting.wines %}<span class="fact">{{ tasting.wines.size }} wines</span>{% endif %}
-              </div>
-
-              {% if tasting.wines %}
-              <details class="lineup">
-                <summary class="lineup__toggle">The lineup</summary>
-                <ol class="lineup__list">
+            {% if tasting.wines %}
+              {% if is_next %}
+              <div class="tl-card__menu">
+                <span class="wine-menu__label">On the table</span>
+                <ol class="wine-menu wine-menu--dark">
                   {% for wine in tasting.wines %}
-                  <li class="lineup__wine">
-                    <span class="lineup__wine-name">{{ wine.producer }} — {{ wine.name }} {{ wine.vintage }}</span>
-                    <span class="lineup__wine-detail">{{ wine.appellation }}{% if wine.blend %} &middot; {{ wine.blend }}{% endif %}</span>
+                  <li class="wine-line">
+                    <span class="wine-line__main">
+                      <span class="wine-line__name">{{ wine.producer }} · <em>{{ wine.name }}</em></span>
+                      <span class="wine-line__dots" aria-hidden="true"></span>
+                      <span class="wine-line__vintage">{{ wine.vintage }}</span>
+                    </span>
+                    <span class="wine-line__detail">{{ wine.appellation }}{% if wine.blend %} &middot; {{ wine.blend }}{% endif %}</span>
+                  </li>
+                  {% endfor %}
+                </ol>
+              </div>
+              {% else %}
+              <details class="lineup">
+                <summary class="lineup__toggle">On the table — {{ tasting.wines.size }} wines</summary>
+                <ol class="wine-menu">
+                  {% for wine in tasting.wines %}
+                  <li class="wine-line">
+                    <span class="wine-line__main">
+                      <span class="wine-line__name">{{ wine.producer }} · <em>{{ wine.name }}</em></span>
+                      <span class="wine-line__dots" aria-hidden="true"></span>
+                      <span class="wine-line__vintage">{{ wine.vintage }}</span>
+                    </span>
+                    <span class="wine-line__detail">{{ wine.appellation }}{% if wine.blend %} &middot; {{ wine.blend }}{% endif %}</span>
                   </li>
                   {% endfor %}
                 </ol>
               </details>
               {% endif %}
+            {% endif %}
 
-              <div class="tasting-card__foot">
-                <div class="tasting-card__tags">
-                  {% for tag in tasting.tags limit: 3 %}<span class="tag">{{ tag }}</span>{% endfor %}
-                  {% if tasting.tags.size > 3 %}<span class="tag tag--count">+{{ tasting.tags.size | minus: 3 }}</span>{% endif %}
-                </div>
-                <div class="tasting-card__btns">
-                  {% if tasting.slides %}
-                    <a href="{{ site.baseurl }}/tastings/{{ tasting.slug }}/" class="btn btn--text">Presentation →</a>
-                  {% endif %}
-                  <button class="share-btn" data-slug="{{ tasting.slug }}" data-slides="{{ tasting.slides }}">Share</button>
-                  {% if tasting.date_tbd %}
-                    <a href="{{ '/planner/' | relative_url }}#{{ tasting.slug }}" class="btn btn--solid">My availability</a>
-                  {% else %}
-                    <a href="{{ '/planner/' | relative_url }}#{{ tasting.slug }}" class="btn btn--solid">I'm coming</a>
-                  {% endif %}
-                </div>
-              </div>
+            <div class="tl-card__foot">
+              {% if tasting.date_tbd %}
+                <a href="{{ '/planner/' | relative_url }}#{{ tasting.slug }}" class="btn btn--solid">My availability</a>
+              {% elsif is_next %}
+                <a href="{{ '/planner/' | relative_url }}#{{ tasting.slug }}" class="btn btn--hero">I'm coming</a>
+                <button class="btn btn--text-light js-ics"
+                        data-date="{{ tasting.date }}" data-title="{{ tasting.title }}"
+                        data-location="{{ tasting.location }}">Add to calendar</button>
+              {% else %}
+                <a href="{{ '/planner/' | relative_url }}#{{ tasting.slug }}" class="btn btn--solid">I'm coming</a>
+                <button class="btn btn--text js-ics"
+                        data-date="{{ tasting.date }}" data-title="{{ tasting.title }}"
+                        data-location="{{ tasting.location }}">Add to calendar</button>
+              {% endif %}
+              {% if tasting.slides %}
+                <a href="{{ site.baseurl }}/tastings/{{ tasting.slug }}/" class="btn {% if is_next %}btn--text-light{% else %}btn--text{% endif %}">Presentation →</a>
+              {% endif %}
+              <button class="share-btn {% if is_next %}share-btn--dark{% endif %}" data-slug="{{ tasting.slug }}" data-slides="{{ tasting.slides }}">Share</button>
             </div>
           </div>
-        </article>
-        {% endfor %}
-      {% else %}
-        <p class="text-light" style="padding-top:1rem;">Nothing planned yet — check back soon.</p>
-      {% endif %}
-      <p class="filter-empty text-light" style="display:none;padding-top:1rem;">No upcoming tastings match this filter.</p>
-    </div>
-  </div>
+        </div>
+      </article>
+      {% endfor %}
+      <p class="filter-empty filter-empty--upcoming text-light" style="display:none;">No upcoming tastings match this filter.</p>
 
-  <!-- vertical rule -->
-  <div class="tastings-rule"></div>
-
-  <!-- ── Archive ───────────────────────────────────────────── -->
-  <div class="tastings-col tastings-col--archive">
-    <div class="container-col">
-      <span class="col-label">Archive</span>
-      {% if past.size > 0 %}
-      <div class="archive-list">
-        {% for tasting in past %}
-        {% capture cover_prefix %}/assets/tastings/{{ tasting.slug }}/cover{% endcapture %}
-        {% assign cover = site.static_files | where_exp: "f", "f.path contains cover_prefix" | first %}
-        <article class="archive-item" data-tags="{{ tasting.tags | join: ',' }}">
-          <details>
-            <summary class="archive-item__head">
-              <span class="archive-item__no" aria-hidden="true">№&nbsp;{{ past.size | minus: forloop.index0 | prepend: '0' | slice: -2, 2 }}</span>
-              {% if cover %}
-                <img class="archive-item__thumb" src="{{ cover.path | relative_url }}" alt="" loading="lazy">
-              {% else %}
-                <span class="archive-item__thumb archive-item__thumb--empty" aria-hidden="true"></span>
-              {% endif %}
-              <span class="archive-item__main">
-                <span class="archive-item__title">{{ tasting.title }}</span>
-                <span class="archive-item__where">
-                  <time datetime="{{ tasting.date }}">{{ tasting.date | date: "%-d %b %Y" }}</time>
-                  &middot; {{ tasting.region }}{% if tasting.location %} &middot; {{ tasting.location }}{% endif %}
-                </span>
-              </span>
-              <span class="archive-item__chevron" aria-hidden="true"></span>
-            </summary>
-            <div class="archive-item__body">
-              <p class="archive-item__desc">{{ tasting.description }}</p>
-              {% if tasting.wines %}
-              <ol class="lineup__list">
-                {% for wine in tasting.wines %}
-                <li class="lineup__wine">
-                  <span class="lineup__wine-name">{{ wine.producer }} — {{ wine.name }} {{ wine.vintage }}</span>
-                  <span class="lineup__wine-detail">{{ wine.appellation }}{% if wine.blend %} &middot; {{ wine.blend }}{% endif %}</span>
-                </li>
-                {% endfor %}
-              </ol>
-              {% endif %}
-              <div class="archive-item__foot">
-                <div class="tasting-card__tags">
-                  {% for tag in tasting.tags limit: 3 %}<span class="tag">{{ tag }}</span>{% endfor %}
-                  {% if tasting.tags.size > 3 %}<span class="tag tag--count">+{{ tasting.tags.size | minus: 3 }}</span>{% endif %}
-                </div>
-                <div class="tasting-card__btns">
-                  {% if tasting.slides %}
-                    <a href="{{ site.baseurl }}/tastings/{{ tasting.slug }}/" class="btn btn--text">Presentation →</a>
-                  {% else %}
-                    <span class="label" style="font-size:0.6rem;">Presentation coming</span>
-                  {% endif %}
-                  <button class="share-btn" data-slug="{{ tasting.slug }}" data-slides="{{ tasting.slides }}">Share</button>
-                </div>
-              </div>
-            </div>
-          </details>
-        </article>
-        {% endfor %}
+      <!-- Divider -->
+      <div class="tl-row tl-row--divider" id="archive">
+        <div class="tl-row__date"></div>
+        <span class="tl-node tl-node--hollow" aria-hidden="true"></span>
+        <div class="tl-row__label">Previously poured — {{ past.size }} evening{% if past.size != 1 %}s{% endif %}, {{ wine_count }} wines</div>
       </div>
-      {% else %}
-        <p class="text-light" style="padding-top:1rem;">No tastings yet.</p>
-      {% endif %}
-      <p class="filter-empty text-light" style="display:none;padding-top:1rem;">No past tastings match this filter.</p>
+
+      <!-- Past -->
+      {% for tasting in past %}
+      {% capture cover_prefix %}/assets/tastings/{{ tasting.slug }}/cover{% endcapture %}
+      {% assign cover = site.static_files | where_exp: "f", "f.path contains cover_prefix" | first %}
+      <article class="tl-row tl-row--past" data-tags="{{ tasting.tags | join: ',' }}">
+
+        <div class="tl-row__date" aria-hidden="true">
+          <span class="tl-row__dow">{{ tasting.date | date: "%a" }}</span>
+          <span class="tl-row__day tl-row__day--past">{{ tasting.date | date: "%-d" }}</span>
+          <span class="tl-row__mon">{{ tasting.date | date: "%b %Y" }}</span>
+        </div>
+        <span class="tl-node tl-node--past" aria-hidden="true"></span>
+
+        <details class="past-entry">
+          <summary class="past-entry__head">
+            {% if cover %}
+              <img class="past-entry__thumb" src="{{ cover.path | relative_url }}" alt="" loading="lazy">
+            {% else %}
+              <span class="past-entry__thumb past-entry__thumb--empty" aria-hidden="true"></span>
+            {% endif %}
+            <span class="past-entry__main">
+              <span class="past-entry__title">{{ tasting.title }}</span>
+              <span class="past-entry__where">
+                {{ tasting.region }}{% if tasting.location %} &middot; {{ tasting.location }}{% endif %}
+                {% if tasting.wines %} &middot; {{ tasting.wines.size }} wines{% endif %}
+              </span>
+            </span>
+            <span class="past-entry__chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="past-entry__body">
+            <p class="past-entry__desc">{{ tasting.description }}</p>
+            {% if tasting.wines %}
+            <ol class="wine-menu">
+              {% for wine in tasting.wines %}
+              <li class="wine-line">
+                <span class="wine-line__main">
+                  <span class="wine-line__name">{{ wine.producer }} · <em>{{ wine.name }}</em></span>
+                  <span class="wine-line__dots" aria-hidden="true"></span>
+                  <span class="wine-line__vintage">{{ wine.vintage }}</span>
+                </span>
+                <span class="wine-line__detail">{{ wine.appellation }}{% if wine.blend %} &middot; {{ wine.blend }}{% endif %}</span>
+              </li>
+              {% endfor %}
+            </ol>
+            {% endif %}
+            <div class="past-entry__foot">
+              {% if tasting.slides %}
+                <a href="{{ site.baseurl }}/tastings/{{ tasting.slug }}/" class="btn btn--text">Presentation →</a>
+              {% else %}
+                <span class="label" style="font-size:0.6rem;">Presentation coming</span>
+              {% endif %}
+              <button class="share-btn" data-slug="{{ tasting.slug }}" data-slides="{{ tasting.slides }}">Share</button>
+            </div>
+          </div>
+        </details>
+      </article>
+      {% endfor %}
+      <p class="filter-empty filter-empty--past text-light" style="display:none;">No past tastings match this filter.</p>
+
+      <!-- Terminus -->
+      <div class="tl-row tl-row--end">
+        <div class="tl-row__date"></div>
+        <span class="tl-node tl-node--hollow" aria-hidden="true"></span>
+        <div class="tl-row__label">
+          The cellar opened {% if first_ever %}{{ first_ever.date | date: "%B %Y" }}{% endif %} —
+          <a href="{{ '/planner/' | relative_url }}#propose" class="tl-end-link">propose the next theme →</a>
+        </div>
+      </div>
+
     </div>
   </div>
-
-</div>
+</section>
