@@ -59,16 +59,16 @@
       vintage: 2023
       appellation: "Lirac AOC"
       blend: "Viognier 33%, Roussanne 34%, Marsanne 33%"
-    - name: "IGP Vaucluse"
-      producer: "Domaine Gourt de Mautens"
-      vintage: 2012
-      appellation: "IGP Vaucluse"
-      blend: "Grenache, Mourvèdre, Syrah, Carignan, Counoise, Vaccarèse"
     - name: "Les Hautes Garrigues"
       producer: "Domaine Santa Duc"
       vintage: 2022
       appellation: "Gigondas AOC"
       blend: "Grenache 50%, Mourvèdre 50%"
+    - name: "IGP Vaucluse"
+      producer: "Domaine Gourt de Mautens"
+      vintage: 2012
+      appellation: "IGP Vaucluse"
+      blend: "Grenache, Mourvèdre, Syrah, Carignan, Counoise, Vaccarèse"
       
 - slug: condrieu-horizontal
   title: "Condrieu Horizontal"
