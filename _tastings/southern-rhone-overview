@@ -301,40 +301,6 @@ date: 2026-07-18
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 8 · WINE 3 · RASTEAU (DECLASSIFIED) · GOURT DE MAUTENS
-     Map:    assets/tastings/southern-rhone-overview/map_rasteau_1.jpg
-     Bottle: assets/tastings/southern-rhone-overview/bottle_gourt_de_mautens.png
-     QR:     assets/tastings/southern-rhone-overview/qr_gourt_de_mautens.png
-     ───────────────────────────────────────────────────────── -->
-<div class="slide slide-wine">
-  <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/southern-rhone-overview/map_rasteau_1.jpg" alt="Rasteau · Southern Rhône">
-    <div class="map-tag">Rasteau · Southern Rhône</div>
-  </div>
-  <div class="wine-panel">
-    <div class="panel-head">
-      <div class="w-counter">03 / 04</div>
-      <div class="w-appellation">IGP Vaucluse · declassified Rasteau</div>
-      <div class="w-hrule"></div>
-    </div>
-    <div class="wine-bottle">
-      <img src="{{ site.baseurl }}/assets/tastings/southern-rhone-overview/bottle_gourt_de_mautens.png" alt="Domaine Gourt de Mautens">
-    </div>
-    <div class="wine-info">
-      <div class="info-text">
-        <div class="w-name">IGP Vaucluse</div>
-        <div class="w-producer">Domaine Gourt de Mautens</div>
-        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2012</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Grenache, Mourvèdre, Syrah, Carignan, Counoise, Vaccarèse</span></div>
-      </div>
-      <div class="wine-qr">
-        <img src="{{ site.baseurl }}/assets/tastings/southern-rhone-overview/qr_gourt_de_mautens.png" alt="QR">
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ─────────────────────────────────────────────────────────
      SLIDE 8 · WINE 3 · GIGONDAS · LES HAUTES GARRIGUES
      Map:    assets/tastings/southern-rhone-overview/map_gigondas.jpg
      Bottle: assets/tastings/southern-rhone-overview/bottle_les_hautes_garrigues.png
