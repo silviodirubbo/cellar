@@ -233,7 +233,7 @@ date: 2026-07-18
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 6 · WINE 2 · LIRAC · LA PLUME DU PEINTRE
+     SLIDE 6 · WINE 1 · LIRAC · LA PLUME DU PEINTRE
      Map:    assets/tastings/southern-rhone-overview/map_lirac.jpg
      Bottle: assets/tastings/southern-rhone-overview/bottle_lirac_mordoree.png
      QR:     assets/tastings/southern-rhone-overview/qr_lirac_mordoree.png
@@ -245,7 +245,7 @@ date: 2026-07-18
   </div>
   <div class="wine-panel">
     <div class="panel-head">
-      <div class="w-counter">02 / 04</div>
+      <div class="w-counter">01 / 04</div>
       <div class="w-appellation">Lirac AOC</div>
       <div class="w-hrule"></div>
     </div>
@@ -279,7 +279,7 @@ date: 2026-07-18
   </div>
   <div class="wine-panel">
     <div class="panel-head">
-      <div class="w-counter">01 / 04</div>
+      <div class="w-counter">02 / 04</div>
       <div class="w-appellation">Tavel AOC</div>
       <div class="w-hrule"></div>
     </div>
@@ -313,7 +313,7 @@ date: 2026-07-18
   </div>
   <div class="wine-panel">
     <div class="panel-head">
-      <div class="w-counter">04 / 04</div>
+      <div class="w-counter">03 / 04</div>
       <div class="w-appellation">Gigondas AOC</div>
       <div class="w-hrule"></div>
     </div>
@@ -347,7 +347,7 @@ date: 2026-07-18
   </div>
   <div class="wine-panel">
     <div class="panel-head">
-      <div class="w-counter">03 / 04</div>
+      <div class="w-counter">04 / 04</div>
       <div class="w-appellation">IGP Vaucluse · declassified Rasteau</div>
       <div class="w-hrule"></div>
     </div>
