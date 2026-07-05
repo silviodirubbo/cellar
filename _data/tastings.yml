@@ -47,6 +47,7 @@
   spots_total: 7
   cost_estimate: "32 CHF"
   featured: false
+  slides: true
   wines:
     - name: "La Plume du Peintre"
       producer: "Domaine de la Mordorée"
