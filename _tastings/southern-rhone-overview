@@ -219,7 +219,7 @@ date: 2026-07-18
      Image: assets/tastings/southern-rhone-overview/map_rhone_valley.png
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-map" style="position:relative;">
-  <img src="{{ site.baseurl }}/assets/tastings/southern-rhone-overview/map_rhone_valley.jpg" alt="Rhône Valley · Overview">
+  <img src="{{ site.baseurl }}/assets/tastings/southern-rhone-overview/map_rhone_valley.png" alt="Rhône Valley · Overview">
   <div class="map-label-center">Rhône Valley · Overview</div>
 </div>
 
