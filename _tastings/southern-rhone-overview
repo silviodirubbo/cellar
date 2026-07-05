@@ -182,8 +182,8 @@ date: 2026-07-18
     <div class="cover-title">Southern Rhône</div>
     <div class="cover-subtitle">Overview</div>
     <div class="cover-rule"></div>
-    <div class="cover-meta">Four appellations · Three colours</div>
-    <div class="cover-meta" style="margin-top:6px;color:#C8A84B">Rasteau · Gigondas · Lirac · Tavel</div>
+    <div class="cover-meta">Three colours · Four appellations</div>
+    <div class="cover-meta" style="margin-top:6px;color:#C8A84B">Lirac · Tavel · Gigondas · Rasteau</div>
   </div>
 </div>
 
@@ -198,10 +198,10 @@ date: 2026-07-18
   </div>
   <div class="intro-vline"></div>
   <div class="intro-grid">
-    <div><div class="ig-label">Tavel</div><div class="ig-val"><em>Rosé</em><br>right bank</div></div>
     <div><div class="ig-label">Lirac</div><div class="ig-val"><em>Blanc</em><br>right bank</div></div>
-    <div><div class="ig-label">Rasteau</div><div class="ig-val"><em>Declassified</em><br>IGP Vaucluse</div></div>
+    <div><div class="ig-label">Tavel</div><div class="ig-val"><em>Rosé</em><br>right bank</div></div>
     <div><div class="ig-label">Gigondas</div><div class="ig-val"><em>Old vines</em><br>Dentelles plateau</div></div>
+    <div><div class="ig-label">Rasteau</div><div class="ig-val"><em>Declassified</em><br>IGP Vaucluse</div></div>
   </div>
 </div>
 
@@ -233,41 +233,7 @@ date: 2026-07-18
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 6 · WINE 1 · TAVEL · LA PLUME DU PEINTRE
-     Map:    assets/tastings/southern-rhone-overview/map_tavel.jpg
-     Bottle: assets/tastings/southern-rhone-overview/bottle_tavel_mordoree.png
-     QR:     assets/tastings/southern-rhone-overview/qr_tavel_mordoree.png
-     ───────────────────────────────────────────────────────── -->
-<div class="slide slide-wine">
-  <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/southern-rhone-overview/map_tavel.jpg" alt="Tavel · Southern Rhône">
-    <div class="map-tag">Tavel · Southern Rhône</div>
-  </div>
-  <div class="wine-panel">
-    <div class="panel-head">
-      <div class="w-counter">01 / 04</div>
-      <div class="w-appellation">Tavel AOC</div>
-      <div class="w-hrule"></div>
-    </div>
-    <div class="wine-bottle">
-      <img src="{{ site.baseurl }}/assets/tastings/southern-rhone-overview/bottle_tavel_mordoree.png" alt="La Plume du Peintre, Tavel">
-    </div>
-    <div class="wine-info">
-      <div class="info-text">
-        <div class="w-name">La Plume du Peintre</div>
-        <div class="w-producer">Domaine de la Mordorée</div>
-        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Grenache 50%, Syrah 20%, Clairette 15%, Cinsault 15%</span></div>
-      </div>
-      <div class="wine-qr">
-        <img src="{{ site.baseurl }}/assets/tastings/southern-rhone-overview/qr_tavel_mordoree.png" alt="QR">
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ─────────────────────────────────────────────────────────
-     SLIDE 7 · WINE 2 · LIRAC · LA PLUME DU PEINTRE
+     SLIDE 6 · WINE 2 · LIRAC · LA PLUME DU PEINTRE
      Map:    assets/tastings/southern-rhone-overview/map_lirac.jpg
      Bottle: assets/tastings/southern-rhone-overview/bottle_lirac_mordoree.png
      QR:     assets/tastings/southern-rhone-overview/qr_lirac_mordoree.png
@@ -295,6 +261,40 @@ date: 2026-07-18
       </div>
       <div class="wine-qr">
         <img src="{{ site.baseurl }}/assets/tastings/southern-rhone-overview/qr_lirac_mordoree.png" alt="QR">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 7 · WINE 2 · TAVEL · LA PLUME DU PEINTRE
+     Map:    assets/tastings/southern-rhone-overview/map_tavel.jpg
+     Bottle: assets/tastings/southern-rhone-overview/bottle_tavel_mordoree.png
+     QR:     assets/tastings/southern-rhone-overview/qr_tavel_mordoree.png
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/southern-rhone-overview/map_tavel.jpg" alt="Tavel · Southern Rhône">
+    <div class="map-tag">Tavel · Southern Rhône</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">01 / 04</div>
+      <div class="w-appellation">Tavel AOC</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/southern-rhone-overview/bottle_tavel_mordoree.png" alt="La Plume du Peintre, Tavel">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">La Plume du Peintre</div>
+        <div class="w-producer">Domaine de la Mordorée</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Grenache 50%, Syrah 20%, Clairette 15%, Cinsault 15%</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/southern-rhone-overview/qr_tavel_mordoree.png" alt="QR">
       </div>
     </div>
   </div>
@@ -335,7 +335,7 @@ date: 2026-07-18
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 9 · WINE 4 · GIGONDAS · LES HAUTES GARRIGUES
+     SLIDE 8 · WINE 3 · GIGONDAS · LES HAUTES GARRIGUES
      Map:    assets/tastings/southern-rhone-overview/map_gigondas.jpg
      Bottle: assets/tastings/southern-rhone-overview/bottle_les_hautes_garrigues.png
      QR:     assets/tastings/southern-rhone-overview/qr_les_hautes_garrigues.png
@@ -363,6 +363,40 @@ date: 2026-07-18
       </div>
       <div class="wine-qr">
         <img src="{{ site.baseurl }}/assets/tastings/southern-rhone-overview/qr_les_hautes_garrigues.png" alt="QR">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 9 · WINE 4 · RASTEAU (DECLASSIFIED) · GOURT DE MAUTENS
+     Map:    assets/tastings/southern-rhone-overview/map_rasteau_1.jpg
+     Bottle: assets/tastings/southern-rhone-overview/bottle_gourt_de_mautens.png
+     QR:     assets/tastings/southern-rhone-overview/qr_gourt_de_mautens.png
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/southern-rhone-overview/map_rasteau_1.jpg" alt="Rasteau · Southern Rhône">
+    <div class="map-tag">Rasteau · Southern Rhône</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">03 / 04</div>
+      <div class="w-appellation">IGP Vaucluse · declassified Rasteau</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/southern-rhone-overview/bottle_gourt_de_mautens.png" alt="Domaine Gourt de Mautens">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">IGP Vaucluse</div>
+        <div class="w-producer">Domaine Gourt de Mautens</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2012</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Grenache, Mourvèdre, Syrah, Carignan, Counoise, Vaccarèse</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/southern-rhone-overview/qr_gourt_de_mautens.png" alt="QR">
       </div>
     </div>
   </div>
