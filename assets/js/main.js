@@ -219,12 +219,16 @@ document.addEventListener('DOMContentLoaded', () => {
       banner.style.display = show ? '' : 'none';
     });
 
-    // Empty messages
+    // Empty messages (the next-tasting hero counts as upcoming)
+    const hero = document.getElementById('next-hero');
     ['tastings-col--upcoming', 'tastings-col--archive'].forEach(cls => {
       const col = document.querySelector('.' + cls);
       if (!col) return;
-      const anyVisible = [...col.querySelectorAll('[data-tags]')]
+      let anyVisible = [...col.querySelectorAll('[data-tags]')]
         .some(b => b.style.display !== 'none');
+      if (cls === 'tastings-col--upcoming' && hero && hero.style.display !== 'none') {
+        anyVisible = true;
+      }
       const empty = col.querySelector('.filter-empty');
       if (empty) empty.style.display = anyVisible ? 'none' : '';
     });
