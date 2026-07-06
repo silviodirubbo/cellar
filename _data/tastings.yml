@@ -52,13 +52,13 @@
     - name: "La Plume du Peintre"
       producer: "Domaine de la Mordorée"
       vintage: 2023
-      appellation: "Tavel AOC"
-      blend: "Grenache 50%, Syrah 20%, Clairette 15%, Cinsault 15%"
+      appellation: "Lirac AOC"
+      blend: "Viognier 33%, Roussanne 34%, Marsanne 33%"
     - name: "La Plume du Peintre"
       producer: "Domaine de la Mordorée"
       vintage: 2023
-      appellation: "Lirac AOC"
-      blend: "Viognier 33%, Roussanne 34%, Marsanne 33%"
+      appellation: "Tavel AOC"
+      blend: "Grenache 50%, Syrah 20%, Clairette 15%, Cinsault 15%"
     - name: "Les Hautes Garrigues"
       producer: "Domaine Santa Duc"
       vintage: 2022
