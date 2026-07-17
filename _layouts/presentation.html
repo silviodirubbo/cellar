@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>{{ page.title }} — Silvio di Rubbo</title>
+  <title>{{ page.title }} · Silvio di Rubbo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
@@ -28,7 +28,7 @@
       overflow: hidden;
     }
 
-    /* THE STAGE — fixed 1280×720 (16:9). The ONLY scaled element. */
+    /* THE STAGE: fixed 1280×720 (16:9). The ONLY scaled element. */
     #stage {
       width: 1280px;
       height: 720px;
@@ -38,6 +38,13 @@
       transform-origin: center center;
       font-family: 'Cormorant Garamond', serif;
       background: #1A1814;
+    }
+
+    /* Shared across all decks: cover slide's secondary gold meta line.   */
+    /* Relies on --gold being defined in each deck's own :root block.     */
+    .cover-meta-gold {
+      font-family: 'DM Mono', monospace; font-weight: 300; font-size: 10px;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-top: 6px;
     }
 
     /* ── Chrome: absolute INSIDE the stage, with a translucent chip ── */
