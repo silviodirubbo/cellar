@@ -1,8 +1,5 @@
----
----
-
 /* ============================================================
-   SILVIO DI RUBBO — CELLAR
+   SILVIO DI RUBBO · CELLAR
    Global stylesheet for silviodirubbo.github.io/cellar
    ============================================================ */
 
@@ -15,11 +12,10 @@
   --off-white:   #F7F5F0;
   --ink:         #1A1814;
   --ink-mid:     #4A4640;
-  --ink-light:   #8A8480;
+  --ink-light:   #736E6B;
   --rule:        #E2DED8;
   --green:       #2C4A3E;
   --gold:        #8B6914;
-  --wine:        #722F37;
   --font-serif:  'Cormorant Garamond', Georgia, serif;
   --font-mono:   'DM Mono', 'Courier New', monospace;
   --section-pad: 7rem;
@@ -84,7 +80,7 @@ p {
 
 em, i { font-style: italic; color: var(--green); }
 
-/* ── DM Mono — labels, metadata, tags ────────────────────── */
+/* ── DM Mono: labels, metadata, tags ────────────────────── */
 .label, .meta, .tag, .nav__item, time {
   font-family: var(--font-mono);
   font-weight: 300;
@@ -190,7 +186,7 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
   cursor: pointer;
   transition: all 0.2s var(--ease);
 }
-.btn--cancel:hover { border-color: #c0392b; color: #c0392b; }
+.btn--cancel:hover { border-color: var(--ink-mid); color: var(--ink); }
 
 /* ── Navigation ───────────────────────────────────────────── */
 .nav {
@@ -223,7 +219,7 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
   font-family: var(--font-mono);
   font-size: 0.65rem;
   font-weight: 300;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ink);
 }
@@ -247,7 +243,7 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
 .nav__item a:hover,
 .nav__item a.active { color: var(--ink); }
 
-/* Hamburger — hidden on desktop */
+/* Hamburger: hidden on desktop */
 .nav__burger {
   display: none;
   flex-direction: column;
@@ -644,27 +640,16 @@ textarea.form-input { min-height: 5rem; }
 }
 
 /* ============================================================
-   TASTINGS — the cellar calendar
+   TASTINGS: the cellar calendar
    (masthead → billboard → chip filters → one timeline)
    ============================================================ */
 
 /* ── Masthead ─────────────────────────────────────────────── */
 .page-header--tastings {
-  background: linear-gradient(155deg, #14110d 0%, var(--ink) 45%, #23332b 120%);
+  background: var(--ink);
   position: relative;
   overflow: hidden;
   padding-bottom: 4rem;
-}
-.page-header--tastings::after {
-  content: '';
-  position: absolute;
-  right: -8rem;
-  top: -10rem;
-  width: 30rem;
-  height: 30rem;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(114,47,55,0.35) 0%, transparent 65%);
-  pointer-events: none;
 }
 .page-header--tastings .container { position: relative; z-index: 1; }
 .th-title {
@@ -709,7 +694,7 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   padding: 0.85rem 1.9rem;
   border: 1px solid var(--warm-white);
 }
-.btn--hero:hover { background: var(--wine); border-color: var(--wine); color: var(--warm-white); }
+.btn--hero:hover { background: var(--green); border-color: var(--green); color: var(--warm-white); }
 .btn--text-light {
   color: rgba(253,252,250,0.75);
   border-bottom: 1px solid rgba(253,252,250,0.4);
@@ -730,9 +715,9 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   display: block;
   font-family: var(--font-mono);
   font-size: 0.55rem;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #C9A227;
+  color: var(--gold);
   margin-bottom: 0.3rem;
 }
 .wine-menu { list-style: none; }
@@ -755,7 +740,7 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   font-family: var(--font-mono);
   font-size: 0.7rem;
   letter-spacing: 0.08em;
-  color: var(--wine);
+  color: var(--ink);
 }
 .wine-line__detail {
   display: block;
@@ -768,9 +753,9 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 }
 /* dark variant (inside billboard) */
 .wine-menu--dark .wine-line__name { color: var(--warm-white); }
-.wine-menu--dark .wine-line__name em { color: #d8c9a5; }
+.wine-menu--dark .wine-line__name em { color: var(--gold); }
 .wine-menu--dark .wine-line__dots { border-bottom-color: rgba(253,252,250,0.35); }
-.wine-menu--dark .wine-line__vintage { color: #C9A227; }
+.wine-menu--dark .wine-line__vintage { color: var(--gold); }
 .wine-menu--dark .wine-line__detail { color: rgba(253,252,250,0.45); }
 
 /* Collapsible lineup */
@@ -872,7 +857,7 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   font-weight: 300;
   font-size: 2rem;
   line-height: 1;
-  color: var(--wine);
+  color: var(--green);
   margin: 0.15rem 0;
 }
 .tl-row__day--tbd { color: var(--gold); }
@@ -892,22 +877,13 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: var(--wine);
+  background: var(--green);
   transform: translateX(-50%);
 }
 .tl-node--tbd { background: transparent; border: 1px dashed var(--gold); }
 .tl-node--past { background: var(--rule); }
 .tl-node--hollow { background: var(--warm-white); border: 1px solid var(--ink-light); }
-.tl-node--today {
-  background: var(--gold);
-  box-shadow: 0 0 0 0 rgba(139,105,20,0.5);
-  animation: tl-pulse 2.4s var(--ease) infinite;
-}
-@keyframes tl-pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(139,105,20,0.45); }
-  70%  { box-shadow: 0 0 0 9px rgba(139,105,20,0); }
-  100% { box-shadow: 0 0 0 0 rgba(139,105,20,0); }
-}
+.tl-node--today { background: var(--gold); }
 
 /* labels (today / divider / terminus) */
 .tl-row--today, .tl-row--divider, .tl-row--end { min-height: 1.5rem; }
@@ -932,14 +908,13 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 .tl-card {
   border: 1px solid var(--rule);
   background: var(--warm-white);
-  transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease), transform 0.25s var(--ease);
+  transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
 }
 .tl-row--upcoming:hover .tl-card {
   border-color: var(--ink-light);
-  box-shadow: 0 14px 34px -20px rgba(26,24,20,0.35);
   transform: translateY(-2px);
 }
-.tl-row--next .tl-card { border-left: 2px solid var(--wine); }
+.tl-row--next .tl-card { border-left: 2px solid var(--green); }
 .tl-card__cover {
   height: 160px;
   overflow: hidden;
@@ -960,13 +935,12 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   font-size: 0.55rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--wine);
-  border: 1px solid var(--wine);
+  color: var(--green);
+  border: 1px solid var(--green);
   padding: 0.2rem 0.55rem;
   margin-bottom: 0.6rem;
 }
 .tl-card__title {
-  font-style: italic;
   font-size: 1.5rem;
   color: var(--ink);
   margin-bottom: 0.25rem;
@@ -995,13 +969,13 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   position: relative;
   overflow: hidden;
   border-color: transparent;
-  background: linear-gradient(120deg, #14110d 0%, #1c1a15 55%, #2a2320 100%);
+  background: var(--ink);
   background-size: cover;
   background-position: center;
   color: var(--warm-white);
 }
-.tl-row--next .tl-card { border-left: 2px solid var(--wine); }
-.tl-row--upcoming:hover .tl-card--feature { border-color: transparent; border-left-color: var(--wine); }
+.tl-row--next .tl-card { border-left: 2px solid var(--green); }
+.tl-row--upcoming:hover .tl-card--feature { border-color: transparent; border-left-color: var(--green); }
 .tl-card__ghost {
   position: absolute;
   right: -0.5rem;
@@ -1021,8 +995,8 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 }
 .tl-card--feature .tl-card__flag {
   color: var(--warm-white);
-  background: var(--wine);
-  border-color: var(--wine);
+  background: var(--green);
+  border-color: var(--green);
   padding: 0.3rem 0.7rem;
 }
 .tl-card__flag .js-countdown:not(:empty)::before { content: ' \00b7 '; }
@@ -1035,7 +1009,7 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 .tl-card__menu { margin-top: 1.3rem; max-width: 34rem; }
 .tl-card--feature .tl-card__foot { border-top-color: rgba(253,252,250,0.15); }
 
-/* past entries — the register */
+/* past entries: the register */
 .tl-row--past { margin-bottom: 0; }
 .past-entry { border-bottom: 1px solid var(--rule); }
 .tl-row--past:first-of-type .past-entry { border-top: 1px solid var(--rule); }
