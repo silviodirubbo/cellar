@@ -19,7 +19,7 @@ permalink: /planner/
 
 <div class="planner-grid">
 
-  <!-- ── Main — sign up ──────────────────────────────────── -->
+  <!-- ── Main: sign up ──────────────────────────────────── -->
   <div class="planner-main">
     <span class="col-label">Upcoming tastings</span>
 
@@ -41,7 +41,7 @@ permalink: /planner/
 
         {% if tasting.cost_estimate != "" and tasting.cost_estimate %}
         <p class="signup-cost">
-          <span class="label">Indicative cost —</span>
+          <span class="label">Indicative cost:</span>
           <span class="cost-value">{{ tasting.cost_estimate }}</span>
           <span class="cost-note">bottles only</span>
         </p>
@@ -71,15 +71,15 @@ permalink: /planner/
       </div>
       {% endfor %}
     {% else %}
-      <p class="text-light">No upcoming tastings at the moment — check back soon.</p>
+      <p class="text-light">No upcoming tastings at the moment. Check back soon.</p>
     {% endif %}
   </div>
 
-  <!-- ── Aside — propose ─────────────────────────────────── -->
+  <!-- ── Aside: propose ─────────────────────────────────── -->
   <div class="planner-aside">
     <span class="col-label">Propose a topic</span>
 
-    <p class="propose-intro">Have a grape, region, or theme in mind? Send it over — I read every suggestion and build the programme from there.</p>
+    <p class="propose-intro">Have a grape, region, or theme in mind? Send it over. I read every suggestion and build the programme from there.</p>
 
     <form class="propose-form" action="https://formspree.io/f/xdajwkbv" method="POST" id="propose-form">
       <input type="hidden" name="type" value="proposal">
@@ -104,7 +104,7 @@ permalink: /planner/
         <input class="form-input" type="number" id="propose-people" name="people" min="1" max="20" placeholder="e.g. 2">
       </div>
       <button type="submit" class="btn btn--green">Send suggestion</button>
-      <p class="form-success" id="propose-success" style="display:none;">Thank you — suggestion sent.</p>
+      <p class="form-success" id="propose-success" style="display:none;">Thank you. Suggestion sent.</p>
     </form>
   </div>
 
@@ -138,7 +138,7 @@ permalink: /planner/
         <input class="form-input" type="number" id="signup-people" name="people" min="1" max="10" placeholder="e.g. 1" required>
       </div>
       <button type="submit" class="btn btn--green">Confirm attendance</button>
-      <p class="form-success" id="signup-success" style="display:none;">You're in — see you there.</p>
+      <p class="form-success" id="signup-success" style="display:none;">You're in. See you there.</p>
     </form>
   </div>
 </div>
@@ -171,7 +171,7 @@ permalink: /planner/
         <input class="form-input" type="number" id="avail-people" name="people" min="1" max="20" placeholder="e.g. 2">
       </div>
       <button type="submit" class="btn btn--green">Send availability</button>
-      <p class="form-success" id="avail-success" style="display:none;">Thank you — I will be in touch once the date is set.</p>
+      <p class="form-success" id="avail-success" style="display:none;">Thank you. I will be in touch once the date is set.</p>
     </form>
   </div>
 </div>
@@ -216,7 +216,7 @@ const availOverlay = document.getElementById('avail-overlay');
 
 document.querySelectorAll('.avail-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.getElementById('avail-tasting-name').textContent = btn.dataset.title + ' — availability';
+    document.getElementById('avail-tasting-name').textContent = btn.dataset.title + ' · availability';
     document.getElementById('avail-tasting-field').value = btn.dataset.title;
     availOverlay.style.display = 'flex';
   });

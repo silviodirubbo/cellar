@@ -1,6 +1,6 @@
 # Silvio's Cellar
 
-A personal wine tasting site — built with Jekyll, hosted on GitHub Pages.
+A personal wine tasting site built with Jekyll, hosted on GitHub Pages.
 
 **→ [silviodirubbo.github.io/cellar](https://silviodirubbo.github.io/cellar)**
 
@@ -13,14 +13,14 @@ A lightweight site that tracks private wine tasting evenings in Geneva. Each eve
 ## Structure
 
 ```
-_data/tastings.yml      — single source of truth for all events
-_tastings/              — one HTML presentation file per tasting
-assets/tastings/        — images, maps, QR codes, and PDFs per tasting
-_layouts/               — default, presentation, and tasting layouts
-_includes/              — nav, footer, tasting banner
-assets/css/main.css     — full site styles
-planner/                — sign-up and topic proposal page
-tastings/               — public tastings index
+_data/tastings.yml      - single source of truth for all events
+_tastings/              - one HTML presentation file per tasting
+assets/tastings/        - images, maps, QR codes, and PDFs per tasting
+_layouts/               - default, presentation, and tasting layouts
+_includes/              - nav, footer, tasting banner
+assets/css/main.css     - full site styles
+planner/                - sign-up and topic proposal page
+tastings/               - public tastings index
 ```
 
 ## Adding a tasting

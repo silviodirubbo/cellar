@@ -12,7 +12,7 @@
 #   tags:              list of grape/region/theme tags
 #   status:            upcoming | past
 #   spots_total:       integer
-#   cost_estimate:     string e.g. "CHF 37"
+#   cost_estimate:     string e.g. "32 CHF"
 #   featured:          true | false
 #   slides:            true once presentation is ready
 #   wines:             list of wines (for presentation slides)
@@ -109,7 +109,7 @@
       blend: "100% Viognier"
 
 - slug: chateauneuf-du-pape-the-whites
-  title: "Châteauneuf-du-Pape — The Whites"
+  title: "Châteauneuf-du-Pape: The Whites"
   date: null
   date_tbd: true
   location: "Krieg 13"
@@ -153,7 +153,7 @@
       blend: "Grenache Blanc, Roussanne, Clairette, Bourboulenc"
 
 - slug: chateauneuf-du-pape-the-reds
-  title: "Châteauneuf-du-Pape — The Reds"
+  title: "Châteauneuf-du-Pape: The Reds"
   date: null
   date_tbd: true
   location: "Krieg 13"
@@ -351,7 +351,7 @@
       blend: "100% Syrah"
 
 - slug: syrah-rhone-cortona
-  title: "Syrah — from the Rhône to Cortona"
+  title: "Syrah, from the Rhône to Cortona"
   date: 2026-04-11
   date_tbd: false
   location: "Krieg 13"

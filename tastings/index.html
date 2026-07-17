@@ -67,7 +67,7 @@ permalink: /tastings/
         <div class="tl-row__date"><span class="tl-row__today-word">Today</span></div>
         <span class="tl-node tl-node--today" aria-hidden="true"></span>
         <div class="tl-row__label">
-          <span class="js-today">{{ site.time | date: "%A %-d %B %Y" }}</span> — Geneva.
+          <span class="js-today">{{ site.time | date: "%A %-d %B %Y" }}</span>, Geneva.
           {% if upcoming.size > 0 %}The road ahead:{% endif %}
         </div>
       </div>
@@ -130,7 +130,7 @@ permalink: /tastings/
               </div>
               {% else %}
               <details class="lineup">
-                <summary class="lineup__toggle">On the table — {{ tasting.wines.size }} wines</summary>
+                <summary class="lineup__toggle">On the table: {{ tasting.wines.size }} wines</summary>
                 <ol class="wine-menu">
                   {% for wine in tasting.wines %}
                   <li class="wine-line">
@@ -176,7 +176,7 @@ permalink: /tastings/
       <div class="tl-row tl-row--divider" id="archive">
         <div class="tl-row__date"></div>
         <span class="tl-node tl-node--hollow" aria-hidden="true"></span>
-        <div class="tl-row__label">Previously poured — {{ past.size }} evening{% if past.size != 1 %}s{% endif %}, {{ wine_count }} wines</div>
+        <div class="tl-row__label">Previously poured: {{ past.size }} evening{% if past.size != 1 %}s{% endif %}, {{ wine_count }} wines</div>
       </div>
 
       <!-- Past -->
@@ -243,7 +243,7 @@ permalink: /tastings/
         <div class="tl-row__date"></div>
         <span class="tl-node tl-node--hollow" aria-hidden="true"></span>
         <div class="tl-row__label">
-          The cellar opened {% if first_ever %}{{ first_ever.date | date: "%B %Y" }}{% endif %} —
+          The cellar opened {% if first_ever %}{{ first_ever.date | date: "%B %Y" }}{% endif %}:
           <a href="{{ '/planner/' | relative_url }}#propose" class="tl-end-link">propose the next theme →</a>
         </div>
       </div>

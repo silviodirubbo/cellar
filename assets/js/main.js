@@ -1,5 +1,5 @@
 /* ============================================================
-   main.js — Global JavaScript
+   main.js: Global JavaScript
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'DTSTAMP:' + d + 'T000000Z',
         'DTSTART:' + d + 'T190000',
         'DTEND:' + d + 'T220000',
-        'SUMMARY:' + esc('Wine tasting — ' + title),
+        'SUMMARY:' + esc('Wine tasting: ' + title),
         'LOCATION:' + esc(location),
         'END:VEVENT', 'END:VCALENDAR'
       ].join('\r\n');
