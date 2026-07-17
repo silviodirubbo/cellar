@@ -9,7 +9,7 @@ date: 2026-06-20
   --off-white:  #F7F5F0;
   --ink:        #1A1814;
   --ink-mid:    #4A4640;
-  --ink-light:  #8A8480;
+  --ink-light:  #736E6B;
   --green:      #2C4A3E;
   --gold:       #8B6914;
   --rule:       #E2DED8;
@@ -242,7 +242,7 @@ date: 2026-06-20
   font-family: 'DM Mono', monospace; font-size: 6.5px; font-weight: 300;
 }
 
-/* vintage chart — centered in the band below the producers */
+/* vintage chart: centered in the band below the producers */
 .prod-bottom {
   flex: 1 1 auto;
   padding: 20px 28px 0 28px;
@@ -304,7 +304,7 @@ date: 2026-06-20
     <div class="cover-subtitle">Horizontal</div>
     <div class="cover-rule"></div>
     <div class="cover-meta">Three wines · One appellation</div>
-    <div class="cover-meta" style="margin-top:6px;color:#C8A84B">Rostaing · Vernay · Cuilleron</div>
+    <div class="cover-meta-gold">Rostaing · Vernay · Cuilleron</div>
   </div>
 </div>
 
@@ -330,7 +330,7 @@ date: 2026-06-20
      Image: assets/tastings/cote-rotie-horizontal/map_france.jpg
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-map" style="position:relative;">
-  <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/map_france.jpg" alt="France · Wine Regions">
+  <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/map_france.jpg" alt="France · Wine Regions" loading="lazy">
   <div class="map-label-center">France · Wine Regions</div>
 </div>
 
@@ -339,7 +339,7 @@ date: 2026-06-20
      Image: assets/tastings/cote-rotie-horizontal/map_rhone_valley.jpg
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-map" style="position:relative;">
-  <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/map_rhone_valley.jpg" alt="Rhône Valley · Overview">
+  <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/map_rhone_valley.jpg" alt="Rhône Valley · Overview" loading="lazy">
   <div class="map-label-center">Rhône Valley · Overview</div>
 </div>
 
@@ -348,7 +348,7 @@ date: 2026-06-20
      Image: assets/tastings/cote-rotie-horizontal/map_northern_rhone.jpg
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-map" style="position:relative;">
-  <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/map_northern_rhone.jpg" alt="Northern Rhône · Appellations">
+  <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/map_northern_rhone.jpg" alt="Northern Rhône · Appellations" loading="lazy">
   <div class="map-label-center">Northern Rhône · Appellations</div>
 </div>
 
@@ -360,7 +360,7 @@ date: 2026-06-20
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/map_cote_rotie.jpg" alt="Côte-Rôtie · Northern Rhône">
+    <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/map_cote_rotie.jpg" alt="Côte-Rôtie · Northern Rhône" loading="lazy">
     <div class="map-tag">Côte-Rôtie · Northern Rhône</div>
   </div>
   <div class="wine-panel">
@@ -370,7 +370,7 @@ date: 2026-06-20
       <div class="w-hrule"></div>
     </div>
     <div class="wine-bottle">
-      <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/bottle_rostaing.png.png" alt="Ampodium">
+      <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/bottle_rostaing.png.png" alt="Ampodium" loading="lazy">
     </div>
     <div class="wine-info">
       <div class="info-text">
@@ -380,7 +380,7 @@ date: 2026-06-20
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Syrah</span></div>
       </div>
       <div class="wine-qr">
-        <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/qr_rostaing.png.png" alt="QR">
+        <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/qr_rostaing.png.png" alt="QR code for Domaine Rostaing" loading="lazy">
       </div>
     </div>
   </div>
@@ -394,7 +394,7 @@ date: 2026-06-20
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/map_cote_rotie.jpg" alt="Côte-Rôtie · Northern Rhône">
+    <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/map_cote_rotie.jpg" alt="Côte-Rôtie · Northern Rhône" loading="lazy">
     <div class="map-tag">Côte-Rôtie · Northern Rhône</div>
   </div>
   <div class="wine-panel">
@@ -404,7 +404,7 @@ date: 2026-06-20
       <div class="w-hrule"></div>
     </div>
     <div class="wine-bottle">
-      <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/bottle_vernay.png.png" alt="Blonde du Seigneur">
+      <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/bottle_vernay.png.png" alt="Blonde du Seigneur" loading="lazy">
     </div>
     <div class="wine-info">
       <div class="info-text">
@@ -414,7 +414,7 @@ date: 2026-06-20
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">95% Syrah · 5% Viognier</span></div>
       </div>
       <div class="wine-qr">
-        <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/qr_vernay.png.png" alt="QR">
+        <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/qr_vernay.png.png" alt="QR code for Domaine Georges Vernay" loading="lazy">
       </div>
     </div>
   </div>
@@ -428,7 +428,7 @@ date: 2026-06-20
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/map_cote_rotie.jpg" alt="Côte-Rôtie · Northern Rhône">
+    <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/map_cote_rotie.jpg" alt="Côte-Rôtie · Northern Rhône" loading="lazy">
     <div class="map-tag">Côte-Rôtie · Northern Rhône</div>
   </div>
   <div class="wine-panel">
@@ -438,7 +438,7 @@ date: 2026-06-20
       <div class="w-hrule"></div>
     </div>
     <div class="wine-bottle">
-      <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/bottle_cuilleron.png.png" alt="La Viallière">
+      <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/bottle_cuilleron.png.png" alt="La Viallière" loading="lazy">
     </div>
     <div class="wine-info">
       <div class="info-text">
@@ -448,7 +448,7 @@ date: 2026-06-20
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Syrah</span></div>
       </div>
       <div class="wine-qr">
-        <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/qr_cuilleron.png.png" alt="QR">
+        <img src="{{ site.baseurl }}/assets/tastings/cote-rotie-horizontal/qr_cuilleron.png.png" alt="QR code for Yves Cuilleron" loading="lazy">
       </div>
     </div>
   </div>

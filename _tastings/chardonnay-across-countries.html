@@ -9,7 +9,7 @@ date: 2026-03-07
   --off-white:  #F7F5F0;
   --ink:        #1A1814;
   --ink-mid:    #4A4640;
-  --ink-light:  #8A8480;
+  --ink-light:  #736E6B;
   --green:      #2C4A3E;
   --gold:       #8B6914;
   --rule:       #E2DED8;
@@ -67,7 +67,7 @@ date: 2026-03-07
 /* ── WINE SLIDE ─────────────────────────────────────── */
 .slide-wine { background: var(--warm-white); color: var(--ink); flex-direction: row; }
 
-/* Map — exactly 2/3 of 1280. contain = full map always, never truncated. */
+/* Map: exactly 2/3 of 1280. contain = full map always, never truncated. */
 .wine-map {
   width: 853px; height: 720px; flex: 0 0 853px;
   position: relative; overflow: hidden; background: var(--warm-white); cursor: pointer;
@@ -86,7 +86,7 @@ date: 2026-03-07
   background: rgba(253,252,250,.9); padding: 5px 9px;
 }
 
-/* Panel — exactly 1/3 of 1280. Padding reserves room for the chrome. */
+/* Panel: exactly 1/3 of 1280. Padding reserves room for the chrome. */
 .wine-panel {
   width: 427px; height: 720px; flex: 0 0 427px;
   display: flex; flex-direction: column;
@@ -146,7 +146,7 @@ date: 2026-03-07
     <div class="cover-subtitle">across Countries</div>
     <div class="cover-rule"></div>
     <div class="cover-meta">Three wines · One grape</div>
-    <div class="cover-meta" style="margin-top:6px;color:#C8A84B">Burgundy · Alto Adige · Friuli Venezia Giulia</div>
+    <div class="cover-meta-gold">Burgundy · Alto Adige · Friuli Venezia Giulia</div>
   </div>
 </div>
 
@@ -165,7 +165,7 @@ date: 2026-03-07
 <!-- 3: DROUHIN map 1 -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/map_drouhin_1.jpg.png" alt="France · Wine Regions">
+    <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/map_drouhin_1.jpg.png" alt="France · Wine Regions" loading="lazy">
     <div class="map-tag">France · Wine Regions</div>
   </div>
   <div class="wine-panel">
@@ -174,7 +174,7 @@ date: 2026-03-07
       <div class="w-appellation">Montagny Premier Cru · Côte Chalonnaise</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/bottle_drouhin.png.png" alt="Montagny Premier Cru"></div>
+    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/bottle_drouhin.png.png" alt="Montagny Premier Cru" loading="lazy"></div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Montagny<br>Premier Cru</div>
@@ -183,7 +183,7 @@ date: 2026-03-07
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chardonnay 100%</span></div>
       </div>
       <div class="wine-qr">
-        <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/qr_drouhin.png.png" alt="QR">
+        <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/qr_drouhin.png.png" alt="QR code for Joseph Drouhin" loading="lazy">
         <div class="qr-label">Scan for<br>producer info</div>
       </div>
     </div>
@@ -193,7 +193,7 @@ date: 2026-03-07
 <!-- 4: DROUHIN map 2 -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/map_drouhin_2.jpg.png" alt="Burgundy · Overview">
+    <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/map_drouhin_2.jpg.png" alt="Burgundy · Overview" loading="lazy">
     <div class="map-tag">Burgundy · Overview</div>
   </div>
   <div class="wine-panel">
@@ -202,7 +202,7 @@ date: 2026-03-07
       <div class="w-appellation">Montagny Premier Cru · Côte Chalonnaise</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/bottle_drouhin.png.png" alt="Montagny Premier Cru"></div>
+    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/bottle_drouhin.png.png" alt="Montagny Premier Cru" loading="lazy"></div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Montagny<br>Premier Cru</div>
@@ -211,7 +211,7 @@ date: 2026-03-07
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chardonnay 100%</span></div>
       </div>
       <div class="wine-qr">
-        <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/qr_drouhin.png.png" alt="QR">
+        <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/qr_drouhin.png.png" alt="QR code for Joseph Drouhin" loading="lazy">
         <div class="qr-label">Scan for<br>producer info</div>
       </div>
     </div>
@@ -221,7 +221,7 @@ date: 2026-03-07
 <!-- 5: DROUHIN map 3 -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/map_drouhin_3.jpg.png" alt="Côte Chalonnaise · Montagny">
+    <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/map_drouhin_3.jpg.png" alt="Côte Chalonnaise · Montagny" loading="lazy">
     <div class="map-tag">Côte Chalonnaise · Montagny</div>
   </div>
   <div class="wine-panel">
@@ -230,7 +230,7 @@ date: 2026-03-07
       <div class="w-appellation">Montagny Premier Cru · Côte Chalonnaise</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/bottle_drouhin.png.png" alt="Montagny Premier Cru"></div>
+    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/bottle_drouhin.png.png" alt="Montagny Premier Cru" loading="lazy"></div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Montagny<br>Premier Cru</div>
@@ -239,7 +239,7 @@ date: 2026-03-07
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chardonnay 100%</span></div>
       </div>
       <div class="wine-qr">
-        <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/qr_drouhin.png.png" alt="QR">
+        <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/qr_drouhin.png.png" alt="QR code for Joseph Drouhin" loading="lazy">
         <div class="qr-label">Scan for<br>producer info</div>
       </div>
     </div>
@@ -249,7 +249,7 @@ date: 2026-03-07
 <!-- 6: SANCT VALENTIN map 1 -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/map_sanct_valentin_1.jpg.png" alt="Alto Adige · Südtirol · Italy">
+    <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/map_sanct_valentin_1.jpg.png" alt="Alto Adige · Südtirol · Italy" loading="lazy">
     <div class="map-tag">Alto Adige · Südtirol · Italy</div>
   </div>
   <div class="wine-panel">
@@ -258,7 +258,7 @@ date: 2026-03-07
       <div class="w-appellation">Appiano · Alto Adige DOC</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/bottle_sanct_valentin.png.png" alt="Sanct Valentin Chardonnay"></div>
+    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/bottle_sanct_valentin.png.png" alt="Sanct Valentin Chardonnay" loading="lazy"></div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Sanct Valentin<br>Chardonnay</div>
@@ -267,7 +267,7 @@ date: 2026-03-07
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chardonnay 100%</span></div>
       </div>
       <div class="wine-qr">
-        <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/qr_sanct_valentin.png.png" alt="QR">
+        <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/qr_sanct_valentin.png.png" alt="QR code for St. Michael-Eppan" loading="lazy">
         <div class="qr-label">Scan for<br>producer info</div>
       </div>
     </div>
@@ -277,7 +277,7 @@ date: 2026-03-07
 <!-- 7: SANCT VALENTIN map 2 -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/map_sanct_valentin_2.jpg.png" alt="Appiano · Alto Adige Südtirol DOC">
+    <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/map_sanct_valentin_2.jpg.png" alt="Appiano · Alto Adige Südtirol DOC" loading="lazy">
     <div class="map-tag">Appiano · Alto Adige Südtirol DOC</div>
   </div>
   <div class="wine-panel">
@@ -286,7 +286,7 @@ date: 2026-03-07
       <div class="w-appellation">Appiano · Alto Adige DOC</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/bottle_sanct_valentin.png.png" alt="Sanct Valentin Chardonnay"></div>
+    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/bottle_sanct_valentin.png.png" alt="Sanct Valentin Chardonnay" loading="lazy"></div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Sanct Valentin<br>Chardonnay</div>
@@ -295,7 +295,7 @@ date: 2026-03-07
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chardonnay 100%</span></div>
       </div>
       <div class="wine-qr">
-        <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/qr_sanct_valentin.png.png" alt="QR">
+        <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/qr_sanct_valentin.png.png" alt="QR code for St. Michael-Eppan" loading="lazy">
         <div class="qr-label">Scan for<br>producer info</div>
       </div>
     </div>
@@ -305,7 +305,7 @@ date: 2026-03-07
 <!-- 8: LIS NERIS map 1 -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/map_lis_neris_1.jpg.png" alt="Friuli Isonzo · Friuli Venezia Giulia">
+    <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/map_lis_neris_1.jpg.png" alt="Friuli Isonzo · Friuli Venezia Giulia" loading="lazy">
     <div class="map-tag">Friuli Isonzo · Friuli Venezia Giulia</div>
   </div>
   <div class="wine-panel">
@@ -314,7 +314,7 @@ date: 2026-03-07
       <div class="w-appellation">Isonzo · Friuli Venezia Giulia DOC</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/bottle_lis_neris.png.png" alt="Jurosa Chardonnay"></div>
+    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/bottle_lis_neris.png.png" alt="Jurosa Chardonnay" loading="lazy"></div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Jurosa<br>Chardonnay</div>
@@ -323,7 +323,7 @@ date: 2026-03-07
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chardonnay 100%</span></div>
       </div>
       <div class="wine-qr">
-        <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/qr_lis_neris.png.png" alt="QR">
+        <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/qr_lis_neris.png.png" alt="QR code for Lis Neris" loading="lazy">
         <div class="qr-label">Scan for<br>producer info</div>
       </div>
     </div>
@@ -333,7 +333,7 @@ date: 2026-03-07
 <!-- 9: LIS NERIS map 2 -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/map_lis_neris_2.jpg.png" alt="Isonzo · Collio · Friuli Venezia Giulia">
+    <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/map_lis_neris_2.jpg.png" alt="Isonzo · Collio · Friuli Venezia Giulia" loading="lazy">
     <div class="map-tag">Isonzo · Collio · Friuli Venezia Giulia</div>
   </div>
   <div class="wine-panel">
@@ -342,7 +342,7 @@ date: 2026-03-07
       <div class="w-appellation">Isonzo · Friuli Venezia Giulia DOC</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/bottle_lis_neris.png.png" alt="Jurosa Chardonnay"></div>
+    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/bottle_lis_neris.png.png" alt="Jurosa Chardonnay" loading="lazy"></div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Jurosa<br>Chardonnay</div>
@@ -351,7 +351,7 @@ date: 2026-03-07
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chardonnay 100%</span></div>
       </div>
       <div class="wine-qr">
-        <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/qr_lis_neris.png.png" alt="QR">
+        <img src="{{ site.baseurl }}/assets/tastings/chardonnay-across-countries/qr_lis_neris.png.png" alt="QR code for Lis Neris" loading="lazy">
         <div class="qr-label">Scan for<br>producer info</div>
       </div>
     </div>
