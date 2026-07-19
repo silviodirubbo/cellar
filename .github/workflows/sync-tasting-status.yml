@@ -1,0 +1,31 @@
+name: Sync tasting status
+
+on:
+  schedule:
+    # 5am UTC, daily
+    - cron: "0 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Sync _data/tastings.yml status
+        run: node scripts/sync-tasting-status.js
+
+      - name: Commit and push if changed
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: sync tasting status [automated]"
+          file_pattern: _data/tastings.yml
