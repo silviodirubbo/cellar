@@ -14,6 +14,22 @@
   category: Region
 - name: Tuscany
   category: Region
+- name: Südtirol
+  category: Region
+- name: Friuli
+  category: Region
+- name: Loire
+  category: Region
+- name: Pays Nantais
+  category: Region
+- name: Anjou
+  category: Region
+- name: Saumur
+  category: Region
+- name: Touraine
+  category: Region
+- name: Centre-Loire
+  category: Region
 
 - name: Côte-Rôtie
   category: Appellation
@@ -47,6 +63,30 @@
   category: Appellation
 - name: Cortona
   category: Appellation
+- name: Muscadet Sèvre-et-Maine
+  category: Appellation
+- name: Savennières
+  category: Appellation
+- name: Bonnezeaux
+  category: Appellation
+- name: Saumur-Champigny
+  category: Appellation
+- name: Crémant de Loire
+  category: Appellation
+- name: Vouvray
+  category: Appellation
+- name: Montlouis-sur-Loire
+  category: Appellation
+- name: Chinon
+  category: Appellation
+- name: Bourgueil
+  category: Appellation
+- name: Saint-Nicolas-de-Bourgueil
+  category: Appellation
+- name: Pouilly-Fumé
+  category: Appellation
+- name: Sancerre
+  category: Appellation
 
 - name: Syrah
   category: Grape
@@ -67,6 +107,14 @@
 - name: Muscat
   category: Grape
 - name: Chardonnay
+  category: Grape
+- name: Melon de Bourgogne
+  category: Grape
+- name: Chenin Blanc
+  category: Grape
+- name: Cabernet Franc
+  category: Grape
+- name: Sauvignon Blanc
   category: Grape
 
 - name: France
