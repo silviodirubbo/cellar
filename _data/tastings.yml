@@ -234,6 +234,239 @@
   cost_estimate: "30 CHF"
   featured: false
 
+- slug: muscadet-pays-nantais
+  title: "Muscadet (Pays Nantais)"
+  date: null
+  date_tbd: true
+  region: "Pays Nantais"
+  description: >
+    First stop in the Loire series, moving west to east: Muscadet from the
+    Pays Nantais, three crus and a single vineyard.
+  tags:
+    - Melon de Bourgogne
+    - Muscadet Sèvre-et-Maine
+    - Pays Nantais
+    - Loire
+    - France
+  status: upcoming
+  featured: false
+  wines:
+    - name: "Château-Thébaud"
+      producer: "Domaine de la Pépière"
+      vintage: 2022
+      appellation: "Muscadet Sèvre-et-Maine AOC, cru communal"
+      blend: "100% Melon de Bourgogne"
+    - name: "Clisson"
+      producer: "Domaine de la Pépière"
+      vintage: 2023
+      appellation: "Muscadet Sèvre-et-Maine AOC, cru communal"
+      blend: "100% Melon de Bourgogne"
+    - name: "Monnières-Saint Fiacre"
+      producer: "Domaine de la Pépière"
+      vintage: 2022
+      appellation: "Muscadet Sèvre-et-Maine AOC, cru communal"
+      blend: "100% Melon de Bourgogne"
+    - name: "Gula Ana"
+      producer: "Domaine Luneau-Papin"
+      vintage: 2023
+      appellation: "Muscadet Sèvre-et-Maine AOC, single vineyard"
+      blend: "100% Melon de Bourgogne"
+
+- slug: anjou
+  title: "Anjou"
+  date: null
+  date_tbd: true
+  region: "Anjou"
+  description: >
+    Second stop in the Loire series: Chenin Blanc through Savennières,
+    closing with a Bonnezeaux.
+  tags:
+    - Chenin Blanc
+    - Savennières
+    - Bonnezeaux
+    - Anjou
+    - Loire
+    - France
+  status: upcoming
+  featured: false
+  wines:
+    - name: "Chamboureau"
+      producer: "Domaine FL"
+      vintage: 2021
+      appellation: "Savennières AOC"
+      blend: "100% Chenin Blanc"
+    - name: "Clos de la Bergerie"
+      producer: "Nicolas Joly"
+      vintage: 2022
+      appellation: "Savennières-Roche-aux-Moines AOC"
+      blend: "100% Chenin Blanc"
+    - name: "Coulée de Serrant"
+      producer: "Nicolas Joly"
+      vintage: 2022
+      appellation: "Savennières-Coulée-de-Serrant AOC, Grand Cru"
+      blend: "100% Chenin Blanc"
+    - name: "Bonnezeaux"
+      producer: "Domaine du Petit Val"
+      vintage: 2022
+      appellation: "Bonnezeaux AOC"
+      blend: "100% Chenin Blanc"
+
+- slug: saumur
+  title: "Saumur"
+  date: null
+  date_tbd: true
+  region: "Saumur"
+  description: >
+    Third stop in the Loire series: sparkling, blanc and two vintages
+    of Saumur-Champigny.
+  tags:
+    - Chenin Blanc
+    - Cabernet Franc
+    - Saumur
+    - Saumur-Champigny
+    - Crémant de Loire
+    - Loire
+    - France
+  status: upcoming
+  featured: false
+  wines:
+    - name: "Saumur Brut"
+      producer: "Domaine des Sanzay"
+      vintage: "NV"
+      appellation: "Saumur AOC, sparkling"
+      blend: "Chenin Blanc"
+    - name: "Blanc de Blancs"
+      producer: "Domaine Ogereau"
+      vintage: 2022
+      appellation: "Crémant de Loire AOC"
+      blend: "100% Chenin Blanc"
+    - name: "Clos de l'Echelier"
+      producer: "Thierry Germain / Domaine des Roches Neuves"
+      vintage: 2017
+      appellation: "Saumur-Champigny AOC"
+      blend: "100% Cabernet Franc"
+    - name: "Le Clos"
+      producer: "Clos Rougeard"
+      vintage: 2020
+      appellation: "Saumur-Champigny AOC"
+      blend: "100% Cabernet Franc"
+
+- slug: touraine-whites
+  title: "Touraine Whites"
+  date: null
+  date_tbd: true
+  region: "Touraine"
+  description: >
+    Fourth stop in the Loire series, the whites: Chenin Blanc across
+    Vouvray and Montlouis-sur-Loire, dry to sweet.
+  tags:
+    - Chenin Blanc
+    - Vouvray
+    - Montlouis-sur-Loire
+    - Touraine
+    - Loire
+    - France
+  status: upcoming
+  featured: false
+  wines:
+    - name: "Le Haut-Lieu Sec"
+      producer: "Domaine Huet"
+      vintage: 2022
+      appellation: "Vouvray AOC"
+      blend: "100% Chenin Blanc"
+    - name: "Les Hauts de Husseau"
+      producer: "Jacky Blot / Domaine de la Taille aux Loups"
+      vintage: 2023
+      appellation: "Montlouis-sur-Loire AOC, sec"
+      blend: "100% Chenin Blanc"
+    - name: "Les Tuffeaux"
+      producer: "François Chidaine"
+      vintage: 2020
+      appellation: "Montlouis-sur-Loire AOC, demi-sec"
+      blend: "100% Chenin Blanc"
+    - name: "Moelleux Réserve"
+      producer: "Clos Naudin / Domaine Foreau"
+      vintage: 2018
+      appellation: "Vouvray AOC, moelleux"
+      blend: "100% Chenin Blanc"
+
+- slug: touraine-reds
+  title: "Touraine Reds"
+  date: null
+  date_tbd: true
+  region: "Touraine"
+  description: >
+    Fourth stop in the Loire series, the reds: Cabernet Franc across
+    Chinon, Bourgueil and Saint-Nicolas-de-Bourgueil, opened with a
+    sparkling Vouvray.
+  tags:
+    - Cabernet Franc
+    - Chenin Blanc
+    - Vouvray
+    - Chinon
+    - Bourgueil
+    - Saint-Nicolas-de-Bourgueil
+    - Touraine
+    - Loire
+    - France
+  status: upcoming
+  featured: false
+  wines:
+    - name: "Méthode Traditionnelle Extra Brut"
+      producer: "Clos Naudin / Domaine Foreau"
+      vintage: 2019
+      appellation: "Vouvray AOC, sparkling"
+      blend: "100% Chenin Blanc"
+    - name: "Coteau de Noiré"
+      producer: "Domaine Philippe Alliet"
+      vintage: 2023
+      appellation: "Chinon AOC"
+      blend: "100% Cabernet Franc"
+    - name: "Perrières"
+      producer: "Domaine de la Butte"
+      vintage: 2022
+      appellation: "Bourgueil AOC"
+      blend: "100% Cabernet Franc"
+    - name: "Le Vau Renou"
+      producer: "Clos des Quarterons / Amirault"
+      vintage: 2020
+      appellation: "Saint-Nicolas-de-Bourgueil AOC"
+      blend: "100% Cabernet Franc"
+
+- slug: centre-loire
+  title: "Centre-Loire"
+  date: null
+  date_tbd: true
+  region: "Centre-Loire"
+  description: >
+    Closing the Loire series in Centre-Loire: Sauvignon Blanc from
+    Pouilly-Fumé and two vintages of Sancerre.
+  tags:
+    - Sauvignon Blanc
+    - Pouilly-Fumé
+    - Sancerre
+    - Centre-Loire
+    - Loire
+    - France
+  status: upcoming
+  featured: false
+  wines:
+    - name: "Silex"
+      producer: "Didier Dagueneau"
+      vintage: 2022
+      appellation: "Pouilly-Fumé AOC"
+      blend: "100% Sauvignon Blanc"
+    - name: "Le Pavé"
+      producer: "Domaine Vacheron"
+      vintage: 2017
+      appellation: "Sancerre AOC"
+      blend: "100% Sauvignon Blanc"
+    - name: "Étienne Henri"
+      producer: "Famille Bourgeois"
+      vintage: 2013
+      appellation: "Sancerre AOC"
+      blend: "100% Sauvignon Blanc"
+
 # ── Past ──────────────────────────────────────────────────────
 
 - slug: cote-rotie-horizontal
