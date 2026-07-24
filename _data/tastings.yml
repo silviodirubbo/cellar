@@ -189,51 +189,6 @@
       appellation: "Châteauneuf-du-Pape AOC"
       blend: "Grenache 30%, Mourvèdre 30%, Syrah 10%, Counoise 10%, autres 20%"
 
-- slug: saint-joseph
-  title: "Saint-Joseph"
-  date: null
-  date_tbd: true
-  location: "Krieg 13"
-  region: "Northern Rhône"
-  description: >
-    A cross-varietal evening dedicated to the Saint-Joseph appellation,
-    red and white side by side, letting the place speak across grape varieties.
-  tags:
-    - Syrah
-    - Marsanne
-    - Roussanne
-    - Saint-Joseph
-    - Rhône
-    - Northern Rhône
-    - France
-  status: upcoming
-  spots_total: 6
-  cost_estimate: "30 CHF"
-  featured: false
-
-- slug: crozes-hermitage
-  title: "Crozes-Hermitage"
-  date: null
-  date_tbd: true
-  location: "Krieg 13"
-  region: "Northern Rhône"
-  description: >
-    A cross-varietal evening dedicated to the Crozes-Hermitage appellation,
-    red and white together, exploring the largest Northern Rhône appellation
-    in all its expressive range.
-  tags:
-    - Syrah
-    - Marsanne
-    - Roussanne
-    - Crozes-Hermitage
-    - Rhône
-    - Northern Rhône
-    - France
-  status: upcoming
-  spots_total: 6
-  cost_estimate: "30 CHF"
-  featured: false
-
 - slug: muscadet-pays-nantais
   title: "Muscadet (Pays Nantais)"
   date: null
