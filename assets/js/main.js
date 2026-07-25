@@ -134,4 +134,50 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ── Tastings: filter panel toggle ─────────────────────────
+  const filterToggle = document.getElementById('filterToggle');
+  const filterPanel  = document.getElementById('filterPanel');
+  if (filterToggle && filterPanel) {
+    const labelEl  = filterToggle.querySelector('.filter-toggle__label');
+    const closeBtn = document.getElementById('filterClose');
+
+    const openPanel = () => {
+      filterPanel.hidden = false;
+      filterToggle.setAttribute('aria-expanded', 'true');
+      filterToggle.classList.add('filter-toggle--open');
+      document.body.classList.add('filter-open');
+    };
+    const closePanel = () => {
+      filterPanel.hidden = true;
+      filterToggle.setAttribute('aria-expanded', 'false');
+      filterToggle.classList.remove('filter-toggle--open');
+      document.body.classList.remove('filter-open');
+    };
+
+    filterToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      filterPanel.hidden ? openPanel() : closePanel();
+    });
+    if (closeBtn) closeBtn.addEventListener('click', closePanel);
+
+    // click outside the panel closes it (desktop dropdown)
+    document.addEventListener('click', (e) => {
+      if (filterPanel.hidden) return;
+      if (!filterPanel.contains(e.target) && !filterToggle.contains(e.target)) closePanel();
+    });
+    // Esc closes it
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !filterPanel.hidden) closePanel();
+    });
+
+    // reflect the active filter on the button, so it reads even when closed
+    filterPanel.addEventListener('click', (e) => {
+      if (!e.target.closest('.chip')) return;
+      const active = filterPanel.querySelector('.chip.chip--active');
+      const tag = active ? active.dataset.tag : '';
+      if (labelEl) labelEl.textContent = tag ? 'Filter · ' + tag : 'Filter';
+      filterToggle.classList.toggle('filter-toggle--active', !!tag);
+    });
+  }
+
 });

@@ -42,10 +42,25 @@ permalink: /tastings/
 <!-- ── The timeline ────────────────────────────────────────── -->
 <section class="timeline">
   <div class="container">
-    <div class="tastings-layout">
 
-      <!-- Tag chips (sidebar on desktop, inline above the list on mobile) -->
-      <aside class="filters-aside">
+    <!-- Filter toolbar: a single button revealing a hidden dropdown panel -->
+    <div class="filter-toolbar">
+      <button type="button" class="filter-toggle" id="filterToggle"
+              aria-expanded="false" aria-controls="filterPanel">
+        <svg class="filter-toggle__icon" width="13" height="13" viewBox="0 0 16 16"
+             fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true">
+          <line x1="2" y1="4.5" x2="14" y2="4.5"/>
+          <line x1="4" y1="8" x2="12" y2="8"/>
+          <line x1="6" y1="11.5" x2="10" y2="11.5"/>
+        </svg>
+        <span class="filter-toggle__label">Filter</span>
+      </button>
+
+      <div class="filter-panel" id="filterPanel" hidden>
+        <div class="filter-panel__head">
+          <span class="filter-panel__title">Filter</span>
+          <button type="button" class="filter-panel__close" id="filterClose" aria-label="Close filters">&times;</button>
+        </div>
         <div class="chipbar" id="chipbar">
           <div class="chip-group chip-group--all">
             <button class="chip chip--active" data-tag="">All</button>
@@ -75,9 +90,10 @@ permalink: /tastings/
             </details>
           {% endfor %}
         </div>
-      </aside>
+      </div>
+    </div>
 
-      <div class="tl">
+    <div class="tl">
 
       <!-- Today -->
       <div class="tl-row tl-row--today" id="coming-up">
@@ -283,8 +299,7 @@ permalink: /tastings/
         </div>
       </div>
 
-      </div>
-
     </div>
+
   </div>
 </section>
