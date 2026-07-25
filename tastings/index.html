@@ -39,45 +39,45 @@ permalink: /tastings/
   </div>
 </header>
 
-<!-- ── Tag chips ───────────────────────────────────────────── -->
-<div class="chipbar-wrap">
-  <div class="container">
-    <div class="chipbar" id="chipbar">
-      <div class="chip-group chip-group--all">
-        <button class="chip chip--active" data-tag="">All</button>
-      </div>
-      {% assign chip_groups = "Region|Appellation|Grape" | split: "|" %}
-      {% assign chip_group_labels = "Region|Denomination|Grape" | split: "|" %}
-      {% for category in chip_groups %}
-        {% assign group_label = chip_group_labels[forloop.index0] %}
-        {% assign group_tags = site.data.tags | where: "category", category %}
-        {% assign group_count = 0 %}
-        {% for tag in group_tags %}
-          {% assign c = 0 %}
-          {% for x in all_tags %}{% if x == tag.name %}{% assign c = c | plus: 1 %}{% endif %}{% endfor %}
-          {% if c > 0 %}{% assign group_count = group_count | plus: 1 %}{% endif %}
-        {% endfor %}
-        <details class="chip-group">
-          <summary class="chip-group__label">{{ group_label }}<span class="chip-group__count">{{ group_count }}</span></summary>
-          <div class="chip-group__items">
-            {% for tag in group_tags %}
-              {% assign c = 0 %}
-              {% for x in all_tags %}{% if x == tag.name %}{% assign c = c | plus: 1 %}{% endif %}{% endfor %}
-              {% if c > 0 %}
-                <button class="chip" data-tag="{{ tag.name }}">{{ tag.name }}&nbsp;<span class="chip__n">{{ c }}</span></button>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </details>
-      {% endfor %}
-    </div>
-  </div>
-</div>
-
 <!-- ── The timeline ────────────────────────────────────────── -->
 <section class="timeline">
   <div class="container">
-    <div class="tl">
+    <div class="tastings-layout">
+
+      <!-- Tag chips (sidebar on desktop, inline above the list on mobile) -->
+      <aside class="filters-aside">
+        <div class="chipbar" id="chipbar">
+          <div class="chip-group chip-group--all">
+            <button class="chip chip--active" data-tag="">All</button>
+          </div>
+          {% assign chip_groups = "Region|Appellation|Grape" | split: "|" %}
+          {% assign chip_group_labels = "Region|Denomination|Grape" | split: "|" %}
+          {% for category in chip_groups %}
+            {% assign group_label = chip_group_labels[forloop.index0] %}
+            {% assign group_tags = site.data.tags | where: "category", category %}
+            {% assign group_count = 0 %}
+            {% for tag in group_tags %}
+              {% assign c = 0 %}
+              {% for x in all_tags %}{% if x == tag.name %}{% assign c = c | plus: 1 %}{% endif %}{% endfor %}
+              {% if c > 0 %}{% assign group_count = group_count | plus: 1 %}{% endif %}
+            {% endfor %}
+            <details class="chip-group">
+              <summary class="chip-group__label">{{ group_label }}<span class="chip-group__count">{{ group_count }}</span></summary>
+              <div class="chip-group__items">
+                {% for tag in group_tags %}
+                  {% assign c = 0 %}
+                  {% for x in all_tags %}{% if x == tag.name %}{% assign c = c | plus: 1 %}{% endif %}{% endfor %}
+                  {% if c > 0 %}
+                    <button class="chip" data-tag="{{ tag.name }}">{{ tag.name }}&nbsp;<span class="chip__n">{{ c }}</span></button>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </details>
+          {% endfor %}
+        </div>
+      </aside>
+
+      <div class="tl">
 
       <!-- Today -->
       <div class="tl-row tl-row--today" id="coming-up">
@@ -281,6 +281,8 @@ permalink: /tastings/
           The cellar opened {% if first_ever %}{{ first_ever.date | date: "%B %Y" }}{% endif %}:
           <a href="{{ '/planner/' | relative_url }}#propose" class="tl-end-link">propose the next theme →</a>
         </div>
+      </div>
+
       </div>
 
     </div>

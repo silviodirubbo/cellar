@@ -18,7 +18,7 @@
   --gold:        #8B6914;
   --chapter-pilot: var(--gold);
   --chapter-rhone: var(--green);
-  --chapter-loire: #45604F;
+  --chapter-loire: #4F5F66;
   --font-serif:  'Cormorant Garamond', Georgia, serif;
   --font-mono:   'DM Mono', 'Courier New', monospace;
   --section-pad: 7rem;
@@ -597,6 +597,8 @@ textarea.form-input { min-height: 5rem; }
   .page-header__inner { grid-template-columns: 1fr; gap: 1.5rem; }
   .planner-grid { grid-template-columns: 1fr; }
   .planner-main { border-right: none; border-bottom: 1px solid var(--rule); }
+  .tastings-layout { grid-template-columns: 1fr; }
+  .filters-aside { border-right: none; padding-right: 0; margin-bottom: 2rem; }
   .tasting-banner { grid-template-columns: 1fr; }
   .tasting-banner__actions { align-items: flex-start; flex-direction: row; }
   .footer__inner { flex-direction: column; gap: 1rem; text-align: center; }
@@ -790,15 +792,19 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 .lineup__toggle:hover { color: var(--ink); }
 .lineup .wine-menu { margin-top: 0.5rem; padding-left: 0.9rem; border-left: 1px solid var(--rule); }
 
-/* ── Chip filter bar ──────────────────────────────────────── */
-.chipbar-wrap {
-  background: var(--warm-white);
-  border-bottom: 1px solid var(--rule);
-  padding: 0.7rem 0;
-  position: sticky;
-  top: 56px;
-  z-index: 50;
+/* ── Tastings layout: filters sidebar + timeline ─────────────── */
+.tastings-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--col-gap);
+  align-items: start;
 }
+.filters-aside {
+  padding-right: 2rem;
+  border-right: 1px solid var(--rule);
+}
+
+/* ── Chip filter bar ──────────────────────────────────────── */
 .chipbar { display: flex; flex-direction: column; }
 .chip-group--all { display: flex; padding-bottom: 0.5rem; margin-bottom: 0.35rem; border-bottom: 1px solid var(--rule); }
 .chip-group { border-bottom: 1px solid var(--rule); }
@@ -1170,6 +1176,3 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   .tl-card--feature .btn--hero { flex: 1 1 100%; text-align: center; }
 }
 
-@media (max-width: 640px) {
-  .chipbar-wrap { top: 52px; }
-}
