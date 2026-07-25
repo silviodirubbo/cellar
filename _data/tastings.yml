@@ -10,6 +10,7 @@
 #   region:            primary region (displayed as label)
 #   description:       one or two sentences, kept short
 #   tags:              list of grape/region/theme tags
+#   chapter:           pilot | rhone | loire (curriculum chapter, own colour on cards)
 #   status:            upcoming | past
 #   spots_total:       integer
 #   cost_estimate:     string e.g. "32 CHF"
@@ -43,6 +44,7 @@
     - Rhône
     - Southern Rhône
     - France
+  chapter: rhone
   status: past
   featured: false
   slides: true
@@ -84,6 +86,7 @@
     - Rhône
     - Northern Rhône
     - France
+  chapter: rhone
   status: upcoming
   spots_total: 6
   cost_estimate: "35 CHF"
@@ -124,6 +127,7 @@
     - Rhône
     - Southern Rhône
     - France
+  chapter: rhone
   status: upcoming
   spots_total: 6
   cost_estimate: "42 CHF"
@@ -168,6 +172,7 @@
     - Rhône
     - Southern Rhône
     - France
+  chapter: rhone
   status: upcoming
   spots_total: 6
   cost_estimate: "44 CHF"
@@ -189,21 +194,27 @@
       appellation: "Châteauneuf-du-Pape AOC"
       blend: "Grenache 30%, Mourvèdre 30%, Syrah 10%, Counoise 10%, autres 20%"
 
-- slug: muscadet-pays-nantais
-  title: "Muscadet (Pays Nantais)"
+- slug: muscadet
+  title: "Muscadet"
   date: null
   date_tbd: true
+  location: "Krieg 13"
   region: "Pays Nantais"
   description: >
-    First stop in the Loire series, moving west to east: Muscadet from the
-    Pays Nantais, three crus and a single vineyard.
+    We open the Loire at its western edge, in the Pays Nantais, with four
+    Muscadets that have little to do with the thin, forgettable bottles the
+    name usually brings to mind. Three communal crus and a single vineyard
+    bottling, from two producers who take Melon de Bourgogne seriously.
+    Krieg 13, six of us, 15.90 CHF a head.
   tags:
-    - Melon de Bourgogne
-    - Muscadet Sèvre-et-Maine
-    - Pays Nantais
     - Loire
+    - Muscadet Sèvre-et-Maine
+    - Melon de Bourgogne
     - France
+  chapter: loire
   status: upcoming
+  spots_total: 6
+  cost_estimate: "15.90 CHF"
   featured: false
   wines:
     - name: "Château-Thébaud"
@@ -227,22 +238,29 @@
       appellation: "Muscadet Sèvre-et-Maine AOC, single vineyard"
       blend: "100% Melon de Bourgogne"
 
-- slug: anjou
-  title: "Anjou"
+- slug: savennieres-bonnezeaux
+  title: "Savennières & Bonnezeaux"
   date: null
   date_tbd: true
+  location: "Krieg 13"
   region: "Anjou"
   description: >
-    Second stop in the Loire series: Chenin Blanc through Savennières,
-    closing with a Bonnezeaux.
+    From Muscadet we move east into Anjou, where Chenin Blanc turns serious.
+    Three dry Savennières, including both of its named crus, then a glass of
+    Bonnezeaux to end on something sweet. Krieg 13, six of us, roughly
+    32 CHF a head.
   tags:
-    - Chenin Blanc
-    - Savennières
-    - Bonnezeaux
-    - Anjou
     - Loire
+    - Savennières
+    - Savennières-Roche-aux-Moines
+    - Savennières-Coulée-de-Serrant
+    - Bonnezeaux
+    - Chenin Blanc
     - France
+  chapter: loire
   status: upcoming
+  spots_total: 6
+  cost_estimate: "32 CHF"
   featured: false
   wines:
     - name: "Chamboureau"
@@ -250,9 +268,8 @@
       vintage: 2021
       appellation: "Savennières AOC"
       blend: "100% Chenin Blanc"
-    - name: "Clos de la Bergerie"
-      producer: "Nicolas Joly"
-      vintage: 2022
+    - name: "Savennières-Roche-aux-Moines"
+      producer: "Domaine aux Moines"
       appellation: "Savennières-Roche-aux-Moines AOC"
       blend: "100% Chenin Blanc"
     - name: "Coulée de Serrant"
@@ -266,23 +283,28 @@
       appellation: "Bonnezeaux AOC"
       blend: "100% Chenin Blanc"
 
-- slug: saumur
-  title: "Saumur"
+- slug: saumur-champigny
+  title: "Saumur & Champigny"
   date: null
   date_tbd: true
+  location: "Krieg 13"
   region: "Saumur"
   description: >
-    Third stop in the Loire series: sparkling, blanc and two vintages
-    of Saumur-Champigny.
+    Saumur in three registers: a traditional-method sparkling, a Crémant
+    blanc de blancs, and two vintages of Cabernet Franc from Saumur-Champigny
+    three years apart. Krieg 13, six of us, roughly 38 CHF a head.
   tags:
-    - Chenin Blanc
-    - Cabernet Franc
+    - Loire
     - Saumur
     - Saumur-Champigny
     - Crémant de Loire
-    - Loire
+    - Chenin Blanc
+    - Cabernet Franc
     - France
+  chapter: loire
   status: upcoming
+  spots_total: 6
+  cost_estimate: "38 CHF"
   featured: false
   wines:
     - name: "Saumur Brut"
@@ -306,27 +328,32 @@
       appellation: "Saumur-Champigny AOC"
       blend: "100% Cabernet Franc"
 
-- slug: touraine-whites
-  title: "Touraine Whites"
+- slug: vouvray-montlouis
+  title: "Vouvray & Montlouis"
   date: null
   date_tbd: true
+  location: "Krieg 13"
   region: "Touraine"
   description: >
-    Fourth stop in the Loire series, the whites: Chenin Blanc across
-    Vouvray and Montlouis-sur-Loire, dry to sweet.
+    Vouvray and Montlouis face each other across the river and both work
+    Chenin Blanc through every register it has: dry, off-dry and sweet.
+    Four wines from four producers who take that range seriously.
+    Krieg 13, six of us, roughly 23 CHF a head.
   tags:
-    - Chenin Blanc
+    - Loire
     - Vouvray
     - Montlouis-sur-Loire
-    - Touraine
-    - Loire
+    - Chenin Blanc
     - France
+  chapter: loire
   status: upcoming
+  spots_total: 6
+  cost_estimate: "23 CHF"
   featured: false
   wines:
-    - name: "Le Haut-Lieu Sec"
+    - name: "Clos du Bourg Sec"
       producer: "Domaine Huet"
-      vintage: 2022
+      vintage: 2023
       appellation: "Vouvray AOC"
       blend: "100% Chenin Blanc"
     - name: "Les Hauts de Husseau"
@@ -345,26 +372,29 @@
       appellation: "Vouvray AOC, moelleux"
       blend: "100% Chenin Blanc"
 
-- slug: touraine-reds
-  title: "Touraine Reds"
+- slug: chinon-bourgueil
+  title: "Chinon & Bourgueil"
   date: null
   date_tbd: true
+  location: "Krieg 13"
   region: "Touraine"
   description: >
-    Fourth stop in the Loire series, the reds: Cabernet Franc across
-    Chinon, Bourgueil and Saint-Nicolas-de-Bourgueil, opened with a
-    sparkling Vouvray.
+    We open with a sparkling Vouvray, then move into Cabernet Franc country:
+    Chinon, Bourgueil and Saint-Nicolas-de-Bourgueil, three neighbouring
+    villages on different gravels. Krieg 13, six of us, roughly 20 CHF a head.
   tags:
-    - Cabernet Franc
-    - Chenin Blanc
+    - Loire
     - Vouvray
     - Chinon
     - Bourgueil
     - Saint-Nicolas-de-Bourgueil
-    - Touraine
-    - Loire
+    - Chenin Blanc
+    - Cabernet Franc
     - France
+  chapter: loire
   status: upcoming
+  spots_total: 6
+  cost_estimate: "20 CHF"
   featured: false
   wines:
     - name: "Méthode Traditionnelle Extra Brut"
@@ -388,27 +418,32 @@
       appellation: "Saint-Nicolas-de-Bourgueil AOC"
       blend: "100% Cabernet Franc"
 
-- slug: centre-loire
-  title: "Centre-Loire"
+- slug: sancerre-pouilly-fume
+  title: "Sancerre & Pouilly-Fumé"
   date: null
   date_tbd: true
+  location: "Krieg 13"
   region: "Centre-Loire"
   description: >
-    Closing the Loire series in Centre-Loire: Sauvignon Blanc from
-    Pouilly-Fumé and two vintages of Sancerre.
+    We close the Loire where Sauvignon Blanc settled in for good: Pouilly-Fumé
+    and Sancerre, facing each other across the river. A Dagueneau, and two
+    vintages of Sancerre six years apart to see what age does to the grape.
+    Krieg 13, six of us, roughly 42 CHF a head.
   tags:
-    - Sauvignon Blanc
+    - Loire
     - Pouilly-Fumé
     - Sancerre
-    - Centre-Loire
-    - Loire
+    - Sauvignon Blanc
     - France
+  chapter: loire
   status: upcoming
+  spots_total: 6
+  cost_estimate: "42 CHF"
   featured: false
   wines:
     - name: "Silex"
       producer: "Didier Dagueneau"
-      vintage: 2022
+      vintage: 2023
       appellation: "Pouilly-Fumé AOC"
       blend: "100% Sauvignon Blanc"
     - name: "Le Pavé"
@@ -439,6 +474,7 @@
     - Rhône
     - Northern Rhône
     - France
+  chapter: rhone
   status: past
   featured: false
   slides: true
@@ -478,6 +514,7 @@
     - Rhône
     - Northern Rhône
     - France
+  chapter: rhone
   status: past
   featured: false
   slides: true
@@ -516,6 +553,7 @@
     - Rhône
     - Northern Rhône
     - France
+  chapter: rhone
   status: past
   featured: false
   slides: true
@@ -559,6 +597,7 @@
     - Tuscany
     - France
     - Italy
+  chapter: rhone
   status: past
   featured: false
   slides: true
@@ -597,6 +636,7 @@
     - Friuli
     - France
     - Italy
+  chapter: pilot
   status: past
   featured: false
   slides: true

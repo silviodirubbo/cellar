@@ -20,16 +20,6 @@
   category: Region
 - name: Loire
   category: Region
-- name: Pays Nantais
-  category: Region
-- name: Anjou
-  category: Region
-- name: Saumur
-  category: Region
-- name: Touraine
-  category: Region
-- name: Centre-Loire
-  category: Region
 
 - name: Côte-Rôtie
   category: Appellation
@@ -67,7 +57,13 @@
   category: Appellation
 - name: Savennières
   category: Appellation
+- name: Savennières-Roche-aux-Moines
+  category: Appellation
+- name: Savennières-Coulée-de-Serrant
+  category: Appellation
 - name: Bonnezeaux
+  category: Appellation
+- name: Saumur
   category: Appellation
 - name: Saumur-Champigny
   category: Appellation

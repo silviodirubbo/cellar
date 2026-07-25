@@ -43,15 +43,26 @@ permalink: /tastings/
 <div class="chipbar-wrap">
   <div class="container">
     <div class="chipbar" id="chipbar">
-      <button class="chip chip--active" data-tag="">All</button>
-      {% for tag in site.data.tags %}
-        {% unless tag.category == "Country" %}
-          {% assign c = 0 %}
-          {% for x in all_tags %}{% if x == tag.name %}{% assign c = c | plus: 1 %}{% endif %}{% endfor %}
-          {% if c >= 3 %}
-            <button class="chip" data-tag="{{ tag.name }}">{{ tag.name }}&nbsp;<span class="chip__n">{{ c }}</span></button>
-          {% endif %}
-        {% endunless %}
+      <div class="chip-group chip-group--all">
+        <button class="chip chip--active" data-tag="">All</button>
+      </div>
+      {% assign chip_groups = "Region|Appellation|Grape" | split: "|" %}
+      {% assign chip_group_labels = "Region|Denomination|Grape" | split: "|" %}
+      {% for category in chip_groups %}
+        {% assign group_label = chip_group_labels[forloop.index0] %}
+        {% assign group_tags = site.data.tags | where: "category", category %}
+        <div class="chip-group">
+          <span class="chip-group__label">{{ group_label }}</span>
+          <div class="chip-group__items">
+            {% for tag in group_tags %}
+              {% assign c = 0 %}
+              {% for x in all_tags %}{% if x == tag.name %}{% assign c = c | plus: 1 %}{% endif %}{% endfor %}
+              {% if c > 0 %}
+                <button class="chip" data-tag="{{ tag.name }}">{{ tag.name }}&nbsp;<span class="chip__n">{{ c }}</span></button>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
       {% endfor %}
     </div>
   </div>
@@ -102,6 +113,15 @@ permalink: /tastings/
           <div class="tl-card__body">
             {% if is_next %}
             <span class="tl-card__flag">Next tasting<span class="js-countdown" data-date="{{ tasting.date }}"></span></span>
+            {% endif %}
+            {% case tasting.chapter %}
+              {% when "pilot" %}{% assign chapter_label = "Pilot" %}
+              {% when "rhone" %}{% assign chapter_label = "Rhône" %}
+              {% when "loire" %}{% assign chapter_label = "Loire" %}
+              {% else %}{% assign chapter_label = "" %}
+            {% endcase %}
+            {% if chapter_label != "" %}
+            <span class="chapter-tag chapter-tag--{{ tasting.chapter }}">{{ chapter_label }}</span>
             {% endif %}
             <h2 class="tl-card__title">{{ tasting.title }}</h2>
             <div class="tl-card__where">
@@ -200,7 +220,16 @@ permalink: /tastings/
               <span class="past-entry__thumb past-entry__thumb--empty" aria-hidden="true"></span>
             {% endif %}
             <span class="past-entry__main">
-              <span class="past-entry__title">{{ tasting.title }}</span>
+              {% case tasting.chapter %}
+                {% when "pilot" %}{% assign chapter_label = "Pilot" %}
+                {% when "rhone" %}{% assign chapter_label = "Rhône" %}
+                {% when "loire" %}{% assign chapter_label = "Loire" %}
+                {% else %}{% assign chapter_label = "" %}
+              {% endcase %}
+              <span class="past-entry__title">
+                {% if chapter_label != "" %}<span class="chapter-dot chapter-dot--{{ tasting.chapter }}" aria-hidden="true"></span>{% endif %}
+                {{ tasting.title }}
+              </span>
               <span class="past-entry__where">
                 {{ tasting.region }}{% if tasting.location %} &middot; {{ tasting.location }}{% endif %}
                 {% if tasting.wines %} &middot; {{ tasting.wines.size }} wines{% endif %}

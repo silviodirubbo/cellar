@@ -796,7 +796,19 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   top: 56px;
   z-index: 50;
 }
-.chipbar { display: flex; gap: 0.45rem; flex-wrap: wrap; }
+.chipbar { display: flex; flex-direction: column; gap: 0.5rem; }
+.chip-group { display: flex; align-items: baseline; gap: 0.7rem; flex-wrap: wrap; }
+.chip-group--all { padding-bottom: 0.35rem; border-bottom: 1px solid var(--rule); }
+.chip-group__label {
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  flex: 0 0 auto;
+  width: 5.25rem;
+}
+.chip-group__items { display: flex; gap: 0.45rem; flex-wrap: wrap; }
 .chip {
   font-family: var(--font-mono);
   font-size: 0.58rem;
@@ -819,6 +831,35 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   border-color: var(--ink);
 }
 .chip__n { color: var(--gold); }
+
+/* ── Chapter tag (curriculum chapter, on every card) ────────── */
+.chapter-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--warm-white);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  margin-bottom: 0.55rem;
+}
+.chapter-tag--pilot { background: #A88C5A; }
+.chapter-tag--rhone { background: var(--green); }
+.chapter-tag--loire { background: #6B8A78; }
+.tl-card--feature .chapter-tag { background: rgba(253,252,250,0.15); }
+
+.chapter-dot {
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  margin-right: 0.35rem;
+  vertical-align: middle;
+}
+.chapter-dot--pilot { background: #A88C5A; }
+.chapter-dot--rhone { background: var(--green); }
+.chapter-dot--loire { background: #6B8A78; }
 
 /* ── The timeline ─────────────────────────────────────────── */
 .timeline { padding: 3rem 0 5rem; }
@@ -1108,13 +1149,17 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 
 @media (max-width: 640px) {
   .chipbar-wrap { top: 52px; }
-  .chipbar {
+  .chip-group { align-items: flex-start; }
+  .chip-group__label { width: auto; margin-bottom: 0.3rem; }
+  .chip-group:not(.chip-group--all) { flex-direction: column; gap: 0.4rem; }
+  .chip-group__items {
     flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     margin-right: -2rem;
     padding-right: 2rem;
+    width: 100%;
   }
-  .chipbar::-webkit-scrollbar { display: none; }
+  .chip-group__items::-webkit-scrollbar { display: none; }
 }
