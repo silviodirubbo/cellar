@@ -358,6 +358,7 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
 .text-ink   { color: var(--ink); }
 .mt-1 { margin-top: 0.5rem; }  .mt-2 { margin-top: 1rem; }
 .mt-3 { margin-top: 1.5rem; }  .mt-4 { margin-top: 2rem; }
+.mt-6 { margin-top: 3rem; }
 .mb-1 { margin-bottom: 0.5rem; } .mb-2 { margin-bottom: 1rem; }
 .mb-3 { margin-bottom: 1.5rem; } .mb-4 { margin-bottom: 2rem; }
 
@@ -482,6 +483,40 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
 .form-input:focus { border-color: var(--ink-mid); }
 textarea.form-input { min-height: 5rem; }
 .form-success { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-top: 0.75rem; max-width: none; }
+.form-error { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-top: 0.75rem; max-width: none; }
+
+/* ── Planner: stale deep-link notice ──────────────────────── */
+.planner-stale-notice { border-left: 2px solid var(--gold); padding: 1rem 1.25rem; margin-bottom: 1.5rem; background: var(--off-white); }
+.planner-stale-notice p { font-size: 0.9rem; color: var(--ink-mid); max-width: none; }
+.planner-stale-notice em { font-style: italic; }
+.planner-stale-notice a { color: var(--ink-mid); border-bottom: 1px solid var(--ink-mid); padding-bottom: 1px; transition: color 0.2s var(--ease), border-color 0.2s var(--ease); }
+.planner-stale-notice a:hover { color: var(--green); border-bottom-color: var(--green); }
+
+/* ── Planner: TBD tastings, grouped by chapter ────────────── */
+.tbd-group { margin-bottom: 2rem; }
+.tbd-group__label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
+  border-bottom: 1px solid var(--rule);
+}
+.tbd-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.tbd-row:last-child { border-bottom: none; }
+.tbd-row__main { display: flex; flex-direction: column; gap: 0.15rem; }
+.tbd-row__title { font-family: var(--font-serif); font-size: 1rem; color: var(--ink); }
+.tbd-row__meta { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); }
 
 /* ── Availability modal ───────────────────────────────────── */
 .avail-overlay { position: fixed; inset: 0; background: rgba(26,24,20,0.7); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 2rem; }
@@ -544,6 +579,9 @@ textarea.form-input { min-height: 5rem; }
 
   /* Page header */
   .page-header { padding-top: calc(3rem + 3.5rem); padding-bottom: 3rem; }
+
+  /* Planner: TBD rows stack instead of squeezing the button */
+  .tbd-row { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
 }
 
 /* ============================================================
