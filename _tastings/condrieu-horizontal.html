@@ -175,16 +175,18 @@ date: 2026-07-18
    Base structure and classes mirror the final producers slide
    in _tastings/cote-rotie-horizontal.html and
    _tastings/southern-rhone-overview.html (the two are identical
-   except SR adds the .vint-legend and gold .vint-score — used as
-   the current reference here). Deck-specific additions below:
-     · .cv-prev / .prod-prevnote — a "tasted at a previous
+   except SR adds the .vint-legend and gold .vint-score). This
+   deck stacks two timelines in the same slide: Wine Spectator
+   (numeric scores, score-threshold tiers, tasted-year highlight)
+   above Vin & Millesimes (a curated best-vintage shortlist).
+   Deck-specific additions below.
+     · .cv-prev / .prod-prevnote: a "tasted at a previous
        session" footnote marker, deliberately muted grey and kept
        distinct from this session's gold .tdot + green .cv-hi.
-     · .prod-grillet — a set-apart band for Château-Grillet, a
+     · .prod-grillet: a set-apart band for Chateau-Grillet, a
        neighbouring monopole AOC rather than a Condrieu producer.
-     · .vint-bar.ghost + .vint-note — support a curated,
-       non-contiguous "best vintages" chart (Vin & Millésimes)
-       in place of the dense Wine Spectator annual run. */
+     · .vint-bar.ghost + .vint-note: support the curated,
+       non-contiguous Vin & Millesimes shortlist. */
 .slide-producers {
   background: var(--warm-white);
   flex-direction: column;
@@ -228,7 +230,7 @@ date: 2026-07-18
   margin-top: 12px;
 }
 
-/* previously-tasted footnote — muted grey, NOT the green/gold
+/* previously-tasted footnote, muted grey, NOT the green/gold
    marks reserved for wines poured this session */
 .prod-prevnote {
   font-family: 'DM Mono', monospace; font-weight: 300; font-size: 6px;
@@ -290,8 +292,8 @@ date: 2026-07-18
   font-family: 'DM Mono', monospace; font-size: 6.5px; font-weight: 300;
 }
 
-/* Château-Grillet: a neighbouring monopole AOC set apart from the
-   Condrieu producer grid — same fonts and palette, gold accent
+/* Chateau-Grillet: a neighbouring monopole AOC set apart from the
+   Condrieu producer grid, same fonts and palette; gold accent
    rail + off-white ground signal "adjacent, not one of the above". */
 .prod-grillet {
   flex: 0 0 auto;
@@ -353,6 +355,14 @@ date: 2026-07-18
   display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1;
 }
 
+/* numeric score above each bar (Wine Spectator timeline only) */
+.vint-score {
+  font-family: 'DM Mono', monospace; font-size: 6px; font-weight: 300;
+  color: var(--ink-light); text-align: center; line-height: 1;
+}
+.vint-score.cls { color: var(--green); }
+.vint-score.out { color: var(--green); opacity: 0.8; }
+
 .vint-bar-wrap {
   width: 100%; display: flex; align-items: flex-end; height: 48px;
 }
@@ -363,8 +373,10 @@ date: 2026-07-18
 .vint-bar.cls { background: var(--green); }
 .vint-bar.out { background: var(--green); opacity: 0.6; }
 .vint-bar.vg  { background: var(--ink-light); opacity: 0.4; }
+.vint-bar.gd  { background: var(--ink-light); opacity: 0.2; }
+.vint-bar.hi  { outline: 1.5px solid var(--gold); outline-offset: 1px; }
 /* 1978: celebrated older vintage listed without a modern tier
-   rating — rendered as an outlined "ghost" bar so it reads as
+   rating, rendered as an outlined "ghost" bar so it reads as
    present-but-unrated rather than low quality */
 .vint-bar.ghost {
   background: transparent;
@@ -376,9 +388,10 @@ date: 2026-07-18
   font-family: 'DM Mono', monospace; font-size: 6px; font-weight: 300;
   letter-spacing: .01em; color: var(--ink-light); text-align: center; line-height: 1;
 }
+.vint-year.hi { color: var(--gold); }
 
 /* discontinuity break: a narrow gap + dotted rule set between the
-   lone 1978 outlier and the 1995–2020 cluster, so the evenly spaced
+   lone 1978 outlier and the 1995-2020 cluster, so the evenly spaced
    bars don't misread as a continuous 45-year annual run */
 .vint-gap { flex: 0 0 18px; }
 .vint-divider {
@@ -578,7 +591,7 @@ date: 2026-07-18
           a broad framework of the appellation's producers.
         </div>
         <div class="prod-prevnote">
-          <span class="cv-prev">†</span>Les Chaillets (Cuilleron) —
+          <span class="cv-prev">†</span>Les Chaillets (Cuilleron),
           tasted at a previous session, Northern Rhône Whites ·
           29 May 2026. Not poured tonight.
         </div>
@@ -588,85 +601,6 @@ date: 2026-07-18
     <div class="prod-right">
       <div class="prod-col">
         <div class="prow first">
-          <div class="pname tasted"><span class="tdot"></span>Vernay</div><div class="leader"></div>
-          <div class="cuvees">Coteau de Vernon<span class="csep">·</span><span class="cv-hi">Chaillées de l'Enfer</span><span class="csep">·</span><span class="cv-hi">Terrasses de l'Empire</span></div>
-        </div>
-        <div class="prow">
-          <div class="pname">Guigal</div><div class="leader"></div>
-          <div class="cuvees">La Doriane<span class="csep">·</span>Luminescence</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Jamet</div><div class="leader"></div>
-          <div class="cuvees">Vernillon</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Cuilleron</div><div class="leader"></div>
-          <div class="cuvees">La Petite Côte<span class="csep">·</span>Les Chaillets<span class="cv-prev">†</span><span class="csep">·</span>Verlieu<span class="csep">·</span>Vernon<span class="csep">·</span>Essence d'Automne</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Niero</div><div class="leader"></div>
-          <div class="cuvees">Les Ravines<span class="csep">·</span>Cœur de Roncharde<span class="csep">·</span>Vernon<span class="csep">·</span>Héritage</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Gangloff</div><div class="leader"></div>
-          <div class="cuvees">Condrieu</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Chapoutier</div><div class="leader"></div>
-          <div class="cuvees">Coteau de Chery<span class="csep">·</span>Invitare</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Domaine du Monteillet</div><div class="leader"></div>
-          <div class="cuvees">Les Grandes Chaillées<span class="csep">·</span>Chanson<span class="csep">·</span>La Grillette</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Rostaing</div><div class="leader"></div>
-          <div class="cuvees">La Bonnette</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Clusel-Roch</div><div class="leader"></div>
-          <div class="cuvees">Verchery</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Domaine du Tunnel</div><div class="leader"></div>
-          <div class="cuvees">Condrieu</div>
-        </div>
-        <div class="prow">
-          <div class="pname">La Mordorée</div><div class="leader"></div>
-          <div class="cuvees">Christophe Delorme</div>
-        </div>
-      </div>
-
-      <div class="prod-col">
-        <div class="prow first">
-          <div class="pname tasted"><span class="tdot"></span>Villard</div><div class="leader"></div>
-          <div class="cuvees"><span class="cv-hi">Villa Pontciana</span><span class="csep">·</span>De Poncins<span class="csep">·</span>Le Grand Vallon<span class="csep">·</span>Les Terrasses du Palat</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Perret</div><div class="leader"></div>
-          <div class="cuvees">Condrieu<span class="csep">·</span>Coteau de Chéry<span class="csep">·</span>Clos Chanson</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Gérin</div><div class="leader"></div>
-          <div class="cuvees">La Loye<span class="csep">·</span>Les Eguets</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Pichon</div><div class="leader"></div>
-          <div class="cuvees">Caresse</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Ogier</div><div class="leader"></div>
-          <div class="cuvees">Les Vieilles Vignes de Jacques Vernay</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Vidal-Fleury</div><div class="leader"></div>
-          <div class="cuvees">Condrieu</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Dumazet</div><div class="leader"></div>
-          <div class="cuvees">Côte Fournet</div>
-        </div>
-        <div class="prow">
           <div class="pname">Anthony Paret</div><div class="leader"></div>
           <div class="cuvees">Côte Bellay<span class="csep">·</span>Paton</div>
         </div>
@@ -675,12 +609,91 @@ date: 2026-07-18
           <div class="cuvees">Côte Chatillon</div>
         </div>
         <div class="prow">
-          <div class="pname">Saint Cosme</div><div class="leader"></div>
+          <div class="pname">Chapoutier</div><div class="leader"></div>
+          <div class="cuvees">Coteau de Chery<span class="csep">·</span>Invitare</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Clusel-Roch</div><div class="leader"></div>
+          <div class="cuvees">Verchery</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Cuilleron</div><div class="leader"></div>
+          <div class="cuvees">La Petite Côte<span class="csep">·</span>Les Chaillets<span class="cv-prev">†</span><span class="csep">·</span>Verlieu<span class="csep">·</span>Vernon<span class="csep">·</span>Essence d'Automne</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Domaine du Monteillet</div><div class="leader"></div>
+          <div class="cuvees">Les Grandes Chaillées<span class="csep">·</span>Chanson<span class="csep">·</span>La Grillette</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Domaine du Tunnel</div><div class="leader"></div>
           <div class="cuvees">Condrieu</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Dumazet</div><div class="leader"></div>
+          <div class="cuvees">Côte Fournet</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Gangloff</div><div class="leader"></div>
+          <div class="cuvees">Condrieu</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Gérin</div><div class="leader"></div>
+          <div class="cuvees">La Loye<span class="csep">·</span>Les Eguets</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Guigal</div><div class="leader"></div>
+          <div class="cuvees">La Doriane<span class="csep">·</span>Luminescence</div>
         </div>
         <div class="prow">
           <div class="pname">Jaboulet</div><div class="leader"></div>
           <div class="cuvees">Les Cassines<span class="csep">·</span>Les Grands Amandiers</div>
+        </div>
+      </div>
+
+      <div class="prod-col">
+        <div class="prow first">
+          <div class="pname">Jamet</div><div class="leader"></div>
+          <div class="cuvees">Vernillon</div>
+        </div>
+        <div class="prow">
+          <div class="pname">La Mordorée</div><div class="leader"></div>
+          <div class="cuvees">Christophe Delorme</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Niero</div><div class="leader"></div>
+          <div class="cuvees">Les Ravines<span class="csep">·</span>Cœur de Roncharde<span class="csep">·</span>Vernon<span class="csep">·</span>Héritage</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Ogier</div><div class="leader"></div>
+          <div class="cuvees">Les Vieilles Vignes de Jacques Vernay</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Perret</div><div class="leader"></div>
+          <div class="cuvees">Condrieu<span class="csep">·</span>Coteau de Chéry<span class="csep">·</span>Clos Chanson</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Pichon</div><div class="leader"></div>
+          <div class="cuvees">Caresse</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Rostaing</div><div class="leader"></div>
+          <div class="cuvees">La Bonnette</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Saint Cosme</div><div class="leader"></div>
+          <div class="cuvees">Condrieu</div>
+        </div>
+        <div class="prow">
+          <div class="pname tasted"><span class="tdot"></span>Vernay</div><div class="leader"></div>
+          <div class="cuvees">Coteau de Vernon<span class="csep">·</span><span class="cv-hi">Chaillées de l'Enfer</span><span class="csep">·</span><span class="cv-hi">Terrasses de l'Empire</span></div>
+        </div>
+        <div class="prow">
+          <div class="pname">Vidal-Fleury</div><div class="leader"></div>
+          <div class="cuvees">Condrieu</div>
+        </div>
+        <div class="prow">
+          <div class="pname tasted"><span class="tdot"></span>Villard</div><div class="leader"></div>
+          <div class="cuvees"><span class="cv-hi">Villa Pontciana</span><span class="csep">·</span>De Poncins<span class="csep">·</span>Le Grand Vallon<span class="csep">·</span>Les Terrasses du Palat</div>
         </div>
       </div>
     </div>
@@ -693,13 +706,19 @@ date: 2026-07-18
     </div>
     <div class="grillet-sep"></div>
     <div class="grillet-desc">
-      A single-estate monopole of roughly 3.5 hectares enclosed within Condrieu — its own
+      A single-estate monopole of roughly 3.5 hectares enclosed within Condrieu. Its own
       appellation and among the smallest AOCs in France. Shown apart because it is a
       neighbouring cru, not a Condrieu producer, though it grows the same Viognier.
     </div>
   </div>
 
   <div class="prod-bottom">
+    <div class="vint-header">
+      <span class="vint-label">Vintages · Wine Spectator</span>
+      <div class="vint-rule"></div>
+    </div>
+    <div class="vint-chart" id="vint-chart-condrieu-ws"></div>
+
     <div class="vint-header">
       <span class="vint-label">Vintages · Vin &amp; Millésimes</span>
       <div class="vint-rule"></div>
@@ -712,7 +731,7 @@ date: 2026-07-18
     </div>
     <div class="vint-chart" id="vint-chart-condrieu"></div>
     <div class="vint-note">
-      A curated best-vintage shortlist — years are spaced evenly for comparison, not on a
+      A curated best-vintage shortlist, years spaced evenly for comparison rather than on a
       continuous time axis. 1978 (outlined) is a celebrated older vintage listed without a
       modern tier rating.
     </div>
@@ -722,7 +741,62 @@ date: 2026-07-18
 
 <script>
 (function() {
-  // Condrieu best-vintage shortlist from Vin & Millésimes — a curated,
+  // Wine Spectator vintage chart, same structure and data used on the
+  // Côte-Rôtie producers slide (Northern Rhône, 29 consecutive years,
+  // numeric scores, score-threshold tier coloring). Poured this session:
+  // Vernay 2023 (x2) and Villard 2020, both highlighted via the gold
+  // outline / gold year (isTasted).
+  var data = [
+    {y:1995,s:91},{y:1996,s:90},{y:1997,s:88},{y:1998,s:90},
+    {y:1999,s:96},{y:2000,s:88},{y:2001,s:89},{y:2002,s:82},
+    {y:2003,s:94},{y:2004,s:90},{y:2005,s:94},{y:2006,s:92},
+    {y:2007,s:91},{y:2008,s:86},{y:2009,s:96},{y:2010,s:98},
+    {y:2011,s:92},{y:2012,s:92},{y:2013,s:91},{y:2014,s:89},
+    {y:2015,s:99},{y:2016,s:97},{y:2017,s:97},{y:2018,s:92},
+    {y:2019,s:96},{y:2020,s:96},{y:2021,s:87},{y:2022,s:94},
+    {y:2023,s:93}
+  ];
+  var tasted = [2020, 2023];
+  var minS = 80, maxH = 48;
+  var chart = document.getElementById('vint-chart-condrieu-ws');
+  if (!chart) return;
+
+  data.forEach(function(v) {
+    var isTasted = tasted.indexOf(v.y) > -1;
+    var pct = (v.s - minS) / 20;
+    var barH = Math.round(pct * maxH) + 'px';
+    var tier = v.s >= 95 ? 'cls' : v.s >= 90 ? 'out' : v.s >= 85 ? 'vg' : 'gd';
+
+    var col = document.createElement('div');
+    col.className = 'vint-col';
+
+    var score = document.createElement('div');
+    score.className = 'vint-score ' + tier;
+    score.textContent = v.s;
+
+    var wrap = document.createElement('div');
+    wrap.className = 'vint-bar-wrap';
+
+    var bar = document.createElement('div');
+    bar.className = 'vint-bar ' + tier + (isTasted ? ' hi' : '');
+    bar.style.height = barH;
+
+    var year = document.createElement('div');
+    year.className = 'vint-year' + (isTasted ? ' hi' : '');
+    year.textContent = v.y;
+
+    wrap.appendChild(bar);
+    col.appendChild(score);
+    col.appendChild(wrap);
+    col.appendChild(year);
+    chart.appendChild(col);
+  });
+})();
+</script>
+
+<script>
+(function() {
+  // Condrieu best-vintage shortlist from Vin & Millésimes, a curated,
   // non-contiguous selection rather than a full annual run. Bars are
   // laid out evenly (flex) for comparison and are NOT plotted on a real
   // time axis, so the 17-year gap between 1978 and 1995 reads the same
