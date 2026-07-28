@@ -296,9 +296,10 @@ title: "Côte-Rôtie Horizontal"
      SLIDE 1 · COVER
      Image: assets/tastings/cote-rotie-horizontal/cover.jpg
      ───────────────────────────────────────────────────────── -->
+{% assign this_tasting = site.data.tastings | where: "slug", page.slug | first %}
 <div class="slide slide-cover active">
   <div class="cover-content">
-    <div class="eyebrow">Wine Tasting · 20 June 2026</div>
+    <div class="eyebrow">Wine Tasting · {{ this_tasting.date | date: "%-d %B %Y" }}</div>
     <div class="cover-title">Côte-Rôtie</div>
     <div class="cover-subtitle">Horizontal</div>
     <div class="cover-rule"></div>

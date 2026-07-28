@@ -331,9 +331,10 @@ title: "Southern Rhône Overview"
      SLIDE 1 · COVER
      Image: assets/tastings/southern-rhone-overview/cover.jpg
      ───────────────────────────────────────────────────────── -->
+{% assign this_tasting = site.data.tastings | where: "slug", page.slug | first %}
 <div class="slide slide-cover active">
   <div class="cover-content">
-    <div class="eyebrow">Wine Tasting · 18 July 2026</div>
+    <div class="eyebrow">Wine Tasting · {{ this_tasting.date | date: "%-d %B %Y" }}</div>
     <div class="cover-title">Southern Rhône</div>
     <div class="cover-subtitle">Overview</div>
     <div class="cover-rule"></div>

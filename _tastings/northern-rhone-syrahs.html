@@ -141,10 +141,11 @@ title: "Northern Rhône Syrahs"
 </style>
 
 <!-- 1: COVER -->
+{% assign this_tasting = site.data.tastings | where: "slug", page.slug | first %}
 <div class="slide slide-cover active">
   <div class="cover-bg" style="background-image:url('{{ site.baseurl }}/assets/tastings/northern-rhone-syrahs/cover.jpg')"></div>
   <div class="cover-content">
-    <div class="eyebrow">Wine Tasting · 23 May 2026</div>
+    <div class="eyebrow">Wine Tasting · {{ this_tasting.date | date: "%-d %B %Y" }}</div>
     <div class="cover-title">Syrah</div>
     <div class="cover-subtitle">of the Northern Rhône</div>
     <div class="cover-rule"></div>

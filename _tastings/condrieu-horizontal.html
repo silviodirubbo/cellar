@@ -115,7 +115,7 @@ title: "Condrieu Horizontal"
 }
 .map-tag {
   position: absolute; bottom: 16px; left: 16px;
-  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 15px;
   letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
   background: rgba(253,252,250,.9); padding: 5px 9px;
 }
@@ -428,9 +428,10 @@ title: "Condrieu Horizontal"
      SLIDE 1 · COVER
      Image: assets/tastings/condrieu-horizontal/cover.jpg
      ───────────────────────────────────────────────────────── -->
+{% assign this_tasting = site.data.tastings | where: "slug", page.slug | first %}
 <div class="slide slide-cover active">
   <div class="cover-content">
-    <div class="eyebrow">Wine Tasting · 18 July 2026</div>
+    <div class="eyebrow">Wine Tasting · {{ this_tasting.date | date: "%-d %B %Y" }}</div>
     <div class="cover-title">Condrieu</div>
     <div class="cover-subtitle">Horizontal</div>
     <div class="cover-rule"></div>
