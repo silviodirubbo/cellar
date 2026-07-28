@@ -377,6 +377,15 @@ date: 2026-07-18
   letter-spacing: .01em; color: var(--ink-light); text-align: center; line-height: 1;
 }
 
+/* discontinuity break: a narrow gap + dotted rule set between the
+   lone 1978 outlier and the 1995–2020 cluster, so the evenly spaced
+   bars don't misread as a continuous 45-year annual run */
+.vint-gap { flex: 0 0 18px; }
+.vint-divider {
+  width: 1px; height: 48px; margin: 0 auto;
+  border-left: 1px dotted var(--rule);
+}
+
 .vint-note {
   font-family: 'DM Mono', monospace; font-weight: 300; font-size: 6px;
   letter-spacing: .05em; color: var(--ink-light); line-height: 1.6; margin-top: 2px;
@@ -724,7 +733,7 @@ date: 2026-07-18
   var tierHeight = { leg: 48,    exc: 38,    vg: 28 };
 
   var data = [
-    {y:1978, tier:null,  ghost:true, note:'Celebrated older vintage; listed among the best without a modern tier rating.'},
+    {y:1978, tier:null,  ghost:true, gapAfter:true, note:'Celebrated older vintage; listed among the best without a modern tier rating.'},
     {y:1995, tier:'leg', note:'Minerality, purity, exceptional consistency.'},
     {y:1999, tier:'vg',  note:'Opulence, candied fruits, honeyed notes.'},
     {y:2000, tier:'vg',  note:'Perfect balance, remarkable floral expression.'},
@@ -761,6 +770,23 @@ date: 2026-07-18
     col.appendChild(wrap);
     col.appendChild(year);
     chart.appendChild(col);
+
+    // insert a discontinuity break after the isolated 1978 outlier so
+    // the even bar spacing doesn't imply a continuous annual timeline
+    if (v.gapAfter) {
+      var gap = document.createElement('div');
+      gap.className = 'vint-col vint-gap';
+      var gapWrap = document.createElement('div');
+      gapWrap.className = 'vint-bar-wrap';
+      var divider = document.createElement('div');
+      divider.className = 'vint-divider';
+      var gapYear = document.createElement('div');
+      gapYear.className = 'vint-year';
+      gapWrap.appendChild(divider);
+      gap.appendChild(gapWrap);
+      gap.appendChild(gapYear);
+      chart.appendChild(gap);
+    }
   });
 })();
 </script>
