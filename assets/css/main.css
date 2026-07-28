@@ -22,6 +22,7 @@
   --font-serif:  'Cormorant Garamond', Georgia, serif;
   --font-mono:   'DM Mono', 'Courier New', monospace;
   --section-pad: 7rem;
+  --panel-pad-y:  3rem;
   --container:   960px;
   --ease:        cubic-bezier(0.25, 0.1, 0.25, 1);
 }
@@ -365,7 +366,7 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
 /* ── Home two-column preview ──────────────────────────────── */
 .preview-grid { display: grid; grid-template-columns: 1fr 1px 1fr; min-height: 360px; }
 .preview-rule { background-color: var(--rule); width: 1px; }
-.preview-col { padding: 3rem 2.5rem; }
+.preview-col { padding: var(--panel-pad-y) 2.5rem; }
 .preview-col--left  { background-color: var(--off-white); }
 .preview-col--right { background-color: var(--warm-white); }
 
@@ -403,8 +404,8 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
 
 /* ── Planner page ─────────────────────────────────────────── */
 .planner-grid { display: grid; grid-template-columns: 2fr 1fr; min-height: 500px; border-top: 1px solid var(--rule); }
-.planner-main { padding: 3rem 2.5rem; background: var(--warm-white); border-right: 1px solid var(--rule); }
-.planner-aside { padding: 3rem 2rem; background: var(--off-white); }
+.planner-main { padding: var(--panel-pad-y) 2.5rem; background: var(--warm-white); border-right: 1px solid var(--rule); }
+.planner-aside { padding: var(--panel-pad-y) 2rem; background: var(--off-white); }
 
 .signup-block { border: 1px solid var(--rule); padding: 1.5rem; margin-bottom: 1rem; }
 .signup-block--featured { border-left: 2px solid var(--green); }
@@ -425,6 +426,7 @@ textarea.form-input { min-height: 5rem; }
 
 /* ── Availability modal ───────────────────────────────────── */
 .avail-overlay { position: fixed; inset: 0; background: rgba(26,24,20,0.7); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+.avail-overlay[hidden] { display: none; }
 .avail-modal { background: var(--warm-white); max-width: 480px; width: 100%; padding: 2.5rem; position: relative; }
 .avail-modal__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
 .avail-close { font-family: var(--font-mono); font-size: 0.7rem; color: var(--ink-light); background: none; border: none; cursor: pointer; padding: 0.25rem; transition: color 0.2s var(--ease); }
@@ -965,6 +967,17 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   color: var(--warm-white);
 }
 .tl-row--upcoming:hover .tl-card--feature { border-color: transparent; border-left-color: var(--chapter-accent, var(--green)); }
+/* legibility scrim over the cover photo, painted in --ink itself rather than
+   a hardcoded near-miss; harmless no-op when there's no cover, since the
+   card's own background is already solid --ink underneath. */
+.tl-card--feature::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: linear-gradient(110deg, rgba(26,24,20,0.95) 35%, rgba(26,24,20,0.6) 100%);
+}
 .tl-card__ghost {
   position: absolute;
   right: -0.5rem;

@@ -1,5 +1,5 @@
 /* ============================================================
-   supabase.js — Auth & database client
+   supabase.js: Auth & database client
    ============================================================ */
 
 const SUPABASE_URL      = 'https://iazxrxrimfakxdbulwsj.supabase.co';
@@ -14,7 +14,7 @@ const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   }
 });
 
-// Handle OAuth redirect — recover session from URL hash
+// Handle OAuth redirect, recover session from URL hash
 db.auth.getSession().then(({ data: { session } }) => {
   if (session) {
     document.dispatchEvent(new CustomEvent('user:ready', { detail: session.user }));

@@ -104,14 +104,14 @@ permalink: /planner/
         <input class="form-input" type="number" id="propose-people" name="people" min="1" max="20" placeholder="e.g. 2">
       </div>
       <button type="submit" class="btn btn--green">Send suggestion</button>
-      <p class="form-success" id="propose-success" style="display:none;">Thank you. Suggestion sent.</p>
+      <p class="form-success" id="propose-success" hidden>Thank you. Suggestion sent.</p>
     </form>
   </div>
 
 </div>
 
 <!-- ── Sign-up modal ───────────────────────────────────────── -->
-<div class="avail-overlay" id="signup-overlay" style="display:none;">
+<div class="avail-overlay" id="signup-overlay" hidden>
   <div class="avail-modal">
     <div class="avail-modal__header">
       <span class="col-label" style="margin-bottom:0;" id="signup-tasting-name">Sign up</span>
@@ -138,13 +138,13 @@ permalink: /planner/
         <input class="form-input" type="number" id="signup-people" name="people" min="1" max="10" placeholder="e.g. 1" required>
       </div>
       <button type="submit" class="btn btn--green">Confirm attendance</button>
-      <p class="form-success" id="signup-success" style="display:none;">You're in. See you there.</p>
+      <p class="form-success" id="signup-success" hidden>You're in. See you there.</p>
     </form>
   </div>
 </div>
 
 <!-- ── Availability modal ──────────────────────────────────── -->
-<div class="avail-overlay" id="avail-overlay" style="display:none;">
+<div class="avail-overlay" id="avail-overlay" hidden>
   <div class="avail-modal">
     <div class="avail-modal__header">
       <span class="col-label" style="margin-bottom:0;" id="avail-tasting-name">Availability</span>
@@ -171,7 +171,7 @@ permalink: /planner/
         <input class="form-input" type="number" id="avail-people" name="people" min="1" max="20" placeholder="e.g. 2">
       </div>
       <button type="submit" class="btn btn--green">Send availability</button>
-      <p class="form-success" id="avail-success" style="display:none;">Thank you. I will be in touch once the date is set.</p>
+      <p class="form-success" id="avail-success" hidden>Thank you. I will be in touch once the date is set.</p>
     </form>
   </div>
 </div>
@@ -184,16 +184,16 @@ document.querySelectorAll('.signup-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.getElementById('signup-tasting-name').textContent = btn.dataset.title;
     document.getElementById('signup-tasting-field').value = btn.dataset.title;
-    signupOverlay.style.display = 'flex';
+    signupOverlay.hidden = false;
   });
 });
 
 document.getElementById('signup-close')?.addEventListener('click', () => {
-  signupOverlay.style.display = 'none';
+  signupOverlay.hidden = true;
 });
 
 signupOverlay?.addEventListener('click', e => {
-  if (e.target === signupOverlay) signupOverlay.style.display = 'none';
+  if (e.target === signupOverlay) signupOverlay.hidden = true;
 });
 
 document.getElementById('signup-form')?.addEventListener('submit', async e => {
@@ -206,8 +206,8 @@ document.getElementById('signup-form')?.addEventListener('submit', async e => {
   });
   if (res.ok) {
     form.reset();
-    document.getElementById('signup-success').style.display = 'block';
-    setTimeout(() => { signupOverlay.style.display = 'none'; }, 2500);
+    document.getElementById('signup-success').hidden = false;
+    setTimeout(() => { signupOverlay.hidden = true; }, 2500);
   }
 });
 
@@ -218,16 +218,16 @@ document.querySelectorAll('.avail-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.getElementById('avail-tasting-name').textContent = btn.dataset.title + ' · availability';
     document.getElementById('avail-tasting-field').value = btn.dataset.title;
-    availOverlay.style.display = 'flex';
+    availOverlay.hidden = false;
   });
 });
 
 document.getElementById('avail-close')?.addEventListener('click', () => {
-  availOverlay.style.display = 'none';
+  availOverlay.hidden = true;
 });
 
 availOverlay?.addEventListener('click', e => {
-  if (e.target === availOverlay) availOverlay.style.display = 'none';
+  if (e.target === availOverlay) availOverlay.hidden = true;
 });
 
 document.getElementById('avail-form')?.addEventListener('submit', async e => {
@@ -240,8 +240,8 @@ document.getElementById('avail-form')?.addEventListener('submit', async e => {
   });
   if (res.ok) {
     form.reset();
-    document.getElementById('avail-success').style.display = 'block';
-    setTimeout(() => { availOverlay.style.display = 'none'; }, 2500);
+    document.getElementById('avail-success').hidden = false;
+    setTimeout(() => { availOverlay.hidden = true; }, 2500);
   }
 });
 
@@ -256,7 +256,7 @@ document.getElementById('propose-form')?.addEventListener('submit', async e => {
   });
   if (res.ok) {
     form.reset();
-    document.getElementById('propose-success').style.display = 'block';
+    document.getElementById('propose-success').hidden = false;
   }
 });
 </script>

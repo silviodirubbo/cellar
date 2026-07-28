@@ -133,7 +133,7 @@ permalink: /tastings/
           {% else %}{% assign chapter_label = "" %}{% assign chapter_color = "" %}
         {% endcase %}
         <div class="tl-card {% if is_next %}tl-card--feature{% endif %}"
-             style="{% if chapter_color != "" %}--chapter-accent: {{ chapter_color }};{% endif %}{% if is_next and cover %}background-image: linear-gradient(110deg, rgba(20,17,13,0.95) 35%, rgba(20,17,13,0.6) 100%), url('{{ cover.path | relative_url }}');{% endif %}">
+             style="{% if chapter_color != "" %}--chapter-accent: {{ chapter_color }};{% endif %}{% if is_next and cover %}background-image: url('{{ cover.path | relative_url }}');{% endif %}">
           {% if is_next %}<span class="tl-card__ghost" aria-hidden="true">{{ tasting.date | date: "%-d" }}</span>{% endif %}
           {% if cover and is_next == false %}
           <div class="tl-card__cover"><img src="{{ cover.path | relative_url }}" alt="" loading="lazy"></div>
@@ -212,7 +212,7 @@ permalink: /tastings/
         </div>
       </article>
       {% endfor %}
-      <p class="filter-empty filter-empty--upcoming text-light" style="display:none;">No upcoming tastings match this filter.</p>
+      <p class="filter-empty filter-empty--upcoming text-light" hidden>No upcoming tastings match this filter.</p>
 
       <!-- Divider -->
       <div class="tl-row tl-row--divider" id="archive">
@@ -287,7 +287,7 @@ permalink: /tastings/
         </details>
       </article>
       {% endfor %}
-      <p class="filter-empty filter-empty--past text-light" style="display:none;">No past tastings match this filter.</p>
+      <p class="filter-empty filter-empty--past text-light" hidden>No past tastings match this filter.</p>
 
       <!-- Terminus -->
       <div class="tl-row tl-row--end">

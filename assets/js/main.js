@@ -128,8 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
           .some(r => r.style.display !== 'none');
         const eu = document.querySelector('.filter-empty--upcoming');
         const ep = document.querySelector('.filter-empty--past');
-        if (eu) eu.style.display = anyUp ? 'none' : '';
-        if (ep) ep.style.display = anyPast ? 'none' : '';
+        if (eu) eu.hidden = anyUp;
+        if (ep) ep.hidden = anyPast;
       });
     });
   }
