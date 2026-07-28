@@ -15,6 +15,8 @@ permalink: /tastings/
 {% for t in past %}{% assign wine_count = wine_count | plus: t.wines.size %}{% endfor %}
 {% assign all_tags = "" | split: "" %}
 {% for t in site.data.tastings %}{% assign all_tags = all_tags | concat: t.tags %}{% endfor %}
+{% assign tag_counts = all_tags | group_by_exp: "t", "t" %}
+{% assign chapters_sorted = site.chapters | sort: "order" %}
 
 <!-- ── Masthead ────────────────────────────────────────────── -->
 <header class="page-header page-header--tastings">
@@ -65,6 +67,17 @@ permalink: /tastings/
           <div class="chip-group chip-group--all">
             <button class="chip chip--active" data-tag="" aria-pressed="true">All</button>
           </div>
+
+          <details class="chip-group">
+            <summary class="chip-group__label">Chapter<span class="chip-group__count">{{ chapters_sorted.size }}</span></summary>
+            <div class="chip-group__items">
+              {% for chapter in chapters_sorted %}
+                {% assign chapter_items = site.data.tastings | where: "chapter", chapter.slug %}
+                <button class="chip" data-chapter="{{ chapter.slug }}" aria-pressed="false">{{ chapter.title }}&nbsp;<span class="chip__n">{{ chapter_items.size }}</span></button>
+              {% endfor %}
+            </div>
+          </details>
+
           {% assign chip_groups = "Region|Appellation|Grape" | split: "|" %}
           {% assign chip_group_labels = "Region|Denomination|Grape" | split: "|" %}
           {% for category in chip_groups %}
@@ -72,18 +85,16 @@ permalink: /tastings/
             {% assign group_tags = site.data.tags | where: "category", category %}
             {% assign group_count = 0 %}
             {% for tag in group_tags %}
-              {% assign c = 0 %}
-              {% for x in all_tags %}{% if x == tag.name %}{% assign c = c | plus: 1 %}{% endif %}{% endfor %}
-              {% if c > 0 %}{% assign group_count = group_count | plus: 1 %}{% endif %}
+              {% assign tg = tag_counts | where: "name", tag.name | first %}
+              {% if tg %}{% assign group_count = group_count | plus: 1 %}{% endif %}
             {% endfor %}
             <details class="chip-group">
               <summary class="chip-group__label">{{ group_label }}<span class="chip-group__count">{{ group_count }}</span></summary>
               <div class="chip-group__items">
                 {% for tag in group_tags %}
-                  {% assign c = 0 %}
-                  {% for x in all_tags %}{% if x == tag.name %}{% assign c = c | plus: 1 %}{% endif %}{% endfor %}
-                  {% if c > 0 %}
-                    <button class="chip" data-tag="{{ tag.name }}" aria-pressed="false">{{ tag.name }}&nbsp;<span class="chip__n">{{ c }}</span></button>
+                  {% assign tg = tag_counts | where: "name", tag.name | first %}
+                  {% if tg %}
+                    <button class="chip" data-tag="{{ tag.name }}" aria-pressed="false">{{ tag.name }}&nbsp;<span class="chip__n">{{ tg.items.size }}</span></button>
                   {% endif %}
                 {% endfor %}
               </div>
@@ -110,7 +121,7 @@ permalink: /tastings/
       {% capture cover_prefix %}/assets/tastings/{{ tasting.slug }}/cover{% endcapture %}
       {% assign cover = site.static_files | where_exp: "f", "f.path contains cover_prefix" | first %}
       <article class="tl-row tl-row--upcoming {% if next and tasting.slug == next.slug %}tl-row--next{% endif %}"
-               id="{{ tasting.slug }}" data-tags="{{ tasting.tags | join: ',' }}">
+               id="{{ tasting.slug }}" data-tags="{{ tasting.tags | join: ',' }}" data-chapter="{{ tasting.chapter }}">
 
         {% if tasting.date_tbd %}
         <div class="tl-row__date" aria-label="Date to be announced">
@@ -222,7 +233,7 @@ permalink: /tastings/
       {% for tasting in past %}
       {% capture cover_prefix %}/assets/tastings/{{ tasting.slug }}/cover{% endcapture %}
       {% assign cover = site.static_files | where_exp: "f", "f.path contains cover_prefix" | first %}
-      <article class="tl-row tl-row--past" id="{{ tasting.slug }}" data-tags="{{ tasting.tags | join: ',' }}">
+      <article class="tl-row tl-row--past" id="{{ tasting.slug }}" data-tags="{{ tasting.tags | join: ',' }}" data-chapter="{{ tasting.chapter }}">
 
         <time class="tl-row__date" datetime="{{ tasting.date }}" aria-label="{{ tasting.date | date: '%A %-d %B %Y' }}">
           <span class="tl-row__dow" aria-hidden="true">{{ tasting.date | date: "%a" }}</span>

@@ -104,16 +104,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ── Tastings: one-tap tag chips ───────────────────────────
+  // ── Tastings: one-tap tag/chapter chips ───────────────────
   const chipbar = document.getElementById('chipbar');
   if (chipbar) {
-    const rows = document.querySelectorAll('[data-tags]');
+    const rows = document.querySelectorAll('[data-tags], [data-chapter]');
+    const allChip = chipbar.querySelector('.chip[data-tag=""]');
+
     chipbar.querySelectorAll('.chip').forEach(chip => {
       chip.addEventListener('click', () => {
         // tapping the active chip resets to All
         const isActive = chip.classList.contains('chip--active');
-        const target = isActive ? chipbar.querySelector('[data-tag=""]') : chip;
+        const target = isActive ? allChip : chip;
+        const chapterSlug = target.dataset.chapter;
         const tag = target.dataset.tag;
+
         chipbar.querySelectorAll('.chip').forEach(c => {
           const active = c === target;
           c.classList.toggle('chip--active', active);
@@ -121,8 +125,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         rows.forEach(row => {
-          const tags = (row.dataset.tags || '').split(',').map(t => t.trim());
-          row.style.display = (!tag || tags.includes(tag)) ? '' : 'none';
+          let match = true;
+          if (chapterSlug) {
+            match = row.dataset.chapter === chapterSlug;
+          } else if (tag) {
+            const tags = (row.dataset.tags || '').split(',').map(t => t.trim());
+            match = tags.includes(tag);
+          }
+          row.style.display = match ? '' : 'none';
         });
 
         const anyUp = [...document.querySelectorAll('.tl-row--upcoming')]
