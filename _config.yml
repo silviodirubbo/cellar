@@ -19,6 +19,9 @@ collections:
   tastings:
     output: true
     permalink: /tastings/:name/
+  chapters:
+    output: true
+    permalink: /chapters/:name/
 # Defaults
 defaults:
   - scope:
@@ -26,3 +29,8 @@ defaults:
       type: "tastings"
     values:
       layout: "presentation"
+  - scope:
+      path: ""
+      type: "chapters"
+    values:
+      layout: "chapter"

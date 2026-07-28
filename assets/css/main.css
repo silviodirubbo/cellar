@@ -17,9 +17,6 @@
   --green:       #2C4A3E;
   --gold:        #8B6914;
   --ink-light-on-dark: #9A948F; /* --ink-light is 3.52:1 on --ink, fails AA; this is 5.91:1 */
-  --chapter-pilot: var(--gold);
-  --chapter-rhone: var(--green);
-  --chapter-loire: #4F5F66;
   --font-serif:  'Cormorant Garamond', Georgia, serif;
   --font-mono:   'DM Mono', 'Courier New', monospace;
   --section-pad: 7rem;
@@ -402,6 +399,29 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
 .hero-stat-num { font-family: var(--font-serif); font-weight: 300; font-size: 2.2rem; color: var(--ink); line-height: 1; }
 .hero-stat-desc { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); margin-top: 0.2rem; }
 
+/* ── Home: curriculum band ────────────────────────────────── */
+.curriculum-band { background-color: var(--off-white); border-bottom: 1px solid var(--rule); padding: 4rem 0; }
+.curriculum-row { display: flex; gap: 3rem; flex-wrap: wrap; }
+.curriculum-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s var(--ease);
+}
+.curriculum-item:hover { border-bottom-color: var(--chapter-accent, var(--ink-mid)); }
+.curriculum-item__numeral {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--chapter-accent, var(--ink));
+}
+.curriculum-item__title { font-family: var(--font-serif); font-size: 1.05rem; color: var(--ink); }
+.curriculum-item__count { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; color: var(--ink-light); }
+
 /* ── Home two-column preview ──────────────────────────────── */
 .preview-grid { display: grid; grid-template-columns: 1fr 1px 1fr; min-height: 360px; }
 .preview-rule { background-color: var(--rule); width: 1px; }
@@ -489,19 +509,10 @@ textarea.form-input { min-height: 5rem; }
   .planner-grid { grid-template-columns: 1fr; }
   .planner-main { border-right: none; border-bottom: 1px solid var(--rule); }
   .footer__inner { flex-direction: column; gap: 1rem; text-align: center; }
-}
 
-/* ── Mobile ───────────────────────────────────────────────── */
-@media (max-width: 640px) {
-  html { font-size: 16px; }
-  h1 { font-size: clamp(1.8rem, 8vw, 2.8rem); }
-  h2 { font-size: clamp(1.4rem, 6vw, 2rem); }
-  p  { font-size: 0.95rem; line-height: 1.65; }
-
-  /* Hamburger visible */
+  /* Nav: burger takes over here, at the 4-item point where the inline
+     nav would otherwise start squeezing against the logo. */
   .nav__burger { display: flex; }
-
-  /* Links hidden by default, revealed on toggle */
   .nav__links {
     display: none;
     position: absolute;
@@ -518,6 +529,14 @@ textarea.form-input { min-height: 5rem; }
   }
   .nav__links--open { display: flex; }
   .nav__item a { font-size: 0.75rem; }
+}
+
+/* ── Mobile ───────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  html { font-size: 16px; }
+  h1 { font-size: clamp(1.8rem, 8vw, 2.8rem); }
+  h2 { font-size: clamp(1.4rem, 6vw, 2rem); }
+  p  { font-size: 0.95rem; line-height: 1.65; }
 
   /* Hero */
   .home-hero { padding-top: calc(4rem + 3.5rem); padding-bottom: 3rem; }
@@ -820,7 +839,10 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 }
 .chip__n { color: var(--gold); }
 
-/* ── Chapter tag (curriculum chapter, on every card) ────────── */
+/* ── Chapter tag (curriculum chapter, on every card) ──────────
+   Colour comes from --chapter-accent, set inline per instance from
+   that tasting's chapter.color (see _chapters/*.md); adding a chapter
+   is a new front-matter file, not a new rule here. */
 .chapter-tag {
   display: inline-block;
   font-family: var(--font-mono);
@@ -828,13 +850,11 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--warm-white);
+  background: var(--chapter-accent, var(--ink-light));
   border-radius: 999px;
   padding: 0.2rem 0.6rem;
   margin-bottom: 0.55rem;
 }
-.chapter-tag--pilot { background: var(--chapter-pilot); }
-.chapter-tag--rhone { background: var(--chapter-rhone); }
-.chapter-tag--loire { background: var(--chapter-loire); }
 .tl-card--feature .chapter-tag { background: rgba(253,252,250,0.15); }
 
 .chapter-dot {
@@ -844,10 +864,8 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   border-radius: 50%;
   margin-right: 0.35rem;
   vertical-align: middle;
+  background: var(--chapter-accent, var(--ink-light));
 }
-.chapter-dot--pilot { background: var(--chapter-pilot); }
-.chapter-dot--rhone { background: var(--chapter-rhone); }
-.chapter-dot--loire { background: var(--chapter-loire); }
 
 /* ── The timeline ─────────────────────────────────────────── */
 .timeline { padding: 3rem 0 5rem; }
@@ -1147,3 +1165,128 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   .tl-card--feature .btn--hero { flex: 1 1 100%; text-align: center; }
 }
 
+
+/* ============================================================
+   CHAPTERS: the curriculum, index + per-chapter pages
+   ============================================================ */
+
+/* ── Directory list (chapters/index.html) ─────────────────── */
+.chapters-list { display: flex; flex-direction: column; }
+.chapters-row {
+  display: grid;
+  grid-template-columns: 4rem 1fr auto;
+  gap: 2rem;
+  align-items: center;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--rule);
+  transition: background-color 0.2s var(--ease);
+}
+.chapters-row:first-child { border-top: 1px solid var(--rule); }
+.chapters-row:hover {
+  background-color: var(--off-white);
+  padding-left: 1rem; padding-right: 1rem;
+  margin-left: -1rem; margin-right: -1rem;
+}
+.chapters-row__numeral {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--chapter-accent, var(--ink));
+}
+.chapters-row__title {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+}
+.chapters-row__state {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 0.6rem;
+}
+.chapters-row__blurb {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--ink-light);
+  max-width: 52ch;
+  margin-bottom: 1rem;
+}
+.chapters-row__arrow {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--ink-light);
+  transition: color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.chapters-row:hover .chapters-row__arrow { color: var(--ink); transform: translateX(2px); }
+
+/* ── Progress bar (shared include) ────────────────────────── */
+.chapter-progress { display: flex; align-items: center; gap: 0.75rem; max-width: 18rem; }
+.chapter-progress__bar { flex: 1; height: 1px; background: var(--rule); position: relative; }
+.chapter-progress__fill {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  background: var(--chapter-accent, var(--green));
+}
+.chapter-progress__label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  white-space: nowrap;
+}
+.page-header .chapter-progress__label { color: var(--ink-light-on-dark); }
+
+/* ── Per-chapter hero (_layouts/chapter.html) ─────────────── */
+.chapter-hero__head { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+.chapter-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-light-on-dark);
+}
+.chapter-state__dot {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--chapter-accent, var(--ink-light-on-dark));
+}
+
+/* ── Sequence (_layouts/chapter.html) ─────────────────────── */
+.chapter-sequence { display: flex; flex-direction: column; }
+.chapter-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.25rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.chapter-item:first-child { border-top: 1px solid var(--rule); }
+.chapter-item .tl-node { position: static; margin-top: 0.5rem; }
+.chapter-item__meta { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.4rem; }
+.chapter-item__meta time,
+.chapter-item__meta .date-tbd { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); }
+.chapter-item__title { font-size: 1.3rem; color: var(--ink); margin-bottom: 0.3rem; }
+.chapter-item__desc { font-size: 0.9rem; color: var(--ink-mid); max-width: 58ch; }
+.chapter-item__foot { display: flex; align-items: center; gap: 1.1rem; flex-wrap: wrap; margin-top: 0.9rem; }
+
+/* held state for .tl-node, reused from the Tastings timeline vocabulary */
+.tl-node--held { background: var(--ink-light); }
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .chapters-row { grid-template-columns: 3rem 1fr; }
+  .chapters-row__arrow { display: none; }
+  .chapter-item { grid-template-columns: auto 1fr; gap: 0.9rem; }
+}

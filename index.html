@@ -46,6 +46,30 @@ permalink: /
   </div>
 </section>
 
+<!-- ── Curriculum ───────────────────────────────────────────── -->
+<section class="curriculum-band">
+  <div class="container">
+    <span class="section-label">Curriculum</span>
+    <div class="curriculum-row">
+      {% assign chapters = site.chapters | sort: "order" %}
+      {% for chapter in chapters %}
+        {% assign items = site.data.tastings | where: "chapter", chapter.slug %}
+        {% assign held = items | where: "status", "past" | size %}
+        {% assign total = items.size %}
+        {% if chapter.planned_total and chapter.planned_total > total %}
+          {% assign total = chapter.planned_total %}
+        {% endif %}
+        <a class="curriculum-item" href="{{ chapter.url | relative_url }}" style="--chapter-accent: {{ chapter.color }};">
+          <span class="curriculum-item__numeral" aria-hidden="true">{{ chapter.numeral }}</span>
+          <span class="curriculum-item__title">{{ chapter.title }}</span>
+          <span class="curriculum-item__count">{{ held }} / {{ total }}</span>
+        </a>
+      {% endfor %}
+    </div>
+    <a class="preview-link mt-4" href="{{ '/chapters/' | relative_url }}">Browse all chapters →</a>
+  </div>
+</section>
+
 <!-- ── Two-column preview ─────────────────────────────────── -->
 <div class="preview-grid">
 

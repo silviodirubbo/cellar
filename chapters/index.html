@@ -1,0 +1,41 @@
+---
+layout: default
+title: Chapters
+description: The curriculum, chapter by chapter.
+permalink: /chapters/
+---
+
+{% assign chapters = site.chapters | sort: "order" %}
+
+<header class="page-header">
+  <div class="container">
+    <span class="section-label">Curriculum</span>
+    <h1>Chapters</h1>
+    <p class="page-header__sub mt-3">The series organised the way it's taught rather than the way it happened. Each chapter runs its own arc, from the first tasting to the last, held evenings and evenings still to come, in the order they build on each other.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="chapters-list">
+      {% for chapter in chapters %}
+        {% assign items = site.data.tastings | where: "chapter", chapter.slug %}
+        {% assign held = items | where: "status", "past" | size %}
+        {% assign total = items.size %}
+        {% if chapter.planned_total and chapter.planned_total > total %}
+          {% assign total = chapter.planned_total %}
+        {% endif %}
+        <a class="chapters-row" href="{{ chapter.url | relative_url }}" style="--chapter-accent: {{ chapter.color }};">
+          <span class="chapters-row__numeral" aria-hidden="true">{{ chapter.numeral }}</span>
+          <span class="chapters-row__body">
+            <span class="chapters-row__title">{{ chapter.title }}</span>
+            <span class="chapters-row__state">{{ chapter.state | capitalize }}</span>
+            <span class="chapters-row__blurb">{{ chapter.blurb }}</span>
+            {% include chapter-progress.html held=held total=total %}
+          </span>
+          <span class="chapters-row__arrow" aria-hidden="true">→</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

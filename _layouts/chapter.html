@@ -1,0 +1,69 @@
+---
+layout: default
+---
+
+{% assign chapter = page %}
+{% assign items = site.data.tastings | where: "chapter", chapter.slug | sort: "chapter_order" %}
+{% assign held = items | where: "status", "past" | size %}
+{% assign total = items.size %}
+{% if chapter.planned_total and chapter.planned_total > total %}
+  {% assign total = chapter.planned_total %}
+{% endif %}
+
+<header class="page-header" style="--chapter-accent: {{ chapter.color }};">
+  <div class="container">
+    <span class="section-label">Chapter {{ chapter.numeral }}</span>
+    <div class="chapter-hero__head">
+      <h1>{{ chapter.title }}</h1>
+      <span class="chapter-state"><span class="chapter-state__dot" aria-hidden="true"></span>{{ chapter.state | capitalize }}</span>
+    </div>
+    <p class="page-header__sub mt-3">{{ chapter.blurb }}</p>
+    <div class="mt-4">
+      {% include chapter-progress.html held=held total=total %}
+    </div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="chapter-sequence">
+      {% for tasting in items %}
+        {% if tasting.status == "past" %}
+          {% assign node_class = "tl-node--held" %}
+        {% elsif tasting.date_tbd %}
+          {% assign node_class = "tl-node--tbd" %}
+        {% else %}
+          {% assign node_class = "" %}
+        {% endif %}
+        <article class="chapter-item">
+          <span class="tl-node {{ node_class }}" aria-hidden="true"></span>
+          <div class="chapter-item__body">
+            <div class="chapter-item__meta">
+              {% if tasting.date_tbd %}
+                <span class="date-tbd">Date TBD</span>
+              {% else %}
+                <time datetime="{{ tasting.date }}">{{ tasting.date | date: "%-d %b %Y" }}</time>
+              {% endif %}
+              <span class="label">{{ tasting.region }}</span>
+              {% if tasting.wines %}<span class="label">{{ tasting.wines.size }} wines</span>{% endif %}
+            </div>
+            <h2 class="chapter-item__title">{{ tasting.title }}</h2>
+            <p class="chapter-item__desc">{{ tasting.description }}</p>
+            <div class="chapter-item__foot">
+              {% if tasting.slides %}
+                <a href="{{ site.baseurl }}/tastings/{{ tasting.slug }}/" class="btn btn--text">Presentation →</a>
+              {% elsif tasting.status == "past" %}
+                <span class="label">Presentation coming</span>
+              {% elsif tasting.date_tbd %}
+                <a href="{{ '/planner/' | relative_url }}#{{ tasting.slug }}" class="btn btn--text">My availability →</a>
+              {% else %}
+                <a href="{{ '/planner/' | relative_url }}#{{ tasting.slug }}" class="btn btn--text">I'm coming →</a>
+              {% endif %}
+              <a href="{{ '/tastings/' | relative_url }}#{{ tasting.slug }}" class="btn btn--text">On the calendar →</a>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

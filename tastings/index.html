@@ -110,7 +110,7 @@ permalink: /tastings/
       {% capture cover_prefix %}/assets/tastings/{{ tasting.slug }}/cover{% endcapture %}
       {% assign cover = site.static_files | where_exp: "f", "f.path contains cover_prefix" | first %}
       <article class="tl-row tl-row--upcoming {% if next and tasting.slug == next.slug %}tl-row--next{% endif %}"
-               data-tags="{{ tasting.tags | join: ',' }}">
+               id="{{ tasting.slug }}" data-tags="{{ tasting.tags | join: ',' }}">
 
         {% if tasting.date_tbd %}
         <div class="tl-row__date" aria-label="Date to be announced">
@@ -128,14 +128,9 @@ permalink: /tastings/
 
         {% assign is_next = false %}
         {% if next and tasting.slug == next.slug %}{% assign is_next = true %}{% endif %}
-        {% case tasting.chapter %}
-          {% when "pilot" %}{% assign chapter_label = "Pilot" %}{% assign chapter_color = "var(--chapter-pilot)" %}
-          {% when "rhone" %}{% assign chapter_label = "Rhône" %}{% assign chapter_color = "var(--chapter-rhone)" %}
-          {% when "loire" %}{% assign chapter_label = "Loire" %}{% assign chapter_color = "var(--chapter-loire)" %}
-          {% else %}{% assign chapter_label = "" %}{% assign chapter_color = "" %}
-        {% endcase %}
+        {% assign chapter_obj = site.chapters | where: "slug", tasting.chapter | first %}
         <div class="tl-card {% if is_next %}tl-card--feature{% endif %}"
-             style="{% if chapter_color != "" %}--chapter-accent: {{ chapter_color }};{% endif %}{% if is_next and cover %}background-image: url('{{ cover.path | relative_url }}');{% endif %}">
+             style="{% if chapter_obj %}--chapter-accent: {{ chapter_obj.color }};{% endif %}{% if is_next and cover %}background-image: url('{{ cover.path | relative_url }}');{% endif %}">
           {% if is_next %}<span class="tl-card__ghost" aria-hidden="true">{{ tasting.date | date: "%-d" }}</span>{% endif %}
           {% if cover and is_next == false %}
           <div class="tl-card__cover"><img src="{{ cover.path | relative_url }}" alt="" loading="lazy"></div>
@@ -144,8 +139,8 @@ permalink: /tastings/
             {% if is_next %}
             <span class="tl-card__flag">Next tasting<span class="js-countdown" data-date="{{ tasting.date }}"></span></span>
             {% endif %}
-            {% if chapter_label != "" %}
-            <span class="chapter-tag chapter-tag--{{ tasting.chapter }}">{{ chapter_label }}</span>
+            {% if chapter_obj %}
+            <a class="chapter-tag" href="{{ chapter_obj.url | relative_url }}">{{ chapter_obj.title }}</a>
             {% endif %}
             <h2 class="tl-card__title">{{ tasting.title }}</h2>
             <div class="tl-card__where">
@@ -227,7 +222,7 @@ permalink: /tastings/
       {% for tasting in past %}
       {% capture cover_prefix %}/assets/tastings/{{ tasting.slug }}/cover{% endcapture %}
       {% assign cover = site.static_files | where_exp: "f", "f.path contains cover_prefix" | first %}
-      <article class="tl-row tl-row--past" data-tags="{{ tasting.tags | join: ',' }}">
+      <article class="tl-row tl-row--past" id="{{ tasting.slug }}" data-tags="{{ tasting.tags | join: ',' }}">
 
         <time class="tl-row__date" datetime="{{ tasting.date }}" aria-label="{{ tasting.date | date: '%A %-d %B %Y' }}">
           <span class="tl-row__dow" aria-hidden="true">{{ tasting.date | date: "%a" }}</span>
@@ -236,7 +231,8 @@ permalink: /tastings/
         </time>
         <span class="tl-node tl-node--past" aria-hidden="true"></span>
 
-        <details class="past-entry">
+        {% assign chapter_obj = site.chapters | where: "slug", tasting.chapter | first %}
+        <details class="past-entry" style="{% if chapter_obj %}--chapter-accent: {{ chapter_obj.color }};{% endif %}">
           <summary class="past-entry__head">
             {% if cover %}
               <img class="past-entry__thumb" src="{{ cover.path | relative_url }}" alt="" loading="lazy">
@@ -244,14 +240,8 @@ permalink: /tastings/
               <span class="past-entry__thumb past-entry__thumb--empty" aria-hidden="true"></span>
             {% endif %}
             <span class="past-entry__main">
-              {% case tasting.chapter %}
-                {% when "pilot" %}{% assign chapter_label = "Pilot" %}
-                {% when "rhone" %}{% assign chapter_label = "Rhône" %}
-                {% when "loire" %}{% assign chapter_label = "Loire" %}
-                {% else %}{% assign chapter_label = "" %}
-              {% endcase %}
               <span class="past-entry__title">
-                {% if chapter_label != "" %}<span class="chapter-dot chapter-dot--{{ tasting.chapter }}" aria-hidden="true"></span>{% endif %}
+                {% if chapter_obj %}<span class="chapter-dot" aria-hidden="true"></span>{% endif %}
                 {{ tasting.title }}
               </span>
               <span class="past-entry__where">
