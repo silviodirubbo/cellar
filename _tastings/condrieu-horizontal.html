@@ -170,6 +170,217 @@ date: 2026-07-18
   letter-spacing: .12em; text-transform: uppercase; color: var(--ink-light);
   text-align: center; line-height: 1.6;
 }
+
+/* ── PRODUCERS + VINTAGE TIMELINE SLIDE ────────────────
+   Base structure and classes mirror the final producers slide
+   in _tastings/cote-rotie-horizontal.html and
+   _tastings/southern-rhone-overview.html (the two are identical
+   except SR adds the .vint-legend and gold .vint-score — used as
+   the current reference here). Deck-specific additions below:
+     · .cv-prev / .prod-prevnote — a "tasted at a previous
+       session" footnote marker, deliberately muted grey and kept
+       distinct from this session's gold .tdot + green .cv-hi.
+     · .prod-grillet — a set-apart band for Château-Grillet, a
+       neighbouring monopole AOC rather than a Condrieu producer.
+     · .vint-bar.ghost + .vint-note — support a curated,
+       non-contiguous "best vintages" chart (Vin & Millésimes)
+       in place of the dense Wine Spectator annual run. */
+.slide-producers {
+  background: var(--warm-white);
+  flex-direction: column;
+  cursor: pointer;
+  padding-top: 70px;
+  padding-bottom: 44px;
+}
+
+.prod-top {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.prod-left {
+  width: 200px;
+  flex: 0 0 200px;
+  border-right: 1px solid var(--rule);
+  padding: 20px 20px 18px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.prod-eyebrow {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light);
+  display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+}
+.prod-eyebrow::after { content: ''; display: block; height: 1px; width: 20px; background: var(--rule); }
+
+.prod-title { font-size: 36px; font-weight: 300; line-height: 1.05; color: var(--ink); }
+.prod-title em { font-style: italic; color: var(--green); }
+
+.prod-disclaimer {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 6.5px;
+  letter-spacing: .07em; color: var(--ink-light); line-height: 1.65;
+  padding-top: 8px; border-top: 1px solid var(--rule);
+  margin-top: 12px;
+}
+
+/* previously-tasted footnote — muted grey, NOT the green/gold
+   marks reserved for wines poured this session */
+.prod-prevnote {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 6px;
+  letter-spacing: .05em; color: var(--ink-light); line-height: 1.6;
+  margin-top: 9px; font-style: italic;
+}
+.cv-prev {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 5px;
+  color: var(--ink-light); vertical-align: super; margin-left: 1px;
+  font-style: normal;
+}
+.prod-prevnote .cv-prev { vertical-align: baseline; font-size: 6px; margin: 0 2px 0 0; }
+
+.prod-right {
+  flex: 1 1 auto;
+  padding: 12px 28px 10px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 32px;
+  align-content: start;
+}
+
+.prod-col { display: flex; flex-direction: column; }
+
+.prow {
+  display: flex; align-items: baseline;
+  padding: 2.5px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.prow.first { border-top: 1px solid var(--rule); }
+
+.pname {
+  font-size: 10px; font-weight: 300; color: var(--ink);
+  display: flex; align-items: center; gap: 5px;
+  white-space: nowrap; flex-shrink: 0;
+}
+.pname.tasted { color: var(--green); font-style: italic; }
+
+.tdot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--gold); flex-shrink: 0; display: inline-block;
+}
+
+.leader {
+  flex: 1 1 auto;
+  border-bottom: 1px dotted var(--rule);
+  margin: 0 5px; position: relative; top: -2px;
+}
+
+.cuvees {
+  font-family: 'DM Mono', monospace; font-size: 6.5px; font-weight: 300;
+  letter-spacing: .03em; color: var(--ink-light);
+  white-space: nowrap; text-align: right; flex-shrink: 0;
+}
+.csep { margin: 0 3px; opacity: 0.35; }
+
+.cv-hi {
+  color: var(--green); font-style: italic;
+  font-family: 'DM Mono', monospace; font-size: 6.5px; font-weight: 300;
+}
+
+/* Château-Grillet: a neighbouring monopole AOC set apart from the
+   Condrieu producer grid — same fonts and palette, gold accent
+   rail + off-white ground signal "adjacent, not one of the above". */
+.prod-grillet {
+  flex: 0 0 auto;
+  display: flex; align-items: center; gap: 18px;
+  margin: 14px 28px 0 28px;
+  padding: 11px 18px;
+  background: var(--off-white);
+  border-left: 2px solid var(--gold);
+}
+.grillet-head { display: flex; flex-direction: column; gap: 3px; flex-shrink: 0; }
+.grillet-mark {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 7px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--gold);
+  white-space: nowrap;
+}
+.grillet-name {
+  font-size: 18px; font-weight: 300; font-style: italic; color: var(--green);
+  line-height: 1; white-space: nowrap;
+}
+.grillet-sep { width: 1px; align-self: stretch; background: var(--rule); flex-shrink: 0; }
+.grillet-desc {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 7px;
+  letter-spacing: .04em; color: var(--ink-mid); line-height: 1.7;
+}
+
+/* vintage chart: centered in the band below the producers */
+.prod-bottom {
+  flex: 1 1 auto;
+  padding: 16px 28px 0 28px;
+  display: flex; flex-direction: column; justify-content: center; gap: 8px;
+}
+
+.vint-header {
+  display: flex; align-items: center; gap: 10px;
+}
+.vint-label {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 7px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); white-space: nowrap;
+}
+.vint-rule { flex: 1; height: 1px; background: var(--rule); }
+
+.vint-legend { display: flex; gap: 14px; flex-shrink: 0; }
+.vl-item {
+  display: flex; align-items: center; gap: 4px;
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 7px;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--ink-light); white-space: nowrap;
+}
+.vl-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.vl-dot.cls { background: var(--green); }
+.vl-dot.out { background: var(--green); opacity: .6; }
+.vl-dot.vg  { background: var(--ink-light); opacity: .4; }
+.vl-dot.ghost { background: transparent; border: 1px solid var(--green); opacity: .55; }
+
+.vint-chart {
+  display: flex; align-items: flex-end; gap: 4px; height: 84px;
+}
+
+.vint-col {
+  display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1;
+}
+
+.vint-bar-wrap {
+  width: 100%; display: flex; align-items: flex-end; height: 48px;
+}
+
+.vint-bar {
+  width: 100%; border-radius: 1px 1px 0 0;
+}
+.vint-bar.cls { background: var(--green); }
+.vint-bar.out { background: var(--green); opacity: 0.6; }
+.vint-bar.vg  { background: var(--ink-light); opacity: 0.4; }
+/* 1978: celebrated older vintage listed without a modern tier
+   rating — rendered as an outlined "ghost" bar so it reads as
+   present-but-unrated rather than low quality */
+.vint-bar.ghost {
+  background: transparent;
+  border: 1px solid var(--green); opacity: 0.55;
+  box-sizing: border-box;
+}
+
+.vint-year {
+  font-family: 'DM Mono', monospace; font-size: 6px; font-weight: 300;
+  letter-spacing: .01em; color: var(--ink-light); text-align: center; line-height: 1;
+}
+
+.vint-note {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 6px;
+  letter-spacing: .05em; color: var(--ink-light); line-height: 1.6; margin-top: 2px;
+}
 </style>
 
 <!-- ─────────────────────────────────────────────────────────
@@ -332,3 +543,224 @@ date: 2026-07-18
     </div>
   </div>
 </div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 9 · PRODUCERS LANDSCAPE + VINTAGE CHART
+     No images needed. Structure mirrors the Côte-Rôtie /
+     Southern Rhône producers slide. Tasted-this-session marks
+     (.tasted / .tdot / .cv-hi) are reserved for Vernay and
+     Villard; the Cuilleron "Les Chaillets" reference carries a
+     muted "†" previous-session footnote instead. Château-Grillet
+     sits in its own band as a neighbouring monopole AOC. The
+     vintage chart uses a curated Vin & Millésimes best-vintage
+     shortlist (non-contiguous years, tier-coded bars).
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-producers">
+
+  <div class="prod-top">
+    <div class="prod-left">
+      <div>
+        <div class="prod-eyebrow">Condrieu</div>
+        <div class="prod-title">The<br><em>producers</em></div>
+      </div>
+      <div>
+        <div class="prod-disclaimer">
+          A partial and subjective list aimed at providing
+          a broad framework of the appellation's producers.
+        </div>
+        <div class="prod-prevnote">
+          <span class="cv-prev">†</span>Les Chaillets (Cuilleron) —
+          tasted at a previous session, Northern Rhône Whites ·
+          29 May 2026. Not poured tonight.
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-right">
+      <div class="prod-col">
+        <div class="prow first">
+          <div class="pname tasted"><span class="tdot"></span>Vernay</div><div class="leader"></div>
+          <div class="cuvees">Coteau de Vernon<span class="csep">·</span><span class="cv-hi">Chaillées de l'Enfer</span><span class="csep">·</span><span class="cv-hi">Terrasses de l'Empire</span></div>
+        </div>
+        <div class="prow">
+          <div class="pname">Guigal</div><div class="leader"></div>
+          <div class="cuvees">La Doriane<span class="csep">·</span>Luminescence</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Jamet</div><div class="leader"></div>
+          <div class="cuvees">Vernillon</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Cuilleron</div><div class="leader"></div>
+          <div class="cuvees">La Petite Côte<span class="csep">·</span>Les Chaillets<span class="cv-prev">†</span><span class="csep">·</span>Verlieu<span class="csep">·</span>Vernon<span class="csep">·</span>Essence d'Automne</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Niero</div><div class="leader"></div>
+          <div class="cuvees">Les Ravines<span class="csep">·</span>Cœur de Roncharde<span class="csep">·</span>Vernon<span class="csep">·</span>Héritage</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Gangloff</div><div class="leader"></div>
+          <div class="cuvees">Condrieu</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Chapoutier</div><div class="leader"></div>
+          <div class="cuvees">Coteau de Chery<span class="csep">·</span>Invitare</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Domaine du Monteillet</div><div class="leader"></div>
+          <div class="cuvees">Les Grandes Chaillées<span class="csep">·</span>Chanson<span class="csep">·</span>La Grillette</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Rostaing</div><div class="leader"></div>
+          <div class="cuvees">La Bonnette</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Clusel-Roch</div><div class="leader"></div>
+          <div class="cuvees">Verchery</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Domaine du Tunnel</div><div class="leader"></div>
+          <div class="cuvees">Condrieu</div>
+        </div>
+        <div class="prow">
+          <div class="pname">La Mordorée</div><div class="leader"></div>
+          <div class="cuvees">Christophe Delorme</div>
+        </div>
+      </div>
+
+      <div class="prod-col">
+        <div class="prow first">
+          <div class="pname tasted"><span class="tdot"></span>Villard</div><div class="leader"></div>
+          <div class="cuvees"><span class="cv-hi">Villa Pontciana</span><span class="csep">·</span>De Poncins<span class="csep">·</span>Le Grand Vallon<span class="csep">·</span>Les Terrasses du Palat</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Perret</div><div class="leader"></div>
+          <div class="cuvees">Condrieu<span class="csep">·</span>Coteau de Chéry<span class="csep">·</span>Clos Chanson</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Gérin</div><div class="leader"></div>
+          <div class="cuvees">La Loye<span class="csep">·</span>Les Eguets</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Pichon</div><div class="leader"></div>
+          <div class="cuvees">Caresse</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Ogier</div><div class="leader"></div>
+          <div class="cuvees">Les Vieilles Vignes de Jacques Vernay</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Vidal-Fleury</div><div class="leader"></div>
+          <div class="cuvees">Condrieu</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Dumazet</div><div class="leader"></div>
+          <div class="cuvees">Côte Fournet</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Anthony Paret</div><div class="leader"></div>
+          <div class="cuvees">Côte Bellay<span class="csep">·</span>Paton</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Bonnefond</div><div class="leader"></div>
+          <div class="cuvees">Côte Chatillon</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Saint Cosme</div><div class="leader"></div>
+          <div class="cuvees">Condrieu</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Jaboulet</div><div class="leader"></div>
+          <div class="cuvees">Les Cassines<span class="csep">·</span>Les Grands Amandiers</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="prod-grillet">
+    <div class="grillet-head">
+      <div class="grillet-mark">Neighbouring AOC · Monopole</div>
+      <div class="grillet-name">Château-Grillet</div>
+    </div>
+    <div class="grillet-sep"></div>
+    <div class="grillet-desc">
+      A single-estate monopole of roughly 3.5 hectares enclosed within Condrieu — its own
+      appellation and among the smallest AOCs in France. Shown apart because it is a
+      neighbouring cru, not a Condrieu producer, though it grows the same Viognier.
+    </div>
+  </div>
+
+  <div class="prod-bottom">
+    <div class="vint-header">
+      <span class="vint-label">Vintages · Vin &amp; Millésimes</span>
+      <div class="vint-rule"></div>
+      <div class="vint-legend">
+        <span class="vl-item"><span class="vl-dot cls"></span>Legendary</span>
+        <span class="vl-item"><span class="vl-dot out"></span>Exceptional</span>
+        <span class="vl-item"><span class="vl-dot vg"></span>Very great</span>
+        <span class="vl-item"><span class="vl-dot ghost"></span>Historic</span>
+      </div>
+    </div>
+    <div class="vint-chart" id="vint-chart-condrieu"></div>
+    <div class="vint-note">
+      A curated best-vintage shortlist — years are spaced evenly for comparison, not on a
+      continuous time axis. 1978 (outlined) is a celebrated older vintage listed without a
+      modern tier rating.
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  // Condrieu best-vintage shortlist from Vin & Millésimes — a curated,
+  // non-contiguous selection rather than a full annual run. Bars are
+  // laid out evenly (flex) for comparison and are NOT plotted on a real
+  // time axis, so the 17-year gap between 1978 and 1995 reads the same
+  // width as a one-year gap; the note under the chart flags this.
+  // tier → bar class + height. 1978 has no modern tier rating in the
+  // source, so it renders as an outlined "ghost" bar (present, unrated).
+  var tierClass  = { leg: 'cls', exc: 'out', vg: 'vg' };
+  var tierHeight = { leg: 48,    exc: 38,    vg: 28 };
+
+  var data = [
+    {y:1978, tier:null,  ghost:true, note:'Celebrated older vintage; listed among the best without a modern tier rating.'},
+    {y:1995, tier:'leg', note:'Minerality, purity, exceptional consistency.'},
+    {y:1999, tier:'vg',  note:'Opulence, candied fruits, honeyed notes.'},
+    {y:2000, tier:'vg',  note:'Perfect balance, remarkable floral expression.'},
+    {y:2005, tier:'leg', note:'Richness, complexity, an ageing reference.'},
+    {y:2008, tier:'leg', note:''},
+    {y:2010, tier:'vg',  note:'Tension, minerality, classic style.'},
+    {y:2015, tier:'leg', note:'Concentration, natural balance, ageing 10+ years.'},
+    {y:2017, tier:'vg',  note:'Elegance, yellow fruits, good acidity.'},
+    {y:2018, tier:'vg',  note:'Roundness, ripe peach, generous and long.'},
+    {y:2019, tier:'exc', note:'Mineral tension, floral freshness, longevity.'},
+    {y:2020, tier:'exc', note:'Breadth, balance, tropical notes.'}
+  ];
+
+  var chart = document.getElementById('vint-chart-condrieu');
+  if (!chart) return;
+
+  data.forEach(function(v) {
+    var col = document.createElement('div');
+    col.className = 'vint-col';
+    if (v.note) col.title = v.note;
+
+    var wrap = document.createElement('div');
+    wrap.className = 'vint-bar-wrap';
+
+    var bar = document.createElement('div');
+    bar.className = 'vint-bar ' + (v.ghost ? 'ghost' : tierClass[v.tier]);
+    bar.style.height = (v.ghost ? 48 : tierHeight[v.tier]) + 'px';
+
+    var year = document.createElement('div');
+    year.className = 'vint-year';
+    year.textContent = v.y;
+
+    wrap.appendChild(bar);
+    col.appendChild(wrap);
+    col.appendChild(year);
+    chart.appendChild(col);
+  });
+})();
+</script>
