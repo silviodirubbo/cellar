@@ -121,6 +121,23 @@ date: 2026-07-18
   background: rgba(253,252,250,.9); padding: 5px 9px;
 }
 
+/* two-map variant (slide 3): the wine blends two lieux-dits from two
+   communes, so the map panel splits into two stacked halves, one map
+   each. The source maps are wide landscape and stack more legibly than
+   a side-by-side split of this near-square panel. */
+.wine-map.split {
+  flex-direction: column; align-items: stretch; justify-content: stretch;
+}
+.wine-submap {
+  position: relative; flex: 1 1 0; min-height: 0; width: 100%;
+  box-sizing: border-box;
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.wine-submap + .wine-submap { border-top: 1px solid var(--rule); }
+.wine-submap img {
+  width: 100%; height: 100%; object-fit: contain; object-position: center; display: block;
+}
+
 .wine-panel {
   width: 427px; height: 720px; flex: 0 0 427px;
   display: flex; flex-direction: column;
@@ -162,6 +179,9 @@ date: 2026-07-18
   letter-spacing: .14em; text-transform: uppercase; color: var(--ink-light); min-width: 46px;
 }
 .w-mv { font-size: 13px; font-weight: 300; color: var(--ink-mid); }
+/* lieux-dits row: place-name value(s), sometimes a two-name pairing,
+   allowed to wrap and set a touch smaller so it never overflows the panel */
+.w-mv-lieux { font-size: 12px; line-height: 1.3; white-space: normal; }
 
 .wine-qr { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .wine-qr img { width: 74px; height: 74px; object-fit: contain; display: block; }
@@ -466,14 +486,14 @@ date: 2026-07-18
 
 <!-- ─────────────────────────────────────────────────────────
      SLIDE 6 · WINE 1 · VERNAY · TERRASSES DE L'EMPIRE
-     Map:    assets/tastings/condrieu-horizontal/map_condrieu.png
+     Map:    assets/tastings/condrieu-horizontal/map_vin1_vin2_condrieu.jpg
      Bottle: assets/tastings/condrieu-horizontal/bottle_vernay_terrasses.png.png
      QR:     assets/tastings/condrieu-horizontal/qr_vernay_terrasses.png.png
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/condrieu-horizontal/map_condrieu.png" alt="Condrieu · Northern Rhône" loading="lazy">
-    <div class="map-tag">Condrieu · Northern Rhône</div>
+    <img src="{{ site.baseurl }}/assets/tastings/condrieu-horizontal/map_vin1_vin2_condrieu.jpg" alt="Condrieu · Zoomed view" loading="lazy">
+    <div class="map-tag">Condrieu · Zoomed view</div>
   </div>
   <div class="wine-panel">
     <div class="panel-head">
@@ -489,6 +509,7 @@ date: 2026-07-18
         <div class="w-name" style="font-size:19px;">Terrasses de l'Empire</div>
         <div class="w-producer">Domaine Georges Vernay</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
+        <div class="w-meta"><span class="w-ml">Lieux-dits</span><span class="w-mv w-mv-lieux">La Caille, Sainte-Agathe</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Viognier</span></div>
       </div>
       <div class="wine-qr">
@@ -500,14 +521,14 @@ date: 2026-07-18
 
 <!-- ─────────────────────────────────────────────────────────
      SLIDE 7 · WINE 2 · VERNAY · CHAILLÉES DE L'ENFER
-     Map:    assets/tastings/condrieu-horizontal/map_condrieu.png   (same map)
+     Map:    assets/tastings/condrieu-horizontal/map_vin1_vin2_condrieu.jpg   (same map as wine 1)
      Bottle: assets/tastings/condrieu-horizontal/bottle_vernay_chaillees.png.png
      QR:     assets/tastings/condrieu-horizontal/qr_vernay_chaillees.png.png
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/condrieu-horizontal/map_condrieu.png" alt="Condrieu · Northern Rhône" loading="lazy">
-    <div class="map-tag">Condrieu · Northern Rhône</div>
+    <img src="{{ site.baseurl }}/assets/tastings/condrieu-horizontal/map_vin1_vin2_condrieu.jpg" alt="Condrieu · Zoomed view" loading="lazy">
+    <div class="map-tag">Condrieu · Zoomed view</div>
   </div>
   <div class="wine-panel">
     <div class="panel-head">
@@ -523,6 +544,7 @@ date: 2026-07-18
         <div class="w-name" style="font-size:19px;">Chaillées de l'Enfer</div>
         <div class="w-producer">Domaine Georges Vernay</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
+        <div class="w-meta"><span class="w-ml">Lieux-dits</span><span class="w-mv w-mv-lieux">La Caille</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Viognier</span></div>
       </div>
       <div class="wine-qr">
@@ -534,14 +556,21 @@ date: 2026-07-18
 
 <!-- ─────────────────────────────────────────────────────────
      SLIDE 8 · WINE 3 · VILLARD · VILLA PONTCIANA
-     Map:    assets/tastings/condrieu-horizontal/map_condrieu.png   (same map)
+     Maps:   assets/tastings/condrieu-horizontal/map_saint-michel-sur-rhone_vin3.jpg (Poncin, north)
+             assets/tastings/condrieu-horizontal/map_saint-pierre-de-boeuf_vin3.jpg  (Le Grand Val, south)
      Bottle: assets/tastings/condrieu-horizontal/bottle_villard.png.png
      QR:     assets/tastings/condrieu-horizontal/qr_villard.png.png
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
-  <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/condrieu-horizontal/map_condrieu.png" alt="Condrieu · Northern Rhône" loading="lazy">
-    <div class="map-tag">Condrieu · Northern Rhône</div>
+  <div class="wine-map split">
+    <div class="wine-submap">
+      <img src="{{ site.baseurl }}/assets/tastings/condrieu-horizontal/map_saint-michel-sur-rhone_vin3.jpg" alt="Saint-Michel-sur-Rhône · Condrieu" loading="lazy">
+      <div class="map-tag">Saint-Michel-sur-Rhône · Poncin</div>
+    </div>
+    <div class="wine-submap">
+      <img src="{{ site.baseurl }}/assets/tastings/condrieu-horizontal/map_saint-pierre-de-boeuf_vin3.jpg" alt="Saint-Pierre-de-Bœuf · Condrieu" loading="lazy">
+      <div class="map-tag">Saint-Pierre-de-Bœuf · Le Grand Val</div>
+    </div>
   </div>
   <div class="wine-panel">
     <div class="panel-head">
@@ -557,6 +586,7 @@ date: 2026-07-18
         <div class="w-name">Villa Pontciana</div>
         <div class="w-producer">François Villard</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2020</span></div>
+        <div class="w-meta"><span class="w-ml">Lieux-dits</span><span class="w-mv w-mv-lieux">Le Grand Val, Poncin</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Viognier</span></div>
       </div>
       <div class="wine-qr">
