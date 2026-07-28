@@ -25,4 +25,4 @@ defaults:
       path: ""
       type: "tastings"
     values:
-      layout: "tasting"
+      layout: "presentation"

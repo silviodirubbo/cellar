@@ -10,16 +10,20 @@
 #   region:            primary region (displayed as label)
 #   description:       one or two sentences, kept short
 #   tags:              list of grape/region/theme tags
-#   chapter:           pilot | rhone | loire (curriculum chapter, own colour on cards)
-#   status:            upcoming | past
+#   chapter:           pilot | rhone | loire | ... (see _chapters/*.md for the
+#                      full list; curriculum chapter, colour driven by that file)
+#   chapter_order:     integer, position within the chapter's curriculum
+#                      sequence (not chronological order: several TBD entries
+#                      share no real date, so this is the only ordering signal)
+#   status:            upcoming | past (kept in sync daily by
+#                      scripts/sync-tasting-status.js, not by position in this
+#                      file, so entries are not grouped by status below)
 #   spots_total:       integer
 #   cost_estimate:     string e.g. "32 CHF"
 #   featured:          true | false
 #   slides:            true once presentation is ready
 #   wines:             list of wines (for presentation slides)
 # ─────────────────────────────────────────────────────────────
-
-# ── Upcoming ──────────────────────────────────────────────────
 
 - slug: southern-rhone-overview
   title: "Southern Rhône Overview"
@@ -45,6 +49,7 @@
     - Southern Rhône
     - France
   chapter: rhone
+  chapter_order: 6
   status: past
   featured: false
   slides: true
@@ -87,6 +92,7 @@
     - Northern Rhône
     - France
   chapter: rhone
+  chapter_order: 5
   status: upcoming
   spots_total: 6
   cost_estimate: "35 CHF"
@@ -128,6 +134,7 @@
     - Southern Rhône
     - France
   chapter: rhone
+  chapter_order: 7
   status: upcoming
   spots_total: 6
   cost_estimate: "42 CHF"
@@ -173,6 +180,7 @@
     - Southern Rhône
     - France
   chapter: rhone
+  chapter_order: 8
   status: upcoming
   spots_total: 6
   cost_estimate: "44 CHF"
@@ -211,6 +219,7 @@
     - Melon de Bourgogne
     - France
   chapter: loire
+  chapter_order: 1
   status: upcoming
   spots_total: 6
   cost_estimate: "15.90 CHF"
@@ -256,6 +265,7 @@
     - Chenin Blanc
     - France
   chapter: loire
+  chapter_order: 2
   status: upcoming
   spots_total: 6
   cost_estimate: "32 CHF"
@@ -300,6 +310,7 @@
     - Cabernet Franc
     - France
   chapter: loire
+  chapter_order: 3
   status: upcoming
   spots_total: 6
   cost_estimate: "38 CHF"
@@ -343,6 +354,7 @@
     - Chenin Blanc
     - France
   chapter: loire
+  chapter_order: 4
   status: upcoming
   spots_total: 6
   cost_estimate: "23 CHF"
@@ -389,6 +401,7 @@
     - Cabernet Franc
     - France
   chapter: loire
+  chapter_order: 5
   status: upcoming
   spots_total: 6
   cost_estimate: "20 CHF"
@@ -432,6 +445,7 @@
     - Sauvignon Blanc
     - France
   chapter: loire
+  chapter_order: 6
   status: upcoming
   spots_total: 6
   cost_estimate: "42 CHF"
@@ -453,8 +467,6 @@
       appellation: "Sancerre AOC"
       blend: "100% Sauvignon Blanc"
 
-# ── Past ──────────────────────────────────────────────────────
-
 - slug: cote-rotie-horizontal
   title: "Côte-Rôtie Horizontal"
   date: 2026-06-20
@@ -471,6 +483,7 @@
     - Northern Rhône
     - France
   chapter: rhone
+  chapter_order: 4
   status: past
   featured: false
   slides: true
@@ -511,6 +524,7 @@
     - Northern Rhône
     - France
   chapter: rhone
+  chapter_order: 3
   status: past
   featured: false
   slides: true
@@ -550,6 +564,7 @@
     - Northern Rhône
     - France
   chapter: rhone
+  chapter_order: 2
   status: past
   featured: false
   slides: true
@@ -594,6 +609,7 @@
     - France
     - Italy
   chapter: rhone
+  chapter_order: 1
   status: past
   featured: false
   slides: true
@@ -633,6 +649,7 @@
     - France
     - Italy
   chapter: pilot
+  chapter_order: 1
   status: past
   featured: false
   slides: true
