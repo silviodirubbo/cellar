@@ -63,7 +63,7 @@ permalink: /tastings/
         </div>
         <div class="chipbar" id="chipbar">
           <div class="chip-group chip-group--all">
-            <button class="chip chip--active" data-tag="">All</button>
+            <button class="chip chip--active" data-tag="" aria-pressed="true">All</button>
           </div>
           {% assign chip_groups = "Region|Appellation|Grape" | split: "|" %}
           {% assign chip_group_labels = "Region|Denomination|Grape" | split: "|" %}
@@ -83,7 +83,7 @@ permalink: /tastings/
                   {% assign c = 0 %}
                   {% for x in all_tags %}{% if x == tag.name %}{% assign c = c | plus: 1 %}{% endif %}{% endfor %}
                   {% if c > 0 %}
-                    <button class="chip" data-tag="{{ tag.name }}">{{ tag.name }}&nbsp;<span class="chip__n">{{ c }}</span></button>
+                    <button class="chip" data-tag="{{ tag.name }}" aria-pressed="false">{{ tag.name }}&nbsp;<span class="chip__n">{{ c }}</span></button>
                   {% endif %}
                 {% endfor %}
               </div>
@@ -112,16 +112,18 @@ permalink: /tastings/
       <article class="tl-row tl-row--upcoming {% if next and tasting.slug == next.slug %}tl-row--next{% endif %}"
                data-tags="{{ tasting.tags | join: ',' }}">
 
-        <div class="tl-row__date" aria-hidden="true">
-          {% if tasting.date_tbd %}
-            <span class="tl-row__day tl-row__day--tbd">?</span>
-            <span class="tl-row__mon">date TBD</span>
-          {% else %}
-            <span class="tl-row__dow">{{ tasting.date | date: "%a" }}</span>
-            <span class="tl-row__day">{{ tasting.date | date: "%-d" }}</span>
-            <span class="tl-row__mon">{{ tasting.date | date: "%b %Y" }}</span>
-          {% endif %}
+        {% if tasting.date_tbd %}
+        <div class="tl-row__date" aria-label="Date to be announced">
+          <span class="tl-row__day tl-row__day--tbd" aria-hidden="true">?</span>
+          <span class="tl-row__mon" aria-hidden="true">date TBD</span>
         </div>
+        {% else %}
+        <time class="tl-row__date" datetime="{{ tasting.date }}" aria-label="{{ tasting.date | date: '%A %-d %B %Y' }}">
+          <span class="tl-row__dow" aria-hidden="true">{{ tasting.date | date: "%a" }}</span>
+          <span class="tl-row__day" aria-hidden="true">{{ tasting.date | date: "%-d" }}</span>
+          <span class="tl-row__mon" aria-hidden="true">{{ tasting.date | date: "%b %Y" }}</span>
+        </time>
+        {% endif %}
         <span class="tl-node {% if tasting.date_tbd %}tl-node--tbd{% endif %}" aria-hidden="true"></span>
 
         {% assign is_next = false %}
@@ -212,7 +214,7 @@ permalink: /tastings/
         </div>
       </article>
       {% endfor %}
-      <p class="filter-empty filter-empty--upcoming text-light" hidden>No upcoming tastings match this filter.</p>
+      <p class="filter-empty filter-empty--upcoming text-light" hidden aria-live="polite">No upcoming tastings match this filter.</p>
 
       <!-- Divider -->
       <div class="tl-row tl-row--divider" id="archive">
@@ -227,11 +229,11 @@ permalink: /tastings/
       {% assign cover = site.static_files | where_exp: "f", "f.path contains cover_prefix" | first %}
       <article class="tl-row tl-row--past" data-tags="{{ tasting.tags | join: ',' }}">
 
-        <div class="tl-row__date" aria-hidden="true">
-          <span class="tl-row__dow">{{ tasting.date | date: "%a" }}</span>
-          <span class="tl-row__day tl-row__day--past">{{ tasting.date | date: "%-d" }}</span>
-          <span class="tl-row__mon">{{ tasting.date | date: "%b %Y" }}</span>
-        </div>
+        <time class="tl-row__date" datetime="{{ tasting.date }}" aria-label="{{ tasting.date | date: '%A %-d %B %Y' }}">
+          <span class="tl-row__dow" aria-hidden="true">{{ tasting.date | date: "%a" }}</span>
+          <span class="tl-row__day tl-row__day--past" aria-hidden="true">{{ tasting.date | date: "%-d" }}</span>
+          <span class="tl-row__mon" aria-hidden="true">{{ tasting.date | date: "%b %Y" }}</span>
+        </time>
         <span class="tl-node tl-node--past" aria-hidden="true"></span>
 
         <details class="past-entry">
@@ -287,7 +289,7 @@ permalink: /tastings/
         </details>
       </article>
       {% endfor %}
-      <p class="filter-empty filter-empty--past text-light" hidden>No past tastings match this filter.</p>
+      <p class="filter-empty filter-empty--past text-light" hidden aria-live="polite">No past tastings match this filter.</p>
 
       <!-- Terminus -->
       <div class="tl-row tl-row--end">

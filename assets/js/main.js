@@ -114,8 +114,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const isActive = chip.classList.contains('chip--active');
         const target = isActive ? chipbar.querySelector('[data-tag=""]') : chip;
         const tag = target.dataset.tag;
-        chipbar.querySelectorAll('.chip').forEach(c =>
-          c.classList.toggle('chip--active', c === target));
+        chipbar.querySelectorAll('.chip').forEach(c => {
+          const active = c === target;
+          c.classList.toggle('chip--active', active);
+          c.setAttribute('aria-pressed', active);
+        });
 
         rows.forEach(row => {
           const tags = (row.dataset.tags || '').split(',').map(t => t.trim());

@@ -23,8 +23,9 @@
   {% endif %}
 </head>
 <body class="{% if page.body_class %}{{ page.body_class }}{% endif %}">
+  <a class="skip-link" href="#main">Skip to content</a>
   {% include nav.html %}
-  <main>
+  <main id="main">
     {{ content }}
   </main>
   {% include footer.html %}

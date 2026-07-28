@@ -112,7 +112,7 @@ permalink: /planner/
 
 <!-- ── Sign-up modal ───────────────────────────────────────── -->
 <div class="avail-overlay" id="signup-overlay" hidden>
-  <div class="avail-modal">
+  <div class="avail-modal" role="dialog" aria-modal="true" aria-labelledby="signup-tasting-name">
     <div class="avail-modal__header">
       <span class="col-label" style="margin-bottom:0;" id="signup-tasting-name">Sign up</span>
       <button class="avail-close" id="signup-close" aria-label="Close">✕</button>
@@ -145,7 +145,7 @@ permalink: /planner/
 
 <!-- ── Availability modal ──────────────────────────────────── -->
 <div class="avail-overlay" id="avail-overlay" hidden>
-  <div class="avail-modal">
+  <div class="avail-modal" role="dialog" aria-modal="true" aria-labelledby="avail-tasting-name">
     <div class="avail-modal__header">
       <span class="col-label" style="margin-bottom:0;" id="avail-tasting-name">Availability</span>
       <button class="avail-close" id="avail-close" aria-label="Close">✕</button>
@@ -177,23 +177,51 @@ permalink: /planner/
 </div>
 
 <script>
-// ── Sign-up modal ─────────────────────────────────────────────
 const signupOverlay = document.getElementById('signup-overlay');
+const availOverlay = document.getElementById('avail-overlay');
+
+// ── Modal dialog helpers (focus management, Escape, scroll lock) ──
+// Mirrors the Tastings page's filter-panel pattern (main.js): Escape
+// closes it, and body.filter-open locks background scroll while open.
+let lastTrigger = null;
+
+function openModal(overlay, triggerBtn) {
+  lastTrigger = triggerBtn || null;
+  overlay.hidden = false;
+  document.body.classList.add('filter-open');
+  const focusTarget = overlay.querySelector('.form-input') || overlay.querySelector('.avail-close');
+  focusTarget?.focus();
+}
+
+function closeModal(overlay) {
+  if (overlay.hidden) return;
+  overlay.hidden = true;
+  document.body.classList.remove('filter-open');
+  lastTrigger?.focus();
+  lastTrigger = null;
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  [signupOverlay, availOverlay].forEach(o => { if (o && !o.hidden) closeModal(o); });
+});
+
+// ── Sign-up modal ─────────────────────────────────────────────
 
 document.querySelectorAll('.signup-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.getElementById('signup-tasting-name').textContent = btn.dataset.title;
     document.getElementById('signup-tasting-field').value = btn.dataset.title;
-    signupOverlay.hidden = false;
+    openModal(signupOverlay, btn);
   });
 });
 
 document.getElementById('signup-close')?.addEventListener('click', () => {
-  signupOverlay.hidden = true;
+  closeModal(signupOverlay);
 });
 
 signupOverlay?.addEventListener('click', e => {
-  if (e.target === signupOverlay) signupOverlay.hidden = true;
+  if (e.target === signupOverlay) closeModal(signupOverlay);
 });
 
 document.getElementById('signup-form')?.addEventListener('submit', async e => {
@@ -207,27 +235,26 @@ document.getElementById('signup-form')?.addEventListener('submit', async e => {
   if (res.ok) {
     form.reset();
     document.getElementById('signup-success').hidden = false;
-    setTimeout(() => { signupOverlay.hidden = true; }, 2500);
+    setTimeout(() => { closeModal(signupOverlay); }, 2500);
   }
 });
 
 // ── Availability modal ────────────────────────────────────────
-const availOverlay = document.getElementById('avail-overlay');
 
 document.querySelectorAll('.avail-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.getElementById('avail-tasting-name').textContent = btn.dataset.title + ' · availability';
     document.getElementById('avail-tasting-field').value = btn.dataset.title;
-    availOverlay.hidden = false;
+    openModal(availOverlay, btn);
   });
 });
 
 document.getElementById('avail-close')?.addEventListener('click', () => {
-  availOverlay.hidden = true;
+  closeModal(availOverlay);
 });
 
 availOverlay?.addEventListener('click', e => {
-  if (e.target === availOverlay) availOverlay.hidden = true;
+  if (e.target === availOverlay) closeModal(availOverlay);
 });
 
 document.getElementById('avail-form')?.addEventListener('submit', async e => {
@@ -241,7 +268,7 @@ document.getElementById('avail-form')?.addEventListener('submit', async e => {
   if (res.ok) {
     form.reset();
     document.getElementById('avail-success').hidden = false;
-    setTimeout(() => { availOverlay.hidden = true; }, 2500);
+    setTimeout(() => { closeModal(availOverlay); }, 2500);
   }
 });
 
