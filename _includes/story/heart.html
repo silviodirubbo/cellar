@@ -1,0 +1,15 @@
+{% comment %}
+  Small gradient heart accent, used on the wordmark slide, the link bar,
+  and (optionally) near a tasting slide's closing line.
+  Params: id (unique per instance, for the gradient def), from, to (hex),
+  class (extra class(es) for sizing/placement).
+{% endcomment %}
+<svg class="story-heart {{ include.class }}" viewBox="0 0 32 29" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <linearGradient id="heart-grad-{{ include.id }}" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="{{ include.from }}"/>
+      <stop offset="100%" stop-color="{{ include.to }}"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#heart-grad-{{ include.id }})" d="M23.6,0c-3.4,0-6.3,2-7.6,4.9C14.7,2,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,7.1,7.4,12.9,15.6,20.6c0.2,0.2,0.6,0.2,0.8,0C24.6,21.3,32,15.5,32,8.4C32,3.8,28.2,0,23.6,0z"/>
+</svg>

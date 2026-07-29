@@ -1,0 +1,20 @@
+{% comment %}
+  Bottom link bar shared by the "what it is" and "how it works" evergreen
+  slides: heart, url, tap chip. Params: uid (unique per page, for the
+  gradient defs), second_heart (bool — a floating heart under the bar),
+  heart_from/heart_to (optional gradient override for the main heart).
+{% endcomment %}
+{% assign uid = include.uid | default: "lb" %}
+{% assign uid2 = uid | append: "-2" %}
+{% assign hfrom = include.heart_from | default: "#B14FE0" %}
+{% assign hto = include.heart_to | default: "#7B2FF7" %}
+<div class="story-linkbar-wrap">
+  <div class="story-linkbar">
+    {% include story/heart.html id=uid from=hfrom to=hto class="story-linkbar__heart" %}
+    <span class="story-linkbar__url">silviodirubbo.github.io/cellar</span>
+    <span class="story-linkbar__tap" role="img" aria-label="tap">👆</span>
+  </div>
+  {% if include.second_heart %}
+    {% include story/heart.html id=uid2 from="#FF8A00" to="#E52E71" class="story-linkbar__second-heart" %}
+  {% endif %}
+</div>
