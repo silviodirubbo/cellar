@@ -1,0 +1,32 @@
+{% comment %}
+  Slide 5+ — one per past tasting. Eyebrow (tasting number, chapter,
+  date), serif title, italic intro, wine list, closing line.
+  Page front matter: tasting_slug, number ("01".."07"), story_bg
+  (green|offwhite), intro, wine_types (array, same order/length as the
+  tasting's wines, each red|white).
+{% endcomment %}
+{% assign tasting = site.data.tastings | where: "slug", page.tasting_slug | first %}
+{% assign chapter = site.chapters | where: "slug", tasting.chapter | first %}
+<div class="story story--{{ page.story_bg }}">
+  <div class="story__inner">
+    {% include story/dots.html chapter=tasting.chapter %}
+    <p class="story-eyebrow">TASTING {{ page.number }} &middot; {{ chapter.story_label | upcase }} &middot; {{ tasting.date | date: "%-d %b %Y" | upcase }}</p>
+    <h1 class="story-title">{{ tasting.title }}</h1>
+    <p class="story-italic" style="margin-bottom: 56px;">{{ page.intro }}</p>
+    <div class="story-winelist">
+      {% for wine in tasting.wines %}
+        {% assign wtype = page.wine_types[forloop.index0] %}
+        {% assign appel = wine.appellation | remove: " AOC" | remove: " DOC" %}
+        <div class="story-wine">
+          {% include story/bottle.html type=wtype %}
+          <div>
+            <div class="story-wine__name">{{ wine.name }}</div>
+            <div class="story-wine__meta">{{ wine.producer | upcase }} &middot; {{ wine.vintage }} &middot; {{ appel | upcase }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <hr class="story-rule" style="margin-top: 8px; margin-bottom: 32px;">
+    <p class="story-italic" style="font-size: 38px;">Check out the slides for more details on the website.</p>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+{% comment %}
+  Chapter dots: which curriculum chapter this story batch belongs to.
+  Shown on every slide in the batch, evergreen ones included, since the
+  point is "this release is about chapter N" regardless of slide type.
+  Params: chapter (slug) — falls back to page.dots_chapter, then "rhone".
+{% endcomment %}
+{% assign current_slug = include.chapter | default: page.dots_chapter | default: "rhone" %}
+{% assign chapters = site.chapters | sort: "order" %}
+{% assign current = chapters | where: "slug", current_slug | first %}
+<div class="story-dots" aria-hidden="true">
+  {% for c in chapters %}
+    <span class="story-dots__dot{% if c.slug == current.slug %} story-dots__dot--active{% endif %}"></span>
+  {% endfor %}
+</div>

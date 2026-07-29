@@ -1,0 +1,31 @@
+{% comment %}
+  Slide 4 — chapter cover, new slide type. Eyebrow, chapter title, italic
+  intro, full list of the chapter's tastings (any status), closing line.
+  Page front matter: chapter_slug, story_bg (green|offwhite), title,
+  intro, closing.
+{% endcomment %}
+{% assign items = site.data.tastings | where: "chapter", page.chapter_slug | sort: "chapter_order" %}
+{% assign chapter = site.chapters | where: "slug", page.chapter_slug | first %}
+<div class="story story--{{ page.story_bg }}">
+  <div class="story__inner">
+    {% include story/dots.html chapter=page.chapter_slug %}
+    <p class="story-eyebrow">{{ chapter.story_label | upcase }}</p>
+    <h1 class="story-title">{{ page.title }}</h1>
+    <p class="story-italic" style="margin-bottom: 44px;">{{ page.intro }}</p>
+    <div class="story-list">
+      {% for t in items %}
+        <div class="story-list__row">
+          <div class="story-list__marker">
+            <span class="story-list__dot{% unless t.status == 'past' %} story-list__dot--hollow{% endunless %}"></span>
+          </div>
+          <div>
+            <div class="story-list__title">{{ t.title }}</div>
+            <div class="story-list__date">{% if t.date_tbd %}Date TBD{% else %}{{ t.date | date: "%-d %b %Y" | upcase }}{% endif %}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <hr class="story-rule" style="margin-top: 8px;">
+    <p class="story-italic" style="font-size: 38px;">{{ page.closing }}</p>
+  </div>
+</div>

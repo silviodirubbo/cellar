@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ page.title }} · Cellar Story</title>
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  <style>
+    html, body { margin: 0; padding: 0; background: var(--ink); }
+  </style>
+</head>
+<body>
+  {% if page.story_type == "wordmark" %}
+    {% include story/wordmark.html %}
+  {% elsif page.story_type == "what-it-is" %}
+    {% include story/what-it-is.html %}
+  {% elsif page.story_type == "how-it-works" %}
+    {% include story/how-it-works.html %}
+  {% elsif page.story_type == "chapter-cover" %}
+    {% include story/chapter-cover.html %}
+  {% elsif page.story_type == "tasting-reveal" %}
+    {% include story/tasting-reveal.html %}
+  {% endif %}
+</body>
+</html>
