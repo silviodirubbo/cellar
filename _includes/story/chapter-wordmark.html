@@ -1,0 +1,12 @@
+{% comment %}
+  Simple chapter cover: dark bg, one word centered (both axes), large
+  italic serif. Same typographic treatment as the evergreen "Cellar."
+  wordmark slide, but centered rather than lower-left, and word/bg are
+  parametrized per chapter.
+  Page front matter: word (the chapter name to display).
+{% endcomment %}
+<div class="story story--red">
+  <div class="story__inner" style="align-items: center; justify-content: center; padding: 0;">
+    <h1 style="font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 260px; line-height: 1; color: var(--warm-white); text-align: center; margin: 0;">{{ page.word }}</h1>
+  </div>
+</div>

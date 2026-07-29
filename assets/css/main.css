@@ -1346,6 +1346,9 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 .story--dark     { background: var(--ink); }
 .story--green    { background: var(--green); }
 .story--offwhite { background: var(--off-white); }
+/* Dark bordeaux, same tonal family as --ink but with a wine-red hue.
+   Used for chapter-specific wordmark covers (e.g. the Rhône cover). */
+.story--red      { background: #3B1712; }
 
 .story__inner {
   position: absolute;
