@@ -1,21 +1,21 @@
 {% comment %}
-  Wine bottle glyph: single-stroke outline (long neck, smooth continuous
-  shoulder curve into the body, Burgundy-style silhouette) with a
-  two-band tinted fill (liquid level).
-  Colour comes from --bottle-red/--bottle-white, set per background in
-  main.css's story section.
-  Params: type (red | white), id (unique per instance, for the clip).
+  Wine bottle glyph: plain single-stroke outline. Straight neck, one
+  straight angled shoulder line, straight body, only the two bottom
+  corners rounded. Colour comes from --bottle-red/--bottle-white, set
+  per background in main.css's story section.
+  Params: type (red | white).
 {% endcomment %}
-<svg class="story-bottle story-bottle--{{ include.type }}" viewBox="0 0 64 148" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <defs>
-    <clipPath id="bottle-clip-{{ include.id }}">
-      <path d="M27,0 L37,0 L37,50 C37,75 56,60 56,88 L56,140 A4,4 0 0 1 52,144 L12,144 A4,4 0 0 1 8,140 L8,88 C8,60 27,75 27,50 L27,0 Z"/>
-    </clipPath>
-  </defs>
-  <g clip-path="url(#bottle-clip-{{ include.id }})">
-    <rect class="story-bottle__fill-upper" x="0" y="50" width="64" height="47"/>
-    <rect class="story-bottle__fill-lower" x="0" y="97" width="64" height="51"/>
-  </g>
-  <line class="story-bottle__divider" x1="8" y1="97" x2="56" y2="97"/>
-  <path class="story-bottle__outline" d="M27,0 L37,0 L37,50 C37,75 56,60 56,88 L56,140 A4,4 0 0 1 52,144 L12,144 A4,4 0 0 1 8,140 L8,88 C8,60 27,75 27,50 L27,0 Z"/>
+<svg class="story-bottle story-bottle--{{ include.type }}" viewBox="0 0 60 170" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M24 2
+           L36 2
+           L36 30
+           L48 52
+           L48 160
+           Q48 166 42 166
+           L18 166
+           Q12 166 12 160
+           L12 52
+           L24 30
+           Z"
+    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
 </svg>

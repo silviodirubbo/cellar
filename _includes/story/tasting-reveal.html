@@ -18,7 +18,7 @@
         {% assign wtype = page.wine_types[forloop.index0] %}
         {% assign appel = wine.appellation | remove: " AOC" | remove: " DOC" %}
         <div class="story-wine">
-          {% include story/bottle.html type=wtype id=forloop.index %}
+          {% include story/bottle.html type=wtype %}
           <div>
             <div class="story-wine__name">{{ wine.name }}</div>
             <div class="story-wine__meta">{{ wine.producer | upcase }} &middot; {{ wine.vintage }} &middot; {{ appel | upcase }}</div>

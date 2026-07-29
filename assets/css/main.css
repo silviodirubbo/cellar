@@ -1471,13 +1471,9 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   --bottle-red:   #B3402E;
   --bottle-white: #C9D2BE;
 }
-.story-bottle { flex: 0 0 auto; width: 56px; height: 128px; }
+.story-bottle { flex: 0 0 auto; width: 48px; height: 136px; }
 .story-bottle--red   { color: var(--bottle-red); }
 .story-bottle--white { color: var(--bottle-white); }
-.story-bottle__outline { fill: none; stroke: currentColor; stroke-width: 2.5; }
-.story-bottle__fill-upper { fill: currentColor; opacity: 0.4; }
-.story-bottle__fill-lower { fill: currentColor; opacity: 0.72; }
-.story-bottle__divider { stroke: currentColor; stroke-width: 1.5; opacity: 0.5; }
 
 /* ── Link bar (slides 2 & 3): URL + tap chip ──────────────────── */
 .story-linkbar-wrap { flex: 0 0 auto; margin-top: auto; }
