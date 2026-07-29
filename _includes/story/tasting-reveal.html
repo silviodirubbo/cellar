@@ -3,7 +3,7 @@
   date), serif title, italic intro, wine list, closing line.
   Page front matter: tasting_slug, number ("01".."07"), story_bg
   (green|offwhite), intro, wine_types (array, same order/length as the
-  tasting's wines, each red|white|rose), heart_from/heart_to (optional).
+  tasting's wines, each red|white).
 {% endcomment %}
 {% assign tasting = site.data.tastings | where: "slug", page.tasting_slug | first %}
 {% assign chapter = site.chapters | where: "slug", tasting.chapter | first %}
@@ -27,11 +27,6 @@
       {% endfor %}
     </div>
     <hr class="story-rule" style="margin-top: 8px; margin-bottom: 32px;">
-    <div class="story-closing">
-      {% if page.heart_from %}
-        {% include story/heart.html id=page.tasting_slug from=page.heart_from to=page.heart_to %}
-      {% endif %}
-      <p class="story-italic">Check out the slides for more details on the website.</p>
-    </div>
+    <p class="story-italic" style="font-size: 38px;">Check out the slides for more details on the website.</p>
   </div>
 </div>
