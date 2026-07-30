@@ -117,8 +117,8 @@
 
 - slug: chateauneuf-du-pape-the-whites
   title: "Châteauneuf-du-Pape: The Whites"
-  date: null
-  date_tbd: true
+  date: 2026-09-09
+  date_tbd: false
   location: "Krieg 13"
   region: "Southern Rhône"
   description: >
@@ -163,8 +163,8 @@
 
 - slug: chateauneuf-du-pape-the-reds
   title: "Châteauneuf-du-Pape: The Reds"
-  date: null
-  date_tbd: true
+  date: 2026-09-18
+  date_tbd: false
   location: "Krieg 13"
   region: "Southern Rhône"
   description: >

@@ -21,6 +21,10 @@
     {% include story/tasting-reveal.html %}
   {% elsif page.story_type == "chapter-wordmark" %}
     {% include story/chapter-wordmark.html %}
+  {% elsif page.story_type == "tasting-pair" %}
+    {% include story/tasting-pair.html %}
+  {% elsif page.story_type == "section-cover" %}
+    {% include story/section-cover.html %}
   {% endif %}
 </body>
 </html>

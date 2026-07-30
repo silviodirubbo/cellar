@@ -1,0 +1,11 @@
+{% comment %}
+  Generic section cover: a single word, centered, on a solid
+  background. Not tied to a tasting or chapter, reusable for archive
+  covers (e.g. "Next" for the upcoming-tastings section).
+  Params: word, story_bg (green|offwhite|dark).
+{% endcomment %}
+<div class="story story--{{ page.story_bg }}">
+  <div class="story__inner story__inner--center">
+    <h1 class="story-word">{{ page.word }}</h1>
+  </div>
+</div>

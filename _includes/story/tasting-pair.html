@@ -1,0 +1,33 @@
+{% comment %}
+  Two tastings released together as one story (e.g. a two-part arc),
+  scoped to an explicit slug pair rather than a whole chapter. Shows
+  each tasting's sub-title only (the part after "Name: "), not the
+  full wine list, so the specific bottles stay a mystery until closer
+  to the date.
+  Page front matter: tasting_slug_a, tasting_slug_b, story_bg
+  (green|offwhite), title, intro, closing.
+{% endcomment %}
+{% assign a_arr = site.data.tastings | where: "slug", page.tasting_slug_a %}
+{% assign b_arr = site.data.tastings | where: "slug", page.tasting_slug_b %}
+{% assign pair = a_arr | concat: b_arr %}
+{% assign a = a_arr.first %}
+{% assign chapter = site.chapters | where: "slug", a.chapter | first %}
+<div class="story story--{{ page.story_bg }}">
+  <div class="story__inner">
+    {% include story/dots.html chapter=a.chapter %}
+    <p class="story-eyebrow">{{ chapter.story_label | upcase }}</p>
+    <h1 class="story-title">{{ page.title }}</h1>
+    <p class="story-italic" style="margin-bottom: 0;">{{ page.intro }}</p>
+    <div class="story-pair">
+      {% for t in pair %}
+        {% unless forloop.first %}<div class="story-pair__divider" aria-hidden="true"></div>{% endunless %}
+        <div class="story-pair__item">
+          <div class="story-pair__label">{{ t.title | split: ": " | last }}</div>
+          <div class="story-pair__date">{% if t.date_tbd %}Date TBD{% else %}{{ t.date | date: "%-d %b %Y" | upcase }}{% endif %}</div>
+        </div>
+      {% endfor %}
+    </div>
+    <hr class="story-rule" style="margin-top: 8px;">
+    <p class="story-italic" style="font-size: 38px;">{{ page.closing }}</p>
+  </div>
+</div>

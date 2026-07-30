@@ -1545,3 +1545,48 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 .story--offwhite .story-list__date  { color: var(--ink-light); }
 .story--offwhite .story-list__dot   { background: var(--green); }
 .story--offwhite .story-list__dot--hollow { background: transparent; border-color: var(--ink-light); }
+
+/* ── Tasting pair: two tastings released as one story, centered
+   in the remaining space instead of a many-row timeline list ── */
+.story-pair {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 56px;
+  flex: 1 1 auto;
+}
+.story-pair__item { display: flex; flex-direction: column; gap: 14px; }
+.story-pair__label {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 96px;
+  line-height: 1.05;
+  color: var(--ink);
+}
+.story--dark .story-pair__label,
+.story--green .story-pair__label { color: var(--warm-white); }
+.story-pair__date {
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 28px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+.story--dark .story-pair__date,
+.story--green .story-pair__date { color: rgba(253,252,250,0.55); }
+.story-pair__divider { height: 1px; background: var(--rule); flex: 0 0 auto; }
+.story--dark .story-pair__divider,
+.story--green .story-pair__divider { background: rgba(253,252,250,0.16); }
+
+/* ── Section cover: single centered word, no eyebrow/dots ────── */
+.story__inner--center { justify-content: center; align-items: center; text-align: center; }
+.story-word {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 230px;
+  line-height: 1;
+  color: var(--ink);
+}
+.story--dark .story-word,
+.story--green .story-word { color: var(--warm-white); }
