@@ -1579,8 +1579,8 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 .story--dark .story-pair__divider,
 .story--green .story-pair__divider { background: rgba(253,252,250,0.16); }
 
-/* ── Section cover: single centered word, no eyebrow/dots ────── */
-.story__inner--center { justify-content: center; align-items: center; text-align: center; }
+/* ── Section cover: single centered word, dots top-left only ─── */
+.story__inner--center { display: flex; flex: 1 1 auto; justify-content: center; align-items: center; text-align: center; }
 .story-word {
   font-family: var(--font-serif);
   font-weight: 400;
