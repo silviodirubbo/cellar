@@ -93,9 +93,7 @@
     - France
   chapter: rhone
   chapter_order: 5
-  status: upcoming
-  spots_total: 6
-  cost_estimate: "35 CHF"
+  status: past
   featured: false
   slides: true
   wines:
