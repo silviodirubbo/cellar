@@ -202,8 +202,8 @@
 
 - slug: muscadet
   title: "Muscadet"
-  date: null
-  date_tbd: true
+  date: 2026-10-02
+  date_tbd: false
   location: "Krieg 13"
   region: "Pays Nantais"
   description: >
@@ -246,8 +246,8 @@
 
 - slug: savennieres-bonnezeaux
   title: "Savennières & Bonnezeaux"
-  date: null
-  date_tbd: true
+  date: 2026-10-09
+  date_tbd: false
   location: "Krieg 13"
   region: "Anjou"
   description: >
@@ -291,8 +291,8 @@
 
 - slug: saumur-champigny
   title: "Saumur & Champigny"
-  date: null
-  date_tbd: true
+  date: 2026-10-23
+  date_tbd: false
   location: "Krieg 13"
   region: "Saumur"
   description: >
@@ -337,8 +337,8 @@
 
 - slug: vouvray-montlouis
   title: "Vouvray & Montlouis"
-  date: null
-  date_tbd: true
+  date: 2026-10-30
+  date_tbd: false
   location: "Krieg 13"
   region: "Touraine"
   description: >
@@ -381,8 +381,8 @@
 
 - slug: chinon-bourgueil
   title: "Chinon & Bourgueil"
-  date: null
-  date_tbd: true
+  date: 2026-11-06
+  date_tbd: false
   location: "Krieg 13"
   region: "Touraine"
   description: >
@@ -428,8 +428,8 @@
 
 - slug: sancerre-pouilly-fume
   title: "Sancerre & Pouilly-Fumé"
-  date: null
-  date_tbd: true
+  date: 2026-11-13
+  date_tbd: false
   location: "Krieg 13"
   region: "Centre-Loire"
   description: >
