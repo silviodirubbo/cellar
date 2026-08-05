@@ -113,6 +113,29 @@
       appellation: "Condrieu AOC"
       blend: "100% Viognier"
 
+- slug: bourgogne-chardonnay-brunello
+  title: "Bourgogne Chardonnay & Brunello di Montalcino"
+  date: 2026-08-13
+  date_tbd: false
+  location: "Carlo's"
+  region: "Bourgogne & Tuscany"
+  description: >
+    A one-off, off the curriculum: white Burgundy against Sangiovese from
+    Montalcino, at Carlo's table. Two very different classics side by side,
+    just because they deserved an evening together.
+  tags:
+    - Chardonnay
+    - Sangiovese
+    - Bourgogne
+    - Brunello di Montalcino
+    - Tuscany
+    - France
+    - Italy
+  status: upcoming
+  spots_total: 6
+  featured: false
+  wines: []
+
 - slug: chateauneuf-du-pape-the-whites
   title: "Châteauneuf-du-Pape: The Whites"
   date: 2026-09-09

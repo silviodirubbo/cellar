@@ -139,7 +139,8 @@ permalink: /tastings/
 
         {% assign is_next = false %}
         {% if next and tasting.slug == next.slug %}{% assign is_next = true %}{% endif %}
-        {% assign chapter_obj = site.chapters | where: "slug", tasting.chapter | first %}
+        {% assign chapter_obj = nil %}
+        {% if tasting.chapter %}{% assign chapter_obj = site.chapters | where: "slug", tasting.chapter | first %}{% endif %}
         <div class="tl-card {% if is_next %}tl-card--feature{% endif %}"
              style="{% if chapter_obj %}--chapter-accent: {{ chapter_obj.color }};{% endif %}{% if is_next and cover %}background-image: url('{{ cover.path | relative_url }}');{% endif %}">
           {% if is_next %}<span class="tl-card__ghost" aria-hidden="true">{{ tasting.date | date: "%-d" }}</span>{% endif %}
@@ -242,7 +243,8 @@ permalink: /tastings/
         </time>
         <span class="tl-node tl-node--past" aria-hidden="true"></span>
 
-        {% assign chapter_obj = site.chapters | where: "slug", tasting.chapter | first %}
+        {% assign chapter_obj = nil %}
+        {% if tasting.chapter %}{% assign chapter_obj = site.chapters | where: "slug", tasting.chapter | first %}{% endif %}
         <details class="past-entry" style="{% if chapter_obj %}--chapter-accent: {{ chapter_obj.color }};{% endif %}">
           <summary class="past-entry__head">
             {% if cover %}
