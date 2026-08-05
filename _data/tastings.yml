@@ -134,7 +134,28 @@
   status: upcoming
   spots_total: 6
   featured: false
-  wines: []
+  slides: true
+  wines:
+    - name: "Vieilles Vignes"
+      producer: "Domaine AMI"
+      vintage: 2018
+      appellation: "Saint-Romain AOC"
+      blend: "100% Chardonnay"
+    - name: "Meursault"
+      producer: "Chanson Père et Fils"
+      vintage: 2005
+      appellation: "Meursault AOC"
+      blend: "100% Chardonnay"
+    - name: "Sogni e Follia"
+      producer: "Podere Le Ripi"
+      vintage: 2019
+      appellation: "Rosso di Montalcino DOC"
+      blend: "100% Sangiovese"
+    - name: "Brunello di Montalcino"
+      producer: "Val di Suga"
+      vintage: 1998
+      appellation: "Brunello di Montalcino DOCG"
+      blend: "100% Sangiovese"
 
 - slug: chateauneuf-du-pape-the-whites
   title: "Châteauneuf-du-Pape: The Whites"

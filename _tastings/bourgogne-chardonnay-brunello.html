@@ -1,0 +1,433 @@
+---
+layout: presentation
+title: "Bourgogne Chardonnay & Brunello di Montalcino"
+---
+<style>
+:root {
+  --warm-white: #FDFCFA;
+  --off-white:  #F7F5F0;
+  --ink:        #1A1814;
+  --ink-mid:    #4A4640;
+  --ink-light:  #736E6B;
+  --green:      #2C4A3E;
+  --gold:       #8B6914;
+  --rule:       #E2DED8;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 1280px;
+  height: 720px;
+  display: none;
+}
+.slide.active { display: flex; }
+
+/* ── COVER ──────────────────────────────────────────── */
+.slide-cover {
+  background: var(--ink) url('{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/cover.jpg') center/cover no-repeat;
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; cursor: pointer; position: relative;
+}
+.slide-cover::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(26,24,20,.62);
+  z-index: 0;
+}
+.cover-content { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
+.eyebrow {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 11px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 36px;
+}
+.cover-rule { width: 40px; height: 1px; background: var(--gold); margin: 28px auto; }
+.cover-meta {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 10px;
+  letter-spacing: .14em; text-transform: uppercase; color: rgba(253,252,250,.55);
+}
+
+/* ── COVER, SPLIT VARIANT ───────────────────────────────
+   One-off tasting, two grapes/regions at once rather than the usual
+   single cover-title/cover-subtitle pair. Two half-width columns
+   divided by a vertical rule, reusing the deck's existing color
+   tokens and type (Cormorant Garamond for the grape names, DM Mono
+   for the eyebrow/meta lines) rather than inventing new ones. */
+.cover-split {
+  display: flex; flex-direction: row; align-items: center; justify-content: center;
+  width: 100%; max-width: 1120px; position: relative; z-index: 1;
+}
+.cover-half {
+  flex: 1 1 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 0 56px;
+}
+.cover-half-title { font-size: 72px; font-weight: 300; line-height: 1; color: var(--warm-white); letter-spacing: -.01em; }
+.cover-half-subtitle {
+  font-size: 19px; font-weight: 300; font-style: italic; color: var(--warm-white);
+  margin-top: 10px; opacity: .8;
+}
+.cover-split-rule { width: 1px; align-self: stretch; margin: 10px 0; background: rgba(253,252,250,.22); }
+
+/* ── WHITE DIVIDER SLIDE ─────────────────────────────────
+   New slide type, not present in any other deck: a plain grape-name
+   divider with no appellation/character/soil grid, for the Chardonnay
+   split (slide 2) where two villages/producers are covered at once
+   and no single ig-grid row could describe both truthfully. Reuses
+   the .intro-label / .intro-grapes / .intro-grape-primary / .intro-vline
+   type treatment from the standard grape-intro slide so it still reads
+   as part of the same family. */
+.slide-divider {
+  background: var(--warm-white); color: var(--ink);
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 72px; cursor: pointer;
+}
+.divider-caption {
+  font-size: 19px; font-weight: 300; font-style: italic; color: var(--ink-light);
+}
+
+/* ── GRAPE INTRO ────────────────────────────────────── */
+.slide-intro {
+  background: var(--warm-white); color: var(--ink);
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 72px; cursor: pointer;
+}
+.intro-label {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 10px;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 18px;
+}
+.intro-grapes {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1;
+}
+.intro-grape-primary { font-size: 112px; font-weight: 300; color: var(--ink); letter-spacing: -.02em; }
+.intro-vline { width: 1px; height: 38px; background: var(--rule); margin: 28px auto; }
+.intro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; max-width: 640px; }
+.ig-label {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 8px;
+}
+.ig-val { font-size: 14px; font-weight: 300; color: var(--ink-mid); line-height: 1.5; }
+.ig-val em { color: var(--green); font-style: italic; }
+
+/* ── MAP-ONLY SLIDE ─────────────────────────────────── */
+.slide-map {
+  background: var(--warm-white);
+  flex-direction: column; align-items: center; justify-content: center; cursor: pointer;
+}
+.slide-map img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+.map-label-center {
+  position: absolute; bottom: 16px; left: 16px;
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
+  background: rgba(253,252,250,.9); padding: 5px 9px;
+}
+
+/* ── WINE SLIDE ─────────────────────────────────────── */
+.slide-wine { background: var(--warm-white); color: var(--ink); flex-direction: row; }
+.wine-map {
+  width: 853px; height: 720px; flex: 0 0 853px;
+  position: relative; overflow: hidden; background: var(--warm-white); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.wine-map img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
+.map-tag {
+  position: absolute; bottom: 16px; left: 16px;
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
+  background: rgba(253,252,250,.9); padding: 5px 9px;
+}
+.wine-panel {
+  width: 427px; height: 720px; flex: 0 0 427px;
+  display: flex; flex-direction: column;
+  padding: 62px 35px 60px;
+  border-left: 1px solid var(--rule); background: var(--warm-white);
+}
+.panel-head { flex: 0 0 auto; }
+.w-counter {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 6px;
+}
+.w-appellation {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .13em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+}
+.w-hrule { width: 100%; height: 1px; background: var(--rule); }
+.wine-bottle {
+  flex: 1 1 auto; min-height: 0;
+  display: flex; align-items: center; justify-content: center; padding: 16px 0;
+}
+.wine-bottle img {
+  max-height: 100%; max-width: 68%; object-fit: contain;
+  filter: drop-shadow(0 4px 24px rgba(26,24,20,.07));
+}
+.wine-info {
+  flex: 0 0 auto;
+  padding-top: 18px; border-top: 1px solid var(--rule);
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
+}
+.info-text { flex: 1 1 auto; min-width: 0; }
+.w-name { font-size: 26px; font-weight: 300; color: var(--ink); line-height: 1.12; margin-bottom: 3px; }
+.w-producer { font-size: 14px; font-weight: 300; font-style: italic; color: var(--green); margin-bottom: 11px; }
+.w-meta { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.w-ml {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink-light); min-width: 46px;
+}
+.w-mv { font-size: 13px; font-weight: 300; color: var(--ink-mid); }
+.wine-qr { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.wine-qr img { width: 74px; height: 74px; object-fit: contain; display: block; }
+.qr-label {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 7px;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-light);
+  text-align: center; line-height: 1.6;
+}
+</style>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 1 · COVER, SPLIT (Chardonnay | Brunello)
+     Image: assets/tastings/bourgogne-chardonnay-brunello/cover.jpg
+     ───────────────────────────────────────────────────────── -->
+{% assign this_tasting = site.data.tastings | where: "slug", page.slug | first %}
+<div class="slide slide-cover active">
+  <div class="cover-content">
+    <div class="eyebrow">Wine Tasting · {{ this_tasting.date | date: "%-d %B %Y" }}</div>
+    <div class="cover-split">
+      <div class="cover-half">
+        <div class="cover-half-title">Chardonnay</div>
+        <div class="cover-half-subtitle">Bourgogne</div>
+      </div>
+      <div class="cover-split-rule"></div>
+      <div class="cover-half">
+        <div class="cover-half-title">Brunello</div>
+        <div class="cover-half-subtitle">di Montalcino</div>
+      </div>
+    </div>
+    <div class="cover-rule"></div>
+    <div class="cover-meta">Four wines · Two regions · One evening</div>
+    <div class="cover-meta-gold">Saint-Romain &middot; Meursault &middot; Rosso di Montalcino &middot; Brunello</div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 2 · WHITE DIVIDER · CHARDONNAY
+     No images needed. New .slide-divider type: Saint-Romain (AMI)
+     and Meursault (Chanson) are two different villages, so this
+     stays a plain grape-name divider rather than a single-appellation
+     ig-grid like .slide-intro (which would misdescribe one of the two).
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-divider">
+  <div class="intro-label">The Grape</div>
+  <div class="intro-grapes">
+    <div class="intro-grape-primary">Chardonnay</div>
+  </div>
+  <div class="intro-vline"></div>
+  <div class="divider-caption">Two villages, C&ocirc;te de Beaune</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 3 · FRANCE MAP
+     Image: assets/tastings/bourgogne-chardonnay-brunello/map_france.jpg
+     (same source asset as cote-rotie-horizontal / condrieu-horizontal,
+     copied into this deck's own folder, not fetched fresh)
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-map" style="position:relative;">
+  <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/map_france.jpg" alt="France · Wine Regions" loading="lazy">
+  <div class="map-label-center">France · Wine Regions</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 4 · BOURGOGNE / CÔTE DE BEAUNE MAP
+     Image: assets/tastings/bourgogne-chardonnay-brunello/map_bourgogne.jpg
+     NEW ASSET — does not exist in the repo yet, needed from Silvio.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-map" style="position:relative;">
+  <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/map_bourgogne.jpg" alt="Bourgogne · Côte de Beaune" loading="lazy">
+  <div class="map-label-center">Bourgogne · C&ocirc;te de Beaune</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 5 · WINE 1 · DOMAINE AMI · SAINT-ROMAIN VIEILLES VIGNES
+     Map:    assets/tastings/bourgogne-chardonnay-brunello/map_saint_romain.jpg
+             NEW ASSET — Saint-Romain-specific (village zoom), separate
+             from Meursault's own map since they are different villages,
+             unlike Côte-Rôtie where all 3 wines share one appellation map.
+     Bottle: assets/tastings/bourgogne-chardonnay-brunello/bottle_ami.png
+     QR:     assets/tastings/bourgogne-chardonnay-brunello/qr_ami.png
+             NEW ASSET — target https://www.domaineami.com/ needs to be
+             generated externally as a QR image, the same way every other
+             deck's QR is a static image rather than a live link in the HTML.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/map_saint_romain.jpg" alt="Saint-Romain · Côte de Beaune" loading="lazy">
+    <div class="map-tag">Saint-Romain · C&ocirc;te de Beaune</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">01 / 04</div>
+      <div class="w-appellation">Saint-Romain AOC · Vieilles Vignes</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/bottle_ami.png" alt="Vieilles Vignes" loading="lazy">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Vieilles Vignes</div>
+        <div class="w-producer">Domaine AMI</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2018</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Chardonnay</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/qr_ami.png" alt="QR code for Domaine AMI" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 6 · WINE 2 · CHANSON PÈRE ET FILS · MEURSAULT
+     Map:    assets/tastings/bourgogne-chardonnay-brunello/map_meursault.jpg
+             NEW ASSET — Meursault-specific (village zoom), separate
+             from Saint-Romain's own map per slide 5's note.
+     Bottle: assets/tastings/bourgogne-chardonnay-brunello/bottle_chanson.png
+     QR:     assets/tastings/bourgogne-chardonnay-brunello/qr_chanson.png
+             NEW ASSET — target https://www.domaine-chanson.com/vin/meursault/,
+             same QR-image flag as slide 5.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/map_meursault.jpg" alt="Meursault · Côte de Beaune" loading="lazy">
+    <div class="map-tag">Meursault · C&ocirc;te de Beaune</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">02 / 04</div>
+      <div class="w-appellation">Meursault AOC</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/bottle_chanson.png" alt="Meursault" loading="lazy">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Meursault</div>
+        <div class="w-producer">Chanson P&egrave;re et Fils</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2005</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Chardonnay</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/qr_chanson.png" alt="QR code for Chanson Père et Fils" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 7 · WHITE DIVIDER · SANGIOVESE
+     No images needed. Unlike slide 2, both Italian wines (Rosso di
+     Montalcino and Brunello di Montalcino) are the same commune, so
+     this one carries the full .slide-intro ig-grid like existing
+     decks, titled by grape (matching every other .slide-intro:
+     Côte-Rôtie says "Syrah & Viognier", Condrieu says "Viognier")
+     rather than by country/region.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-intro">
+  <div class="intro-label">The Grape</div>
+  <div class="intro-grapes">
+    <div class="intro-grape-primary">Sangiovese</div>
+  </div>
+  <div class="intro-vline"></div>
+  <div class="intro-grid">
+    <div><div class="ig-label">Appellation</div><div class="ig-val">Montalcino<br>Tuscany</div></div>
+    <div><div class="ig-label">Character</div><div class="ig-val"><em>Cherry · Leather<br>Tobacco · Dried herbs</em></div></div>
+    <div><div class="ig-label">Soil</div><div class="ig-val">Galestro &amp; tufo<br>varied by exposure</div></div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 8 · TUSCANY MAP
+     Image: assets/tastings/bourgogne-chardonnay-brunello/map_tuscany.jpg
+     NEW ASSET — does not exist in the repo yet, needed from Silvio.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-map" style="position:relative;">
+  <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/map_tuscany.jpg" alt="Tuscany · Wine Regions" loading="lazy">
+  <div class="map-label-center">Tuscany · Wine Regions</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 9 · WINE 3 · PODERE LE RIPI · ROSSO DI MONTALCINO SOGNI E FOLLIA
+     Map:    assets/tastings/bourgogne-chardonnay-brunello/map_montalcino.jpg
+             NEW ASSET — shared with slide 10 (same commune, matching
+             the Côte-Rôtie precedent of one appellation map for every
+             wine from that appellation).
+     Bottle: assets/tastings/bourgogne-chardonnay-brunello/bottle_leripi.png
+     QR:     assets/tastings/bourgogne-chardonnay-brunello/qr_leripi.png
+             NEW ASSET — target
+             https://www.podereleripi.com/our-montalcino-wines/sogni-e-follia/,
+             same QR-image flag as slides 5 and 6.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/map_montalcino.jpg" alt="Montalcino · Tuscany" loading="lazy">
+    <div class="map-tag">Montalcino · Tuscany</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">03 / 04</div>
+      <div class="w-appellation">Rosso di Montalcino DOC · Sogni e Follia</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/bottle_leripi.png" alt="Sogni e Follia" loading="lazy">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Sogni e Follia</div>
+        <div class="w-producer">Podere Le Ripi</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2019</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Sangiovese</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/qr_leripi.png" alt="QR code for Podere Le Ripi" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 10 · WINE 4 · VAL DI SUGA · BRUNELLO DI MONTALCINO
+     Map:    assets/tastings/bourgogne-chardonnay-brunello/map_montalcino.jpg
+             (same shared asset as slide 9, per that slide's note)
+     Bottle: assets/tastings/bourgogne-chardonnay-brunello/bottle_valdisuga.png
+     QR:     assets/tastings/bourgogne-chardonnay-brunello/qr_valdisuga.png
+             NEW ASSET — target
+             https://www.valdisuga.com/en/i-vini/brunello-di-montalcino-docg/,
+             same QR-image flag as slides 5, 6 and 9.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/map_montalcino.jpg" alt="Montalcino · Tuscany" loading="lazy">
+    <div class="map-tag">Montalcino · Tuscany</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">04 / 04</div>
+      <div class="w-appellation">Brunello di Montalcino DOCG</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/bottle_valdisuga.png" alt="Brunello di Montalcino" loading="lazy">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Brunello di Montalcino</div>
+        <div class="w-producer">Val di Suga</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">1998</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Sangiovese</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/qr_valdisuga.png" alt="QR code for Val di Suga" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
