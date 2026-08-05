@@ -138,7 +138,7 @@
   wines:
     - name: "Vieilles Vignes"
       producer: "Domaine AMI"
-      vintage: 2018
+      vintage: 2020
       appellation: "Saint-Romain AOC"
       blend: "100% Chardonnay"
     - name: "Meursault"
