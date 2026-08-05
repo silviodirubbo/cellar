@@ -193,10 +193,12 @@ title: "Chardonnay & Brunello"
 
 <!-- ─────────────────────────────────────────────────────────
      SLIDE 2 · WHITE DIVIDER · CHARDONNAY
-     No images needed. New .slide-divider type: Saint-Romain (AMI)
-     and Meursault (Chanson) are two different villages, so this
-     stays a plain grape-name divider rather than a single-appellation
-     ig-grid like .slide-intro (which would misdescribe one of the two).
+     No images needed. Still the .slide-divider type (not .slide-intro),
+     but now carries the same intro-grid as the Sangiovese divider
+     (slide 8): the Appellation cell names both Saint-Romain and
+     Meursault together rather than picking one, which is the detail
+     that let this stay a two-village divider without misdescribing
+     either village the way a single-appellation grid would have.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-divider">
   <div class="intro-label">The Grape</div>
@@ -204,6 +206,11 @@ title: "Chardonnay & Brunello"
     <div class="intro-grape-primary">Chardonnay</div>
   </div>
   <div class="intro-vline"></div>
+  <div class="intro-grid">
+    <div><div class="ig-label">Appellation</div><div class="ig-val">Saint-Romain &amp; Meursault<br>Bourgogne</div></div>
+    <div><div class="ig-label">Character</div><div class="ig-val"><em>Citrus · Stone fruit<br>Hazelnut · Minerality</em></div></div>
+    <div><div class="ig-label">Soil</div><div class="ig-val">Limestone &amp; marl<br>varied by exposure</div></div>
+  </div>
   <div class="divider-caption">Two villages, C&ocirc;te de Beaune</div>
 </div>
 
@@ -242,11 +249,12 @@ title: "Chardonnay & Brunello"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 6 · WINE 1 · DOMAINE AMI · SAINT-ROMAIN VIEILLES VIGNES
+     SLIDE 6 · WINE 1 · DOMAINE AMI · SAINT-ROMAIN
      Map:    assets/tastings/bourgogne-chardonnay-brunello/map_saint_romain.jpg
-             Saint-Romain lieu-dit map highlighting La Combe Bazin, separate
-             from Meursault's own map since they are different villages,
-             unlike Côte-Rôtie where all 3 wines share one appellation map.
+             The underlying image is a Saint-Romain lieu-dit map that
+             happens to highlight La Combe Bazin, but the wine itself
+             isn't tied to that specific plot, so the on-slide label
+             stays the generic "Saint-Romain" rather than naming it.
              (Same file originally uploaded as saint-romain-blanc-la-combe-
              bazin.jpg and flagged as an unused future addition; now wired
              in here, and the duplicate under the old name was removed.)
@@ -255,21 +263,21 @@ title: "Chardonnay & Brunello"
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/map_saint_romain.jpg" alt="Saint-Romain · La Combe Bazin" loading="lazy">
-    <div class="map-tag">Saint-Romain · La Combe Bazin</div>
+    <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/map_saint_romain.jpg" alt="Saint-Romain · Côte de Beaune" loading="lazy">
+    <div class="map-tag">Saint-Romain · C&ocirc;te de Beaune</div>
   </div>
   <div class="wine-panel">
     <div class="panel-head">
       <div class="w-counter">01 / 04</div>
-      <div class="w-appellation">Saint-Romain AOC · Vieilles Vignes</div>
+      <div class="w-appellation">Saint-Romain AOC</div>
       <div class="w-hrule"></div>
     </div>
     <div class="wine-bottle">
-      <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/bottle_ami.jpg" alt="Vieilles Vignes" loading="lazy">
+      <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/bottle_ami.jpg" alt="Saint-Romain" loading="lazy">
     </div>
     <div class="wine-info">
       <div class="info-text">
-        <div class="w-name">Vieilles Vignes</div>
+        <div class="w-name">Saint-Romain</div>
         <div class="w-producer">Domaine AMI</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2020</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Chardonnay</span></div>
@@ -365,7 +373,7 @@ title: "Chardonnay & Brunello"
   <div class="wine-panel">
     <div class="panel-head">
       <div class="w-counter">03 / 04</div>
-      <div class="w-appellation">Rosso di Montalcino DOC · Sogni e Follia</div>
+      <div class="w-appellation">Rosso di Montalcino DOC</div>
       <div class="w-hrule"></div>
     </div>
     <div class="wine-bottle">
