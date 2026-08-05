@@ -135,7 +135,7 @@
   featured: false
   slides: true
   wines:
-    - name: "Vieilles Vignes"
+    - name: "Saint-Romain"
       producer: "Domaine AMI"
       vintage: 2020
       appellation: "Saint-Romain AOC"
