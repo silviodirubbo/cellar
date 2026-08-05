@@ -36,48 +36,31 @@ title: "Bourgogne Chardonnay & Brunello di Montalcino"
   z-index: 0;
 }
 .cover-content { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
+/* Sized to match condrieu-horizontal's cover (23px/500 vs the 11px/300
+   used on most other decks' covers) for better legibility. */
 .eyebrow {
-  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 11px;
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 23px;
   letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 36px;
 }
 .cover-rule { width: 40px; height: 1px; background: var(--gold); margin: 28px auto; }
 .cover-meta {
-  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 10px;
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 21px;
   letter-spacing: .14em; text-transform: uppercase; color: rgba(253,252,250,.55);
 }
+/* overrides the shared .cover-meta-gold from _layouts/presentation.html,
+   scoped to this deck only, matching condrieu-horizontal's own override
+   (this <style> block renders after the layout's, so it wins here without
+   touching other decks) */
+.cover-meta-gold { font-size: 21px; font-weight: 500; }
 
-/* ── COVER, SPLIT VARIANT ───────────────────────────────
-   One-off tasting, two grapes/regions at once rather than the usual
-   single cover-title/cover-subtitle pair. Two half-width columns
-   divided by a vertical rule, reusing the deck's existing color
-   tokens and type (Cormorant Garamond for the grape names, DM Mono
-   for the eyebrow/meta lines) rather than inventing new ones. */
-/* Main cover title, same weight/size as every other deck's plain
-   .cover-title (104px), sitting above the split so the split reads
-   as a quiet label row underneath it, not a second headline. */
+/* ── COVER, MAIN TITLE ──────────────────────────────────
+   One-off tasting: a single "Grapedown" title plus an italic subtitle
+   naming both grapes directly, replacing the two-column grape split
+   this cover started with — the subtitle already says both names,
+   so the separate grid was redundant. Sized to match condrieu-
+   horizontal's plain .cover-title / .cover-subtitle exactly. */
 .cover-main-title { font-size: 104px; font-weight: 300; line-height: 1; color: var(--warm-white); letter-spacing: -.01em; }
-/* Subtitle reuses .cover-half-subtitle's italic type as-is; this
-   sibling rule only tunes the spacing for its new position above
-   the split, it doesn't touch the shared rule used under each grape name. */
-.cover-main-title + .cover-half-subtitle { margin-top: 12px; margin-bottom: 34px; }
-.cover-split {
-  display: flex; flex-direction: row; align-items: center; justify-content: center;
-  width: 100%; max-width: 1120px; position: relative; z-index: 1;
-}
-.cover-half {
-  flex: 1 1 50%;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; padding: 0 56px;
-}
-/* Grape name inside the split: a quiet label under .cover-main-title,
-   not a second headline. 30px, just a step up from the 19px italic
-   .cover-half-subtitle underneath it. */
-.cover-half-title { font-size: 30px; font-weight: 300; line-height: 1; color: var(--warm-white); letter-spacing: -.005em; }
-.cover-half-subtitle {
-  font-size: 19px; font-weight: 300; font-style: italic; color: var(--warm-white);
-  margin-top: 10px; opacity: .8;
-}
-.cover-split-rule { width: 1px; align-self: stretch; margin: 10px 0; background: rgba(253,252,250,.22); }
+.cover-subtitle { font-size: 28px; font-weight: 300; font-style: italic; color: var(--warm-white); margin-top: 12px; }
 
 /* ── WHITE DIVIDER SLIDE ─────────────────────────────────
    New slide type, not present in any other deck: a plain grape-name
@@ -202,18 +185,7 @@ title: "Bourgogne Chardonnay & Brunello di Montalcino"
   <div class="cover-content">
     <div class="eyebrow">Wine Tasting · {{ this_tasting.date | date: "%-d %B %Y" }}</div>
     <div class="cover-main-title">Grapedown</div>
-    <div class="cover-half-subtitle">First episode: Chardonnay and Brunello</div>
-    <div class="cover-split">
-      <div class="cover-half">
-        <div class="cover-half-title">Chardonnay</div>
-        <div class="cover-half-subtitle">Bourgogne</div>
-      </div>
-      <div class="cover-split-rule"></div>
-      <div class="cover-half">
-        <div class="cover-half-title">Brunello</div>
-        <div class="cover-half-subtitle">di Montalcino</div>
-      </div>
-    </div>
+    <div class="cover-subtitle">First episode: Chardonnay and Brunello</div>
     <div class="cover-rule"></div>
     <div class="cover-meta-gold">Saint-Romain &middot; Meursault &middot; Rosso di Montalcino &middot; Brunello</div>
   </div>
