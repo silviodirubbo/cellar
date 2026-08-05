@@ -177,15 +177,15 @@ title: "Chardonnay & Brunello"
 </style>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 1 · COVER, SPLIT (Chardonnay | Brunello)
+     SLIDE 1 · COVER
      Image: assets/tastings/bourgogne-chardonnay-brunello/cover.jpg
      ───────────────────────────────────────────────────────── -->
 {% assign this_tasting = site.data.tastings | where: "slug", page.slug | first %}
 <div class="slide slide-cover active">
   <div class="cover-content">
     <div class="eyebrow">Wine Tasting · {{ this_tasting.date | date: "%-d %B %Y" }}</div>
-    <div class="cover-main-title">Grapedown</div>
-    <div class="cover-subtitle">First episode: Chardonnay and Brunello</div>
+    <div class="cover-main-title">Chardonnay & Brunello</div>
+    <div class="cover-subtitle">Grapes comparison across the years</div>
     <div class="cover-rule"></div>
     <div class="cover-meta-gold">Saint-Romain &middot; Meursault &middot; Rosso di Montalcino &middot; Brunello</div>
   </div>
@@ -219,26 +219,37 @@ title: "Chardonnay & Brunello"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 4 · BOURGOGNE / CÔTE DE BEAUNE MAP
+     SLIDE 4 · BOURGOGNE MAP
      Image: assets/tastings/bourgogne-chardonnay-brunello/map_bourgogne.jpg
-     NEW ASSET — does not exist in the repo yet, needed from Silvio.
+     Region-level overview (Côte de Nuits through Mâconnais). New slide,
+     inserted before the appellation-level Côte de Beaune map (slide 5).
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-map" style="position:relative;">
-  <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/map_bourgogne.jpg" alt="Bourgogne · Côte de Beaune" loading="lazy">
-  <div class="map-label-center">Bourgogne · C&ocirc;te de Beaune</div>
+  <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/map_bourgogne.jpg" alt="Bourgogne · Overview" loading="lazy">
+  <div class="map-label-center">Bourgogne · Overview</div>
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 5 · WINE 1 · DOMAINE AMI · SAINT-ROMAIN VIEILLES VIGNES
+     SLIDE 5 · CÔTE DE BEAUNE MAP
+     Image: assets/tastings/bourgogne-chardonnay-brunello/map_cote_de_beaune.jpg
+     Appellation-level zoom, showing Saint-Romain and Meursault among
+     the Côte de Beaune communes. New slide, inserted between the
+     Bourgogne overview (slide 4) and the Saint-Romain wine slide (slide 6).
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-map" style="position:relative;">
+  <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/map_cote_de_beaune.jpg" alt="Côte de Beaune · Appellations" loading="lazy">
+  <div class="map-label-center">C&ocirc;te de Beaune · Appellations</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 6 · WINE 1 · DOMAINE AMI · SAINT-ROMAIN VIEILLES VIGNES
      Map:    assets/tastings/bourgogne-chardonnay-brunello/map_saint_romain.jpg
-             NEW ASSET — Saint-Romain-specific (village zoom), separate
+             STILL NEEDED — Saint-Romain-specific (village zoom), separate
              from Meursault's own map since they are different villages,
              unlike Côte-Rôtie where all 3 wines share one appellation map.
-     Bottle: assets/tastings/bourgogne-chardonnay-brunello/bottle_ami.png
+             Not part of this asset batch; still outstanding.
+     Bottle: assets/tastings/bourgogne-chardonnay-brunello/bottle_ami.jpg
      QR:     assets/tastings/bourgogne-chardonnay-brunello/qr_ami.png
-             NEW ASSET — target https://www.domaineami.com/ needs to be
-             generated externally as a QR image, the same way every other
-             deck's QR is a static image rather than a live link in the HTML.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
   <div class="wine-map">
@@ -252,7 +263,7 @@ title: "Chardonnay & Brunello"
       <div class="w-hrule"></div>
     </div>
     <div class="wine-bottle">
-      <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/bottle_ami.png" alt="Vieilles Vignes" loading="lazy">
+      <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/bottle_ami.jpg" alt="Vieilles Vignes" loading="lazy">
     </div>
     <div class="wine-info">
       <div class="info-text">
@@ -269,19 +280,17 @@ title: "Chardonnay & Brunello"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 6 · WINE 2 · CHANSON PÈRE ET FILS · MEURSAULT
+     SLIDE 7 · WINE 2 · CHANSON PÈRE ET FILS · MEURSAULT
      Map:    assets/tastings/bourgogne-chardonnay-brunello/map_meursault.jpg
-             NEW ASSET — Meursault-specific (village zoom), separate
-             from Saint-Romain's own map per slide 5's note.
+             Meursault lieu-dit/climat map, separate from Saint-Romain's
+             own map per slide 6's note.
      Bottle: assets/tastings/bourgogne-chardonnay-brunello/bottle_chanson.png
      QR:     assets/tastings/bourgogne-chardonnay-brunello/qr_chanson.png
-             NEW ASSET — target https://www.domaine-chanson.com/vin/meursault/,
-             same QR-image flag as slide 5.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/map_meursault.jpg" alt="Meursault · Côte de Beaune" loading="lazy">
-    <div class="map-tag">Meursault · C&ocirc;te de Beaune</div>
+    <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/map_meursault.jpg" alt="Meursault · Climats" loading="lazy">
+    <div class="map-tag">Meursault · Climats</div>
   </div>
   <div class="wine-panel">
     <div class="panel-head">
@@ -307,7 +316,7 @@ title: "Chardonnay & Brunello"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 7 · WHITE DIVIDER · SANGIOVESE
+     SLIDE 8 · WHITE DIVIDER · SANGIOVESE
      No images needed. Unlike slide 2, both Italian wines (Rosso di
      Montalcino and Brunello di Montalcino) are the same commune, so
      this one carries the full .slide-intro ig-grid like existing
@@ -329,9 +338,8 @@ title: "Chardonnay & Brunello"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 8 · TUSCANY MAP
+     SLIDE 9 · TUSCANY MAP
      Image: assets/tastings/bourgogne-chardonnay-brunello/map_tuscany.jpg
-     NEW ASSET — does not exist in the repo yet, needed from Silvio.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-map" style="position:relative;">
   <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/map_tuscany.jpg" alt="Tuscany · Wine Regions" loading="lazy">
@@ -339,21 +347,18 @@ title: "Chardonnay & Brunello"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 9 · WINE 3 · PODERE LE RIPI · ROSSO DI MONTALCINO SOGNI E FOLLIA
+     SLIDE 10 · WINE 3 · PODERE LE RIPI · ROSSO DI MONTALCINO SOGNI E FOLLIA
      Map:    assets/tastings/bourgogne-chardonnay-brunello/map_montalcino.jpg
-             NEW ASSET — shared with slide 10 (same commune, matching
-             the Côte-Rôtie precedent of one appellation map for every
-             wine from that appellation).
-     Bottle: assets/tastings/bourgogne-chardonnay-brunello/bottle_leripi.png
+             Numbered Montalcino producer-location map, shared with
+             slide 11 (same commune, matching the Côte-Rôtie precedent
+             of one appellation map for every wine from that appellation).
+     Bottle: assets/tastings/bourgogne-chardonnay-brunello/bottle_leripi.jpg
      QR:     assets/tastings/bourgogne-chardonnay-brunello/qr_leripi.png
-             NEW ASSET — target
-             https://www.podereleripi.com/our-montalcino-wines/sogni-e-follia/,
-             same QR-image flag as slides 5 and 6.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/map_montalcino.jpg" alt="Montalcino · Tuscany" loading="lazy">
-    <div class="map-tag">Montalcino · Tuscany</div>
+    <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/map_montalcino.jpg" alt="Montalcino · Producer Map" loading="lazy">
+    <div class="map-tag">Montalcino · Producer Map</div>
   </div>
   <div class="wine-panel">
     <div class="panel-head">
@@ -362,7 +367,7 @@ title: "Chardonnay & Brunello"
       <div class="w-hrule"></div>
     </div>
     <div class="wine-bottle">
-      <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/bottle_leripi.png" alt="Sogni e Follia" loading="lazy">
+      <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/bottle_leripi.jpg" alt="Sogni e Follia" loading="lazy">
     </div>
     <div class="wine-info">
       <div class="info-text">
@@ -379,19 +384,16 @@ title: "Chardonnay & Brunello"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 10 · WINE 4 · VAL DI SUGA · BRUNELLO DI MONTALCINO
+     SLIDE 11 · WINE 4 · VAL DI SUGA · BRUNELLO DI MONTALCINO
      Map:    assets/tastings/bourgogne-chardonnay-brunello/map_montalcino.jpg
-             (same shared asset as slide 9, per that slide's note)
-     Bottle: assets/tastings/bourgogne-chardonnay-brunello/bottle_valdisuga.png
+             (same shared asset as slide 10, per that slide's note)
+     Bottle: assets/tastings/bourgogne-chardonnay-brunello/bottle_valdisuga.jpg
      QR:     assets/tastings/bourgogne-chardonnay-brunello/qr_valdisuga.png
-             NEW ASSET — target
-             https://www.valdisuga.com/en/i-vini/brunello-di-montalcino-docg/,
-             same QR-image flag as slides 5, 6 and 9.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
   <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/map_montalcino.jpg" alt="Montalcino · Tuscany" loading="lazy">
-    <div class="map-tag">Montalcino · Tuscany</div>
+    <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/map_montalcino.jpg" alt="Montalcino · Producer Map" loading="lazy">
+    <div class="map-tag">Montalcino · Producer Map</div>
   </div>
   <div class="wine-panel">
     <div class="panel-head">
@@ -400,7 +402,7 @@ title: "Chardonnay & Brunello"
       <div class="w-hrule"></div>
     </div>
     <div class="wine-bottle">
-      <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/bottle_valdisuga.png" alt="Brunello di Montalcino" loading="lazy">
+      <img src="{{ site.baseurl }}/assets/tastings/bourgogne-chardonnay-brunello/bottle_valdisuga.jpg" alt="Brunello di Montalcino" loading="lazy">
     </div>
     <div class="wine-info">
       <div class="info-text">
