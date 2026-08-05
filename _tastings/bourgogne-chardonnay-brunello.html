@@ -52,6 +52,14 @@ title: "Bourgogne Chardonnay & Brunello di Montalcino"
    divided by a vertical rule, reusing the deck's existing color
    tokens and type (Cormorant Garamond for the grape names, DM Mono
    for the eyebrow/meta lines) rather than inventing new ones. */
+/* Main cover title, same weight/size as every other deck's plain
+   .cover-title (104px), sitting above the split so the split reads
+   as a quiet label row underneath it, not a second headline. */
+.cover-main-title { font-size: 104px; font-weight: 300; line-height: 1; color: var(--warm-white); letter-spacing: -.01em; }
+/* Subtitle reuses .cover-half-subtitle's italic type as-is; this
+   sibling rule only tunes the spacing for its new position above
+   the split, it doesn't touch the shared rule used under each grape name. */
+.cover-main-title + .cover-half-subtitle { margin-top: 12px; margin-bottom: 34px; }
 .cover-split {
   display: flex; flex-direction: row; align-items: center; justify-content: center;
   width: 100%; max-width: 1120px; position: relative; z-index: 1;
@@ -61,7 +69,10 @@ title: "Bourgogne Chardonnay & Brunello di Montalcino"
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center; padding: 0 56px;
 }
-.cover-half-title { font-size: 72px; font-weight: 300; line-height: 1; color: var(--warm-white); letter-spacing: -.01em; }
+/* Grape name inside the split: a quiet label under .cover-main-title,
+   not a second headline. 30px, just a step up from the 19px italic
+   .cover-half-subtitle underneath it. */
+.cover-half-title { font-size: 30px; font-weight: 300; line-height: 1; color: var(--warm-white); letter-spacing: -.005em; }
 .cover-half-subtitle {
   font-size: 19px; font-weight: 300; font-style: italic; color: var(--warm-white);
   margin-top: 10px; opacity: .8;
@@ -190,6 +201,8 @@ title: "Bourgogne Chardonnay & Brunello di Montalcino"
 <div class="slide slide-cover active">
   <div class="cover-content">
     <div class="eyebrow">Wine Tasting · {{ this_tasting.date | date: "%-d %B %Y" }}</div>
+    <div class="cover-main-title">Grapedown</div>
+    <div class="cover-half-subtitle">First episode: Chardonnay and Brunello</div>
     <div class="cover-split">
       <div class="cover-half">
         <div class="cover-half-title">Chardonnay</div>
@@ -202,7 +215,6 @@ title: "Bourgogne Chardonnay & Brunello di Montalcino"
       </div>
     </div>
     <div class="cover-rule"></div>
-    <div class="cover-meta">Four wines · Two regions · One evening</div>
     <div class="cover-meta-gold">Saint-Romain &middot; Meursault &middot; Rosso di Montalcino &middot; Brunello</div>
   </div>
 </div>
