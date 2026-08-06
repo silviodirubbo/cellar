@@ -4,7 +4,7 @@ A personal wine tasting site built with Jekyll, hosted on GitHub Pages.
 
 **→ [silviodirubbo.github.io/cellar](https://silviodirubbo.github.io/cellar)**
 
----
+----
 
 ## What it is
 
