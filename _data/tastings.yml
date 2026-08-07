@@ -120,7 +120,7 @@
   location: "Carlo's"
   region: "Bourgogne & Tuscany"
   description: >
-    Four bottles, two grapes: a 2020 and a 2005 from Bourgogne, a 2019 and
+    Four bottles, two grapes: a 2020 and a 2005 from Bourgogne, a 2020 and
     a 1998 from Montalcino. Same grape, same place, twenty years apart.
   tags:
     - Chardonnay
@@ -147,7 +147,7 @@
       blend: "100% Chardonnay"
     - name: "Sogni e Follia"
       producer: "Podere Le Ripi"
-      vintage: 2019
+      vintage: 2020
       appellation: "Rosso di Montalcino DOC"
       blend: "100% Sangiovese"
     - name: "Brunello di Montalcino"
