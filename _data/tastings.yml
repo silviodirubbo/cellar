@@ -132,6 +132,7 @@
     - Italy
   status: upcoming
   spots_total: 6
+  cost_estimate: "32 CHF"
   featured: false
   slides: true
   wines:
