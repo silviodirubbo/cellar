@@ -1,8 +1,8 @@
 ---
 slug: rhone
 title: "Rhône"
-numeral: "II"
-order: 2
+numeral: "I"
+order: 1
 state: current
 color: "var(--green)"
 story_label: "Rhône Valley Chapter"

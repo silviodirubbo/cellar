@@ -1,8 +1,8 @@
 ---
 slug: loire
 title: "Loire"
-numeral: "III"
-order: 3
+numeral: "II"
+order: 2
 state: planned
 color: "#4F5F66"
 blurb: >

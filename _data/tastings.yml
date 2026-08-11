@@ -10,8 +10,9 @@
 #   region:            primary region (displayed as label)
 #   description:       one or two sentences, kept short
 #   tags:              list of grape/region/theme tags
-#   chapter:           pilot | rhone | loire | ... (see _chapters/*.md for the
-#                      full list; curriculum chapter, colour driven by that file)
+#   chapter:           grape-studies | rhone | loire | ... (see _chapters/*.md
+#                      for the full list; curriculum chapter, colour driven
+#                      by that file)
 #   chapter_order:     integer, position within the chapter's curriculum
 #                      sequence (not chronological order: several TBD entries
 #                      share no real date, so this is the only ordering signal)
@@ -130,6 +131,8 @@
     - Tuscany
     - France
     - Italy
+  chapter: grape-studies
+  chapter_order: 2
   status: upcoming
   spots_total: 6
   cost_estimate: "32 CHF"
@@ -690,7 +693,7 @@
     - Friuli
     - France
     - Italy
-  chapter: pilot
+  chapter: grape-studies
   chapter_order: 1
   status: past
   featured: false

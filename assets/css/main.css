@@ -1264,6 +1264,56 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 }
 .chapters-row:hover .chapters-row__arrow { color: var(--ink); transform: translateX(2px); }
 
+/* ── Feature row: standing side-arcs (state: ongoing), e.g. Grape
+   Studies. Solid --green card instead of the plain white/off-white-
+   hover row, echoing the "next tasting" dark poster card treatment
+   elsewhere on the site. Text colors below are translucent warm-white
+   at the same opacities .page-header/.tl-card--feature already use for
+   light-on-dark body text (verified against var(--green) specifically:
+   full var(--warm-white) ≈ 9.5:1, the 0.7-opacity state label ≈ 5.6:1,
+   the 0.65-opacity blurb ≈ 5.1:1 — all comfortably pass WCAG AA's 4.5:1
+   for normal text. --ink-light-on-dark was checked too but only reaches
+   ≈3.25:1 against --green, well short of AA, since it was derived
+   against --ink; not reused here for that reason.) Doubled-up selector
+   (.chapters-row.chapters-row--feature) so this reliably beats the
+   :first-child border-top and the base :hover rule at equal
+   specificity. Reduced motion is already handled globally (the
+   sitewide prefers-reduced-motion block collapses all transition
+   durations), so no extra guard is needed here. */
+.chapters-row.chapters-row--feature {
+  background: var(--green);
+  border-color: transparent;
+  padding: 2rem 1.5rem;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  transition: filter 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.chapters-row.chapters-row--feature:hover {
+  background-color: var(--green);
+  padding-left: 1.5rem; padding-right: 1.5rem; margin-left: -1.5rem; margin-right: -1.5rem;
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+.chapters-row--feature .chapters-row__numeral {
+  /* overrides var(--chapter-accent, var(--ink)): --chapter-accent is
+     var(--green) here, same as the card background, which would
+     otherwise render invisible */
+  color: var(--warm-white);
+}
+.chapters-row--feature .chapters-row__title { color: var(--warm-white); }
+.chapters-row--feature .chapters-row__state { color: rgba(253,252,250,0.7); }
+.chapters-row--feature .chapters-row__blurb { color: rgba(253,252,250,0.65); }
+.chapters-row--feature .chapters-row__arrow { color: rgba(253,252,250,0.7); }
+.chapters-row--feature:hover .chapters-row__arrow { color: var(--warm-white); transform: translateX(2px); }
+/* chapter-progress (below) sets .chapter-progress__fill from
+   --chapter-accent, which for Grape Studies is var(--green) — the same
+   value as this card's own background. Left alone that fill would be
+   invisible; override it and its track/label for the same light-on-
+   dark treatment as the rest of the card. */
+.chapters-row--feature .chapter-progress__bar { background: rgba(253,252,250,0.25); }
+.chapters-row--feature .chapter-progress__fill { background: var(--warm-white); }
+.chapters-row--feature .chapter-progress__label { color: rgba(253,252,250,0.7); }
+
 /* ── Progress bar (shared include) ────────────────────────── */
 .chapter-progress { display: flex; align-items: center; gap: 0.75rem; max-width: 18rem; }
 .chapter-progress__bar { flex: 1; height: 1px; background: var(--rule); position: relative; }

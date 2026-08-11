@@ -25,7 +25,7 @@ permalink: /chapters/
         {% if chapter.planned_total and chapter.planned_total > total %}
           {% assign total = chapter.planned_total %}
         {% endif %}
-        <a class="chapters-row" href="{{ chapter.url | relative_url }}" style="--chapter-accent: {{ chapter.color }};">
+        <a class="chapters-row {% if chapter.state == "ongoing" %}chapters-row--feature{% endif %}" href="{{ chapter.url | relative_url }}" style="--chapter-accent: {{ chapter.color }};">
           <span class="chapters-row__numeral" aria-hidden="true">{{ chapter.numeral }}</span>
           <span class="chapters-row__body">
             <span class="chapters-row__title">{{ chapter.title }}</span>
