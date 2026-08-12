@@ -25,6 +25,10 @@
     {% include story/tasting-pair.html %}
   {% elsif page.story_type == "section-cover" %}
     {% include story/section-cover.html %}
+  {% elsif page.story_type == "promo" %}
+    {% include story/promo.html %}
+  {% elsif page.story_type == "highlight" %}
+    {% include story/highlight.html %}
   {% endif %}
 </body>
 </html>

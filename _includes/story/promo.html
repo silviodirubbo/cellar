@@ -1,0 +1,36 @@
+{% comment %}
+  Promo announcement slide for a specific tasting: premium dark bg (the
+  site's existing --ink/--gold vocabulary, see .page-header--tastings
+  and .tl-card--feature), the tasting's own cover art layered in as a
+  faded full-bleed texture (mix-blend-mode, not a cutout — source is a
+  busy painted scene with no isolated subject), an anonymised bottle
+  row (glyphs + vintage only, no producer/appellation shown), a CTA
+  line, and the plain Cellar wordmark as branding. No venue name.
+  Page front matter: tasting_slug, wine_types (array, red|white, same
+  order as the tasting's wines), texture_image (path), texture_opacity
+  (0-1, default 0.16), cta (defaults to the standard line below).
+{% endcomment %}
+{% assign tasting = site.data.tastings | where: "slug", page.tasting_slug | first %}
+{% assign chapter = nil %}
+{% if tasting.chapter %}{% assign chapter = site.chapters | where: "slug", tasting.chapter | first %}{% endif %}
+<div class="story story--dark story-promo">
+  <div class="story-promo__texture" style="background-image: url('{{ page.texture_image | relative_url }}'); opacity: {{ page.texture_opacity | default: 0.16 }};" aria-hidden="true"></div>
+  <div class="story__inner story-promo__content">
+    <div class="story-promo__brand">Cellar.</div>
+    <p class="story-promo__eyebrow">{% if chapter %}{{ chapter.story_label | upcase }} &middot; {% endif %}UPCOMING TASTING</p>
+    <h1 class="story-promo__title">{{ tasting.title }}</h1>
+    <p class="story-promo__desc">{{ tasting.description }}</p>
+    <div class="story-promo__bottles">
+      {% for wine in tasting.wines %}
+        {% assign wtype = page.wine_types[forloop.index0] %}
+        <div class="story-promo__bottle">
+          {% include story/bottle.html type=wtype %}
+          <span class="story-promo__vintage">{{ wine.vintage }}</span>
+        </div>
+      {% endfor %}
+    </div>
+    <hr class="story-promo__rule">
+    <p class="story-promo__cta">{{ page.cta | default: "Secure your spot on the website or text me." }}</p>
+    <p class="story-promo__meta">silviodirubbo.github.io/cellar</p>
+  </div>
+</div>
