@@ -5,7 +5,10 @@
   chapterless one-off), story_bg (green|offwhite), intro, wine_types
   (array, same order/length as the tasting's wines, each red|white),
   dots_chapter (optional override, see story/dots.html — set this to
-  a non-existent slug like "none" on a one-off so no dot lights up).
+  a non-existent slug like "none" on a one-off so no dot lights up),
+  texture_image + texture_opacity (optional — layers the tasting's own
+  cover art in full-bleed behind the standard slide, see .story-texture
+  in main.css; the slide's normal bg colour still shows through it).
   If the tasting has no chapter (site.chapters where: "slug" finds
   none), the eyebrow drops the number and chapter label for a plain
   "ONE-OFF" tag instead, rather than rendering an empty chapter label.
@@ -14,6 +17,9 @@
 {% assign chapter = nil %}
 {% if tasting.chapter %}{% assign chapter = site.chapters | where: "slug", tasting.chapter | first %}{% endif %}
 <div class="story story--{{ page.story_bg }}">
+  {% if page.texture_image %}
+    <div class="story-texture" style="background-image: url('{{ page.texture_image | relative_url }}'); opacity: {{ page.texture_opacity | default: 0.16 }};" aria-hidden="true"></div>
+  {% endif %}
   <div class="story__inner">
     {% include story/dots.html chapter=tasting.chapter %}
     <p class="story-eyebrow">{% if chapter %}TASTING {{ page.number }} &middot; {{ chapter.story_label | upcase }}{% else %}ONE-OFF{% endif %} &middot; {{ tasting.date | date: "%-d %b %Y" | upcase }}</p>

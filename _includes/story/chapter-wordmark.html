@@ -3,9 +3,11 @@
   italic serif. Same typographic treatment as the evergreen "Cellar."
   wordmark slide, but centered rather than lower-left, and word/bg are
   parametrized per chapter.
-  Page front matter: word (the chapter name to display).
+  Page front matter: word (the chapter name to display), story_bg
+  (defaults to "red", the Rhône treatment; pass e.g. "navy" for
+  another chapter's own colour), dots_chapter.
 {% endcomment %}
-<div class="story story--red">
+<div class="story story--{{ page.story_bg | default: "red" }}">
   <div class="story__inner" style="padding: 132px 104px 100px;">
     {% include story/dots.html chapter=page.dots_chapter %}
     <div style="flex: 1 1 auto; display: flex; align-items: center; justify-content: center;">

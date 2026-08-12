@@ -1399,13 +1399,31 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 /* Dark bordeaux, same tonal family as --ink but with a wine-red hue.
    Used for chapter-specific wordmark covers (e.g. the Rhône cover). */
 .story--red      { background: #3B1712; }
+/* Muted navy, same family again. Used for the Grape Studies cover. */
+.story--navy     { background: #1E2A38; }
 
 .story__inner {
   position: absolute;
   inset: 0;
+  z-index: 1;
   padding: 132px 104px 100px;
   display: flex;
   flex-direction: column;
+}
+
+/* Optional full-bleed texture layer (e.g. a tasting's cover painting,
+   faded in behind the standard slide content). Opt-in: any story adds
+   this div before .story__inner and sets its background-image/opacity
+   inline via page front matter. Not a cutout — full-bleed art blended
+   translucently, so mix-blend-mode/opacity is what does the work. */
+.story-texture {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
 }
 
 /* ── Chapter dots: which chapter this batch belongs to ────── */
@@ -1419,10 +1437,12 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 }
 .story--dark .story-dots__dot,
 .story--green .story-dots__dot,
-.story--red .story-dots__dot { border-color: rgba(253,252,250,0.4); }
+.story--red .story-dots__dot,
+.story--navy .story-dots__dot { border-color: rgba(253,252,250,0.4); }
 .story-dots__dot--active { background: var(--green); border-color: var(--green); }
 .story--green .story-dots__dot--active,
-.story--red .story-dots__dot--active { background: rgba(253,252,250,0.55); border-color: rgba(253,252,250,0.55); }
+.story--red .story-dots__dot--active,
+.story--navy .story-dots__dot--active { background: rgba(253,252,250,0.55); border-color: rgba(253,252,250,0.55); }
 
 /* ── Eyebrow / meta line ───────────────────────────────────── */
 .story-eyebrow {
@@ -1641,114 +1661,3 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 .story--dark .story-word,
 .story--green .story-word { color: var(--warm-white); }
 
-/* ============================================================
-   PROMO SLIDE + HIGHLIGHT COVER
-   Two standalone IG assets, not part of the numbered story-NN
-   batch sequence: a per-tasting promo announcement (premium dark,
-   the tasting's cover art layered in as a faded texture) and a
-   square Highlights-tray icon. Reuse the fixed-canvas .story tokens
-   above for fonts/colour.
-   ============================================================ */
-
-.story-promo { position: relative; }
-.story-promo__texture {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background-size: cover;
-  background-position: center;
-  mix-blend-mode: soft-light;
-  pointer-events: none;
-}
-.story-promo__content { position: relative; z-index: 1; }
-.story-promo__brand {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: 52px;
-  color: rgba(253,252,250,0.55);
-  flex: 0 0 auto;
-  margin-bottom: 72px;
-}
-.story-promo__eyebrow {
-  font-family: var(--font-mono);
-  font-weight: 300;
-  font-size: 25px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 22px;
-  flex: 0 0 auto;
-}
-.story-promo__title {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  font-size: 92px;
-  line-height: 1.1;
-  color: var(--warm-white);
-  margin-bottom: 44px;
-  flex: 0 0 auto;
-}
-.story-promo__desc {
-  font-style: italic;
-  font-weight: 300;
-  font-size: 40px;
-  line-height: 1.55;
-  color: rgba(247,245,240,0.78);
-  margin-bottom: 72px;
-  flex: 0 0 auto;
-  max-width: none;
-}
-.story-promo__bottles { display: flex; gap: 44px; align-items: flex-end; flex: 0 0 auto; }
-.story-promo__bottle { display: flex; flex-direction: column; align-items: center; gap: 18px; }
-.story-promo__vintage {
-  font-family: var(--font-mono);
-  font-weight: 300;
-  font-size: 21px;
-  letter-spacing: 0.08em;
-  color: rgba(253,252,250,0.5);
-}
-.story-promo__rule {
-  border: none;
-  border-top: 1px solid rgba(253,252,250,0.16);
-  margin: 64px 0 40px;
-  flex: 0 0 auto;
-}
-.story-promo__cta {
-  font-style: italic;
-  font-weight: 300;
-  font-size: 44px;
-  line-height: 1.4;
-  color: var(--warm-white);
-  flex: 0 0 auto;
-  max-width: none;
-}
-.story-promo__meta {
-  margin-top: auto;
-  padding-top: 44px;
-  font-family: var(--font-mono);
-  font-weight: 300;
-  font-size: 21px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--gold);
-  flex: 0 0 auto;
-}
-
-/* Square Highlights-tray icon. Same class name space, own fixed
-   size: overrides the 1080x1920 .story canvas to 1080x1080. */
-.story-highlight {
-  width: 1080px;
-  height: 1080px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.story-highlight__mark {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: 360px;
-  line-height: 1;
-  color: var(--warm-white);
-}
