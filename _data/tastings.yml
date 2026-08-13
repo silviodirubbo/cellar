@@ -115,7 +115,7 @@
       blend: "100% Viognier"
 
 - slug: bourgogne-chardonnay-brunello
-  title: "Chardonnay & Brunello"
+  title: "Chardonnay & Barolo"
   date: 2026-08-13
   date_tbd: false
   location: "Carlo's"
@@ -150,7 +150,7 @@
       vintage: 2005
       appellation: "Meursault AOC"
       blend: "100% Chardonnay"
-    - name: "Barolo"
+    - name: "Barolo La Morra"
       producer: "Agricola Brandini"
       vintage: 2017
       appellation: "Barolo DOCG"
