@@ -119,16 +119,17 @@
   date: 2026-08-13
   date_tbd: false
   location: "Carlo's"
-  region: "Bourgogne & Tuscany"
+  region: "Bourgogne & Piedmont"
   description: >
-    Four bottles, two grapes: a 2020 and a 2005 from Bourgogne, a 2020 and
-    a 1998 from Montalcino. Same grape, same place, twenty years apart.
+    Four bottles, two grapes: a 2020 and a 2005 from Bourgogne, a 2017 and
+    a 2007 from Piedmont. Same grape, same place, a decade or two apart
+    each time.
   tags:
     - Chardonnay
-    - Sangiovese
+    - Nebbiolo
     - Bourgogne
-    - Brunello di Montalcino
-    - Tuscany
+    - Barolo
+    - Piedmont
     - France
     - Italy
   chapter: grape-studies
@@ -149,16 +150,16 @@
       vintage: 2005
       appellation: "Meursault AOC"
       blend: "100% Chardonnay"
-    - name: "Sogni e Follia"
-      producer: "Podere Le Ripi"
-      vintage: 2020
-      appellation: "Rosso di Montalcino DOC"
-      blend: "100% Sangiovese"
-    - name: "Brunello di Montalcino"
-      producer: "Val di Suga"
-      vintage: 1998
-      appellation: "Brunello di Montalcino DOCG"
-      blend: "100% Sangiovese"
+    - name: "Barolo"
+      producer: "Agricola Brandini"
+      vintage: 2017
+      appellation: "Barolo DOCG"
+      blend: "100% Nebbiolo"
+    - name: "Cerrati Vigna Cucco Riserva"
+      producer: "Tenuta Cucco"
+      vintage: 2007
+      appellation: "Barolo DOCG"
+      blend: "100% Nebbiolo"
 
 - slug: chateauneuf-du-pape-the-whites
   title: "Châteauneuf-du-Pape: The Whites"
