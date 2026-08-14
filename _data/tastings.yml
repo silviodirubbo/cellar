@@ -134,9 +134,7 @@
     - Italy
   chapter: grape-studies
   chapter_order: 2
-  status: upcoming
-  spots_total: 6
-  cost_estimate: "32 CHF"
+  status: past
   featured: false
   slides: true
   wines:
