@@ -713,3 +713,27 @@
       vintage: 2022
       appellation: "Isonzo"
       blend: "100% Chardonnay"
+
+- slug: fiano-horizontal
+  title: "Fiano Horizontal"
+  date: 2026-08-23
+  date_tbd: false
+  location: "TBD"
+  region: "Campania"
+  description: >
+    Three Fiano di Avellino from the appellation's three defining zones,
+    Montefredane, Summonte and Lapio, each poured through a single-vineyard
+    bottling from the producer most associated with that ground.
+  tags:
+    - Fiano
+    - Fiano di Avellino
+    - Campania
+    - Irpinia
+    - Italy
+  chapter: grape-studies
+  chapter_order: 3
+  status: upcoming
+  spots_total: 6
+  cost_estimate: "TBD"
+  featured: false
+  slides: false

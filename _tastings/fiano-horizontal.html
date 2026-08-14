@@ -1,0 +1,247 @@
+---
+layout: presentation
+title: "Fiano Horizontal"
+---
+<style>
+:root {
+  --warm-white: #FDFCFA;
+  --off-white:  #F7F5F0;
+  --ink:        #1A1814;
+  --ink-mid:    #4A4640;
+  --ink-light:  #736E6B;
+  --green:      #2C4A3E;
+  --gold:       #8B6914;
+  --rule:       #E2DED8;
+}
+
+/* Slides fill the 1280×720 stage exactly */
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 1280px;
+  height: 720px;
+  display: none;
+}
+.slide.active { display: flex; }
+
+/* ── COVER ──────────────────────────────────────────── */
+.slide-cover {
+  background: var(--ink);
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; cursor: pointer;
+}
+.cover-content { display: flex; flex-direction: column; align-items: center; }
+.eyebrow {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 11px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 36px;
+}
+.cover-title { font-size: 104px; font-weight: 300; line-height: 1; color: var(--warm-white); }
+.cover-subtitle { font-size: 28px; font-weight: 300; font-style: italic; color: var(--warm-white); margin-top: 12px; }
+.cover-rule { width: 40px; height: 1px; background: var(--gold); margin: 28px auto; }
+.cover-meta {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 10px;
+  letter-spacing: .14em; text-transform: uppercase; color: rgba(253,252,250,.55);
+}
+
+/* ── INTRO ──────────────────────────────────────────── */
+.slide-intro {
+  background: var(--warm-white); color: var(--ink);
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 72px; cursor: pointer;
+}
+.intro-label {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 10px;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 22px;
+}
+.intro-grape { font-size: 116px; font-weight: 300; color: var(--ink); line-height: 1; letter-spacing: -.02em; }
+.intro-vline { width: 1px; height: 38px; background: var(--rule); margin: 28px auto; }
+.intro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; max-width: 600px; }
+.ig-label {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 8px;
+}
+.ig-val { font-size: 14px; font-weight: 300; color: var(--ink-mid); line-height: 1.5; }
+.ig-val em { color: var(--green); font-style: italic; }
+
+/* ── WINE SLIDE ─────────────────────────────────────── */
+.slide-wine { background: var(--warm-white); color: var(--ink); flex-direction: row; }
+
+/* Map: exactly 2/3 of 1280. contain = full map always, never truncated. */
+.wine-map {
+  width: 853px; height: 720px; flex: 0 0 853px;
+  position: relative; overflow: hidden; background: var(--warm-white); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.wine-map img {
+  width: 100%; height: 100%;
+  object-fit: contain;            /* show the whole map, no cropping */
+  object-position: center;
+  display: block;
+}
+.map-tag {
+  position: absolute; bottom: 16px; left: 16px;
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
+  background: rgba(253,252,250,.9); padding: 5px 9px;
+}
+
+/* Panel: exactly 1/3 of 1280. Padding reserves room for the chrome. */
+.wine-panel {
+  width: 427px; height: 720px; flex: 0 0 427px;
+  display: flex; flex-direction: column;
+  padding: 62px 35px 60px;
+  border-left: 1px solid var(--rule); background: var(--warm-white);
+}
+
+.panel-head { flex: 0 0 auto; }
+.w-counter {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 6px;
+}
+.w-appellation {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .13em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+}
+.w-hrule { width: 100%; height: 1px; background: var(--rule); }
+
+.wine-bottle {
+  flex: 1 1 auto; min-height: 0;
+  display: flex; align-items: center; justify-content: center; padding: 16px 0;
+}
+.wine-bottle img {
+  max-height: 100%; max-width: 68%; object-fit: contain;
+  filter: drop-shadow(0 4px 24px rgba(26,24,20,.07));
+}
+
+.wine-info {
+  flex: 0 0 auto;
+  padding-top: 18px; border-top: 1px solid var(--rule);
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
+}
+.info-text { flex: 1 1 auto; min-width: 0; }
+.w-name { font-size: 26px; font-weight: 300; color: var(--ink); line-height: 1.12; margin-bottom: 3px; }
+.w-producer { font-size: 14px; font-weight: 300; font-style: italic; color: var(--green); margin-bottom: 11px; }
+.w-meta { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.w-ml {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink-light); min-width: 46px;
+}
+.w-mv { font-size: 13px; font-weight: 300; color: var(--ink-mid); }
+
+.wine-qr { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.wine-qr img { width: 74px; height: 74px; object-fit: contain; display: block; }
+.qr-label {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 7px;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-light);
+  text-align: center; line-height: 1.6;
+}
+</style>
+
+<!-- 1: COVER -->
+{% assign this_tasting = site.data.tastings | where: "slug", page.slug | first %}
+<div class="slide slide-cover active">
+  <div class="cover-content">
+    <div class="eyebrow">Wine Tasting · {{ this_tasting.date | date: "%-d %B %Y" }}</div>
+    <div class="cover-title">Fiano</div>
+    <div class="cover-subtitle">di Avellino</div>
+    <div class="cover-rule"></div>
+    <div class="cover-meta">Three wines · One grape</div>
+    <div class="cover-meta-gold">Montefredane · Summonte · Lapio</div>
+  </div>
+</div>
+
+<!-- 2: GRAPE INTRO -->
+<div class="slide slide-intro">
+  <div class="intro-label">The Grape</div>
+  <div class="intro-grape">Fiano</div>
+  <div class="intro-vline"></div>
+  <div class="intro-grid">
+    <div><div class="ig-label">Origin</div><div class="ig-val">Campania, Italy</div></div>
+    <div><div class="ig-label">Character</div><div class="ig-val"><em>Floral · Mineral<br>Structured · Ageworthy</em></div></div>
+    <div><div class="ig-label">Style</div><div class="ig-val">100% white<br>monovarietal</div></div>
+  </div>
+</div>
+
+<!-- 3: MONTEFREDANE -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/fiano-horizontal/map_montefredane_1.png" alt="Montefredane · Fiano di Avellino" loading="lazy">
+    <div class="map-tag">Montefredane · Fiano di Avellino</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">01 / 03</div>
+      <div class="w-appellation">Fiano di Avellino DOCG · Montefredane</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/fiano-horizontal/bottle_montefredane.png" alt="Montefredane Fiano di Avellino" loading="lazy"></div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">TBD</div>
+        <div class="w-producer">TBD</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">TBD</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">TBD</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/fiano-horizontal/qr_montefredane.png" alt="QR code for producer info" loading="lazy">
+        <div class="qr-label">Scan for<br>producer info</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 4: SUMMONTE -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/fiano-horizontal/map_summonte_1.png" alt="Summonte · Fiano di Avellino" loading="lazy">
+    <div class="map-tag">Summonte · Fiano di Avellino</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">02 / 03</div>
+      <div class="w-appellation">Fiano di Avellino DOCG · Summonte</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/fiano-horizontal/bottle_summonte.png" alt="Summonte Fiano di Avellino" loading="lazy"></div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">TBD</div>
+        <div class="w-producer">TBD</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">TBD</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">TBD</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/fiano-horizontal/qr_summonte.png" alt="QR code for producer info" loading="lazy">
+        <div class="qr-label">Scan for<br>producer info</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 5: LAPIO -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/fiano-horizontal/map_lapio_1.png" alt="Lapio · Fiano di Avellino" loading="lazy">
+    <div class="map-tag">Lapio · Fiano di Avellino</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">03 / 03</div>
+      <div class="w-appellation">Fiano di Avellino DOCG · Lapio</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle"><img src="{{ site.baseurl }}/assets/tastings/fiano-horizontal/bottle_lapio.png" alt="Lapio Fiano di Avellino" loading="lazy"></div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">TBD</div>
+        <div class="w-producer">TBD</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">TBD</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">TBD</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/fiano-horizontal/qr_lapio.png" alt="QR code for producer info" loading="lazy">
+        <div class="qr-label">Scan for<br>producer info</div>
+      </div>
+    </div>
+  </div>
+</div>
