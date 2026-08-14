@@ -736,4 +736,4 @@
   spots_total: 6
   cost_estimate: "25 EUR"
   featured: false
-  slides: false
+  slides: true
