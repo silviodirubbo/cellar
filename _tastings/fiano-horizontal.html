@@ -38,16 +38,21 @@ title: "Fiano Horizontal"
 }
 .cover-content { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
 .eyebrow {
-  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 11px;
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 23px;
   letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 36px;
 }
 .cover-title { font-size: 104px; font-weight: 300; line-height: 1; color: var(--warm-white); }
 .cover-subtitle { font-size: 28px; font-weight: 300; font-style: italic; color: var(--warm-white); margin-top: 12px; }
 .cover-rule { width: 40px; height: 1px; background: var(--gold); margin: 28px auto; }
 .cover-meta {
-  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 10px;
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 21px;
   letter-spacing: .14em; text-transform: uppercase; color: rgba(253,252,250,.55);
 }
+/* overrides the shared .cover-meta-gold from _layouts/presentation.html,
+   scoped to this deck only, matching condrieu-horizontal's own override
+   (this <style> block renders after the layout's, so it wins here without
+   touching other decks) */
+.cover-meta-gold { font-size: 21px; font-weight: 500; }
 
 /* ── INTRO ──────────────────────────────────────────── */
 .slide-intro {
@@ -161,8 +166,8 @@ title: "Fiano Horizontal"
 <div class="slide slide-cover active">
   <div class="cover-content">
     <div class="eyebrow">Wine Tasting · {{ this_tasting.date | date: "%-d %B %Y" }}</div>
-    <div class="cover-title">Fiano</div>
-    <div class="cover-subtitle">di Avellino</div>
+    <div class="cover-title">Fiano di Avellino</div>
+    <div class="cover-subtitle">Horizontal</div>
     <div class="cover-rule"></div>
     <div class="cover-meta">Three wines · One appellation · One grape</div>
     <div class="cover-meta-gold">Summonte · Lapio · Montefredane</div>
