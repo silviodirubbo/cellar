@@ -721,9 +721,12 @@
   location: "Avellino"
   region: "Irpinia"
   description: >
-    Three Fiano di Avellino from the appellation's three defining zones,
-    Montefredane, Summonte and Lapio, each poured through a single-vineyard
-    bottling from the producer most associated with that ground.
+    Four Fiano di Avellino from the DOCG's three most defining communes,
+    Montefredane, Summonte and Lapio, each a single-vineyard bottling from
+    the producer most associated with that ground. Three are made in the
+    traditional steel-driven style; the fourth closes the tasting with a
+    steel-and-oak blend, showing how the same grape and place can be read
+    through a different hand in the cellar.
   tags:
     - Fiano
     - Fiano di Avellino
@@ -734,6 +737,27 @@
   chapter_order: 3
   status: upcoming
   spots_total: 6
-  cost_estimate: "25 EUR"
+  cost_estimate: ""
+  wines:
+    - name: "Ciro 906"
+      producer: "Ciro Picariello"
+      vintage: 2023
+      appellation: "Fiano di Avellino DOCG · Summonte"
+      blend: "100% Fiano"
+    - name: "La Congregazione"
+      producer: "Villa Diamante"
+      vintage: 2022
+      appellation: "Fiano di Avellino DOCG · Montefredane"
+      blend: "100% Fiano"
+    - name: "Clelia"
+      producer: "Colli di Lapio"
+      vintage: 2021
+      appellation: "Fiano di Avellino DOCG · Lapio"
+      blend: "100% Fiano"
+    - name: "Più Alto"
+      producer: "i Satoli"
+      vintage: 2021
+      appellation: "Fiano di Avellino DOCG · Montefredane"
+      blend: "100% Fiano"
   featured: false
   slides: true
