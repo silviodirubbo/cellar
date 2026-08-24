@@ -735,9 +735,7 @@
     - Italy
   chapter: grape-studies
   chapter_order: 3
-  status: upcoming
-  spots_total: 6
-  cost_estimate: ""
+  status: past
   wines:
     - name: "Ciro 906"
       producer: "Ciro Picariello"
