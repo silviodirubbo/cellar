@@ -183,6 +183,7 @@
   spots_total: 6
   cost_estimate: "42 CHF"
   featured: false
+  slides: true
   wines:
     - name: "Clos La Roquète"
       producer: "Domaine du Vieux Télégraphe"
