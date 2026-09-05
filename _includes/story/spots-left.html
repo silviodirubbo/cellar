@@ -1,0 +1,28 @@
+{% comment %}
+  Urgency promo: flags a low spot count on a specific tasting, with
+  both booking paths (text Silvio directly, or book on the site) and
+  a pointer to the website for everything else (venue, price, wine
+  list). Meant to be used sparingly, on the one-off --blue background
+  so it visually breaks from the normal green/light alternation.
+  Page front matter: tasting_slug, spots_left (integer), headline
+  (optional full override, defaults to "{{ spots_left }} spots left").
+{% endcomment %}
+{% assign tasting = site.data.tastings | where: "slug", page.tasting_slug | first %}
+{% assign chapter = nil %}
+{% if tasting.chapter %}{% assign chapter = site.chapters | where: "slug", tasting.chapter | first %}{% endif %}
+{% if page.headline %}
+  {% assign headline = page.headline %}
+{% else %}
+  {% assign headline = page.spots_left | append: " spots left" %}
+{% endif %}
+<div class="story story--blue">
+  <div class="story__inner">
+    {% include story/dots.html chapter=tasting.chapter %}
+    <p class="story-eyebrow">{% if chapter %}{{ chapter.story_label | upcase }} &middot; {% endif %}{{ tasting.date | date: "%-d %b %Y" | upcase }}</p>
+    <h1 class="story-title">{{ headline }}</h1>
+    <p class="story-italic" style="margin-bottom: 44px;">{{ tasting.title }}. {{ tasting.wines.size }} wines, one evening, back on {{ tasting.date | date: "%-d %B" }}. Only {{ page.spots_left }} seats are still open.</p>
+    <hr class="story-rule" style="margin-bottom: 44px;">
+    <p class="story-italic">Text me directly to grab one, or book straight from the website. Venue, price and the full wine list are all there too.</p>
+    {% include story/linkbar.html %}
+  </div>
+</div>

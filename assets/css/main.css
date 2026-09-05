@@ -1404,6 +1404,12 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 /* Muted magenta, same tonal family as --ink. Used for the Fiano
    Horizontal tasting-reveal cover. */
 .story--magenta  { background: #3B1A2E; }
+/* Muted slate-blue, warmer and less saturated than a "cold" blue so it
+   still sits in the --ink/--green/--gold family. One-off exception to
+   the green/light alternation, used only for urgency promos (e.g. a
+   "spots left" slide) that need to stand apart from the rest of a
+   story batch. */
+.story--blue     { background: #2A4656; }
 
 .story__inner {
   position: absolute;
@@ -1442,12 +1448,14 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 .story--green .story-dots__dot,
 .story--red .story-dots__dot,
 .story--navy .story-dots__dot,
-.story--magenta .story-dots__dot { border-color: rgba(253,252,250,0.4); }
+.story--magenta .story-dots__dot,
+.story--blue .story-dots__dot { border-color: rgba(253,252,250,0.4); }
 .story-dots__dot--active { background: var(--green); border-color: var(--green); }
 .story--green .story-dots__dot--active,
 .story--red .story-dots__dot--active,
 .story--navy .story-dots__dot--active,
-.story--magenta .story-dots__dot--active { background: rgba(253,252,250,0.55); border-color: rgba(253,252,250,0.55); }
+.story--magenta .story-dots__dot--active,
+.story--blue .story-dots__dot--active { background: rgba(253,252,250,0.55); border-color: rgba(253,252,250,0.55); }
 
 /* ── Eyebrow / meta line ───────────────────────────────────── */
 .story-eyebrow {
@@ -1462,7 +1470,8 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 }
 .story--dark .story-eyebrow,
 .story--green .story-eyebrow,
-.story--magenta .story-eyebrow { color: rgba(253,252,250,0.5); }
+.story--magenta .story-eyebrow,
+.story--blue .story-eyebrow { color: rgba(253,252,250,0.5); }
 
 /* ── Title ─────────────────────────────────────────────────── */
 .story-title {
@@ -1477,13 +1486,15 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 }
 .story--dark .story-title,
 .story--green .story-title,
-.story--magenta .story-title { color: var(--warm-white); }
+.story--magenta .story-title,
+.story--blue .story-title { color: var(--warm-white); }
 
 /* ── Rule ──────────────────────────────────────────────────── */
 .story-rule { border: none; border-top: 1px solid var(--rule); margin: 0 0 48px; flex: 0 0 auto; }
 .story--dark .story-rule,
 .story--green .story-rule,
-.story--magenta .story-rule { border-top-color: rgba(253,252,250,0.16); }
+.story--magenta .story-rule,
+.story--blue .story-rule { border-top-color: rgba(253,252,250,0.16); }
 
 /* ── Italic intro / closing paragraphs (whole-paragraph italic,
    distinct from the selective <em> emphasis used in "how it works") ── */
@@ -1497,7 +1508,8 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 }
 .story--dark .story-italic,
 .story--green .story-italic,
-.story--magenta .story-italic { color: rgba(247,245,240,0.72); }
+.story--magenta .story-italic,
+.story--blue .story-italic { color: rgba(247,245,240,0.72); }
 
 /* ── Plain lede paragraph (slide 2: "what it is") ─────────── */
 .story-lede {
@@ -1532,7 +1544,8 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 }
 .story--dark .story-wine__name,
 .story--green .story-wine__name,
-.story--magenta .story-wine__name { color: var(--warm-white); }
+.story--magenta .story-wine__name,
+.story--blue .story-wine__name { color: var(--warm-white); }
 .story-wine__meta {
   font-family: var(--font-mono);
   font-weight: 300;
@@ -1544,7 +1557,8 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 }
 .story--dark .story-wine__meta,
 .story--green .story-wine__meta,
-.story--magenta .story-wine__meta { color: rgba(253,252,250,0.5); }
+.story--magenta .story-wine__meta,
+.story--blue .story-wine__meta { color: rgba(253,252,250,0.5); }
 
 /* ── Bottle glyph: colour comes from the wine's type, tinted
    lighter on light backgrounds and richer on the dark/green one
@@ -1553,7 +1567,7 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   --bottle-red:   #C97F72;
   --bottle-white: #B7C2AC;
 }
-.story--dark, .story--green, .story--magenta {
+.story--dark, .story--green, .story--magenta, .story--blue {
   --bottle-red:   #B3402E;
   --bottle-white: #C9D2BE;
 }
