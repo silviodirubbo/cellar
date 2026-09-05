@@ -1,0 +1,595 @@
+---
+layout: presentation
+title: "Châteauneuf-du-Pape: The Whites"
+---
+<style>
+:root {
+  --warm-white: #FDFCFA;
+  --off-white:  #F7F5F0;
+  --ink:        #1A1814;
+  --ink-mid:    #4A4640;
+  --ink-light:  #736E6B;
+  --green:      #2C4A3E;
+  --gold:       #8B6914;
+  --rule:       #E2DED8;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 1280px;
+  height: 720px;
+  display: none;
+}
+.slide.active { display: flex; }
+
+/* ── COVER ──────────────────────────────────────────── */
+.slide-cover {
+  background: var(--ink) url('{{ site.baseurl }}/assets/tastings/chateauneuf-du-pape-the-whites/cover.png') center/cover no-repeat;
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; cursor: pointer; position: relative;
+}
+.slide-cover::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(26,24,20,.62);
+  z-index: 0;
+}
+.cover-content { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
+.eyebrow {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 23px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 36px;
+}
+.cover-title { font-size: 104px; font-weight: 300; line-height: 1; color: var(--warm-white); }
+.cover-subtitle { font-size: 28px; font-weight: 300; font-style: italic; color: var(--warm-white); margin-top: 12px; }
+.cover-rule { width: 40px; height: 1px; background: var(--gold); margin: 28px auto; }
+.cover-meta {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 21px;
+  letter-spacing: .14em; text-transform: uppercase; color: rgba(253,252,250,.55);
+}
+/* overrides the shared .cover-meta-gold from _layouts/presentation.html,
+   scoped to this deck only (this <style> block renders after the
+   layout's, so it wins for this page without touching other decks) */
+.cover-meta-gold { font-size: 21px; font-weight: 500; }
+
+/* ── GRAPE/BLEND INTRO ──────────────────────────────── */
+.slide-intro {
+  background: var(--warm-white); color: var(--ink);
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 72px; cursor: pointer;
+}
+.intro-label {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 23px;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 18px;
+}
+.intro-grapes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.intro-grape-primary {
+  font-size: 112px; font-weight: 300; color: var(--ink); letter-spacing: -.02em;
+}
+/* secondary grape line: the deck names a blend, not a single grape, so
+   the two supporting varieties sit beneath the lead grape at a reduced
+   scale rather than introducing a new named class for a one-slide need */
+.intro-grape-secondary {
+  font-size: 40px; font-weight: 300; font-style: italic; color: var(--ink-mid);
+  margin-top: 14px; letter-spacing: -.01em;
+}
+
+.intro-vline { width: 1px; height: 38px; background: var(--rule); margin: 28px auto; }
+.intro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; max-width: 640px; }
+.ig-label {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 20px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 8px;
+}
+.ig-val { font-size: 14px; font-weight: 300; color: var(--ink-mid); line-height: 1.5; }
+.ig-val em { color: var(--green); font-style: italic; }
+
+/* ── MAP-ONLY SLIDE ─────────────────────────────────── */
+.slide-map {
+  background: var(--warm-white);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.slide-map img {
+  max-width: 100%; max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.map-label-center {
+  position: absolute;
+  bottom: 16px; left: 16px;
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
+  background: rgba(253,252,250,.9); padding: 5px 9px;
+}
+
+/* ── WINE SLIDE ─────────────────────────────────────── */
+.slide-wine { background: var(--warm-white); color: var(--ink); flex-direction: row; }
+
+.wine-map {
+  width: 853px; height: 720px; flex: 0 0 853px;
+  position: relative; overflow: hidden; background: var(--warm-white); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.wine-map img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+.map-tag {
+  position: absolute; bottom: 16px; left: 16px;
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
+  background: rgba(253,252,250,.9); padding: 5px 9px;
+}
+
+.wine-panel {
+  width: 427px; height: 720px; flex: 0 0 427px;
+  display: flex; flex-direction: column;
+  padding: 62px 35px 60px;
+  border-left: 1px solid var(--rule); background: var(--warm-white);
+}
+
+.panel-head { flex: 0 0 auto; }
+.w-counter {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 6px;
+}
+.w-appellation {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .13em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+}
+.w-hrule { width: 100%; height: 1px; background: var(--rule); }
+
+.wine-bottle {
+  flex: 1 1 auto; min-height: 0;
+  display: flex; align-items: center; justify-content: center; padding: 16px 0;
+}
+.wine-bottle img {
+  max-height: 100%; max-width: 68%; object-fit: contain;
+  filter: drop-shadow(0 4px 24px rgba(26,24,20,.07));
+}
+
+.wine-info {
+  flex: 0 0 auto;
+  padding-top: 18px; border-top: 1px solid var(--rule);
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
+}
+.info-text { flex: 1 1 auto; min-width: 0; }
+.w-name { font-size: 26px; font-weight: 300; color: var(--ink); line-height: 1.12; margin-bottom: 3px; }
+.w-producer { font-size: 14px; font-weight: 300; font-style: italic; color: var(--green); margin-bottom: 11px; }
+.w-meta { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.w-ml {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink-light); min-width: 46px;
+}
+.w-mv { font-size: 13px; font-weight: 300; color: var(--ink-mid); }
+
+.wine-qr { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.wine-qr img { width: 74px; height: 74px; object-fit: contain; display: block; }
+.qr-label {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 7px;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-light);
+  text-align: center; line-height: 1.6;
+}
+
+/* ── PRODUCERS SLIDE ────────────────────────────────────
+   Structure mirrors _tastings/condrieu-horizontal.html. No vintage
+   chart: unlike Condrieu (Wine Spectator + Vin & Millésimes both
+   publish dedicated Condrieu timelines), no reputable source was
+   found breaking out Châteauneuf-du-Pape's white wines from its reds
+   with year-by-year scores, so the chart is omitted rather than
+   fabricated and the producers grid carries the slide alone. */
+.slide-producers {
+  background: var(--warm-white);
+  flex-direction: column;
+  cursor: pointer;
+  padding-top: 96px;
+  padding-bottom: 96px;
+}
+
+.prod-top {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.prod-left {
+  width: 200px;
+  flex: 0 0 200px;
+  border-right: 1px solid var(--rule);
+  padding: 20px 20px 18px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.prod-eyebrow {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light);
+  display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+}
+.prod-eyebrow::after { content: ''; display: block; height: 1px; width: 20px; background: var(--rule); }
+
+.prod-title { font-size: 36px; font-weight: 300; line-height: 1.05; color: var(--ink); }
+.prod-title em { font-style: italic; color: var(--green); }
+
+.prod-disclaimer {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 6.5px;
+  letter-spacing: .07em; color: var(--ink-light); line-height: 1.65;
+  padding-top: 8px; border-top: 1px solid var(--rule);
+  margin-top: 12px;
+}
+
+.prod-right {
+  flex: 1 1 auto;
+  padding: 12px 28px 10px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 32px;
+  align-content: start;
+}
+
+.prod-col { display: flex; flex-direction: column; }
+
+.prow {
+  display: flex; align-items: baseline;
+  padding: 2.5px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.prow.first { border-top: 1px solid var(--rule); }
+
+.pname {
+  font-size: 10px; font-weight: 300; color: var(--ink);
+  display: flex; align-items: center; gap: 5px;
+  white-space: nowrap; flex-shrink: 0;
+}
+.pname.tasted { color: var(--green); font-style: italic; }
+
+.tdot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--gold); flex-shrink: 0; display: inline-block;
+}
+
+.leader {
+  flex: 1 1 auto;
+  border-bottom: 1px dotted var(--rule);
+  margin: 0 5px; position: relative; top: -2px;
+}
+
+.cuvees {
+  font-family: 'DM Mono', monospace; font-size: 6.5px; font-weight: 300;
+  letter-spacing: .03em; color: var(--ink-light);
+  white-space: nowrap; text-align: right; flex-shrink: 0;
+}
+.csep { margin: 0 3px; opacity: 0.35; }
+
+.cv-hi {
+  color: var(--green); font-style: italic;
+  font-family: 'DM Mono', monospace; font-size: 6.5px; font-weight: 300;
+}
+</style>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 1 · COVER
+     Image: assets/tastings/chateauneuf-du-pape-the-whites/cover.png
+     ───────────────────────────────────────────────────────── -->
+{% assign this_tasting = site.data.tastings | where: "slug", page.slug | first %}
+<div class="slide slide-cover active">
+  <div class="cover-content">
+    <div class="eyebrow">Wine Tasting · {{ this_tasting.date | date: "%-d %B %Y" }}</div>
+    <div class="cover-title">Châteauneuf-du-Pape</div>
+    <div class="cover-subtitle">The Whites</div>
+    <div class="cover-rule"></div>
+    <div class="cover-meta">Four wines · One appellation · Two grape directions</div>
+    <div class="cover-meta-gold">Vieux Télégraphe · Clos des Papes · Ferrando</div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 2 · BLEND INTRO
+     No images needed. Three grapes rather than Condrieu's single
+     Viognier, so Grenache Blanc (the appellation's most planted
+     white grape) leads at the usual large scale, with Clairette and
+     Roussanne set beneath it at a smaller supporting size.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-intro">
+  <div class="intro-label">The Blend</div>
+  <div class="intro-grapes">
+    <div class="intro-grape-primary">Grenache Blanc</div>
+    <div class="intro-grape-secondary">Clairette &amp; Roussanne</div>
+  </div>
+  <div class="intro-vline"></div>
+  <div class="intro-grid">
+    <div><div class="ig-label">Appellation</div><div class="ig-val">Châteauneuf-du-Pape AOC<br>Southern Rhône</div></div>
+    <div><div class="ig-label">Character</div><div class="ig-val"><em>White flower · Stone fruit<br>Honeyed notes</em></div></div>
+    <div><div class="ig-label">Terroir</div><div class="ig-val">Galets roulés, sandstone<br>and safres</div></div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 3 · FRANCE MAP
+     Image: assets/tastings/chateauneuf-du-pape-the-whites/map_france.jpg
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-map" style="position:relative;">
+  <img src="{{ site.baseurl }}/assets/tastings/chateauneuf-du-pape-the-whites/map_france.jpg" alt="France · Wine Regions" loading="lazy">
+  <div class="map-label-center">France · Wine Regions</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 4 · RHÔNE VALLEY MAP
+     Image: assets/tastings/chateauneuf-du-pape-the-whites/map_rhone_valley.png
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-map" style="position:relative;">
+  <img src="{{ site.baseurl }}/assets/tastings/chateauneuf-du-pape-the-whites/map_rhone_valley.png" alt="Rhône Valley · Overview" loading="lazy">
+  <div class="map-label-center">Rhône Valley · Overview</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 5 · SOUTHERN RHÔNE MAP
+     Image: assets/tastings/chateauneuf-du-pape-the-whites/map_southern_rhone.png
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-map" style="position:relative;">
+  <img src="{{ site.baseurl }}/assets/tastings/chateauneuf-du-pape-the-whites/map_southern_rhone.png" alt="Southern Rhône · Appellations" loading="lazy">
+  <div class="map-label-center">Southern Rhône · Appellations</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 6 · WINE 1 · VIEUX TÉLÉGRAPHE · CLOS LA ROQUÈTE
+     Map:    assets/tastings/chateauneuf-du-pape-the-whites/map_chateauneuf.jpg
+             (shared appellation lieux-dits map, used on all four wine
+             slides: this deck has no per-producer zoomed maps)
+     Bottle: assets/tastings/chateauneuf-du-pape-the-whites/bottle_vieux-telegraphe.png
+     QR:     assets/tastings/chateauneuf-du-pape-the-whites/qr_vieux-telegraphe.png
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/chateauneuf-du-pape-the-whites/map_chateauneuf.jpg" alt="Châteauneuf-du-Pape · Lieux-dits" loading="lazy">
+    <div class="map-tag">Châteauneuf-du-Pape · Lieux-dits</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">01 / 04</div>
+      <div class="w-appellation">Châteauneuf-du-Pape AOC</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/chateauneuf-du-pape-the-whites/bottle_vieux-telegraphe.png" alt="Clos La Roquète" loading="lazy">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Clos La Roquète</div>
+        <div class="w-producer">Domaine du Vieux Télégraphe</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2021</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Grenache Blanc, Clairette, Roussanne</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/chateauneuf-du-pape-the-whites/qr_vieux-telegraphe.png" alt="QR code for Domaine du Vieux Télégraphe" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 7 · WINE 2 · CLOS DES PAPES · 2021
+     Map:    assets/tastings/chateauneuf-du-pape-the-whites/map_chateauneuf.jpg (shared)
+     Bottle: assets/tastings/chateauneuf-du-pape-the-whites/bottle_clos-des-papes.png
+     QR:     assets/tastings/chateauneuf-du-pape-the-whites/qr_clos-des-papes.png
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/chateauneuf-du-pape-the-whites/map_chateauneuf.jpg" alt="Châteauneuf-du-Pape · Lieux-dits" loading="lazy">
+    <div class="map-tag">Châteauneuf-du-Pape · Lieux-dits</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">02 / 04</div>
+      <div class="w-appellation">Châteauneuf-du-Pape AOC</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/chateauneuf-du-pape-the-whites/bottle_clos-des-papes.png" alt="Châteauneuf-du-Pape Blanc, Clos des Papes, 2021" loading="lazy">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Châteauneuf-du-Pape Blanc</div>
+        <div class="w-producer">Clos des Papes</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2021</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Grenache Blanc, Roussanne, Clairette, Bourboulenc</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/chateauneuf-du-pape-the-whites/qr_clos-des-papes.png" alt="QR code for Clos des Papes" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 8 · WINE 3 · FAMILLE ISABEL FERRANDO
+     Map:    assets/tastings/chateauneuf-du-pape-the-whites/map_chateauneuf.jpg (shared)
+     Bottle: assets/tastings/chateauneuf-du-pape-the-whites/bottle_ferrando.png
+     QR:     assets/tastings/chateauneuf-du-pape-the-whites/qr_ferrando.png
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/chateauneuf-du-pape-the-whites/map_chateauneuf.jpg" alt="Châteauneuf-du-Pape · Lieux-dits" loading="lazy">
+    <div class="map-tag">Châteauneuf-du-Pape · Lieux-dits</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">03 / 04</div>
+      <div class="w-appellation">Châteauneuf-du-Pape AOC</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/chateauneuf-du-pape-the-whites/bottle_ferrando.png" alt="Châteauneuf-du-Pape Blanc, Famille Isabel Ferrando" loading="lazy">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Châteauneuf-du-Pape Blanc</div>
+        <div class="w-producer">Famille Isabel Ferrando</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2021</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Clairette 60%, Roussanne 40%</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/chateauneuf-du-pape-the-whites/qr_ferrando.png" alt="QR code for Famille Isabel Ferrando" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 9 · WINE 4 · CLOS DES PAPES · 2014
+     Map:    assets/tastings/chateauneuf-du-pape-the-whites/map_chateauneuf.jpg (shared)
+     Bottle: assets/tastings/chateauneuf-du-pape-the-whites/bottle_clos-des-papes.png
+             (same file as wine 2, reused deliberately: same cuvée)
+     QR:     assets/tastings/chateauneuf-du-pape-the-whites/qr_clos-des-papes.png
+             (same file as wine 2, reused deliberately)
+     A vertical pairing with wine 2, same cuvée seven years apart,
+     flagged with a small extra row in the panel rather than new CSS.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/chateauneuf-du-pape-the-whites/map_chateauneuf.jpg" alt="Châteauneuf-du-Pape · Lieux-dits" loading="lazy">
+    <div class="map-tag">Châteauneuf-du-Pape · Lieux-dits</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">04 / 04</div>
+      <div class="w-appellation">Châteauneuf-du-Pape AOC</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/chateauneuf-du-pape-the-whites/bottle_clos-des-papes.png" alt="Châteauneuf-du-Pape Blanc, Clos des Papes, 2014" loading="lazy">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Châteauneuf-du-Pape Blanc</div>
+        <div class="w-producer">Clos des Papes</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2014</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Grenache Blanc, Roussanne, Clairette, Bourboulenc</span></div>
+        <div class="w-meta"><span class="w-ml">Vertical</span><span class="w-mv">Same cuvée as 02, seven years on</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/chateauneuf-du-pape-the-whites/qr_clos-des-papes.png" alt="QR code for Clos des Papes" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 10 · PRODUCERS LANDSCAPE
+     No images needed. No vintage chart: see note on .slide-producers
+     above. Tasted-this-session marks (.tasted / .tdot / .cv-hi) are
+     reserved for Vieux Télégraphe, Clos des Papes and Famille Isabel
+     Ferrando. No neighbouring-monopole band: unlike Condrieu/
+     Château-Grillet, there is no clearly analogous feature here.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-producers">
+
+  <div class="prod-top">
+    <div class="prod-left">
+      <div>
+        <div class="prod-eyebrow">Châteauneuf-du-Pape</div>
+        <div class="prod-title">The white<br><em>producers</em></div>
+      </div>
+      <div>
+        <div class="prod-disclaimer">
+          A partial and subjective list aimed at providing
+          a broad framework of the appellation's white producers.
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-right">
+      <div class="prod-col">
+        <div class="prow first">
+          <div class="pname">Bosquet des Papes</div><div class="leader"></div>
+          <div class="cuvees">Tradition</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Château de Beaucastel</div><div class="leader"></div>
+          <div class="cuvees">Vieilles Vignes</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Château de la Gardine</div><div class="leader"></div>
+          <div class="cuvees">Blanc</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Château de Nalys</div><div class="leader"></div>
+          <div class="cuvees">Grand Vin</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Château La Nerthe</div><div class="leader"></div>
+          <div class="cuvees">Clos de Beauvenir</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Château Mont-Redon</div><div class="leader"></div>
+          <div class="cuvees">Blanc</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Château Rayas</div><div class="leader"></div>
+          <div class="cuvees">Blanc</div>
+        </div>
+        <div class="prow">
+          <div class="pname tasted"><span class="tdot"></span>Clos des Papes</div><div class="leader"></div>
+          <div class="cuvees"><span class="cv-hi">Châteauneuf-du-Pape Blanc</span></div>
+        </div>
+        <div class="prow">
+          <div class="pname">Clos du Mont-Olivet</div><div class="leader"></div>
+          <div class="cuvees">Blanc</div>
+        </div>
+      </div>
+
+      <div class="prod-col">
+        <div class="prow first">
+          <div class="pname">Domaine Charvin</div><div class="leader"></div>
+          <div class="cuvees">Blanc</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Domaine de la Janasse</div><div class="leader"></div>
+          <div class="cuvees">Blanc<span class="csep">·</span>Prestige</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Domaine de la Solitude</div><div class="leader"></div>
+          <div class="cuvees">Blanc</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Domaine du Vieux Lazaret</div><div class="leader"></div>
+          <div class="cuvees">Blanc</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Domaine Giraud</div><div class="leader"></div>
+          <div class="cuvees">Les Galimardes</div>
+        </div>
+        <div class="prow">
+          <div class="pname tasted"><span class="tdot"></span>Famille Isabel Ferrando</div><div class="leader"></div>
+          <div class="cuvees"><span class="cv-hi">Châteauneuf-du-Pape Blanc</span></div>
+        </div>
+        <div class="prow">
+          <div class="pname">Les Cailloux (André Brunel)</div><div class="leader"></div>
+          <div class="cuvees">Blanc</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Vieux Donjon</div><div class="leader"></div>
+          <div class="cuvees">Blanc</div>
+        </div>
+        <div class="prow">
+          <div class="pname tasted"><span class="tdot"></span>Vieux Télégraphe</div><div class="leader"></div>
+          <div class="cuvees"><span class="cv-hi">Clos La Roquète</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
