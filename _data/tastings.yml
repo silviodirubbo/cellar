@@ -270,6 +270,7 @@
   spots_total: 6
   cost_estimate: "15.90 CHF"
   featured: false
+  slides: true
   wines:
     - name: "Château-Thébaud"
       producer: "Domaine de la Pépière"
