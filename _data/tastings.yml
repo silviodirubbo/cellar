@@ -230,6 +230,7 @@
   spots_total: 6
   cost_estimate: "44 CHF"
   featured: false
+  slides: true
   wines:
     - name: "La Crau"
       producer: "Domaine du Vieux Télégraphe"
