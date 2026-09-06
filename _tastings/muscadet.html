@@ -1,0 +1,569 @@
+---
+layout: presentation
+title: "Muscadet"
+---
+<style>
+:root {
+  --warm-white: #FDFCFA;
+  --off-white:  #F7F5F0;
+  --ink:        #1A1814;
+  --ink-mid:    #4A4640;
+  --ink-light:  #736E6B;
+  --green:      #2C4A3E;
+  --gold:       #8B6914;
+  --rule:       #E2DED8;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 1280px;
+  height: 720px;
+  display: none;
+}
+.slide.active { display: flex; }
+
+/* ── COVER ──────────────────────────────────────────── */
+.slide-cover {
+  background: var(--ink) url('{{ site.baseurl }}/assets/tastings/muscadet/cover.png') center/cover no-repeat;
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; cursor: pointer; position: relative;
+}
+.slide-cover::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(26,24,20,.62);
+  z-index: 0;
+}
+.cover-content { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
+.eyebrow {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 23px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 36px;
+}
+.cover-title { font-size: 104px; font-weight: 300; line-height: 1; color: var(--warm-white); }
+.cover-subtitle { font-size: 28px; font-weight: 300; font-style: italic; color: var(--warm-white); margin-top: 12px; }
+.cover-rule { width: 40px; height: 1px; background: var(--gold); margin: 28px auto; }
+.cover-meta {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 21px;
+  letter-spacing: .14em; text-transform: uppercase; color: rgba(253,252,250,.55);
+}
+/* overrides the shared .cover-meta-gold from _layouts/presentation.html,
+   scoped to this deck only (this <style> block renders after the
+   layout's, so it wins for this page without touching other decks) */
+.cover-meta-gold { font-size: 21px; font-weight: 500; }
+
+/* ── GRAPE INTRO ────────────────────────────────────── */
+.slide-intro {
+  background: var(--warm-white); color: var(--ink);
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 72px; cursor: pointer;
+}
+.intro-label {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 23px;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 18px;
+}
+.intro-grapes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.intro-grape-primary {
+  font-size: 112px; font-weight: 300; color: var(--ink); letter-spacing: -.02em;
+}
+
+.intro-vline { width: 1px; height: 38px; background: var(--rule); margin: 28px auto; }
+.intro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; max-width: 640px; }
+.ig-label {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 20px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 8px;
+}
+.ig-val { font-size: 14px; font-weight: 300; color: var(--ink-mid); line-height: 1.5; }
+.ig-val em { color: var(--green); font-style: italic; }
+
+/* ── MAP-ONLY SLIDE ─────────────────────────────────── */
+.slide-map {
+  background: var(--warm-white);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.slide-map img {
+  max-width: 100%; max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.map-label-center {
+  position: absolute;
+  bottom: 16px; left: 16px;
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
+  background: rgba(253,252,250,.9); padding: 5px 9px;
+}
+
+/* ── WINE SLIDE ─────────────────────────────────────── */
+.slide-wine { background: var(--warm-white); color: var(--ink); flex-direction: row; }
+
+.wine-map {
+  width: 853px; height: 720px; flex: 0 0 853px;
+  position: relative; overflow: hidden; background: var(--warm-white); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.wine-map img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+.map-tag {
+  position: absolute; bottom: 16px; left: 16px;
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
+  background: rgba(253,252,250,.9); padding: 5px 9px;
+}
+
+.wine-panel {
+  width: 427px; height: 720px; flex: 0 0 427px;
+  display: flex; flex-direction: column;
+  padding: 62px 35px 60px;
+  border-left: 1px solid var(--rule); background: var(--warm-white);
+}
+
+.panel-head { flex: 0 0 auto; }
+.w-counter {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 6px;
+}
+.w-appellation {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .13em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+}
+.w-hrule { width: 100%; height: 1px; background: var(--rule); }
+
+.wine-bottle {
+  flex: 1 1 auto; min-height: 0;
+  display: flex; align-items: center; justify-content: center; padding: 16px 0;
+}
+.wine-bottle img {
+  max-height: 100%; max-width: 68%; object-fit: contain;
+  filter: drop-shadow(0 4px 24px rgba(26,24,20,.07));
+}
+
+.wine-info {
+  flex: 0 0 auto;
+  padding-top: 18px; border-top: 1px solid var(--rule);
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
+}
+.info-text { flex: 1 1 auto; min-width: 0; }
+.w-name { font-size: 26px; font-weight: 300; color: var(--ink); line-height: 1.12; margin-bottom: 3px; }
+.w-producer { font-size: 14px; font-weight: 300; font-style: italic; color: var(--green); margin-bottom: 11px; }
+.w-meta { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.w-ml {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink-light); min-width: 46px;
+}
+.w-mv { font-size: 13px; font-weight: 300; color: var(--ink-mid); }
+
+.wine-qr { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.wine-qr img { width: 74px; height: 74px; object-fit: contain; display: block; }
+.qr-label {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 7px;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-light);
+  text-align: center; line-height: 1.6;
+}
+
+/* ── PRODUCERS SLIDE ────────────────────────────────────
+   Structure mirrors _tastings/chateauneuf-du-pape-the-whites.html.
+   No vintage chart: no reputable Muscadet-specific vintage source was
+   found during research, so the producers grid carries the slide
+   alone, same call made on the CDP decks. */
+.slide-producers {
+  background: var(--warm-white);
+  flex-direction: column;
+  cursor: pointer;
+  padding-top: 96px;
+  padding-bottom: 96px;
+}
+
+.prod-top {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.prod-left {
+  width: 200px;
+  flex: 0 0 200px;
+  border-right: 1px solid var(--rule);
+  padding: 20px 20px 18px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.prod-eyebrow {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light);
+  display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+}
+.prod-eyebrow::after { content: ''; display: block; height: 1px; width: 20px; background: var(--rule); }
+
+.prod-title { font-size: 36px; font-weight: 300; line-height: 1.05; color: var(--ink); }
+.prod-title em { font-style: italic; color: var(--green); }
+
+.prod-disclaimer {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 6.5px;
+  letter-spacing: .07em; color: var(--ink-light); line-height: 1.65;
+  padding-top: 8px; border-top: 1px solid var(--rule);
+  margin-top: 12px;
+}
+
+.prod-right {
+  flex: 1 1 auto;
+  padding: 12px 28px 10px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 32px;
+  align-content: start;
+}
+
+.prod-col { display: flex; flex-direction: column; }
+
+.prow {
+  display: flex; align-items: baseline;
+  padding: 2.5px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.prow.first { border-top: 1px solid var(--rule); }
+
+.pname {
+  font-size: 10px; font-weight: 300; color: var(--ink);
+  display: flex; align-items: center; gap: 5px;
+  white-space: nowrap; flex-shrink: 0;
+}
+.pname.tasted { color: var(--green); font-style: italic; }
+
+.tdot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--gold); flex-shrink: 0; display: inline-block;
+}
+
+.leader {
+  flex: 1 1 auto;
+  border-bottom: 1px dotted var(--rule);
+  margin: 0 5px; position: relative; top: -2px;
+}
+
+.cuvees {
+  font-family: 'DM Mono', monospace; font-size: 6.5px; font-weight: 300;
+  letter-spacing: .03em; color: var(--ink-light);
+  white-space: nowrap; text-align: right; flex-shrink: 0;
+}
+.csep { margin: 0 3px; opacity: 0.35; }
+
+.cv-hi {
+  color: var(--green); font-style: italic;
+  font-family: 'DM Mono', monospace; font-size: 6.5px; font-weight: 300;
+}
+</style>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 1 · COVER
+     Image: assets/tastings/muscadet/cover.png
+     ───────────────────────────────────────────────────────── -->
+{% assign this_tasting = site.data.tastings | where: "slug", page.slug | first %}
+<div class="slide slide-cover active">
+  <div class="cover-content">
+    <div class="eyebrow">Wine Tasting · {{ this_tasting.date | date: "%-d %B %Y" }}</div>
+    <div class="cover-title">Muscadet</div>
+    <div class="cover-subtitle">Pays Nantais</div>
+    <div class="cover-rule"></div>
+    <div class="cover-meta">Four wines · One appellation · Two producers</div>
+    <div class="cover-meta-gold">Domaine de la Pépière · Domaine Luneau-Papin</div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 2 · GRAPE INTRO
+     No images needed. A single grape at 100% across all four wines,
+     so this is simpler than the CDP decks' blend intros: only the
+     primary grape line is used, no secondary line.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-intro">
+  <div class="intro-label">The Grape</div>
+  <div class="intro-grapes">
+    <div class="intro-grape-primary">Melon de Bourgogne</div>
+  </div>
+  <div class="intro-vline"></div>
+  <div class="intro-grid">
+    <div><div class="ig-label">Appellation</div><div class="ig-val">Muscadet Sèvre-et-Maine AOC<br>Pays Nantais, Loire</div></div>
+    <div><div class="ig-label">Character</div><div class="ig-val"><em>Saline minerality · Citrus<br>Textural depth</em></div></div>
+    <div><div class="ig-label">Terroir</div><div class="ig-val">Gneiss, granite<br>and orthogneiss</div></div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 3 · FRANCE MAP
+     Image: assets/tastings/muscadet/map_france.jpg
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-map" style="position:relative;">
+  <img src="{{ site.baseurl }}/assets/tastings/muscadet/map_france.jpg" alt="France · Wine Regions" loading="lazy">
+  <div class="map-label-center">France · Wine Regions</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 4 · LOIRE VALLEY MAP
+     Image: assets/tastings/muscadet/map_loire.jpg
+     Shared going forward across all Loire-chapter decks, not
+     muscadet-specific.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-map" style="position:relative;">
+  <img src="{{ site.baseurl }}/assets/tastings/muscadet/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
+  <div class="map-label-center">Loire Valley · Overview</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 5 · PAYS NANTAIS MAP
+     Image: assets/tastings/muscadet/map_pays_nantais.jpg
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-map" style="position:relative;">
+  <img src="{{ site.baseurl }}/assets/tastings/muscadet/map_pays_nantais.jpg" alt="Pays Nantais · Sub-Appellations" loading="lazy">
+  <div class="map-label-center">Pays Nantais · Sub-Appellations</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 6 · WINE 1 · CHÂTEAU-THÉBAUD · DOMAINE DE LA PÉPIÈRE · 2022
+     Map:    assets/tastings/muscadet/map_crus_communaux.jpg
+             (shared cru map, same pattern as the CDP decks: no
+             per-producer zoomed maps are available)
+     Bottle: assets/tastings/muscadet/bottle_chateau-thebaud.png
+     QR:     assets/tastings/muscadet/qr_pepiere.png
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/muscadet/map_crus_communaux.jpg" alt="Muscadet · Crus Communaux" loading="lazy">
+    <div class="map-tag">Muscadet · Crus Communaux</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">01 / 04</div>
+      <div class="w-appellation">Muscadet Sèvre-et-Maine AOC</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/muscadet/bottle_chateau-thebaud.png" alt="Château-Thébaud, Domaine de la Pépière" loading="lazy">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Château-Thébaud</div>
+        <div class="w-producer">Domaine de la Pépière</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Melon de Bourgogne</span></div>
+        <div class="w-meta"><span class="w-ml">Cru</span><span class="w-mv">Communal cru</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/muscadet/qr_pepiere.png" alt="QR code for Domaine de la Pépière" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 7 · WINE 2 · CLISSON · DOMAINE DE LA PÉPIÈRE · 2023
+     Map:    assets/tastings/muscadet/map_crus_communaux.jpg (shared)
+     Bottle: assets/tastings/muscadet/bottle_clisson.png
+     QR:     assets/tastings/muscadet/qr_pepiere.png (same file as wine
+             1, reused deliberately: same producer)
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/muscadet/map_crus_communaux.jpg" alt="Muscadet · Crus Communaux" loading="lazy">
+    <div class="map-tag">Muscadet · Crus Communaux</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">02 / 04</div>
+      <div class="w-appellation">Muscadet Sèvre-et-Maine AOC</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/muscadet/bottle_clisson.png" alt="Clisson, Domaine de la Pépière" loading="lazy">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Clisson</div>
+        <div class="w-producer">Domaine de la Pépière</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Melon de Bourgogne</span></div>
+        <div class="w-meta"><span class="w-ml">Cru</span><span class="w-mv">Communal cru</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/muscadet/qr_pepiere.png" alt="QR code for Domaine de la Pépière" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 8 · WINE 3 · MONNIÈRES-SAINT FIACRE · DOMAINE DE LA PÉPIÈRE · 2022
+     Map:    assets/tastings/muscadet/map_crus_communaux.jpg (shared)
+     Bottle: assets/tastings/muscadet/bottle_monnieres-saint-fiacre.png
+     QR:     assets/tastings/muscadet/qr_pepiere.png (same file as wines
+             1 and 2, reused deliberately: same producer)
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/muscadet/map_crus_communaux.jpg" alt="Muscadet · Crus Communaux" loading="lazy">
+    <div class="map-tag">Muscadet · Crus Communaux</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">03 / 04</div>
+      <div class="w-appellation">Muscadet Sèvre-et-Maine AOC</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/muscadet/bottle_monnieres-saint-fiacre.png" alt="Monnières-Saint Fiacre, Domaine de la Pépière" loading="lazy">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name" style="font-size:22px;">Monnières-Saint Fiacre</div>
+        <div class="w-producer">Domaine de la Pépière</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Melon de Bourgogne</span></div>
+        <div class="w-meta"><span class="w-ml">Cru</span><span class="w-mv">Communal cru</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/muscadet/qr_pepiere.png" alt="QR code for Domaine de la Pépière" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 9 · WINE 4 · GULA ANA · DOMAINE LUNEAU-PAPIN · 2023
+     Map:    assets/tastings/muscadet/map_crus_communaux.jpg (shared)
+     Bottle: assets/tastings/muscadet/bottle_gula-ana.png
+     QR:     assets/tastings/muscadet/qr_luneau-papin.png
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/muscadet/map_crus_communaux.jpg" alt="Muscadet · Crus Communaux" loading="lazy">
+    <div class="map-tag">Muscadet · Crus Communaux</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">04 / 04</div>
+      <div class="w-appellation">Muscadet Sèvre-et-Maine AOC</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/muscadet/bottle_gula-ana.png" alt="Gula Ana, Domaine Luneau-Papin" loading="lazy">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Gula Ana</div>
+        <div class="w-producer">Domaine Luneau-Papin</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Melon de Bourgogne</span></div>
+        <div class="w-meta"><span class="w-ml">Vineyard</span><span class="w-mv">Single vineyard</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/muscadet/qr_luneau-papin.png" alt="QR code for Domaine Luneau-Papin" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 10 · PRODUCERS LANDSCAPE
+     No images needed. No vintage chart: see note on .slide-producers
+     above. Tasted-this-session marks (.tasted / .tdot / .cv-hi) are
+     reserved for Domaine de la Pépière and Domaine Luneau-Papin.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-producers">
+
+  <div class="prod-top">
+    <div class="prod-left">
+      <div>
+        <div class="prod-eyebrow">Muscadet</div>
+        <div class="prod-title">The Pays Nantais<br><em>producers</em></div>
+      </div>
+      <div>
+        <div class="prod-disclaimer">
+          A partial and subjective list aimed at providing
+          a broad framework of the region's Muscadet producers.
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-right">
+      <div class="prod-col">
+        <div class="prow first">
+          <div class="pname">Chéreau Carré</div><div class="leader"></div>
+          <div class="cuvees">Comte Leloup</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Château de la Ragotière</div><div class="leader"></div>
+          <div class="cuvees">Muscadet Sèvre-et-Maine</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Domaine de Bellevue</div><div class="leader"></div>
+          <div class="cuvees">Muscadet Sèvre-et-Maine</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Domaine de l'Écu</div><div class="leader"></div>
+          <div class="cuvees">Gneiss<span class="csep">·</span>Orthogneiss<span class="csep">·</span>Granite</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Domaine de la Haute Févrie</div><div class="leader"></div>
+          <div class="cuvees">Muscadet Sèvre-et-Maine</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Domaine de la Louvetrie</div><div class="leader"></div>
+          <div class="cuvees">Le Melonix</div>
+        </div>
+        <div class="prow">
+          <div class="pname tasted"><span class="tdot"></span>Domaine de la Pépière</div><div class="leader"></div>
+          <div class="cuvees"><span class="cv-hi">Clisson</span><span class="csep">·</span><span class="cv-hi">Château-Thébaud</span><span class="csep">·</span><span class="cv-hi">Monnières-Saint Fiacre</span></div>
+        </div>
+      </div>
+
+      <div class="prod-col">
+        <div class="prow first">
+          <div class="pname">Domaine de la Sénéchalière</div><div class="leader"></div>
+          <div class="cuvees">Nuitage</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Domaine des Dorices</div><div class="leader"></div>
+          <div class="cuvees">Muscadet Sèvre-et-Maine</div>
+        </div>
+        <div class="prow">
+          <div class="pname tasted"><span class="tdot"></span>Domaine Luneau-Papin</div><div class="leader"></div>
+          <div class="cuvees"><span class="cv-hi">Gula Ana</span></div>
+        </div>
+        <div class="prow">
+          <div class="pname">Domaine Michel Brégeon</div><div class="leader"></div>
+          <div class="cuvees">Gorges<span class="csep">·</span>Clisson</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Domaine Pierre de la Grange</div><div class="leader"></div>
+          <div class="cuvees">Muscadet Sèvre-et-Maine</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Guilbaud Frères</div><div class="leader"></div>
+          <div class="cuvees">Muscadet Sèvre-et-Maine</div>
+        </div>
+        <div class="prow">
+          <div class="pname">Vincent Caillé</div><div class="leader"></div>
+          <div class="cuvees">Muscadet Sèvre-et-Maine</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
