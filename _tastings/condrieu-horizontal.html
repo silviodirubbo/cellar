@@ -624,10 +624,11 @@ title: "Condrieu Horizontal"
           A partial and subjective list aimed at providing
           a broad framework of the appellation's producers.
         </div>
+        {% assign nrw_tasting = site.data.tastings | where: "slug", "northern-rhone-whites" | first %}
         <div class="prod-prevnote">
           <span class="cv-prev">†</span>Les Chaillets (Cuilleron),
           tasted at a previous session, Northern Rhône Whites ·
-          29 May 2026. Not poured tonight.
+          {{ nrw_tasting.date | date: "%-d %B %Y" }}. Not poured tonight.
         </div>
       </div>
     </div>
