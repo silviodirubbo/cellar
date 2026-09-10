@@ -1,0 +1,312 @@
+---
+layout: presentation
+title: "Saumur & Champigny"
+---
+<style>
+:root {
+  --warm-white: #FDFCFA;
+  --off-white:  #F7F5F0;
+  --ink:        #1A1814;
+  --ink-mid:    #4A4640;
+  --ink-light:  #736E6B;
+  --green:      #2C4A3E;
+  --gold:       #8B6914;
+  --rule:       #E2DED8;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 1280px;
+  height: 720px;
+  display: none;
+}
+.slide.active { display: flex; }
+
+/* ── COVER ──────────────────────────────────────────── */
+.slide-cover {
+  background: var(--ink) url('{{ site.baseurl }}/assets/tastings/saumur-champigny/cover.jpg') center/cover no-repeat;
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; cursor: pointer; position: relative;
+}
+.slide-cover::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(26,24,20,.62);
+  z-index: 0;
+}
+.cover-content { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
+.eyebrow {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 23px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 36px;
+}
+.cover-title { font-size: 104px; font-weight: 300; line-height: 1; color: var(--warm-white); }
+.cover-subtitle { font-size: 28px; font-weight: 300; font-style: italic; color: var(--warm-white); margin-top: 12px; }
+.cover-rule { width: 40px; height: 1px; background: var(--gold); margin: 28px auto; }
+.cover-meta {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 21px;
+  letter-spacing: .14em; text-transform: uppercase; color: rgba(253,252,250,.55);
+}
+/* overrides the shared .cover-meta-gold from _layouts/presentation.html,
+   scoped to this deck only (this <style> block renders after the
+   layout's, so it wins for this page without touching other decks) */
+.cover-meta-gold { font-size: 21px; font-weight: 500; }
+.cover-credit {
+  position: absolute; z-index: 1;
+  bottom: 20px; left: 24px;
+  text-align: left;
+}
+.cover-credit-title {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  font-style: italic; letter-spacing: .06em; color: rgba(253,252,250,.5);
+  margin-bottom: 2px;
+}
+.cover-credit-artist {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .1em; text-transform: uppercase; color: rgba(253,252,250,.38);
+}
+
+/* ── MAP-ONLY SLIDE ─────────────────────────────────── */
+.slide-map {
+  background: var(--warm-white);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.slide-map img {
+  max-width: 100%; max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.map-label-center {
+  position: absolute;
+  bottom: 16px; left: 16px;
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
+  background: rgba(253,252,250,.9); padding: 5px 9px;
+}
+
+/* ── WINE SLIDE ─────────────────────────────────────── */
+.slide-wine { background: var(--warm-white); color: var(--ink); flex-direction: row; }
+
+.wine-map {
+  width: 853px; height: 720px; flex: 0 0 853px;
+  position: relative; overflow: hidden; background: var(--warm-white); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.wine-map img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+.map-tag {
+  position: absolute; bottom: 16px; left: 16px;
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
+  background: rgba(253,252,250,.9); padding: 5px 9px;
+}
+
+.wine-panel {
+  width: 427px; height: 720px; flex: 0 0 427px;
+  display: flex; flex-direction: column;
+  padding: 62px 35px 60px;
+  border-left: 1px solid var(--rule); background: var(--warm-white);
+}
+
+.panel-head { flex: 0 0 auto; }
+.w-counter {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 6px;
+}
+.w-appellation {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .13em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+}
+.w-hrule { width: 100%; height: 1px; background: var(--rule); }
+
+/* empty spacer in this deck: no bottle photos exist yet for these four
+   wines, so this holds the panel-head/wine-info apart at the same
+   proportions the donor decks use for their bottle image, rather than
+   fabricating a bottle photo or leaving a cramped, unbalanced panel */
+.wine-bottle {
+  flex: 1 1 auto; min-height: 0;
+}
+
+.wine-info {
+  flex: 0 0 auto;
+  padding-top: 18px; border-top: 1px solid var(--rule);
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
+}
+.info-text { flex: 1 1 auto; min-width: 0; }
+.w-name { font-size: 26px; font-weight: 300; color: var(--ink); line-height: 1.12; margin-bottom: 3px; }
+.w-producer { font-size: 14px; font-weight: 300; font-style: italic; color: var(--green); margin-bottom: 11px; }
+.w-meta { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+.w-ml {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink-light); min-width: 46px;
+}
+.w-mv { font-size: 13px; font-weight: 300; color: var(--ink-mid); }
+</style>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 1 · COVER
+     Image: assets/tastings/saumur-champigny/cover.jpg
+     "Scene on the Loire, near the Coteaux de Mauves", J. M. W. Turner,
+     c. 1830. Attribution supplied directly for this task, not
+     re-searched.
+     ───────────────────────────────────────────────────────── -->
+{% assign this_tasting = site.data.tastings | where: "slug", page.slug | first %}
+<div class="slide slide-cover active">
+  <div class="cover-content">
+    <div class="eyebrow">Wine Tasting · {{ this_tasting.date | date: "%-d %B %Y" }}</div>
+    <div class="cover-title">Saumur</div>
+    <div class="cover-subtitle">&amp; Champigny</div>
+    <div class="cover-rule"></div>
+    <div class="cover-meta">Four wines · Two colours · Two grapes</div>
+    <div class="cover-meta-gold">Sanzay · Ogereau · Roches Neuves · Clos Rougeard</div>
+  </div>
+  <div class="cover-credit">
+    <div class="cover-credit-title">Scene on the Loire, near the Coteaux de Mauves</div>
+    <div class="cover-credit-artist">J. M. W. Turner, c. 1830</div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 2 · LOIRE VALLEY MAP
+     Image: assets/tastings/saumur-champigny/map_loire.jpg
+     Copied from assets/tastings/muscadet/ (identical file, left in
+     place there), the same shared Loire Valley overview map used
+     across the Loire chapter's decks. No suitable Anjou-Saumur or
+     Saumur-Champigny specific map was found anywhere in the repo, so
+     this overview map also stands in as the wine-map background on
+     every wine slide below rather than a fabricated appellation map.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-map" style="position:relative;">
+  <img src="{{ site.baseurl }}/assets/tastings/saumur-champigny/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
+  <div class="map-label-center">Loire Valley · Overview</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 3 · WINE 1 · SAUMUR BRUT · DOMAINE DES SANZAY
+     No standalone Saumur appellation slide precedes this: no suitable
+     map or context asset for Saumur specifically was found, so that
+     context folds into this wine slide instead (same approach the
+     donor decks use when a sub-region lacks its own map).
+     Map: assets/tastings/saumur-champigny/map_loire.jpg (shared)
+     No bottle image or QR code: none exist yet for this wine.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/saumur-champigny/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
+    <div class="map-tag">Loire Valley · Overview</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">01 / 04</div>
+      <div class="w-appellation">Saumur AOC</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle"></div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Saumur Brut</div>
+        <div class="w-producer">Domaine des Sanzay</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">NV</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chenin Blanc</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 4 · WINE 2 · BLANC DE BLANCS · DOMAINE OGEREAU · 2022
+     Map: assets/tastings/saumur-champigny/map_loire.jpg (shared)
+     No bottle image or QR code: none exist yet for this wine.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/saumur-champigny/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
+    <div class="map-tag">Loire Valley · Overview</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">02 / 04</div>
+      <div class="w-appellation">Crémant de Loire AOC</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle"></div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Blanc de Blancs</div>
+        <div class="w-producer">Domaine Ogereau</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Chenin Blanc</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 5 · WINE 3 · CLOS DE L'ECHELIER · THIERRY GERMAIN / ROCHES NEUVES · 2017
+     No standalone Saumur-Champigny appellation slide precedes this,
+     for the same reason as slide 3: no suitable map or context asset
+     for Saumur-Champigny specifically was found, so the transition
+     into the reds folds into this wine slide instead.
+     Map: assets/tastings/saumur-champigny/map_loire.jpg (shared)
+     No bottle image or QR code: none exist yet for this wine.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/saumur-champigny/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
+    <div class="map-tag">Loire Valley · Overview</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">03 / 04</div>
+      <div class="w-appellation">Saumur-Champigny AOC</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle"></div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Clos de l'Echelier</div>
+        <div class="w-producer">Thierry Germain / Domaine des Roches Neuves</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2017</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Cabernet Franc</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 6 · WINE 4 · LE CLOS · CLOS ROUGEARD · 2020
+     Final slide in the deck, matching the no-closing-slide convention
+     used by gsm-across-regions, fiano-horizontal, chardonnay-across-
+     countries, northern-rhone-syrahs and northern-rhone-whites.
+     Map: assets/tastings/saumur-champigny/map_loire.jpg (shared)
+     No bottle image or QR code: none exist yet for this wine.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/saumur-champigny/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
+    <div class="map-tag">Loire Valley · Overview</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">04 / 04</div>
+      <div class="w-appellation">Saumur-Champigny AOC</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle"></div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Le Clos</div>
+        <div class="w-producer">Clos Rougeard</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2020</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Cabernet Franc</span></div>
+      </div>
+    </div>
+  </div>
+</div>
