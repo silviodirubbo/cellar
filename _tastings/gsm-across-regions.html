@@ -48,6 +48,20 @@ title: "GSM Across Regions"
   letter-spacing: .14em; text-transform: uppercase; color: rgba(253,252,250,.55);
 }
 .cover-meta-gold { font-size: 21px; font-weight: 500; }
+.cover-credit {
+  position: absolute; z-index: 1;
+  bottom: 20px; left: 24px;
+  text-align: left;
+}
+.cover-credit-title {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  font-style: italic; letter-spacing: .06em; color: rgba(253,252,250,.5);
+  margin-bottom: 2px;
+}
+.cover-credit-artist {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .1em; text-transform: uppercase; color: rgba(253,252,250,.38);
+}
 
 /* ── GRAPE/BLEND INTRO ──────────────────────────────── */
 .slide-intro {
@@ -160,7 +174,7 @@ title: "GSM Across Regions"
 .info-text { flex: 1 1 auto; min-width: 0; }
 .w-name { font-size: 26px; font-weight: 300; color: var(--ink); line-height: 1.12; margin-bottom: 3px; }
 .w-producer { font-size: 14px; font-weight: 300; font-style: italic; color: var(--green); margin-bottom: 11px; }
-.w-meta { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.w-meta { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
 .w-ml {
   font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
   letter-spacing: .14em; text-transform: uppercase; color: var(--ink-light); min-width: 46px;
@@ -175,102 +189,6 @@ title: "GSM Across Regions"
   text-align: center; line-height: 1.6;
 }
 
-/* ── PRODUCERS SLIDE ────────────────────────────────────
-   Structure mirrors _tastings/chateauneuf-du-pape-the-reds.html.
-   Kept deliberately short (eleven names, not eighteen) since it spans
-   three regions rather than one appellation, only producers whose
-   region and general style are well established are listed, no
-   invented cuvee names for the untasted ones, appellation only. */
-.slide-producers {
-  background: var(--warm-white);
-  flex-direction: column;
-  cursor: pointer;
-  padding-top: 96px;
-  padding-bottom: 96px;
-}
-
-.prod-top {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: row;
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-}
-
-.prod-left {
-  width: 200px;
-  flex: 0 0 200px;
-  border-right: 1px solid var(--rule);
-  padding: 20px 20px 18px 28px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.prod-eyebrow {
-  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
-  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light);
-  display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
-}
-.prod-eyebrow::after { content: ''; display: block; height: 1px; width: 20px; background: var(--rule); }
-
-.prod-title { font-size: 36px; font-weight: 300; line-height: 1.05; color: var(--ink); }
-.prod-title em { font-style: italic; color: var(--green); }
-
-.prod-disclaimer {
-  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 6.5px;
-  letter-spacing: .07em; color: var(--ink-light); line-height: 1.65;
-  padding-top: 8px; border-top: 1px solid var(--rule);
-  margin-top: 12px;
-}
-
-.prod-right {
-  flex: 1 1 auto;
-  padding: 12px 28px 10px 20px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0 32px;
-  align-content: start;
-}
-
-.prod-col { display: flex; flex-direction: column; }
-
-.prow {
-  display: flex; align-items: baseline;
-  padding: 2.5px 0;
-  border-bottom: 1px solid var(--rule);
-}
-.prow.first { border-top: 1px solid var(--rule); }
-
-.pname {
-  font-size: 10px; font-weight: 300; color: var(--ink);
-  display: flex; align-items: center; gap: 5px;
-  white-space: nowrap; flex-shrink: 0;
-}
-.pname.tasted { color: var(--green); font-style: italic; }
-
-.tdot {
-  width: 4px; height: 4px; border-radius: 50%;
-  background: var(--gold); flex-shrink: 0; display: inline-block;
-}
-
-.leader {
-  flex: 1 1 auto;
-  border-bottom: 1px dotted var(--rule);
-  margin: 0 5px; position: relative; top: -2px;
-}
-
-.cuvees {
-  font-family: 'DM Mono', monospace; font-size: 6.5px; font-weight: 300;
-  letter-spacing: .03em; color: var(--ink-light);
-  white-space: nowrap; text-align: right; flex-shrink: 0;
-}
-.csep { margin: 0 3px; opacity: 0.35; }
-
-.cv-hi {
-  color: var(--green); font-style: italic;
-  font-family: 'DM Mono', monospace; font-size: 6.5px; font-weight: 300;
-}
 </style>
 
 <!-- ─────────────────────────────────────────────────────────
@@ -278,7 +196,8 @@ title: "GSM Across Regions"
      Image: assets/tastings/gsm-across-regions/cover.jpg
      Jean Frederic Bazille, Etude pour une vendange, 1868, Musee Fabre,
      Montpelier. A vineyard study painted near Montpellier, in the
-     Languedoc, one of the three regions this tasting covers.
+     Languedoc, one of the three regions this tasting covers. Title
+     confirmed against the Musee Fabre's own collection record.
      ───────────────────────────────────────────────────────── -->
 {% assign this_tasting = site.data.tastings | where: "slug", page.slug | first %}
 <div class="slide slide-cover active">
@@ -289,6 +208,10 @@ title: "GSM Across Regions"
     <div class="cover-rule"></div>
     <div class="cover-meta">Three wines · Three regions · One grape trio</div>
     <div class="cover-meta-gold">Montcalmès · Le Clos des Fées · Beaucastel</div>
+  </div>
+  <div class="cover-credit">
+    <div class="cover-credit-title">Étude pour une vendange</div>
+    <div class="cover-credit-artist">Frédéric Bazille, 1868</div>
   </div>
 </div>
 
@@ -361,7 +284,6 @@ title: "GSM Across Regions"
         <div class="w-producer">Domaine de Montcalmès</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Syrah 60%, Mourvèdre 20%, Grenache 20%</span></div>
-        <div class="w-meta"><span class="w-ml">Terroir</span><span class="w-mv">High-altitude plateau, Languedoc's northern edge</span></div>
       </div>
       <div class="wine-qr">
         <img src="{{ site.baseurl }}/assets/tastings/gsm-across-regions/qr_montcalmes.png" alt="QR code for Domaine de Montcalmès" loading="lazy">
@@ -399,7 +321,6 @@ title: "GSM Across Regions"
         <div class="w-producer">Le Clos des Fées</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2021</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Grenache 25%, Syrah 25%, Mourvèdre 25%, Carignan 25%</span></div>
-        <div class="w-meta"><span class="w-ml">Terroir</span><span class="w-mv">Interior hills, inland Roussillon</span></div>
       </div>
       <div class="wine-qr">
         <img src="{{ site.baseurl }}/assets/tastings/gsm-across-regions/qr_clos-des-fees.png" alt="QR code for Le Clos des Fées" loading="lazy">
@@ -409,7 +330,21 @@ title: "GSM Across Regions"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 7 · SOUTHERN RHÔNE MAP
+     SLIDE 7 · RHÔNE VALLEY MAP (FULL)
+     Image: assets/tastings/gsm-across-regions/map_rhone_valley.png
+     Already present in this folder (copied alongside the other three
+     shared map files in an earlier session but left unused until now),
+     identical file to chateauneuf-du-pape-the-reds/map_rhone_valley.png,
+     shows north and south together, distinct from the southern-only
+     map on the following slide.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-map" style="position:relative;">
+  <img src="{{ site.baseurl }}/assets/tastings/gsm-across-regions/map_rhone_valley.png" alt="Rhône Valley · Overview" loading="lazy">
+  <div class="map-label-center">Rhône Valley · Overview</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 8 · SOUTHERN RHÔNE MAP
      Image: assets/tastings/gsm-across-regions/map_southern_rhone.png
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-map" style="position:relative;">
@@ -418,7 +353,14 @@ title: "GSM Across Regions"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 8 · WINE 3 · CHÂTEAU DE BEAUCASTEL · CHÂTEAUNEUF-DU-PAPE · 2020
+     SLIDE 9 · WINE 3 · CHÂTEAU DE BEAUCASTEL · CHÂTEAUNEUF-DU-PAPE · 2020
+     Final slide in the deck. The donor's own final slide is its
+     producers landscape slide (chateauneuf-du-pape-the-reds has no
+     other closing pattern), but several simpler decks in this repo
+     (fiano-horizontal, chardonnay-across-countries, northern-rhone-
+     syrahs, northern-rhone-whites) end directly on the last wine
+     slide with no closing slide at all, that plainer convention is
+     matched here instead of carrying the producers slide forward.
      Map:    assets/tastings/gsm-across-regions/map_chateauneuf.jpg
      Bottle: assets/tastings/gsm-across-regions/bottle_beaucastel.png
      QR:     assets/tastings/gsm-across-regions/qr_beaucastel.png
@@ -443,93 +385,10 @@ title: "GSM Across Regions"
         <div class="w-producer">Château de Beaucastel</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2020</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Grenache 30%, Mourvèdre 30%, Syrah 15%, Counoise 10%, other varieties 10%, Cinsault 5%</span></div>
-        <div class="w-meta"><span class="w-ml">Terroir</span><span class="w-mv">All permitted varieties, oldest vintage in the flight</span></div>
       </div>
       <div class="wine-qr">
         <img src="{{ site.baseurl }}/assets/tastings/gsm-across-regions/qr_beaucastel.png" alt="QR code for Château de Beaucastel" loading="lazy">
       </div>
     </div>
   </div>
-</div>
-
-<!-- ─────────────────────────────────────────────────────────
-     SLIDE 9 · PRODUCERS LANDSCAPE
-     No images needed. Structure mirrors the-reds deck's closing
-     slide. Kept to eleven well-established names across the three
-     regions rather than an exhaustive list, since this deck spans
-     three separate appellations, not one. Cuvees column carries the
-     region or appellation only for the untasted producers, no
-     invented cuvee names. Tasted-this-session marks (.tasted / .tdot
-     / .cv-hi) reserved for Montcalmès, Le Clos des Fées and Beaucastel.
-     ───────────────────────────────────────────────────────── -->
-<div class="slide slide-producers">
-
-  <div class="prod-top">
-    <div class="prod-left">
-      <div>
-        <div class="prod-eyebrow">Grenache · Syrah · Mourvèdre</div>
-        <div class="prod-title">The other<br><em>producers</em></div>
-      </div>
-      <div>
-        <div class="prod-disclaimer">
-          A partial and subjective list of producers working with
-          these three grapes across Languedoc, Roussillon and the
-          southern Rhône.
-        </div>
-      </div>
-    </div>
-
-    <div class="prod-right">
-      <div class="prod-col">
-        <div class="prow first">
-          <div class="pname">Mas Jullien</div><div class="leader"></div>
-          <div class="cuvees">Terrasses du Larzac</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Domaine d'Aupilhac</div><div class="leader"></div>
-          <div class="cuvees">Languedoc, Montpeyroux</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Grange des Pères</div><div class="leader"></div>
-          <div class="cuvees">Vin de Pays de l'Hérault</div>
-        </div>
-        <div class="prow">
-          <div class="pname tasted"><span class="tdot"></span>Domaine de Montcalmès</div><div class="leader"></div>
-          <div class="cuvees"><span class="cv-hi">Terrasses du Larzac</span></div>
-        </div>
-        <div class="prow">
-          <div class="pname">Domaine Gauby</div><div class="leader"></div>
-          <div class="cuvees">Côtes Catalanes</div>
-        </div>
-      </div>
-
-      <div class="prod-col">
-        <div class="prow first">
-          <div class="pname tasted"><span class="tdot"></span>Le Clos des Fées</div><div class="leader"></div>
-          <div class="cuvees"><span class="cv-hi">Côtes du Roussillon Villages</span></div>
-        </div>
-        <div class="prow">
-          <div class="pname">Matassa</div><div class="leader"></div>
-          <div class="cuvees">Côtes Catalanes</div>
-        </div>
-        <div class="prow">
-          <div class="pname tasted"><span class="tdot"></span>Château de Beaucastel</div><div class="leader"></div>
-          <div class="cuvees"><span class="cv-hi">Châteauneuf-du-Pape</span></div>
-        </div>
-        <div class="prow">
-          <div class="pname">Château Rayas</div><div class="leader"></div>
-          <div class="cuvees">Châteauneuf-du-Pape</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Domaine du Vieux Télégraphe</div><div class="leader"></div>
-          <div class="cuvees">Châteauneuf-du-Pape</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Clos des Papes</div><div class="leader"></div>
-          <div class="cuvees">Châteauneuf-du-Pape</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
 </div>
