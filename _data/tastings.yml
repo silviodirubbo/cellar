@@ -23,7 +23,9 @@
 #   cost_estimate:     string e.g. "32 CHF"
 #   featured:          true | false
 #   slides:            true once presentation is ready
-#   wines:             list of wines (for presentation slides)
+#   wines:             list of wines (for presentation slides); each wine may
+#                      include a url field, the producer page a QR code was
+#                      generated from
 # ─────────────────────────────────────────────────────────────
 
 - slug: southern-rhone-overview
@@ -763,17 +765,16 @@
   featured: false
   slides: true
 
-- slug: gsm-study
-  title: "One-Off: GSM Study"
+- slug: gsm-across-regions
+  title: "GSM Across Regions"
   date: 2026-11-08
   date_tbd: false
-  location: "TBD"
+  location: "Stefano's"
   region: "Languedoc-Roussillon & Southern Rhône"
   description: >
-    A one-off outside the current chapters, tracing Grenache-Syrah-Mourvèdre
-    blends beyond their home ground. Two blends from Languedoc and Roussillon,
-    then a return to the Rhône with a Châteauneuf-du-Pape as benchmark. Three
-    wines in total.
+    Grenache-Syrah-Mourvèdre blends traced across three regions, Languedoc,
+    Roussillon and the southern Rhône, closing on a Châteauneuf-du-Pape as
+    benchmark. Three wines in total.
   tags:
     - Grenache
     - Syrah
@@ -783,6 +784,8 @@
     - Châteauneuf-du-Pape
     - Rhône
     - France
+  chapter: grape-studies
+  chapter_order: 4
   status: upcoming
   featured: false
   wines:
@@ -791,13 +794,16 @@
       vintage: 2023
       appellation: "Languedoc AOC Terrasses du Larzac"
       blend: "Syrah 60%, Mourvèdre 20%, Grenache 20%"
+      url: "https://domainedemontcalmes.fr/les-vins/terrasses-du-larzac/"
     - name: "Côtes du Roussillon Villages"
       producer: "Le Clos des Fées"
       vintage: 2021
       appellation: "Côtes du Roussillon Villages AOC"
-      blend: "Grenache, Syrah, Carignan"
+      blend: "Grenache 25%, Syrah 25%, Mourvèdre 25%, Carignan 25%"
+      url: "https://www.closdesfees.com/en/wines/"
     - name: "Châteauneuf-du-Pape"
       producer: "Château de Beaucastel"
       vintage: 2020
       appellation: "Châteauneuf-du-Pape AOC"
-      blend: "Grenache, Mourvèdre, Syrah, and other permitted Châteauneuf-du-Pape varieties"
+      blend: "Grenache 30%, Mourvèdre 30%, Syrah 15%, Counoise 10%, Vaccarèse, Terret Noir, Muscardin, Clairette, Picpoul, Picardan, Bourboulenc and Roussanne (combined) 10%, Cinsault 5%"
+      url: "https://www.beaucastel.com/en/products/chateau-de-beaucastel-chateauneuf-du-pape-rouge-2023"
