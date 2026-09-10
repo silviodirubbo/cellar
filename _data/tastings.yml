@@ -319,6 +319,7 @@
   spots_total: 6
   cost_estimate: "32 CHF"
   featured: false
+  slides: true
   wines:
     - name: "Chamboureau"
       producer: "Domaine FL"
@@ -409,6 +410,7 @@
   spots_total: 6
   cost_estimate: "23 CHF"
   featured: false
+  slides: true
   wines:
     - name: "Clos du Bourg Sec"
       producer: "Domaine Huet"
@@ -456,6 +458,7 @@
   spots_total: 6
   cost_estimate: "20 CHF"
   featured: false
+  slides: true
   wines:
     - name: "Méthode Traditionnelle Extra Brut"
       producer: "Clos Naudin / Domaine Foreau"
@@ -500,6 +503,7 @@
   spots_total: 6
   cost_estimate: "42 CHF"
   featured: false
+  slides: true
   wines:
     - name: "Silex"
       producer: "Didier Dagueneau"
