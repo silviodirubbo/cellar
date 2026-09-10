@@ -364,6 +364,7 @@
   spots_total: 6
   cost_estimate: "38 CHF"
   featured: false
+  slides: true
   wines:
     - name: "Saumur Brut"
       producer: "Domaine des Sanzay"
