@@ -788,6 +788,7 @@
   chapter_order: 4
   status: upcoming
   featured: false
+  slides: true
   wines:
     - name: "Terrasses du Larzac"
       producer: "Domaine de Montcalmès"
