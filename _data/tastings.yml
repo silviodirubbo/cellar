@@ -763,15 +763,41 @@
   featured: false
   slides: true
 
-- slug: one-off-tbd
-  title: "One-Off: Track TBD"
+- slug: gsm-study
+  title: "One-Off: GSM Study"
   date: 2026-11-08
   date_tbd: false
   location: "TBD"
-  region: "TBD"
+  region: "Languedoc-Roussillon & Southern Rhône"
   description: >
-    A one-off slot outside the current curriculum. Theme and wines
-    are still to be decided.
-  tags: []
+    A one-off outside the current chapters, tracing Grenache-Syrah-Mourvèdre
+    blends beyond their home ground. Two blends from Languedoc and Roussillon,
+    then a return to the Rhône with a Châteauneuf-du-Pape as benchmark. Three
+    wines in total.
+  tags:
+    - Grenache
+    - Syrah
+    - Mourvèdre
+    - Languedoc
+    - Roussillon
+    - Châteauneuf-du-Pape
+    - Rhône
+    - France
   status: upcoming
   featured: false
+  wines:
+    - name: "Terrasses du Larzac"
+      producer: "Domaine de Montcalmès"
+      vintage: 2023
+      appellation: "Languedoc AOC Terrasses du Larzac"
+      blend: "Syrah 60%, Mourvèdre 20%, Grenache 20%"
+    - name: "Côtes du Roussillon Villages"
+      producer: "Le Clos des Fées"
+      vintage: 2021
+      appellation: "Côtes du Roussillon Villages AOC"
+      blend: "Grenache, Syrah, Carignan"
+    - name: "Châteauneuf-du-Pape"
+      producer: "Château de Beaucastel"
+      vintage: 2020
+      appellation: "Châteauneuf-du-Pape AOC"
+      blend: "Grenache, Mourvèdre, Syrah, and other permitted Châteauneuf-du-Pape varieties"
