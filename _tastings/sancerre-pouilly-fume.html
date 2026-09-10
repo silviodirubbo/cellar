@@ -1,0 +1,261 @@
+---
+layout: presentation
+title: "Sancerre & Pouilly-Fumé"
+---
+<style>
+:root {
+  --warm-white: #FDFCFA;
+  --off-white:  #F7F5F0;
+  --ink:        #1A1814;
+  --ink-mid:    #4A4640;
+  --ink-light:  #736E6B;
+  --green:      #2C4A3E;
+  --gold:       #8B6914;
+  --rule:       #E2DED8;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 1280px;
+  height: 720px;
+  display: none;
+}
+.slide.active { display: flex; }
+
+/* ── COVER ──────────────────────────────────────────── */
+/* No cover image exists yet for this deck (asset folder holds only
+   .gitkeep), so the background stays a plain --ink fill rather than
+   pointing url() at a file that does not exist. No .cover-credit
+   block either, since there is no image to credit. Swap in a
+   background-image and a credit block, matching every other deck's
+   pattern, once a cover is uploaded. */
+.slide-cover {
+  background: var(--ink);
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; cursor: pointer; position: relative;
+}
+.cover-content { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
+.eyebrow {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 23px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 36px;
+}
+.cover-title { font-size: 104px; font-weight: 300; line-height: 1; color: var(--warm-white); }
+.cover-subtitle { font-size: 28px; font-weight: 300; font-style: italic; color: var(--warm-white); margin-top: 12px; }
+.cover-rule { width: 40px; height: 1px; background: var(--gold); margin: 28px auto; }
+.cover-meta {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 21px;
+  letter-spacing: .14em; text-transform: uppercase; color: rgba(253,252,250,.55);
+}
+/* overrides the shared .cover-meta-gold from _layouts/presentation.html,
+   scoped to this deck only (this <style> block renders after the
+   layout's, so it wins for this page without touching other decks) */
+.cover-meta-gold { font-size: 21px; font-weight: 500; }
+
+/* ── MAP-ONLY SLIDE ─────────────────────────────────── */
+.slide-map {
+  background: var(--warm-white);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.slide-map img {
+  max-width: 100%; max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.map-label-center {
+  position: absolute;
+  bottom: 16px; left: 16px;
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
+  background: rgba(253,252,250,.9); padding: 5px 9px;
+}
+
+/* ── WINE SLIDE ─────────────────────────────────────── */
+.slide-wine { background: var(--warm-white); color: var(--ink); flex-direction: row; }
+
+.wine-map {
+  width: 853px; height: 720px; flex: 0 0 853px;
+  position: relative; overflow: hidden; background: var(--warm-white); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.wine-map img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+.map-tag {
+  position: absolute; bottom: 16px; left: 16px;
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
+  background: rgba(253,252,250,.9); padding: 5px 9px;
+}
+
+.wine-panel {
+  width: 427px; height: 720px; flex: 0 0 427px;
+  display: flex; flex-direction: column;
+  padding: 62px 35px 60px;
+  border-left: 1px solid var(--rule); background: var(--warm-white);
+}
+
+.panel-head { flex: 0 0 auto; }
+.w-counter {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 6px;
+}
+.w-appellation {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .13em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+}
+.w-hrule { width: 100%; height: 1px; background: var(--rule); }
+
+/* empty spacer: no bottle photos exist yet for these three wines, same
+   approach as saumur-champigny.html */
+.wine-bottle {
+  flex: 1 1 auto; min-height: 0;
+}
+
+.wine-info {
+  flex: 0 0 auto;
+  padding-top: 18px; border-top: 1px solid var(--rule);
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
+}
+.info-text { flex: 1 1 auto; min-width: 0; }
+.w-name { font-size: 26px; font-weight: 300; color: var(--ink); line-height: 1.12; margin-bottom: 3px; }
+.w-producer { font-size: 14px; font-weight: 300; font-style: italic; color: var(--green); margin-bottom: 11px; }
+.w-meta { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+.w-ml {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink-light); min-width: 46px;
+}
+.w-mv { font-size: 13px; font-weight: 300; color: var(--ink-mid); }
+</style>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 1 · COVER
+     No cover image has been uploaded yet for this deck (the asset
+     folder assets/tastings/sancerre-pouilly-fume/ holds only
+     .gitkeep), so this cover renders as a plain dark fill with no
+     background image and no credit legend, rather than referencing a
+     file that does not exist. Flagged for a future pass once a cover
+     painting is sourced and confirmed.
+     ───────────────────────────────────────────────────────── -->
+{% assign this_tasting = site.data.tastings | where: "slug", page.slug | first %}
+<div class="slide slide-cover active">
+  <div class="cover-content">
+    <div class="eyebrow">Wine Tasting · {{ this_tasting.date | date: "%-d %B %Y" }}</div>
+    <div class="cover-title">Sancerre</div>
+    <div class="cover-subtitle">&amp; Pouilly-Fumé</div>
+    <div class="cover-rule"></div>
+    <div class="cover-meta">Three wines · Two appellations · One grape</div>
+    <div class="cover-meta-gold">Dagueneau · Vacheron · Famille Bourgeois</div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 2 · LOIRE VALLEY MAP
+     Image: assets/tastings/sancerre-pouilly-fume/map_loire.jpg
+     Copied from assets/tastings/muscadet/ (identical file, left in
+     place there). No suitable Sancerre or Pouilly-Fumé specific map
+     was found anywhere in the repo, so this overview map also stands
+     in as the wine-map background on every wine slide below.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-map" style="position:relative;">
+  <img src="{{ site.baseurl }}/assets/tastings/sancerre-pouilly-fume/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
+  <div class="map-label-center">Loire Valley · Overview</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 3 · WINE 1 · SILEX · DIDIER DAGUENEAU · 2023
+     No standalone Pouilly-Fumé appellation slide precedes this: no
+     suitable map or context asset for Pouilly-Fumé specifically was
+     found, so that context folds into this wine slide instead.
+     Map: assets/tastings/sancerre-pouilly-fume/map_loire.jpg (shared)
+     No bottle image or QR code: none exist yet for this wine.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/sancerre-pouilly-fume/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
+    <div class="map-tag">Loire Valley · Overview</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">01 / 03</div>
+      <div class="w-appellation">Pouilly-Fumé AOC</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle"></div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Silex</div>
+        <div class="w-producer">Didier Dagueneau</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Sauvignon Blanc</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 4 · WINE 2 · LE PAVÉ · DOMAINE VACHERON · 2017
+     Crosses into Sancerre. No standalone Sancerre appellation slide
+     precedes this either, same reason as above.
+     Map: assets/tastings/sancerre-pouilly-fume/map_loire.jpg (shared)
+     No bottle image or QR code: none exist yet for this wine.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/sancerre-pouilly-fume/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
+    <div class="map-tag">Loire Valley · Overview</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">02 / 03</div>
+      <div class="w-appellation">Sancerre AOC</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle"></div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Le Pavé</div>
+        <div class="w-producer">Domaine Vacheron</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2017</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Sauvignon Blanc</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 5 · WINE 3 · ÉTIENNE HENRI · FAMILLE BOURGEOIS · 2013
+     Second Sancerre, six years older than wine 2, per the tasting's
+     own description. Final slide in the deck, matching the
+     no-closing-slide convention already used across the repo.
+     Map: assets/tastings/sancerre-pouilly-fume/map_loire.jpg (shared)
+     No bottle image or QR code: none exist yet for this wine.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/sancerre-pouilly-fume/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
+    <div class="map-tag">Loire Valley · Overview</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">03 / 03</div>
+      <div class="w-appellation">Sancerre AOC</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle"></div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Étienne Henri</div>
+        <div class="w-producer">Famille Bourgeois</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2013</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Sauvignon Blanc</span></div>
+      </div>
+    </div>
+  </div>
+</div>
