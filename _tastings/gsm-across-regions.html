@@ -24,12 +24,8 @@ title: "GSM Across Regions"
 .slide.active { display: flex; }
 
 /* ── COVER ──────────────────────────────────────────── */
-/* No cover.png exists in this tasting's asset folder (uploaded assets
-   were maps, bottles and QR codes only), so this slide uses a flat
-   ink background instead of the photographic cover the donor deck
-   uses, rather than inventing or borrowing an unrelated image. */
 .slide-cover {
-  background: var(--ink);
+  background: var(--ink) url('{{ site.baseurl }}/assets/tastings/gsm-across-regions/cover.jpg') center/cover no-repeat;
   flex-direction: column; align-items: center; justify-content: center;
   text-align: center; cursor: pointer; position: relative;
 }
@@ -279,8 +275,10 @@ title: "GSM Across Regions"
 
 <!-- ─────────────────────────────────────────────────────────
      SLIDE 1 · COVER
-     No cover.png in assets/tastings/gsm-across-regions/, flat ink
-     background used instead, see the .slide-cover comment above.
+     Image: assets/tastings/gsm-across-regions/cover.jpg
+     Jean Frederic Bazille, Etude pour une vendange, 1868, Musee Fabre,
+     Montpelier. A vineyard study painted near Montpellier, in the
+     Languedoc, one of the three regions this tasting covers.
      ───────────────────────────────────────────────────────── -->
 {% assign this_tasting = site.data.tastings | where: "slug", page.slug | first %}
 <div class="slide slide-cover active">
