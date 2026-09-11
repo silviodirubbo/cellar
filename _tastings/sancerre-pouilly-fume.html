@@ -24,16 +24,16 @@ title: "Sancerre & Pouilly-Fumé"
 .slide.active { display: flex; }
 
 /* ── COVER ──────────────────────────────────────────── */
-/* No cover image exists yet for this deck (asset folder holds only
-   .gitkeep), so the background stays a plain --ink fill rather than
-   pointing url() at a file that does not exist. No .cover-credit
-   block either, since there is no image to credit. Swap in a
-   background-image and a credit block, matching every other deck's
-   pattern, once a cover is uploaded. */
 .slide-cover {
-  background: var(--ink);
+  background: var(--ink) url('{{ site.baseurl }}/assets/tastings/sancerre-pouilly-fume/cover.jpg') center/cover no-repeat;
   flex-direction: column; align-items: center; justify-content: center;
   text-align: center; cursor: pointer; position: relative;
+}
+.slide-cover::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(26,24,20,.62);
+  z-index: 0;
 }
 .cover-content { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
 .eyebrow {
@@ -51,6 +51,30 @@ title: "Sancerre & Pouilly-Fumé"
    scoped to this deck only (this <style> block renders after the
    layout's, so it wins for this page without touching other decks) */
 .cover-meta-gold { font-size: 21px; font-weight: 500; }
+.cover-credit {
+  position: absolute; z-index: 1;
+  bottom: 20px; left: 24px;
+  text-align: left;
+}
+.cover-credit-title {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  font-style: italic; letter-spacing: .06em; color: rgba(253,252,250,.5);
+  margin-bottom: 2px;
+}
+.cover-credit-artist {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .1em; text-transform: uppercase; color: rgba(253,252,250,.38);
+}
+/* new for this deck: a short factual note beneath the credit, tying
+   the painting to the region. No other Loire deck's cover has a note
+   like this, so this class is introduced here rather than reusing
+   cover-credit-artist, kept smaller and softer so it reads as a
+   footnote to the credit rather than a second credit line. */
+.cover-credit-note {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 7px;
+  letter-spacing: .04em; color: rgba(253,252,250,.3);
+  margin-top: 5px; max-width: 230px; line-height: 1.5;
+}
 
 /* ── MAP-ONLY SLIDE ─────────────────────────────────── */
 .slide-map {
@@ -136,12 +160,14 @@ title: "Sancerre & Pouilly-Fumé"
 
 <!-- ─────────────────────────────────────────────────────────
      SLIDE 1 · COVER
-     No cover image has been uploaded yet for this deck (the asset
-     folder assets/tastings/sancerre-pouilly-fume/ holds only
-     .gitkeep), so this cover renders as a plain dark fill with no
-     background image and no credit legend, rather than referencing a
-     file that does not exist. Flagged for a future pass once a cover
-     painting is sourced and confirmed.
+     Image: assets/tastings/sancerre-pouilly-fume/cover.jpg
+     "La Fable", Berthe Morisot, 1883. Confirmed via the Flammarion
+     and Rey catalogue reference (cited in Cassone magazine) and
+     independently corroborated by USEUM's citation of the Wikimedia
+     Commons file the image itself is sourced from. Attribution
+     supplied directly for this task, not re-searched. Closes the gap
+     flagged at the end of the prior Loire chapter cleanup session,
+     when this deck had no cover image at all.
      ───────────────────────────────────────────────────────── -->
 {% assign this_tasting = site.data.tastings | where: "slug", page.slug | first %}
 <div class="slide slide-cover active">
@@ -152,6 +178,11 @@ title: "Sancerre & Pouilly-Fumé"
     <div class="cover-rule"></div>
     <div class="cover-meta">Three wines · Two appellations · One grape</div>
     <div class="cover-meta-gold">Dagueneau · Vacheron · Famille Bourgeois</div>
+  </div>
+  <div class="cover-credit">
+    <div class="cover-credit-title">La Fable</div>
+    <div class="cover-credit-artist">Berthe Morisot, 1883</div>
+    <div class="cover-credit-note">Morisot was born in Bourges, close to Sancerre.</div>
   </div>
 </div>
 
