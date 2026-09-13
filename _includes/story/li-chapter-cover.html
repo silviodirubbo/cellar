@@ -1,0 +1,32 @@
+{% comment %}
+  LinkedIn slide 4, square equivalent of story/chapter-cover.html.
+  Same front matter contract (chapter_slug, story_bg, title, intro,
+  closing); the tasting list renders as a two-column grid (see
+  .li-list in main.css) instead of a single-column timeline, to fit
+  a full chapter's worth of rows on a square canvas.
+{% endcomment %}
+{% assign items = site.data.tastings | where: "chapter", page.chapter_slug | sort: "chapter_order" %}
+{% assign chapter = site.chapters | where: "slug", page.chapter_slug | first %}
+<div class="story story--{{ page.story_bg }} story--sq">
+  <div class="story__inner">
+    {% include story/dots.html chapter=page.chapter_slug %}
+    <p class="story-eyebrow">{{ chapter.story_label | upcase }}</p>
+    <h1 class="story-title">{{ page.title }}</h1>
+    <p class="story-italic" style="margin-bottom: 32px;">{{ page.intro }}</p>
+    <div class="li-list">
+      {% for t in items %}
+        <div class="li-list__row">
+          <div class="li-list__marker">
+            <span class="li-list__dot{% unless t.status == 'past' %} li-list__dot--hollow{% endunless %}"></span>
+          </div>
+          <div>
+            <div class="li-list__title">{{ t.title }}</div>
+            <div class="li-list__date">{% if t.date_tbd %}Date TBD{% else %}{{ t.date | date: "%-d %b %Y" | upcase }}{% endif %}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <hr class="story-rule" style="margin-top: 26px;">
+    <p class="story-italic" style="font-size: 26px; margin: 0;">{{ page.closing }}</p>
+  </div>
+</div>

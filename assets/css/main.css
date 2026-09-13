@@ -1686,3 +1686,121 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 .story--dark .story-word,
 .story--green .story-word { color: var(--warm-white); }
 
+/* ============================================================
+   LINKEDIN STORIES: fixed 1080x1080 square export canvas
+   (_layouts/story.html li-* branches + _includes/story/li-*.html).
+   Same layer as the Instagram canvas above: same tokens, same
+   background modifiers (.story--dark/--green/--offwhite/etc), same
+   fonts. Only the .story--sq sizing below is new, re-flowed for a
+   canvas with a third of the vertical room but the same width, so
+   most of the compression is in vertical rhythm rather than type
+   scale. Exported via scripts/render-linkedin.js.
+   ============================================================ */
+
+.story--sq { width: 1080px; height: 1080px; }
+.story--sq .story__inner { padding: 84px 88px 76px; }
+
+.story--sq .story-dots { gap: 16px; margin-bottom: 40px; }
+.story--sq .story-dots__dot { width: 22px; height: 22px; border-width: 2px; }
+
+.story--sq .story-eyebrow { font-size: 21px; margin-bottom: 16px; }
+.story--sq .story-title { font-size: 56px; margin-bottom: 26px; }
+.story--sq .story-rule { margin: 0 0 26px; }
+.story--sq .story-italic { font-size: 28px; line-height: 1.45; }
+.story--sq .story-lede { font-size: 32px; line-height: 1.5; }
+.story--sq .story-body { font-size: 30px; line-height: 1.5; }
+
+.story--sq .story-linkbar { padding: 22px 24px; gap: 14px; }
+.story--sq .story-linkbar__url { font-size: 22px; }
+.story--sq .story-linkbar__tap { width: 44px; height: 44px; font-size: 24px; }
+
+/* Wordmark slide (li-wordmark.html): the word itself is sized inline
+   per-slide (same convention as story/wordmark.html), everything else
+   comes from the .story--sq rules above. */
+.story--sq .story-word--wordmark {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 190px;
+  line-height: 1;
+  color: rgba(253,252,250,0.42);
+  margin: 0 0 40px;
+}
+
+/* Chapter-cover / tasting-reveal list, compact two-column grid instead
+   of the single-column timeline list used on the tall canvas: eight
+   rows of title+date don't fit one column at a legible size on a
+   square, but four rows of two do. New classes rather than reusing
+   .story-list, since that include's ::before rail is drawn for a
+   single vertical run and would sit oddly split across two columns. */
+.li-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 40px;
+  row-gap: 22px;
+  flex: 1 1 auto;
+  align-content: center;
+}
+.li-list__row { display: flex; align-items: flex-start; gap: 16px; }
+.li-list__marker { flex: 0 0 auto; margin-top: 6px; }
+.li-list__dot { display: block; width: 16px; height: 16px; border-radius: 50%; background: var(--warm-white); }
+.li-list__dot--hollow { background: transparent; border: 2px solid rgba(253,252,250,0.55); box-sizing: border-box; }
+.li-list__title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.25;
+  color: var(--warm-white);
+}
+.li-list__date {
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(253,252,250,0.5);
+  margin-top: 4px;
+}
+.story--offwhite .li-list__title { color: var(--ink); }
+.story--offwhite .li-list__date  { color: var(--ink-light); }
+.story--offwhite .li-list__dot   { background: var(--green); }
+.story--offwhite .li-list__dot--hollow { background: transparent; border-color: var(--ink-light); }
+
+/* Tasting-reveal wine list, compact 2x2 grid (same reasoning as
+   .li-list above: four stacked rows at readable size don't fit a
+   square canvas alongside eyebrow/title/intro, a 2x2 grid does). */
+.li-winelist {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 36px;
+  row-gap: 28px;
+  flex: 1 1 auto;
+  align-content: center;
+}
+.li-wine { display: flex; align-items: center; gap: 18px; }
+.li-wine .story-bottle { width: 30px; height: 84px; }
+.li-wine__name {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.story--dark .li-wine__name,
+.story--green .li-wine__name,
+.story--magenta .li-wine__name,
+.story--blue .li-wine__name { color: var(--warm-white); }
+.li-wine__meta {
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-top: 5px;
+}
+.story--dark .li-wine__meta,
+.story--green .li-wine__meta,
+.story--magenta .li-wine__meta,
+.story--blue .li-wine__meta { color: rgba(253,252,250,0.5); }
+

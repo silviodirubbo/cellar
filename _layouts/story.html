@@ -27,6 +27,16 @@
     {% include story/section-cover.html %}
   {% elsif page.story_type == "spots-left" %}
     {% include story/spots-left.html %}
+  {% elsif page.story_type == "li-wordmark" %}
+    {% include story/li-wordmark.html %}
+  {% elsif page.story_type == "li-what-it-is" %}
+    {% include story/li-what-it-is.html %}
+  {% elsif page.story_type == "li-how-it-works" %}
+    {% include story/li-how-it-works.html %}
+  {% elsif page.story_type == "li-chapter-cover" %}
+    {% include story/li-chapter-cover.html %}
+  {% elsif page.story_type == "li-tasting-reveal" %}
+    {% include story/li-tasting-reveal.html %}
   {% endif %}
 </body>
 </html>
