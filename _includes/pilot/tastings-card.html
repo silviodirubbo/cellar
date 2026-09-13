@@ -1,0 +1,60 @@
+{% comment %}
+  Pilot social card, refresh of assets/Pilot/slide-5-tastings.png.
+  Reuses the live tl-card--feature markup and the same next-tasting
+  Liquid as tastings/index.html (including the js-countdown span,
+  populated by the site's own assets/js/main.js), so wines, date,
+  spots, cost and the day count stay accurate. Header eyebrow/title
+  and the dateline are bespoke copy for this card (page.dateline,
+  set in front matter), not lifted verbatim from the live page header.
+{% endcomment %}
+{% assign next = site.data.tastings | where: "status", "upcoming" | where: "date_tbd", false | sort: "date" | first %}
+{% assign chapter_obj = nil %}
+{% if next.chapter %}{% assign chapter_obj = site.chapters | where: "slug", next.chapter | first %}{% endif %}
+{% capture cover_prefix %}/assets/tastings/{{ next.slug }}/cover{% endcapture %}
+{% assign cover = site.static_files | where_exp: "f", "f.path contains cover_prefix" | first %}
+<div class="pilot pilot--offwhite">
+  <div class="pilot__inner">
+    <p class="pilot-eyebrow">THE CALENDAR</p>
+    <h1 class="pilot-title">Tastings</h1>
+    <p class="pilot-dateline">{{ page.dateline }}</p>
+    <div class="pilot-feature-wrap">
+      <div class="tl-card tl-card--feature pilot-feature" style="{% if chapter_obj %}--chapter-accent: {{ chapter_obj.color }};{% endif %}{% if cover %}background-image: url('{{ cover.path | relative_url }}');{% endif %}">
+        <div class="tl-card__body">
+          <span class="tl-card__flag">Next tasting<span class="js-countdown" data-date="{{ next.date }}"></span></span>
+          {% if chapter_obj %}<span class="chapter-tag">{{ chapter_obj.title }}</span>{% endif %}
+          <h2 class="tl-card__title">{{ next.title }}</h2>
+          <div class="tl-card__where">
+            {{ next.region }}{% if next.location %} &middot; {{ next.location }}{% endif %}{% if next.spots_total %} &middot; <span class="text-gold">{{ next.spots_total }} spots</span>{% endif %}{% if next.cost_estimate %} &middot; ~{{ next.cost_estimate }}{% endif %}
+          </div>
+          <p class="tl-card__desc">{{ next.description }}</p>
+          {% if next.wines %}
+          <div class="tl-card__menu">
+            <span class="wine-menu__label">On the table</span>
+            <ol class="wine-menu wine-menu--dark">
+              {% for wine in next.wines %}
+              <li class="wine-line">
+                <span class="wine-line__main">
+                  <span class="wine-line__name">{{ wine.producer }} &middot; <em>{{ wine.name }}</em></span>
+                  <span class="wine-line__dots" aria-hidden="true"></span>
+                  <span class="wine-line__vintage">{{ wine.vintage }}</span>
+                </span>
+                <span class="wine-line__detail">{{ wine.appellation }}{% if wine.blend %} &middot; {{ wine.blend }}{% endif %}</span>
+              </li>
+              {% endfor %}
+            </ol>
+          </div>
+          {% endif %}
+          <div class="tl-card__foot">
+            <span class="btn btn--hero">I'm coming</span>
+            <span class="btn btn--text-light">Add to calendar</span>
+            {% if next.slides %}<span class="btn btn--text-light">Presentation &rarr;</span>{% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pilot-footer">
+      <span class="pilot-footer__cta">See what's coming next</span>
+      <span class="pilot-footer__url">silviodirubbo.github.io/cellar</span>
+    </div>
+  </div>
+</div>

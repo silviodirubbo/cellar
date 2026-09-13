@@ -1,0 +1,39 @@
+{% comment %}
+  Pilot social card, refresh of assets/Pilot/slide-4-chapters.png.
+  Reuses the live chapters-row/chapter-progress markup and the same
+  held/total Liquid as chapters/index.html, so the numbers stay
+  accurate. Header eyebrow/title and the closing line are bespoke
+  copy for this card, not lifted verbatim from the live page (which
+  also carries a longer subtitle paragraph this card omits).
+{% endcomment %}
+{% assign chapters = site.chapters | sort: "order" %}
+<div class="pilot pilot--offwhite">
+  <div class="pilot__inner">
+    <p class="pilot-eyebrow">THE CURRICULUM</p>
+    <h1 class="pilot-title">Chapters</h1>
+    <hr class="pilot-rule">
+    <div class="pilot-chapters">
+      {% for chapter in chapters %}
+        {% assign items = site.data.tastings | where: "chapter", chapter.slug %}
+        {% assign held = items | where: "status", "past" | size %}
+        {% assign total = items.size %}
+        {% if chapter.planned_total and chapter.planned_total > total %}
+          {% assign total = chapter.planned_total %}
+        {% endif %}
+        <div class="chapters-row{% if chapter.state == "ongoing" %} chapters-row--feature{% endif %}" style="--chapter-accent: {{ chapter.color }};">
+          <span class="chapters-row__numeral" aria-hidden="true">{{ chapter.numeral }}</span>
+          <span class="chapters-row__body">
+            <span class="chapters-row__title">{{ chapter.title }}</span>
+            <span class="chapters-row__state">{{ chapter.state | capitalize }}</span>
+            <span class="chapters-row__blurb">{{ chapter.blurb }}</span>
+            {% include chapter-progress.html held=held total=total %}
+          </span>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="pilot-footer">
+      <span class="pilot-footer__cta">See the full curriculum</span>
+      <span class="pilot-footer__url">silviodirubbo.github.io/cellar</span>
+    </div>
+  </div>
+</div>

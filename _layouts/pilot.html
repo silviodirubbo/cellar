@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ page.title }} &middot; Cellar Pilot Card</title>
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  <style>
+    html, body { margin: 0; padding: 0; background: var(--off-white); }
+  </style>
+</head>
+<body>
+  {% if page.pilot_type == "chapters" %}
+    {% include pilot/chapters-card.html %}
+  {% elsif page.pilot_type == "tastings" %}
+    {% include pilot/tastings-card.html %}
+  {% endif %}
+  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>
