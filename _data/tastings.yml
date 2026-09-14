@@ -191,12 +191,12 @@
       producer: "Domaine du Vieux Télégraphe"
       vintage: 2021
       appellation: "Châteauneuf-du-Pape AOC"
-      blend: "Grenache Blanc, Clairette, Roussanne"
+      blend: "Grenache Blanc 30%, Clairette 35%, Roussanne 35%"
     - name: "Châteauneuf-du-Pape Blanc"
       producer: "Clos des Papes"
       vintage: 2021
       appellation: "Châteauneuf-du-Pape AOC"
-      blend: "Grenache Blanc, Roussanne, Clairette, Bourboulenc"
+      blend: "Grenache Blanc, Clairette, Roussanne, Picpoul, Bourboulenc, Picardan (16.6% each)"
     - name: "Châteauneuf-du-Pape Blanc"
       producer: "Famille Isabel Ferrando"
       vintage: 2021
@@ -206,7 +206,7 @@
       producer: "Clos des Papes"
       vintage: 2014
       appellation: "Châteauneuf-du-Pape AOC"
-      blend: "Grenache Blanc, Roussanne, Clairette, Bourboulenc"
+      blend: "Grenache Blanc, Clairette, Roussanne, Picpoul, Bourboulenc, Picardan (16.6% each)"
 
 - slug: chateauneuf-du-pape-the-reds
   title: "Châteauneuf-du-Pape: The Reds"
