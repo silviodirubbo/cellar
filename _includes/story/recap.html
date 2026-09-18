@@ -1,0 +1,44 @@
+{% comment %}
+  Post-tasting recap card: a thank-you/wrap-up slide for a tasting that
+  has already happened, distinct from tasting-reveal (which announces a
+  tasting ahead of its date). Same eyebrow/title/winelist structure and
+  data-pulling pattern as tasting-reveal.html, just past-tense framing.
+  Page front matter: tasting_slug, number ("01".."07", omit for a
+  chapterless one-off), story_bg (green|offwhite), intro, wine_types
+  (array, same order/length as the tasting's wines, each red|white),
+  closing, dots_chapter (optional override, see story/dots.html),
+  texture_image + texture_opacity (optional, see story/dots.html and
+  tasting-reveal.html for the same mechanism).
+  If the tasting has no chapter (site.chapters where: "slug" finds
+  none), the eyebrow drops the number and chapter label for a plain
+  "ONE-OFF" tag instead, same rule as tasting-reveal.html.
+{% endcomment %}
+{% assign tasting = site.data.tastings | where: "slug", page.tasting_slug | first %}
+{% assign chapter = nil %}
+{% if tasting.chapter %}{% assign chapter = site.chapters | where: "slug", tasting.chapter | first %}{% endif %}
+<div class="story story--{{ page.story_bg }}">
+  {% if page.texture_image %}
+    <div class="story-texture" style="background-image: url('{{ page.texture_image | relative_url }}'); opacity: {{ page.texture_opacity | default: 0.16 }};" aria-hidden="true"></div>
+  {% endif %}
+  <div class="story__inner">
+    {% include story/dots.html chapter=tasting.chapter %}
+    <p class="story-eyebrow">{% if chapter %}TASTING {{ page.number }} &middot; {{ chapter.story_label | upcase }}{% else %}ONE-OFF{% endif %} &middot; {{ tasting.date | date: "%-d %b %Y" | upcase }}</p>
+    <h1 class="story-title">{{ tasting.title }}</h1>
+    <p class="story-italic" style="margin-bottom: 56px;">{{ page.intro }}</p>
+    <div class="story-winelist">
+      {% for wine in tasting.wines %}
+        {% assign wtype = page.wine_types[forloop.index0] %}
+        {% assign appel = wine.appellation | remove: " DOCG" | remove: " AOC" | remove: " DOC" %}
+        <div class="story-wine">
+          {% include story/bottle.html type=wtype %}
+          <div>
+            <div class="story-wine__name">{{ wine.name }}</div>
+            <div class="story-wine__meta">{{ wine.producer | upcase }} &middot; {{ wine.vintage }} &middot; {{ appel | upcase }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <hr class="story-rule" style="margin-top: 8px; margin-bottom: 32px;">
+    <p class="story-italic" style="font-size: 38px;">{{ page.closing }}</p>
+  </div>
+</div>
