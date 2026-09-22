@@ -197,105 +197,6 @@ title: "Châteauneuf-du-Pape: The Reds"
   text-align: center; line-height: 1.6;
 }
 
-/* ── PRODUCERS SLIDE ────────────────────────────────────
-   Structure mirrors _tastings/chateauneuf-du-pape-the-whites.html.
-   No vintage chart: Wine Spectator's own vintage card only publishes a
-   composite "Rhône / Southern" score spanning several appellations,
-   not a Châteauneuf-du-Pape-specific breakout, and the specialist CDP
-   critic sources found (Wine Cellar Insider, Sommo) were reachable only
-   as fragmentary search snippets, not a complete verifiable year-by-year
-   series, so the chart is omitted rather than filled in with guesses,
-   same call made on the Whites deck. */
-.slide-producers {
-  background: var(--warm-white);
-  flex-direction: column;
-  cursor: pointer;
-  padding-top: 96px;
-  padding-bottom: 96px;
-}
-
-.prod-top {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: row;
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-}
-
-.prod-left {
-  width: 200px;
-  flex: 0 0 200px;
-  border-right: 1px solid var(--rule);
-  padding: 20px 20px 18px 28px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.prod-eyebrow {
-  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
-  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light);
-  display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
-}
-.prod-eyebrow::after { content: ''; display: block; height: 1px; width: 20px; background: var(--rule); }
-
-.prod-title { font-size: 36px; font-weight: 300; line-height: 1.05; color: var(--ink); }
-.prod-title em { font-style: italic; color: var(--green); }
-
-.prod-disclaimer {
-  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 6.5px;
-  letter-spacing: .07em; color: var(--ink-light); line-height: 1.65;
-  padding-top: 8px; border-top: 1px solid var(--rule);
-  margin-top: 12px;
-}
-
-.prod-right {
-  flex: 1 1 auto;
-  padding: 12px 28px 10px 20px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0 32px;
-  align-content: start;
-}
-
-.prod-col { display: flex; flex-direction: column; }
-
-.prow {
-  display: flex; align-items: baseline;
-  padding: 2.5px 0;
-  border-bottom: 1px solid var(--rule);
-}
-.prow.first { border-top: 1px solid var(--rule); }
-
-.pname {
-  font-size: 10px; font-weight: 300; color: var(--ink);
-  display: flex; align-items: center; gap: 5px;
-  white-space: nowrap; flex-shrink: 0;
-}
-.pname.tasted { color: var(--green); font-style: italic; }
-
-.tdot {
-  width: 4px; height: 4px; border-radius: 50%;
-  background: var(--gold); flex-shrink: 0; display: inline-block;
-}
-
-.leader {
-  flex: 1 1 auto;
-  border-bottom: 1px dotted var(--rule);
-  margin: 0 5px; position: relative; top: -2px;
-}
-
-.cuvees {
-  font-family: 'DM Mono', monospace; font-size: 6.5px; font-weight: 300;
-  letter-spacing: .03em; color: var(--ink-light);
-  white-space: nowrap; text-align: right; flex-shrink: 0;
-}
-.csep { margin: 0 3px; opacity: 0.35; }
-
-.cv-hi {
-  color: var(--green); font-style: italic;
-  font-family: 'DM Mono', monospace; font-size: 6.5px; font-weight: 300;
-}
 </style>
 
 <!-- ─────────────────────────────────────────────────────────
@@ -394,7 +295,7 @@ title: "Châteauneuf-du-Pape: The Reds"
         <div class="w-producer">Domaine du Vieux Télégraphe</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Grenache 65%, Mourvèdre 15%, Syrah 15%, Cinsault 5%</span></div>
-        <div class="w-meta"><span class="w-ml">Terroir</span><span class="w-mv">Single plateau, La Crau</span></div>
+        <div class="w-meta"><span class="w-ml">Lieu-Dit</span><span class="w-mv">La Crau · Galets roulés over clay</span></div>
       </div>
       <div class="wine-qr">
         <img src="{{ site.baseurl }}/assets/tastings/chateauneuf-du-pape-the-reds/qr_vieux-telegraphe.png" alt="QR code for Domaine du Vieux Télégraphe" loading="lazy">
@@ -429,7 +330,7 @@ title: "Châteauneuf-du-Pape: The Reds"
         <div class="w-producer">Clos des Papes</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2021</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Grenache 65%, Mourvèdre 20%, Syrah 10%, autres 5%</span></div>
-        <div class="w-meta"><span class="w-ml">Terroir</span><span class="w-mv">Multi-plot, about 24 parcels</span></div>
+        <div class="w-meta"><span class="w-ml">Lieu-Dit</span><span class="w-mv">24 parcels, multiple lieux-dits · Galets roulés, sand &amp; clay-limestone</span></div>
       </div>
       <div class="wine-qr">
         <img src="{{ site.baseurl }}/assets/tastings/chateauneuf-du-pape-the-reds/qr_clos-des-papes.png" alt="QR code for Clos des Papes" loading="lazy">
@@ -464,117 +365,11 @@ title: "Châteauneuf-du-Pape: The Reds"
         <div class="w-producer">Château de Beaucastel</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2017</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Grenache 30%, Mourvèdre 30%, Syrah 10%, Counoise 10%, autres 20%</span></div>
-        <div class="w-meta"><span class="w-ml">Terroir</span><span class="w-mv">All 13 varieties, oldest vintage in the flight</span></div>
+        <div class="w-meta"><span class="w-ml">Lieu-Dit</span><span class="w-mv">Chapouin · Galets roulés over clay, sand &amp; limestone</span></div>
       </div>
       <div class="wine-qr">
         <img src="{{ site.baseurl }}/assets/tastings/chateauneuf-du-pape-the-reds/qr_beaucastel.png" alt="QR code for Château de Beaucastel" loading="lazy">
       </div>
     </div>
   </div>
-</div>
-
-<!-- ─────────────────────────────────────────────────────────
-     SLIDE 9 · PRODUCERS LANDSCAPE
-     No images needed. No vintage chart: see note on .slide-producers
-     above. Tasted-this-session marks (.tasted / .tdot / .cv-hi) are
-     reserved for Vieux Télégraphe, Clos des Papes and Château de
-     Beaucastel.
-     ───────────────────────────────────────────────────────── -->
-<div class="slide slide-producers">
-
-  <div class="prod-top">
-    <div class="prod-left">
-      <div>
-        <div class="prod-eyebrow">Châteauneuf-du-Pape</div>
-        <div class="prod-title">The red<br><em>producers</em></div>
-      </div>
-      <div>
-        <div class="prod-disclaimer">
-          A partial and subjective list aimed at providing
-          a broad framework of the appellation's red producers.
-        </div>
-      </div>
-    </div>
-
-    <div class="prod-right">
-      <div class="prod-col">
-        <div class="prow first">
-          <div class="pname">Bois de Boursan</div><div class="leader"></div>
-          <div class="cuvees">Châteauneuf-du-Pape</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Bosquet des Papes</div><div class="leader"></div>
-          <div class="cuvees">Châteauneuf-du-Pape</div>
-        </div>
-        <div class="prow">
-          <div class="pname tasted"><span class="tdot"></span>Château de Beaucastel</div><div class="leader"></div>
-          <div class="cuvees"><span class="cv-hi">Châteauneuf-du-Pape</span></div>
-        </div>
-        <div class="prow">
-          <div class="pname">Château de Nalys</div><div class="leader"></div>
-          <div class="cuvees">Châteauneuf-du-Pape</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Château Fortia</div><div class="leader"></div>
-          <div class="cuvees">Châteauneuf-du-Pape</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Château La Nerthe</div><div class="leader"></div>
-          <div class="cuvees">Châteauneuf-du-Pape</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Château Rayas</div><div class="leader"></div>
-          <div class="cuvees">Châteauneuf-du-Pape</div>
-        </div>
-        <div class="prow">
-          <div class="pname tasted"><span class="tdot"></span>Clos des Papes</div><div class="leader"></div>
-          <div class="cuvees"><span class="cv-hi">Châteauneuf-du-Pape</span></div>
-        </div>
-        <div class="prow">
-          <div class="pname">Clos Saint-Jean</div><div class="leader"></div>
-          <div class="cuvees">Sanctus Sanctorum</div>
-        </div>
-      </div>
-
-      <div class="prod-col">
-        <div class="prow first">
-          <div class="pname">Domaine Charvin</div><div class="leader"></div>
-          <div class="cuvees">Châteauneuf-du-Pape</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Domaine de Beaurenard</div><div class="leader"></div>
-          <div class="cuvees">Boisrenard</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Domaine des Marcoux</div><div class="leader"></div>
-          <div class="cuvees">Vieilles Vignes</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Domaine du Pegau</div><div class="leader"></div>
-          <div class="cuvees">Cuvée Réservée</div>
-        </div>
-        <div class="prow">
-          <div class="pname tasted"><span class="tdot"></span>Domaine du Vieux Télégraphe</div><div class="leader"></div>
-          <div class="cuvees"><span class="cv-hi">La Crau</span></div>
-        </div>
-        <div class="prow">
-          <div class="pname">Domaine Pierre Usseglio</div><div class="leader"></div>
-          <div class="cuvees">Mon Aïeul</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Domaine Raymond Usseglio</div><div class="leader"></div>
-          <div class="cuvees">Impériale</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Les Cailloux (André Brunel)</div><div class="leader"></div>
-          <div class="cuvees">Châteauneuf-du-Pape</div>
-        </div>
-        <div class="prow">
-          <div class="pname">Vieux Donjon</div><div class="leader"></div>
-          <div class="cuvees">Châteauneuf-du-Pape</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
 </div>
