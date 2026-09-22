@@ -118,6 +118,10 @@ title: "Châteauneuf-du-Pape: The Reds"
   object-fit: contain;
   display: block;
 }
+.slide-map svg {
+  max-width: 100%; max-height: 100%;
+  display: block;
+}
 .map-label-center {
   position: absolute;
   bottom: 16px; left: 16px;
@@ -259,7 +263,68 @@ title: "Châteauneuf-du-Pape: The Reds"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 5 · SOUTHERN RHÔNE MAP
+     SLIDE 5 · CÔTES-DU-RHÔNE APPELLATION HIERARCHY
+     Inline SVG, no external image file. Concentric rings from
+     peripheral appellations down to crus, on the same slide-map
+     treatment as the surrounding map slides.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-map" style="position:relative;">
+  <svg width="100%" viewBox="0 0 680 640" role="img" aria-label="Côtes-du-Rhône appellation hierarchy">
+  <style>
+    text { font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.14em; }
+    .ring-label { font-size: 10px; }
+    .center-label { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px; letter-spacing: 0.02em; text-transform: none; }
+  </style>
+
+  <defs>
+    <path id="ringPeripheral" d="M 105,300 A 195,195 0 0 1 495,300" fill="none"/>
+    <path id="ringCDR"        d="M 143,300 A 157,157 0 0 1 457,300" fill="none"/>
+    <path id="ringVillUn"     d="M 189,300 A 111,111 0 0 1 411,300" fill="none"/>
+    <path id="ringVillNa"     d="M 232,300 A 68,68   0 0 1 368,300" fill="none"/>
+    <path id="ringCrus"       d="M 268,300 A 32,32   0 0 1 332,300" fill="none"/>
+  </defs>
+
+  <circle cx="300" cy="300" r="216" fill="#8A8480"/>
+  <circle cx="300" cy="300" r="174" fill="#FDFCFA"/>
+  <circle cx="300" cy="300" r="132" fill="#F7F5F0"/>
+  <circle cx="300" cy="300" r="90"  fill="#8B6914"/>
+  <circle cx="300" cy="300" r="46"  fill="#2C4A3E"/>
+  <circle cx="300" cy="300" r="17"  fill="#1A1814"/>
+
+  <circle cx="300" cy="300" r="216" fill="none" stroke="#1A1814" stroke-width="0.5"/>
+  <circle cx="300" cy="300" r="174" fill="none" stroke="#E2DED8" stroke-width="0.5"/>
+  <circle cx="300" cy="300" r="132" fill="none" stroke="#E2DED8" stroke-width="0.5"/>
+  <circle cx="300" cy="300" r="90"  fill="none" stroke="#1A1814" stroke-width="0.5"/>
+  <circle cx="300" cy="300" r="46"  fill="none" stroke="#1A1814" stroke-width="0.5"/>
+  <circle cx="300" cy="300" r="17"  fill="none" stroke="#1A1814" stroke-width="0.5"/>
+
+  <text class="ring-label" fill="#FDFCFA">
+    <textPath href="#ringPeripheral" startOffset="50%" text-anchor="middle">Peripheral appellations</textPath>
+  </text>
+
+  <text class="ring-label" fill="#4A4640">
+    <textPath href="#ringCDR" startOffset="50%" text-anchor="middle">Côtes-du-Rhône</textPath>
+  </text>
+
+  <text class="ring-label" fill="#4A4640">
+    <textPath href="#ringVillUn" startOffset="50%" text-anchor="middle">Côtes-du-Rhône Villages</textPath>
+  </text>
+
+  <text class="ring-label" fill="#FDFCFA">
+    <textPath href="#ringVillNa" startOffset="50%" text-anchor="middle">Villages, named</textPath>
+  </text>
+
+  <text class="ring-label" fill="#F7F5F0">
+    <textPath href="#ringCrus" startOffset="50%" text-anchor="middle">Crus</textPath>
+  </text>
+
+  <text class="center-label" x="300" y="304" text-anchor="middle" fill="#F7F5F0">LD</text>
+  </svg>
+  <div class="map-label-center">Côtes-du-Rhône · Appellation Hierarchy</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 6 · SOUTHERN RHÔNE MAP
      Image: assets/tastings/chateauneuf-du-pape-the-reds/map_southern_rhone.png
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-map" style="position:relative;">
@@ -268,7 +333,7 @@ title: "Châteauneuf-du-Pape: The Reds"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 6 · WINE 1 · VIEUX TÉLÉGRAPHE · LA CRAU · 2023
+     SLIDE 7 · WINE 1 · VIEUX TÉLÉGRAPHE · LA CRAU · 2023
      Map:    assets/tastings/chateauneuf-du-pape-the-reds/map_chateauneuf.jpg
              (shared appellation map, same pattern as the Whites deck:
              no per-producer zoomed maps are available)
@@ -305,7 +370,7 @@ title: "Châteauneuf-du-Pape: The Reds"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 7 · WINE 2 · CLOS DES PAPES · 2021
+     SLIDE 8 · WINE 2 · CLOS DES PAPES · 2021
      Map:    assets/tastings/chateauneuf-du-pape-the-reds/map_chateauneuf.jpg (shared)
      Bottle: assets/tastings/chateauneuf-du-pape-the-reds/bottle_clos-des-papes.png
      QR:     assets/tastings/chateauneuf-du-pape-the-reds/qr_clos-des-papes.png
@@ -340,7 +405,7 @@ title: "Châteauneuf-du-Pape: The Reds"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 8 · WINE 3 · CHÂTEAU DE BEAUCASTEL · 2017
+     SLIDE 9 · WINE 3 · CHÂTEAU DE BEAUCASTEL · 2017
      Map:    assets/tastings/chateauneuf-du-pape-the-reds/map_chateauneuf.jpg (shared)
      Bottle: assets/tastings/chateauneuf-du-pape-the-reds/bottle_beaucastel.png
      QR:     assets/tastings/chateauneuf-du-pape-the-reds/qr_beaucastel.png
