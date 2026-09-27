@@ -14,6 +14,7 @@ exclude:
   - Gemfile.lock
   - scripts
   - README.md
+  - assets/social
 # Collections
 collections:
   tastings:
