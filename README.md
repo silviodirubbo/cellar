@@ -22,7 +22,7 @@ stories/                - Instagram Story pages (1080x1920), rendered to PNG
 assets/tastings/        - images, maps, QR codes, and PDFs per tasting
 assets/social/          - off-site post assets, not used by the site
   instagram/feed/       - Instagram feed posts, one folder per post (src/ rebuilds it)
-  instagram/stories/    - rendered Instagram Story PNGs (sources in stories/)
+  instagram/stories/    - rendered PNG of every page in stories/ (scripts/render-stories.js)
   linkedin/             - LinkedIn carousels, one folder per post
 _layouts/               - chapter, default, presentation, and story layouts
 _includes/              - nav, footer, chapter progress, story/ slide partials
