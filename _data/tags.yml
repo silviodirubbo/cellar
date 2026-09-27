@@ -20,6 +20,16 @@
   category: Region
 - name: Loire
   category: Region
+- name: Campania
+  category: Region
+- name: Irpinia
+  category: Region
+- name: Piedmont
+  category: Region
+- name: Languedoc
+  category: Region
+- name: Roussillon
+  category: Region
 
 - name: Côte-Rôtie
   category: Appellation
@@ -83,6 +93,10 @@
   category: Appellation
 - name: Sancerre
   category: Appellation
+- name: Fiano di Avellino
+  category: Appellation
+- name: Barolo
+  category: Appellation
 
 - name: Syrah
   category: Grape
@@ -111,6 +125,10 @@
 - name: Cabernet Franc
   category: Grape
 - name: Sauvignon Blanc
+  category: Grape
+- name: Fiano
+  category: Grape
+- name: Nebbiolo
   category: Grape
 
 - name: France
