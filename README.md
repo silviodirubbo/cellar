@@ -18,11 +18,10 @@ _data/tags.yml          - tag categories for the tastings filter
 _tastings/              - one HTML presentation file per tasting
 _chapters/              - one file per curriculum chapter
 chapters/               - chapters index page
-stories/                - Instagram Story pages (1080x1920), rendered to PNG
 assets/tastings/        - images, maps, QR codes, and PDFs per tasting
 assets/social/          - off-site post assets, not used by the site
   instagram/feed/       - Instagram feed posts, one folder per post (src/ rebuilds it)
-  instagram/stories/    - rendered PNG of every page in stories/ (scripts/render-stories.js)
+  instagram/stories/    - Instagram Stories, one PNG per story (src/ rebuilds them via scripts/render-stories.js)
   linkedin/             - LinkedIn carousels, one folder per post
 _layouts/               - chapter, default, presentation, and story layouts
 _includes/              - nav, footer, chapter progress, story/ slide partials
