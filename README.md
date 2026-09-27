@@ -16,6 +16,10 @@ A lightweight site that tracks private wine tasting evenings in Geneva. Each eve
 _data/tastings.yml      - single source of truth for all events
 _tastings/              - one HTML presentation file per tasting
 assets/tastings/        - images, maps, QR codes, and PDFs per tasting
+assets/social/          - off-site post assets, not used by the site
+  instagram/feed/       - Instagram feed posts, one folder per post (src/ rebuilds it)
+  instagram/stories/    - rendered Instagram Story PNGs (sources in stories/)
+  linkedin/             - LinkedIn carousels, one folder per post
 _layouts/               - default, presentation, and tasting layouts
 _includes/              - nav, footer, tasting banner
 assets/css/main.css     - full site styles
