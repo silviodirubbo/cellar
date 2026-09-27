@@ -70,8 +70,9 @@ T=wines.load()
 BY_SLUG={t['slug']:t for t in T}
 CHAPTER_NUMERAL='I'  # _chapters/rhone.md numeral
 
-# SLIDE 1: cover. Proportions from assets/Pilot/slide-1-cover.png: one
-# centred italic wordmark with a small mono line under it.
+# SLIDE 1: cover. Proportions from
+# assets/social/linkedin/pilot-launch/slide-1-cover.png: one centred italic
+# wordmark with a small mono line under it.
 S1_CSS="""
 .cover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
 .cover h1{font-style:italic;font-weight:300;font-size:176px;line-height:1;letter-spacing:-.005em;}

@@ -1,5 +1,6 @@
 // Captures the /chapters and /tastings frames for the Rhône carousel, framed
-// the way assets/Pilot/slide-4-chapters.png and slide-5-tastings.png are:
+// the way assets/social/linkedin/pilot-launch/slide-4-chapters.png and
+// slide-5-tastings.png are:
 // 1080x1350 viewport at device scale 2 (2160x2700 out), warm-white page,
 // 76px side margins, the page's own eyebrow and title set in ink at the top,
 // the live section below, and a caption plus underlined URL at the bottom.
