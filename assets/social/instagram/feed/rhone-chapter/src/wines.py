@@ -3,7 +3,14 @@
 # tasting's deck in _tastings/<slug>.html.
 import os, yaml
 HERE=os.path.dirname(os.path.abspath(__file__))
-REPO=os.path.abspath(os.path.join(HERE,'..','..','..','..'))
+def _repo_root(d):
+    # Walk up to the folder holding _config.yml, so the script keeps working
+    # wherever the post folder sits in the repo.
+    while not os.path.exists(os.path.join(d,'_config.yml')):
+        if os.path.dirname(d)==d: raise SystemExit('repo root (_config.yml) not found')
+        d=os.path.dirname(d)
+    return d
+REPO=_repo_root(HERE)
 
 # (slug, wine name, producer, vintage) -> bottle image under assets/tastings/<slug>/
 IMAGES={

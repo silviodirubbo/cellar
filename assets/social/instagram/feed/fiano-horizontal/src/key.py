@@ -7,7 +7,14 @@ import os, numpy as np
 from PIL import Image
 from scipy import ndimage as ndi
 HERE=os.path.dirname(os.path.abspath(__file__))
-REPO=os.path.abspath(os.path.join(HERE,'..','..','..','..'))
+def _repo_root(d):
+    # Walk up to the folder holding _config.yml, so the script keeps working
+    # wherever the post folder sits in the repo.
+    while not os.path.exists(os.path.join(d,'_config.yml')):
+        if os.path.dirname(d)==d: raise SystemExit('repo root (_config.yml) not found')
+        d=os.path.dirname(d)
+    return d
+REPO=_repo_root(HERE)
 def symmetric_fill(fg):
     # The Clelia shot has a white label and capsule that merge with the
     # white backdrop on one side. The bottle is symmetric, so rebuild each

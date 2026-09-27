@@ -1,5 +1,5 @@
 # Bottle cutouts for the Rhône bottle grid. Adapted from
-# assets/instagram/fiano-horizontal/src/key.py with two additions:
+# assets/social/instagram/feed/fiano-horizontal/src/key.py with two additions:
 #  - images that already carry transparency are only cropped to the bottle;
 #  - opaque images are keyed against their own backdrop colour (sampled from
 #    the border) rather than assuming pure white, since the Clusel-Roch shot
