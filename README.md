@@ -14,15 +14,21 @@ A lightweight site that tracks private wine tasting evenings in Geneva. Each eve
 
 ```
 _data/tastings.yml      - single source of truth for all events
+_data/tags.yml          - tag categories for the tastings filter
 _tastings/              - one HTML presentation file per tasting
+_chapters/              - one file per curriculum chapter
+chapters/               - chapters index page
+stories/                - Instagram Story pages (1080x1920), rendered to PNG
 assets/tastings/        - images, maps, QR codes, and PDFs per tasting
 assets/social/          - off-site post assets, not used by the site
   instagram/feed/       - Instagram feed posts, one folder per post (src/ rebuilds it)
   instagram/stories/    - rendered Instagram Story PNGs (sources in stories/)
   linkedin/             - LinkedIn carousels, one folder per post
-_layouts/               - default, presentation, and tasting layouts
-_includes/              - nav, footer, tasting banner
+_layouts/               - chapter, default, presentation, and story layouts
+_includes/              - nav, footer, chapter progress, story/ slide partials
 assets/css/main.css     - full site styles
+assets/js/              - site script (main.js) and Supabase client
+scripts/                - Story PNG renderer and daily tasting status sync
 planner/                - sign-up and topic proposal page
 tastings/               - public tastings index
 ```
