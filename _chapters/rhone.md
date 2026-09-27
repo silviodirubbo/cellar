@@ -3,7 +3,7 @@ slug: rhone
 title: "Rhône"
 numeral: "I"
 order: 1
-state: current
+state: complete
 color: "var(--green)"
 story_label: "Rhône Valley Chapter"
 blurb: >
