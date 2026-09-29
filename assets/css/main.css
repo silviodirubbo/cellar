@@ -1933,6 +1933,11 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   gap: 3rem 2rem;
 }
 .wine[hidden] { display: none; }
+/* Until wines.js has put the grid in its random order it stays invisible
+   (space kept, so nothing shifts). If the script never arrives the grid
+   shows anyway after 2s. */
+.wines-pending .wine-grid { visibility: hidden; animation: wines-reveal 0s 2s forwards; }
+@keyframes wines-reveal { to { visibility: visible; } }
 
 .wine__tile {
   position: relative;

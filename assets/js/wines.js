@@ -16,7 +16,14 @@
    places (FLIP with the Web Animations API), dealt one after another;
    with reduced motion they cross-fade instead of travelling. A click
    during a shuffle interrupts it and starts the next one from where the
-   cards are. A reload restores the default order.
+   cards are.
+
+   The grid starts in a random order on every page load: the cards are
+   shuffled once, synchronously, as soon as this script runs and before
+   anything is built or measured, with no animation. A one-line script
+   in the template hides the grid (class wines-pending) until this runs,
+   so the template order never paints. Without JavaScript the template's
+   order stays (poured first, then upcoming).
    ============================================================ */
 (function () {
   'use strict';
@@ -24,7 +31,23 @@
   const grid = document.getElementById('wineGrid');
   if (!grid) return;
 
-  let cards        = Array.from(grid.querySelectorAll('.wine'));
+  // Random order on load (Fisher-Yates over every card), moved in one go
+  let cards = Array.from(grid.querySelectorAll('.wine'));
+  for (let i = cards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [cards[i], cards[j]] = [cards[j], cards[i]];
+  }
+  const startFrag = document.createDocumentFragment();
+  cards.forEach(c => startFrag.appendChild(c));
+  grid.appendChild(startFrag);
+  document.documentElement.classList.remove('wines-pending');
+  // The first rows may now hold photos that were queued as lazy far down
+  // the page: fetch those eagerly so the top of the grid is not late.
+  cards.slice(0, 8).forEach(c => {
+    const img = c.querySelector('img[loading="lazy"]');
+    if (img) img.loading = 'eager';
+  });
+
   const shuffleEl  = document.getElementById('wineShuffle');
   const groupsEl   = document.getElementById('wineFilterGroups');
   const panelEl    = document.getElementById('wineFilterPanel');

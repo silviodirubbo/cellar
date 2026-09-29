@@ -13,7 +13,8 @@ permalink: /wines/
   shown once, with every tasting listed. Filters, search and the Shuffle
   button live in assets/js/wines.js, which builds the filter chips from the
   data-* attributes on each card, so a new wine or chapter needs no change
-  here. Reloading the page restores the default order after a shuffle.
+  here. This is the no-JavaScript order: wines.js puts the grid in a
+  random order on every load.
 {% endcomment %}
 
 {% assign past_desc   = site.data.tastings | where: "status", "past" | sort: "date" | reverse %}
@@ -196,6 +197,8 @@ permalink: /wines/
       </div>
     </div>
 
+    {% comment %} With JS on, hold the grid back until wines.js has shuffled it, so the template order never paints {% endcomment %}
+    <script>document.documentElement.classList.add('wines-pending');</script>
     <ul class="wine-grid" id="wineGrid">
       {{ grid_html }}
     </ul>
