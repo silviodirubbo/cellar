@@ -1909,10 +1909,19 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 .wine-active__tok:hover { color: var(--green); border-color: var(--green); }
 
 /* Shuffle: the same pill as the Filter toggle; the arrows turn on press */
-.wine-shuffle { flex: 0 0 auto; }
+/* Solid gold, so it reads apart from the neutral Filter pill and the green
+   CTAs. Warm white on --gold is about 5:1. */
+.wine-shuffle.filter-toggle {
+  flex: 0 0 auto;
+  color: var(--warm-white);
+  background: var(--gold);
+  border-color: var(--gold);
+  transition: background-color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+.wine-shuffle.filter-toggle:hover { color: var(--warm-white); background: var(--ink); border-color: var(--ink); }
+.wine-shuffle.filter-toggle:focus-visible { outline: 1px solid var(--gold); outline-offset: 2px; }
 .wine-shuffle__icon { transition: transform 0.25s var(--ease); }
 .wine-shuffle:active .wine-shuffle__icon { transform: rotate(180deg); }
-.wine-shuffle[aria-disabled="true"] { cursor: default; }
 /* while the bottles move, hover panels stay shut under the cursor */
 .wine-grid.is-shuffling { pointer-events: none; }
 

@@ -11,10 +11,12 @@
    Tastings filter; active filters are echoed as tokens beside the count.
 
    Shuffle reorders every card (visible or filtered out) with a
-   Fisher-Yates pass, so the order holds when filters change later. The
-   visible cards on screen glide to their new places (FLIP with the Web
-   Animations API), dealt one after another; with reduced motion the
-   grid simply reorders. A reload restores the default order.
+   Fisher-Yates pass, so the order holds when filters change later, and
+   never repeats the current order. Cards on screen travel to their new
+   places (FLIP with the Web Animations API), dealt one after another;
+   with reduced motion they cross-fade instead of travelling. A click
+   during a shuffle interrupts it and starts the next one from where the
+   cards are. A reload restores the default order.
    ============================================================ */
 (function () {
   'use strict';
@@ -253,80 +255,155 @@
   });
 
   // ── Shuffle ─────────────────────────────────────────────────
+  // Every click reorders all cards (shown or filtered out) and always
+  // lands on a new order. The grid is brought into view first when it
+  // mostly sits below the fold, so the move is seen. Full motion: cards
+  // travel to their new places (FLIP, Web Animations API), dealt one after
+  // another. Reduced motion: no travel, a short cross-fade instead. A
+  // click during a run is accepted: running animations are cancelled and
+  // the next run starts from where the cards are at that moment.
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const DURATION = 950;
-  const STAGGER  = 22;     // ms between cards, in their new visual order
-  const STAGGER_CAP = 40;  // after this many cards the delay stops growing
-  const MARGIN   = 50;     // px around the viewport that still counts as on screen
-  let busy = false;
+  const DURATION    = 700;
+  const STAGGER     = 14;   // ms between cards, in their new visual order
+  const STAGGER_CAP = 40;   // after this many cards the delay stops growing
+  const MARGIN      = 50;   // px around the viewport that still counts as on screen
+  const EASE        = 'cubic-bezier(.3,.7,.2,1)';
+  const canAnimate  = typeof grid.animate === 'function';
+  let run = 0;              // id of the latest shuffle; older runs do not clean up
+  let pending = null;       // a reduced-motion reorder still waiting on its fade-out
 
-  function onScreen(r) {
-    return r.bottom > -MARGIN && r.top < window.innerHeight + MARGIN;
+  function newOrder() {
+    const order = cards.slice();
+    if (order.length < 2) return order;
+    do {
+      for (let i = order.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [order[i], order[j]] = [order[j], order[i]];
+      }
+    } while (order.every((c, i) => c === cards[i]));
+    return order;
+  }
+
+  // Scroll offset that puts the toolbar just under the fixed nav, or 0 when
+  // the grid already fills most of the screen.
+  function scrollNeeded() {
+    const g = grid.getBoundingClientRect();
+    const shown = Math.min(g.bottom, window.innerHeight) - Math.max(g.top, 0);
+    if (shown >= window.innerHeight * 0.5) return 0;
+    const nav = document.querySelector('.nav');
+    const navH = nav ? nav.getBoundingClientRect().height : 0;
+    const bar = shuffleEl.getBoundingClientRect().top;
+    const max = document.documentElement.scrollHeight - window.innerHeight - window.scrollY;
+    return Math.max(0, Math.min(bar - navH - 16, max));
+  }
+
+  function stopRunning() {
+    cards.forEach(c => c.getAnimations().forEach(a => a.cancel()));
+  }
+
+  function finish(id, anims) {
+    Promise.all(anims.map(a => a.finished.catch(() => {}))).then(() => {
+      if (id === run) grid.classList.remove('is-shuffling');
+    });
   }
 
   function shuffle() {
-    if (busy) return;
+    const id = ++run;
+    // an interrupted cross-fade still applies its order, so no click is lost
+    if (pending) { const p = pending; pending = null; p(); }
     cards.forEach(c => c.classList.remove('is-open'));
+    const animate = canAnimate;
+    const gentle = reduceMotion.matches;
 
-    // Fisher-Yates over every card, shown or filtered out
-    const order = cards.slice();
-    for (let i = order.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [order[i], order[j]] = [order[j], order[i]];
-    }
-
-    const animate = !reduceMotion.matches && typeof grid.animate === 'function';
+    // Where every visible card is right now, mid-animation included
     const visible = cards.filter(c => !c.hidden);
     const before = new Map();
-    if (animate) visible.forEach(c => before.set(c, c.getBoundingClientRect()));
+    visible.forEach(c => before.set(c, { r: c.getBoundingClientRect(), o: +getComputedStyle(c).opacity }));
+    stopRunning();
 
-    // Reorder the DOM in one move
-    const frag = document.createDocumentFragment();
-    order.forEach(c => frag.appendChild(c));
-    grid.appendChild(frag);
-    cards = order;
-    if (!animate) return;
+    const shift = animate ? scrollNeeded() : 0;
+    const order = newOrder();
+    const commit = () => {
+      const frag = document.createDocumentFragment();
+      order.forEach(c => frag.appendChild(c));
+      grid.appendChild(frag);
+      cards = order;
+    };
+    if (!animate) { commit(); return; }
+
+    if (shift) window.scrollBy({ top: shift, behavior: gentle ? 'instant' : 'smooth' });
+    // on screen once the scroll above has landed
+    const onScreen = r => r.bottom - shift > -MARGIN && r.top - shift < window.innerHeight + MARGIN;
+    grid.classList.add('is-shuffling');
+
+    if (gentle) {
+      // Reduced motion: fade out, reorder, fade back in. Nothing travels.
+      pending = commit;
+      const out = visible.filter(c => onScreen(before.get(c).r)).map(c =>
+        c.animate([{ opacity: before.get(c).o }, { opacity: 0.2 }],
+                  { duration: 120, easing: 'ease-out', fill: 'forwards' }));
+      Promise.all(out.map(a => a.finished.catch(() => {}))).then(() => {
+        if (id !== run) return;
+        out.forEach(a => a.cancel());
+        pending = null;
+        commit();
+        // the instant scroll has landed by now, so measure without the shift
+        const inView = c => {
+          const r = c.getBoundingClientRect();
+          return r.bottom > -MARGIN && r.top < window.innerHeight + MARGIN;
+        };
+        let n = 0;
+        const back = order.filter(c => !c.hidden && inView(c)).map(c =>
+          c.animate([{ opacity: 0.2 }, { opacity: 1 }],
+                    { duration: 200, delay: Math.min(n++, 20) * 6, easing: 'ease-in', fill: 'backwards' }));
+        finish(id, back);
+      });
+      return;
+    }
+
+    commit();
 
     // FLIP: invert each card that lands on screen back to where it was,
-    // then let it play. A card coming from far off screen starts from a
-    // short way out in the same direction and fades in, so the visible
-    // grid refills instead of waiting on long trips. Cards that leave the
-    // screen just move.
+    // then let it play. A card coming from far off screen starts a short
+    // way out in the same direction and fades in, so the visible grid
+    // refills instead of waiting on long trips. Cards leaving the screen
+    // just move.
     const reach = window.innerHeight * 0.4;
-    const moves = [];
+    const anims = [];
     let dealt = 0;
     order.forEach(c => {
       if (c.hidden) return;
       const from = before.get(c);
       const to = c.getBoundingClientRect();
       if (!onScreen(to)) return;
-      let dx = from.left - to.left;
-      let dy = from.top - to.top;
-      if (!dx && !dy) return;
-      let start = 1;
-      if (!onScreen(from) || Math.abs(dy) > reach) {
+      let dx = from.r.left - to.left;
+      let dy = from.r.top - to.top;
+      if (Math.abs(dx) < 1 && Math.abs(dy) < 1) return;
+      let start = from.o;
+      if (!onScreen(from.r) || Math.abs(dy) > reach) {
         dy = Math.sign(dy) * Math.min(Math.abs(dy), reach);
         start = 0;
       }
-      const delay = Math.min(dealt, STAGGER_CAP) * STAGGER;
-      dealt++;
-      const anim = c.animate([
+      const delay = Math.min(dealt++, STAGGER_CAP) * STAGGER;
+      anims.push(c.animate([
         { transform: `translate(${dx}px, ${dy}px)`, opacity: start },
         { transform: `translate(${dx * 0.5}px, ${dy * 0.5 - 14}px) scale(0.93)`, opacity: 0.55, offset: 0.45 },
         { transform: 'none', opacity: 1 }
-      ], { duration: DURATION, delay, easing: 'cubic-bezier(.3,.7,.2,1)', fill: 'backwards' });
-      moves.push(anim.finished.catch(() => {}));
+      ], { duration: DURATION, delay, easing: EASE, fill: 'backwards' }));
     });
-    if (!moves.length) return;
 
-    busy = true;
-    grid.classList.add('is-shuffling');
-    shuffleEl.setAttribute('aria-disabled', 'true');
-    Promise.all(moves).then(() => {
-      busy = false;
-      grid.classList.remove('is-shuffling');
-      shuffleEl.removeAttribute('aria-disabled');
-    });
+    // Nothing travelled on screen (one card left, say): a lift and settle
+    // on the cards in view, so the click still answers.
+    if (!anims.length) {
+      order.filter(c => !c.hidden && onScreen(c.getBoundingClientRect())).forEach(c => {
+        anims.push(c.animate([
+          { transform: 'none' },
+          { transform: 'translateY(-14px) scale(0.96)', opacity: 0.7, offset: 0.4 },
+          { transform: 'none', opacity: 1 }
+        ], { duration: 500, easing: EASE }));
+      });
+    }
+    finish(id, anims);
   }
   shuffleEl.addEventListener('click', shuffle);
 

@@ -15,7 +15,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  <!-- ?v= is the build time, so a new deploy is never served a cached stylesheet -->
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 
   <!-- Supabase (loaded on pages that need it) -->
   {% if page.supabase %}
