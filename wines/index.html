@@ -6,12 +6,14 @@ permalink: /wines/
 ---
 
 {% comment %}
-  One card per wine, in two sections: poured (latest evening first), then
-  coming up (soonest first). A wine without a photo gets a type-only label. A wine that appears in more than one tasting (same
-  producer, name, vintage and appellation) is shown once, with every tasting
-  listed. Filters are built by assets/js/wines.js
-  from the data-* attributes on each card, so a new wine or chapter needs no
-  change here.
+  One card per wine, all in a single grid. Default order: poured wines
+  (latest evening first), then upcoming ones (soonest first, date to be set
+  last). A wine without a photo gets a type-only label. A wine that appears
+  in more than one tasting (same producer, name, vintage and appellation) is
+  shown once, with every tasting listed. Filters, search and the Shuffle
+  button live in assets/js/wines.js, which builds the filter chips from the
+  data-* attributes on each card, so a new wine or chapter needs no change
+  here. Reloading the page restores the default order after a shuffle.
 {% endcomment %}
 
 {% assign past_desc   = site.data.tastings | where: "status", "past" | sort: "date" | reverse %}
@@ -25,8 +27,7 @@ permalink: /wines/
 {% assign n_upcoming = 0 %}
 {% assign n_producers = 0 %}
 
-{% assign poured_html = "" %}
-{% assign upcoming_html = "" %}
+{% assign grid_html = "" %}
 {% for t in ordered %}
   {% for w in t.wines %}
     {% assign key = w.producer | append: "|" | append: w.name | append: "|" | append: w.vintage | append: "|" | append: w.appellation %}
@@ -118,11 +119,7 @@ permalink: /wines/
         </div>
       </li>
       {% endcapture %}
-      {% if wstatus == "poured" %}
-        {% assign poured_html = poured_html | append: card %}
-      {% else %}
-        {% assign upcoming_html = upcoming_html | append: card %}
-      {% endif %}
+      {% assign grid_html = grid_html | append: card %}
     {% endunless %}
   {% endfor %}
 {% endfor %}
@@ -159,6 +156,17 @@ permalink: /wines/
         <label class="visually-hidden" for="wineSearch">Search wines</label>
         <input class="wine-search" type="search" id="wineSearch" placeholder="Search producer, wine, appellation" autocomplete="off">
         <p class="wine-count" id="wineCount" aria-live="polite"><span id="wineCountText">{{ n_poured | plus: n_upcoming }} wines</span></p>
+        <button type="button" class="filter-toggle wine-shuffle" id="wineShuffle">
+          <svg class="filter-toggle__icon wine-shuffle__icon" width="13" height="13" viewBox="0 0 16 16"
+               fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2 4.5h2.5c2.5 0 4.5 7 7 7H14"/>
+            <path d="M2 11.5h2.5c1.1 0 2-1.3 2.9-2.8"/>
+            <path d="M9.6 6.3c.6-1 1.2-1.8 1.9-1.8H14"/>
+            <path d="M12 2.5l2 2-2 2"/>
+            <path d="M12 9.5l2 2-2 2"/>
+          </svg>
+          <span class="wine-shuffle__label">Shuffle</span>
+        </button>
         <div class="wine-tools__filter">
           <button type="button" class="filter-toggle" id="wineFilterToggle" aria-expanded="false" aria-controls="wineFilterPanel">
             <svg class="filter-toggle__icon" width="13" height="13" viewBox="0 0 16 16"
@@ -188,20 +196,9 @@ permalink: /wines/
       </div>
     </div>
 
-    <div class="wine-sections" id="wineGrid">
-      <section class="wine-section" data-section="poured" aria-labelledby="wineHeadPoured">
-        <h2 class="wine-section__head" id="wineHeadPoured">Poured <span class="wine-section__n">{{ n_poured }}</span></h2>
-        <ul class="wine-grid">
-          {{ poured_html }}
-        </ul>
-      </section>
-      <section class="wine-section" data-section="upcoming" aria-labelledby="wineHeadUpcoming">
-        <h2 class="wine-section__head" id="wineHeadUpcoming">Coming up <span class="wine-section__n">{{ n_upcoming }}</span></h2>
-        <ul class="wine-grid">
-          {{ upcoming_html }}
-        </ul>
-      </section>
-    </div>
+    <ul class="wine-grid" id="wineGrid">
+      {{ grid_html }}
+    </ul>
 
     <p class="filter-empty text-light" id="wineEmpty" hidden>No wine matches these filters.</p>
 

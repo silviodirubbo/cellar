@@ -1,13 +1,20 @@
 /* ============================================================
-   wines.js: filters, search and touch behaviour for /wines/.
+   wines.js: filters, search, shuffle and touch behaviour for /wines/.
 
-   Cards are rendered by wines/index.html with these attributes:
+   Every wine is one <li class="wine"> in a single grid (#wineGrid),
+   rendered by wines/index.html with these attributes:
    data-status, data-colour, data-country, data-region, data-chapter,
    data-chapter-title, data-chapter-order, data-search.
    Filter groups and their chips are built here from that data, so new
    wines or chapters appear without touching the template. The chips sit
    in a dropdown (a full-screen sheet on phones), the same pattern as the
    Tastings filter; active filters are echoed as tokens beside the count.
+
+   Shuffle reorders every card (visible or filtered out) with a
+   Fisher-Yates pass, so the order holds when filters change later. The
+   visible cards on screen glide to their new places (FLIP with the Web
+   Animations API), dealt one after another; with reduced motion the
+   grid simply reorders. A reload restores the default order.
    ============================================================ */
 (function () {
   'use strict';
@@ -15,8 +22,8 @@
   const grid = document.getElementById('wineGrid');
   if (!grid) return;
 
-  const cards      = Array.from(grid.querySelectorAll('.wine'));
-  const sections   = Array.from(grid.querySelectorAll('.wine-section'));
+  let cards        = Array.from(grid.querySelectorAll('.wine'));
+  const shuffleEl  = document.getElementById('wineShuffle');
   const groupsEl   = document.getElementById('wineFilterGroups');
   const panelEl    = document.getElementById('wineFilterPanel');
   const closeEl    = document.getElementById('wineFilterClose');
@@ -174,14 +181,6 @@
     toggleEl.classList.toggle('filter-toggle--active', active.length > 0);
     doneEl.textContent = shown === 1 ? 'Show 1 wine' : 'Show ' + shown + ' wines';
 
-    // Each section (poured, coming up) shows its own count, or hides when empty
-    sections.forEach(sec => {
-      const n = sec.querySelectorAll('.wine:not([hidden])').length;
-      sec.hidden = n === 0;
-      const num = sec.querySelector('.wine-section__n');
-      if (num) num.textContent = n;
-    });
-
     // A card that got filtered out must not stay open on touch screens.
     cards.forEach(c => { if (c.hidden) c.classList.remove('is-open'); });
   }
@@ -252,6 +251,84 @@
     cards.forEach(c => c.classList.remove('is-open'));
     if (!panelEl.hidden) { setPanel(false); toggleEl.focus(); }
   });
+
+  // ── Shuffle ─────────────────────────────────────────────────
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const DURATION = 950;
+  const STAGGER  = 22;     // ms between cards, in their new visual order
+  const STAGGER_CAP = 40;  // after this many cards the delay stops growing
+  const MARGIN   = 50;     // px around the viewport that still counts as on screen
+  let busy = false;
+
+  function onScreen(r) {
+    return r.bottom > -MARGIN && r.top < window.innerHeight + MARGIN;
+  }
+
+  function shuffle() {
+    if (busy) return;
+    cards.forEach(c => c.classList.remove('is-open'));
+
+    // Fisher-Yates over every card, shown or filtered out
+    const order = cards.slice();
+    for (let i = order.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [order[i], order[j]] = [order[j], order[i]];
+    }
+
+    const animate = !reduceMotion.matches && typeof grid.animate === 'function';
+    const visible = cards.filter(c => !c.hidden);
+    const before = new Map();
+    if (animate) visible.forEach(c => before.set(c, c.getBoundingClientRect()));
+
+    // Reorder the DOM in one move
+    const frag = document.createDocumentFragment();
+    order.forEach(c => frag.appendChild(c));
+    grid.appendChild(frag);
+    cards = order;
+    if (!animate) return;
+
+    // FLIP: invert each card that lands on screen back to where it was,
+    // then let it play. A card coming from far off screen starts from a
+    // short way out in the same direction and fades in, so the visible
+    // grid refills instead of waiting on long trips. Cards that leave the
+    // screen just move.
+    const reach = window.innerHeight * 0.4;
+    const moves = [];
+    let dealt = 0;
+    order.forEach(c => {
+      if (c.hidden) return;
+      const from = before.get(c);
+      const to = c.getBoundingClientRect();
+      if (!onScreen(to)) return;
+      let dx = from.left - to.left;
+      let dy = from.top - to.top;
+      if (!dx && !dy) return;
+      let start = 1;
+      if (!onScreen(from) || Math.abs(dy) > reach) {
+        dy = Math.sign(dy) * Math.min(Math.abs(dy), reach);
+        start = 0;
+      }
+      const delay = Math.min(dealt, STAGGER_CAP) * STAGGER;
+      dealt++;
+      const anim = c.animate([
+        { transform: `translate(${dx}px, ${dy}px)`, opacity: start },
+        { transform: `translate(${dx * 0.5}px, ${dy * 0.5 - 14}px) scale(0.93)`, opacity: 0.55, offset: 0.45 },
+        { transform: 'none', opacity: 1 }
+      ], { duration: DURATION, delay, easing: 'cubic-bezier(.3,.7,.2,1)', fill: 'backwards' });
+      moves.push(anim.finished.catch(() => {}));
+    });
+    if (!moves.length) return;
+
+    busy = true;
+    grid.classList.add('is-shuffling');
+    shuffleEl.setAttribute('aria-disabled', 'true');
+    Promise.all(moves).then(() => {
+      busy = false;
+      grid.classList.remove('is-shuffling');
+      shuffleEl.removeAttribute('aria-disabled');
+    });
+  }
+  shuffleEl.addEventListener('click', shuffle);
 
   buildGroups();
   apply();
