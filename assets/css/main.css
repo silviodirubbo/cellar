@@ -292,7 +292,8 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
 .page-header h1 { color: var(--warm-white); }
 .page-header p  { color: rgba(253,252,250,0.65); }
 .page-header .section-label { color: var(--ink-light-on-dark); }
-.page-header .section-label::after { background-color: rgba(255,255,255,0.15); }
+.page-header :focus-visible { outline-color: var(--warm-white); }
+.page-header .section-label::after { background-color: rgba(253,252,250,0.15); }
 .page-header__sub { color: rgba(253,252,250,0.65); }
 
 .cost-value  { color: var(--gold); font-weight: 400; }
@@ -319,7 +320,7 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
   background-color: var(--ink);
   color: var(--ink-light);
   padding: 3rem 0;
-  border-top: 1px solid rgba(255,255,255,0.06);
+  border-top: 1px solid rgba(253,252,250,0.06);
 }
 .footer__inner {
   max-width: var(--container);
@@ -349,7 +350,7 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
   padding-bottom: 1px;
   transition: color 0.2s var(--ease);
 }
-.footer__profile-link:hover { color: rgba(255,255,255,0.5); }
+.footer__profile-link:hover { color: rgba(253,252,250,0.5); }
 
 /* ── Utility ──────────────────────────────────────────────── */
 .text-green { color: var(--green); }
@@ -401,7 +402,10 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
 .hero-stat-desc { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); margin-top: 0.2rem; }
 
 /* ── Home: explore cards ──────────────────────────────────── */
-.home-explore { background-color: var(--off-white); padding: var(--section-pad) 0; }
+/* The hero already closes on a full section pad, so the cards open on a
+   shorter one: the two bands read as one sequence, not two islands. */
+.home-explore { background-color: var(--off-white); padding: 5rem 0 var(--section-pad); }
+.home-explore .section-label { margin-bottom: 2.5rem; }
 .home-cards {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -411,8 +415,8 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
   position: relative;               /* anchors the whole-card link */
   display: flex;
   flex-direction: column;
-  min-height: 21rem;
-  padding: 2rem;
+  min-height: 22rem;
+  padding: 2.25rem 2.25rem 2rem;
   border: 1px solid var(--rule);
   background: transparent;
   transition: border-color 0.25s var(--ease);
@@ -421,26 +425,31 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
 .home-card:focus-within { border-color: var(--ink-mid); }
 
 .home-card__eyebrow {
+  display: block;
+  padding-right: 2rem;              /* clears the arrow */
   font-family: var(--font-mono);
   font-weight: 300;
   font-size: 0.6rem;
+  line-height: 1rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--ink-light);
 }
 .home-card__title {
-  margin-top: 0.9rem;
+  margin-top: 1rem;
   font-size: clamp(1.9rem, 3.4vw, 2.5rem);
 }
 .home-card__link::after { content: ''; position: absolute; inset: 0; }
 .home-card__link:focus-visible { outline: none; }
 .home-card__link:focus-visible::after { outline: 1px solid var(--green); outline-offset: 2px; }
-.home-card__text { margin-top: 0.7rem; font-size: 0.95rem; line-height: 1.65; color: var(--ink-mid); max-width: 38ch; }
+.home-card__text { margin-top: 0.6rem; font-size: 0.95rem; line-height: 1.65; color: var(--ink-mid); max-width: 38ch; }
+/* Sits on the eyebrow's line, at the card's top right */
 .home-card__arrow {
   position: absolute;
-  top: 1.9rem; right: 2rem;
+  top: 2.25rem; right: 2.25rem;
   font-family: var(--font-mono);
-  font-size: 1rem;
+  font-size: 0.9rem;
+  line-height: 1rem;
   color: var(--ink-light);
   transition: color 0.25s var(--ease), transform 0.25s var(--ease);
 }
@@ -448,13 +457,13 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
 .home-card:focus-within .home-card__arrow { color: var(--ink); transform: translateX(4px); }
 
 /* Chapters: one row per chapter with its progress */
-.home-chapters { list-style: none; margin-top: auto; padding-top: 1.75rem; }
+.home-chapters { list-style: none; margin-top: auto; padding-top: 2rem; }
 .home-chapters__row {
   display: grid;
   grid-template-columns: 2rem 1fr minmax(9rem, 14rem);
   align-items: baseline;
   gap: 1rem;
-  padding: 0.7rem 0;
+  padding: 0.75rem 0;
   border-top: 1px solid var(--rule);
 }
 .home-chapters__numeral {
@@ -468,55 +477,76 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
 .home-chapters__title { font-family: var(--font-serif); font-size: 1.1rem; color: var(--ink); }
 .home-chapters .chapter-progress { max-width: none; }
 
-/* Tastings: the next evening */
+/* Tastings: the next evenings, anchored to the card's foot like the
+   chapter rows beside it */
 .home-next {
   margin-top: auto;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--rule);
+  padding-top: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
 }
-.home-next__label { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green); }
-.home-next__date { font-size: 0.6rem; }
-.home-next__title { font-family: var(--font-serif); font-size: 1.25rem; line-height: 1.2; color: var(--ink); }
+.home-next__label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green);
+  padding-bottom: 0.6rem;
+}
+.home-next__row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--rule);
+}
+.home-next__row:last-child { padding-bottom: 0; }
+.home-next__date { font-size: 0.55rem; letter-spacing: 0.14em; }
+.home-next__title { font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.25; color: var(--ink-mid); }
+.home-next__row--first .home-next__title { font-size: 1.35rem; color: var(--ink); }
 .home-next__join {
   position: relative; z-index: 1;    /* sits above the whole-card link */
   align-self: flex-start;
-  margin-top: 0.6rem;
+  margin-top: 0.55rem;
   font-family: var(--font-mono);
   font-size: 0.6rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--ink-mid);
-  border-bottom: 1px solid var(--ink-mid);
+  color: var(--green);
+  border-bottom: 1px solid var(--green);
   padding-bottom: 1px;
   transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
 }
-.home-next__join:hover { color: var(--green); border-bottom-color: var(--green); }
+.home-next__join:hover { color: var(--ink); border-bottom-color: var(--ink); }
 
-/* Wines: a strip of bottles from the latest evenings */
+/* Wines: a shelf of bottles from the latest evenings, standing on a rule */
 .home-bottles {
   margin-top: auto;
-  padding-top: 1.5rem;
+  padding-top: 2rem;
   display: flex;
   align-items: flex-end;
-  gap: 1.75rem;
-  height: 10.5rem;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 11rem;
   box-sizing: content-box;
   overflow: hidden;
+  border-bottom: 1px solid var(--rule);
 }
 .home-bottles img {
+  flex: 0 1 auto;
   height: 100%;
   width: auto;
   max-width: 4.5rem;
   object-fit: contain;
+  object-position: bottom;
   mix-blend-mode: multiply;         /* lets a photo's white background fall away */
   filter: brightness(1.03);
 }
 
-/* Propose a topic: the one solid card, the accent green */
+/* Propose a topic: the one solid card, the accent green. Its copy drops to
+   the foot so it lines up with the shelf of bottles beside it. */
 .home-card--green { background: var(--green); border-color: var(--green); }
+.home-card--green .home-card__text { margin-top: auto; padding-top: 2rem; }
 .home-card--green:hover,
 .home-card--green:focus-within { border-color: var(--ink); background: var(--ink); }
 .home-card--green .home-card__eyebrow { color: rgba(253,252,250,0.65); }
@@ -526,15 +556,21 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
 .home-card--green .home-card__arrow { color: rgba(253,252,250,0.65); }
 .home-card--green:hover .home-card__arrow,
 .home-card--green:focus-within .home-card__arrow { color: var(--warm-white); }
+.home-card--green .home-card__link:focus-visible::after { outline-color: var(--warm-white); outline-offset: -4px; }
 
 @media (max-width: 768px) {
+  .home-explore { padding-top: 3.5rem; }
   .home-cards { grid-template-columns: 1fr; }
-  .home-card { min-height: 0; padding: 1.5rem; }
-  .home-card__arrow { top: 1.4rem; right: 1.5rem; }
-  .home-chapters__row { grid-template-columns: 1.6rem 1fr; }
+  .home-card { min-height: 0; padding: 1.75rem 1.5rem 1.5rem; }
+  .home-card__arrow { top: 1.75rem; right: 1.5rem; }
+  .home-card--green { min-height: 0; }
+  .home-card--green .home-card__text { margin-top: 0.6rem; padding-top: 0; }
+  .home-bottles { height: 9.5rem; }
+}
+@media (max-width: 560px) {
+  .home-chapters__row { grid-template-columns: 1.6rem 1fr; row-gap: 0.35rem; }
   .home-chapters__row .chapter-progress { grid-column: 2; }
-  .home-card--green { min-height: 14rem; }
-  .home-bottles { gap: 1rem; height: 9rem; }
+  .home-bottles { height: 8.5rem; }
   .home-bottles img:nth-child(n+5) { display: none; }   /* four fit a phone card */
 }
 
@@ -543,7 +579,16 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
 .propose-form { display: flex; flex-direction: column; gap: 0; }
 .form-field { margin-bottom: 1rem; }
 .form-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); display: block; margin-bottom: 0.4rem; }
-.form-input { width: 100%; font-family: var(--font-serif); font-size: 0.95rem; color: var(--ink); background: var(--warm-white); border: 1px solid var(--rule); padding: 0.6rem 0.75rem; resize: vertical; min-height: 2.5rem; transition: border-color 0.2s var(--ease); }
+.form-input { width: 100%; font-family: var(--font-serif); font-size: 0.95rem; color: var(--ink); background: var(--warm-white); border: 1px solid var(--rule); border-radius: 0; padding: 0.6rem 0.75rem; resize: vertical; min-height: 44px; transition: border-color 0.2s var(--ease); }
+select.form-input {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 2.25rem;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23736E6B' stroke-width='1'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+}
 .form-input:focus { border-color: var(--ink-mid); }
 textarea.form-input { min-height: 5rem; }
 .form-success { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-top: 0.75rem; max-width: none; }
@@ -554,8 +599,31 @@ textarea.form-input { min-height: 5rem; }
 .avail-overlay[hidden] { display: none; }
 .avail-modal { background: var(--warm-white); max-width: 480px; width: 100%; padding: 2.5rem; position: relative; max-height: calc(100vh - 4rem); overflow-y: auto; }
 body.modal-open { overflow: hidden; }
-.avail-modal__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
-.avail-close { font-family: var(--font-mono); font-size: 0.7rem; color: var(--ink-light); background: none; border: none; cursor: pointer; padding: 0.25rem; transition: color 0.2s var(--ease); }
+.avail-modal__header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--rule); margin-bottom: 0.5rem; }
+/* a long evening title wraps, so the header takes a full rule instead of the label's short one */
+.avail-modal__header .col-label { line-height: 1.6; }
+.avail-modal__header .col-label::after { display: none; }
+/* 44px hit area; the negative margin keeps the glyph on the modal's edge */
+.avail-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  margin: -0.75rem -0.9rem -0.75rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink-light);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s var(--ease);
+}
+@media (max-width: 640px) {
+  .avail-overlay { padding: 1rem; }
+  .avail-modal { padding: 1.75rem 1.5rem 1.5rem; max-height: calc(100vh - 2rem); }
+}
 .avail-close:hover { color: var(--ink); }
 
 /* ── Hide auth elements ───────────────────────────────────── */
@@ -630,20 +698,20 @@ body.modal-open { overflow: hidden; }
 .th-title__dot { color: var(--gold); font-style: normal; }
 .th-head {
   display: flex;
-  align-items: flex-end;
+  align-items: baseline;            /* the button's label sits on the title's baseline */
   justify-content: space-between;
-  gap: 1rem 2rem;
+  gap: 1.25rem 2rem;
   flex-wrap: wrap;
 }
 /* The green sits on the dark masthead: a hairline keeps its edge visible. */
-.th-cta { border-color: rgba(253,252,250,0.28); margin-bottom: 0.6rem; }
+.th-cta { flex: 0 0 auto; border-color: rgba(253,252,250,0.28); }
 .th-cta:hover { background: var(--warm-white); border-color: var(--warm-white); color: var(--ink); }
 
 .th-stats {
   display: flex;
-  gap: 2.5rem;
+  gap: 1.25rem 2.5rem;
   flex-wrap: wrap;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(253,252,250,0.1);
   padding-top: 1.5rem;
 }
 .th-stat { display: block; }
@@ -1239,9 +1307,14 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   .past-entry__head { gap: 0.7rem; }
   .past-entry__thumb { width: 44px; height: 44px; }
   .past-entry__body { padding-left: 0.25rem; }
-  .th-stats { gap: 1.75rem; }
+  .th-stats { gap: 1.25rem 1.75rem; }
   .th-stat__num { font-size: 1.5rem; }
   .tl-card--feature .btn--hero { flex: 1 1 100%; text-align: center; }
+}
+/* Phones: the three stats stay on one line (DM Mono is wide) */
+@media (max-width: 480px) {
+  .th-stats { flex-wrap: nowrap; gap: 1.25rem; }
+  .th-stat__label { letter-spacing: 0.1em; white-space: nowrap; }
 }
 
 
@@ -1312,7 +1385,7 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
    at the same opacities .page-header/.tl-card--feature already use for
    light-on-dark body text (verified against var(--green) specifically:
    full var(--warm-white) ≈ 9.5:1, the 0.7-opacity state label ≈ 5.6:1,
-   the 0.65-opacity blurb ≈ 5.1:1 — all comfortably pass WCAG AA's 4.5:1
+   the 0.65-opacity blurb ≈ 5.1:1: all comfortably pass WCAG AA's 4.5:1
    for normal text. --ink-light-on-dark was checked too but only reaches
    ≈3.25:1 against --green, well short of AA, since it was derived
    against --ink; not reused here for that reason.) Doubled-up selector
@@ -1347,7 +1420,7 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 .chapters-row--feature .chapters-row__arrow { color: rgba(253,252,250,0.7); }
 .chapters-row--feature:hover .chapters-row__arrow { color: var(--warm-white); transform: translateX(2px); }
 /* chapter-progress (below) sets .chapter-progress__fill from
-   --chapter-accent, which for Grape Studies is var(--green) — the same
+   --chapter-accent, which for Grape Studies is var(--green): the same
    value as this card's own background. Left alone that fill would be
    invisible; override it and its track/label for the same light-on-
    dark treatment as the rest of the card. */
@@ -1464,7 +1537,7 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 /* Optional full-bleed texture layer (e.g. a tasting's cover painting,
    faded in behind the standard slide content). Opt-in: any story adds
    this div before .story__inner and sets its background-image/opacity
-   inline via page front matter. Not a cutout — full-bleed art blended
+   inline via page front matter. Not a cutout: full-bleed art blended
    translucently, so mix-blend-mode/opacity is what does the work. */
 .story-texture {
   position: absolute;
@@ -1740,91 +1813,203 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   border: 0;
 }
 
-.wines { padding: 3.5rem 0 var(--section-pad); background: var(--warm-white); }
+.wines { padding: 3rem 0 var(--section-pad); background: var(--warm-white); }
 
-/* Search + filter toggle */
-.wine-tools { margin-bottom: 1.25rem; }
-.wine-tools__bar { display: flex; align-items: center; gap: 1rem; }
-.wine-search { flex: 1; max-width: 26rem; border-radius: 0; -webkit-appearance: none; appearance: none; }
-.wine-filters { margin-top: 1.25rem; border-top: 1px solid var(--rule); }
-.wine-filters[hidden] { display: none; }
-.wine-filter {
-  display: grid;
-  grid-template-columns: 6.5rem 1fr;
-  gap: 1rem;
-  align-items: baseline;
-  padding: 0.85rem 0;
+/* ── Toolbar: search on the left, the filter dropdown on the right ── */
+.wine-tools { margin-bottom: 2.5rem; }
+.wine-tools__bar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid var(--rule);
 }
+/* An underline field, not a box: the grid below is the page, not a form */
+.wine-search {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0.4rem 0;
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.wine-search::placeholder { color: var(--ink-light); opacity: 1; }
+.wine-search:focus { outline: none; }
+.wine-tools__bar:focus-within { border-bottom-color: var(--ink-mid); }
+.wine-search::-webkit-search-cancel-button { cursor: pointer; }
+
+.wine-tools__filter { position: relative; flex: 0 0 auto; }
+.wine-panel.filter-panel { width: 25rem; padding: 0.4rem 1.4rem 1.1rem; }
+.wine-panel__foot { display: none; }  /* the sheet footer, phones only */
+
+.wine-filter {
+  padding: 0.95rem 0 1rem;
+  border-bottom: 1px solid var(--rule);
+}
+.wine-filter:last-child { border-bottom: none; padding-bottom: 0.2rem; }
 .wine-filter__label {
+  display: block;
+  margin-bottom: 0.6rem;
   font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.14em;
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--ink-light);
 }
 .wine-filter__items { display: flex; flex-wrap: wrap; gap: 0.45rem; }
 .chip--empty { opacity: 0.4; }
 
+/* Count (in the toolbar row), then active filters and clear when filtering */
 .wine-count {
-  display: flex;
-  align-items: baseline;
-  gap: 1.25rem;
-  margin: 1.5rem 0 1.75rem;
+  flex: 0 0 auto;
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-light);
+  white-space: nowrap;
   max-width: none;
 }
-.wine-count .btn { font-size: 0.58rem; }
-.wine-count [hidden] { display: none; }
+.wine-active-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.25rem;
+  margin-top: 1rem;
+}
+.wine-active-row[hidden] { display: none; }
+.wine-active-row .btn { font-size: 0.58rem; }
+.wine-active-row [hidden] { display: none; }
+.wine-active { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.wine-active:empty { display: none; }
+.wine-active__tok {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--ink-mid);
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+  transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+.wine-active__tok::after { content: '\00d7'; font-size: 0.8rem; line-height: 1; color: var(--ink-light); }
+.wine-active__tok:hover { color: var(--green); border-color: var(--green); }
 
-/* The grid */
+/* ── Sections: poured, then coming up ─────────────────────── */
+.wine-section[hidden] { display: none; }
+.wine-section + .wine-section { margin-top: 5rem; }
+.wine-section__head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  margin-bottom: 2rem;
+  font-size: 1.9rem;
+  font-style: italic;
+  color: var(--ink);
+}
+.wine-section__n {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+}
+
+/* ── The grid ─────────────────────────────────────────────── */
 .wine-grid {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2.25rem 1.25rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 3rem 2rem;
 }
 .wine[hidden] { display: none; }
 
 .wine__tile {
   position: relative;
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 3 / 4;
   background: var(--off-white);
-  overflow: hidden;
   cursor: default;
 }
-.wine__tile:focus-visible { outline: 1px solid var(--green); outline-offset: 2px; }
+.wine__tile:focus-visible { outline: 1px solid var(--green); outline-offset: 3px; }
+
+/* Every bottle is sized by height and stands on the same base line, so a
+   square or wide photo reads at the same scale as a tall cutout. */
+.wine__photo { position: absolute; inset: 0; overflow: hidden; }
 .wine__img {
   position: absolute;
-  inset: 7% 14%;
-  width: 72%;
-  height: 86%;
-  object-fit: contain;
+  left: 50%;
+  bottom: 7%;
+  height: 84%;
+  width: auto;
+  max-width: none;
+  transform: translateX(-50%);
   mix-blend-mode: multiply;        /* photos with a white background sit flat on the tile */
-  filter: brightness(1.03);        /* pushes a near-white photo background to pure white, so it vanishes */
+  filter: brightness(1.03);        /* pushes a near-white photo background to white, so it vanishes */
 }
-.wine__ph {
-  position: absolute;
-  top: 50%; left: 50%;
-  width: 34%;
-  transform: translate(-50%, -50%);
-  color: #CFC9C0;                  /* darker than --rule so the outline reads on the tile */
-}
-.wine__flag { position: absolute; top: 0.7rem; left: 0.7rem; background: var(--off-white); }
 
-/* Details: cover the tile on hover, keyboard focus, or a tap */
-.wine__more {
+/* No photo yet: a type-only label in the bottle's place */
+.wine__label {
   position: absolute;
   inset: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  padding: 0.95rem 0.9rem;
-  overflow-y: auto;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+}
+.wine__label-colour {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+.wine__label-app {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.25;
+  color: var(--green);
+  overflow-wrap: anywhere;
+}
+.wine__label-vint {
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  min-width: 2.5rem;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1;
+  color: var(--ink-mid);
+}
+
+/* Details: cover the tile on hover, keyboard focus, or a tap. The panel
+   is at least as tall as the tile and grows past it when the text needs
+   the room, so nothing is ever cut off. */
+.wine__more {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  min-height: 100%;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 1.1rem 1.05rem 1.15rem;
   background: var(--ink);
   color: var(--warm-white);
   opacity: 0;
@@ -1835,26 +2020,27 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 .wine__tile:focus-within .wine__more,
 .wine.is-open .wine__more { opacity: 1; visibility: visible; }
 
-.wine__more-app { font-family: var(--font-serif); font-size: 1rem; line-height: 1.2; color: var(--warm-white); }
-.wine__more-blend { font-family: var(--font-serif); font-size: 0.8rem; line-height: 1.35; color: rgba(253,252,250,0.7); }
+.wine__more-app { font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.25; color: var(--warm-white); overflow-wrap: anywhere; }
+.wine__more-blend { font-family: var(--font-serif); font-size: 0.85rem; line-height: 1.4; color: rgba(253,252,250,0.7); }
 .wine__more-where,
 .wine__more-label {
   font-family: var(--font-mono);
   font-size: 0.55rem;
+  line-height: 1.6;
   letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--ink-light-on-dark);
 }
-.wine__more-label { margin-top: auto; padding-top: 0.6rem; border-top: 1px solid rgba(253,252,250,0.18); }
-.wine__more-tastings { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.wine__more-label { margin-top: auto; padding-top: 0.7rem; border-top: 1px solid rgba(253,252,250,0.18); }
+.wine__more-tastings { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
 .wine__more-tastings li { display: flex; flex-direction: column; gap: 0.1rem; }
 .wine__more-tastings time,
 .wine__more-date { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-light-on-dark); }
 .wine__more-tastings a {
   align-self: flex-start;
   font-family: var(--font-serif);
-  font-size: 0.9rem;
-  line-height: 1.2;
+  font-size: 0.95rem;
+  line-height: 1.25;
   color: var(--warm-white);
   border-bottom: 1px solid rgba(253,252,250,0.35);
   transition: border-color 0.2s var(--ease);
@@ -1862,33 +2048,83 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 .wine__more-tastings a:hover { border-bottom-color: var(--warm-white); }
 .wine__more-tastings a:focus-visible { outline: 1px solid var(--warm-white); outline-offset: 2px; }
 
-/* Caption under each tile */
-.wine__cap { padding-top: 0.75rem; display: flex; flex-direction: column; gap: 0.15rem; }
+/* Caption under each tile: producer, wine, vintage */
+.wine__cap { padding-top: 0.9rem; display: flex; flex-direction: column; gap: 0.2rem; }
 .wine__prod {
   font-family: var(--font-mono);
   font-size: 0.55rem;
+  line-height: 1.6;
   letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--ink-light);
 }
-.wine__name { font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.25; color: var(--ink); }
+.wine__name { font-family: var(--font-serif); font-size: 1.1rem; line-height: 1.25; color: var(--ink); }
 .wine__vint {
+  margin-top: 0.15rem;
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-light);
 }
 
 @media (max-width: 900px) {
-  .wine-grid { grid-template-columns: repeat(3, 1fr); }
+  .wine-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.75rem 1.5rem; }
 }
 @media (max-width: 768px) {
-  .wine-filter { grid-template-columns: 1fr; gap: 0.5rem; }
-  .wine-search { max-width: none; }
+  .wine-tools { margin-bottom: 2.5rem; }
+  .wine-section + .wine-section { margin-top: 4rem; }
+  .wine-section__head { font-size: 1.6rem; margin-bottom: 1.5rem; }
+  /* the dropdown becomes the shared full-screen sheet */
+  .wine-panel.filter-panel { width: auto; padding: 1.25rem 1.5rem 0; display: flex; flex-direction: column; }
+  .wine-panel.filter-panel[hidden] { display: none; }
+  .wine-panel .wine-filters { flex: 1 0 auto; }
+  .wine-panel__foot {
+    display: block;
+    position: sticky;
+    bottom: 0;
+    margin: 1rem -1.5rem 0;
+    padding: 1rem 1.5rem 1.25rem;
+    background: var(--warm-white);
+    border-top: 1px solid var(--rule);
+  }
+  .wine-panel__foot .btn { width: 100%; }
 }
 @media (max-width: 560px) {
-  .wine-grid { grid-template-columns: repeat(2, 1fr); gap: 1.75rem 0.85rem; }
-  .wine__more { padding: 0.9rem 0.8rem; }
-  .wine__more-app { font-size: 0.95rem; }
+  .wine-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.25rem 1rem; }
+  /* search takes the first line; count and filter share the second */
+  .wine-tools__bar { flex-wrap: wrap; gap: 0.75rem 1rem; padding-bottom: 0; border-bottom: none; }
+  .wine-search { flex-basis: 100%; border-bottom: 1px solid var(--rule); }
+  .wine-search:focus { border-bottom-color: var(--ink-mid); }
+  .wine-count { flex: 1 1 auto; }
+  .wine-search { font-size: 1rem; }
+  .wine__more { padding: 0.9rem 0.8rem 1rem; }
+  .wine__more-app { font-size: 1rem; }
+  .wine__more-blend { font-size: 0.8rem; }
+  .wine__label { gap: 0.7rem; padding: 1rem 0.75rem; }
+  .wine__label-app { font-size: 1.05rem; }
+  .wine__name { font-size: 1.05rem; }
+}
+
+/* ============================================================
+   TOUCH: 44px targets for chips and buttons on tablets and phones
+   ============================================================ */
+@media (max-width: 768px) {
+  .chip,
+  .wine-active__tok { min-height: 44px; display: inline-flex; align-items: center; padding: 0 1rem; }
+  .filter-toggle,
+  .share-btn,
+  .chip-group__label { min-height: 44px; }
+  .btn--solid,
+  .btn--green,
+  .btn--hero { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+  .filter-panel__close { min-width: 44px; min-height: 44px; margin-right: -0.6rem; }
+  /* text buttons keep their underline; an invisible pad takes the tap */
+  .btn--text,
+  .btn--text-light,
+  .tl-end-link { position: relative; }
+  .btn--text::after,
+  .btn--text-light::after,
+  .tl-end-link::after,
+  .home-next__join::after { content: ''; position: absolute; inset: -0.8rem -0.4rem; }
 }

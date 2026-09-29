@@ -6,8 +6,8 @@ permalink: /wines/
 ---
 
 {% comment %}
-  One card per wine, in order: poured evenings (latest first), then upcoming
-  ones (soonest first). A wine that appears in more than one tasting (same
+  One card per wine, in two sections: poured (latest evening first), then
+  coming up (soonest first). A wine without a photo gets a type-only label. A wine that appears in more than one tasting (same
   producer, name, vintage and appellation) is shown once, with every tasting
   listed. Filters are built by assets/js/wines.js
   from the data-* attributes on each card, so a new wine or chapter needs no
@@ -25,7 +25,8 @@ permalink: /wines/
 {% assign n_upcoming = 0 %}
 {% assign n_producers = 0 %}
 
-{% capture grid_html %}
+{% assign poured_html = "" %}
+{% assign upcoming_html = "" %}
 {% for t in ordered %}
   {% for w in t.wines %}
     {% assign key = w.producer | append: "|" | append: w.name | append: "|" | append: w.vintage | append: "|" | append: w.appellation %}
@@ -60,6 +61,7 @@ permalink: /wines/
       {% assign chapter_obj = site.chapters | where: "slug", first_t.chapter | first %}
       {% assign search_text = w.producer | append: " " | append: w.name | append: " " | append: w.appellation | append: " " | append: w.vintage | downcase %}
 
+      {% capture card %}
       <li class="wine"
           data-status="{{ wstatus }}"
           data-colour="{{ w.colour }}"
@@ -73,15 +75,19 @@ permalink: /wines/
 
         <div class="wine__tile" tabindex="0" role="group" aria-label="{{ w.producer }}, {{ w.name }}{% if w.vintage %}, {{ w.vintage }}{% endif %}">
           {% if w.image %}
-            <img class="wine__img"
-                 src="{{ '/assets/tastings/' | append: w.image | relative_url }}"
-                 alt="Bottle of {{ w.name }} by {{ w.producer }}"
-                 loading="lazy" decoding="async">
+            <span class="wine__photo">
+              <img class="wine__img"
+                   src="{{ '/assets/tastings/' | append: w.image | relative_url }}"
+                   alt="Bottle of {{ w.name }} by {{ w.producer }}"
+                   loading="lazy" decoding="async">
+            </span>
           {% else %}
-            <svg class="wine__ph" viewBox="0 0 60 180" aria-hidden="true"><use href="#bottle-outline"/></svg>
+            <span class="wine__label" aria-hidden="true">
+              <span class="wine__label-colour">{{ w.colour }}</span>
+              <span class="wine__label-app">{{ w.appellation }}</span>
+              {% if w.vintage %}<span class="wine__label-vint">{{ w.vintage }}</span>{% endif %}
+            </span>
           {% endif %}
-
-          {% if wstatus == "upcoming" %}<span class="tag tag--green wine__flag">Coming up</span>{% endif %}
 
           <div class="wine__more">
             <span class="wine__more-app">{{ w.appellation }}</span>
@@ -111,18 +117,15 @@ permalink: /wines/
           </span>
         </div>
       </li>
+      {% endcapture %}
+      {% if wstatus == "poured" %}
+        {% assign poured_html = poured_html | append: card %}
+      {% else %}
+        {% assign upcoming_html = upcoming_html | append: card %}
+      {% endif %}
     {% endunless %}
   {% endfor %}
 {% endfor %}
-{% endcapture %}
-
-<!-- Shared bottle outline, used when a wine has no picture yet -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <symbol id="bottle-outline" viewBox="0 0 60 180">
-    <path d="M24 4h12v30c0 8 14 16 14 40v98a4 4 0 0 1-4 4H14a4 4 0 0 1-4-4V74c0-24 14-32 14-40z"
-          fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
-  </symbol>
-</svg>
 
 <!-- ── Masthead ────────────────────────────────────────────── -->
 <header class="page-header page-header--tastings">
@@ -154,28 +157,51 @@ permalink: /wines/
     <div class="wine-tools">
       <div class="wine-tools__bar">
         <label class="visually-hidden" for="wineSearch">Search wines</label>
-        <input class="form-input wine-search" type="search" id="wineSearch" placeholder="Search producer, wine, appellation" autocomplete="off">
-        <button type="button" class="filter-toggle" id="wineFilterToggle" aria-expanded="true" aria-controls="wineFilterGroups">
-          <svg class="filter-toggle__icon" width="13" height="13" viewBox="0 0 16 16"
-               fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true">
-            <line x1="2" y1="4.5" x2="14" y2="4.5"/>
-            <line x1="4" y1="8" x2="12" y2="8"/>
-            <line x1="6" y1="11.5" x2="10" y2="11.5"/>
-          </svg>
-          <span class="filter-toggle__label">Filters</span>
-        </button>
+        <input class="wine-search" type="search" id="wineSearch" placeholder="Search producer, wine, appellation" autocomplete="off">
+        <p class="wine-count" id="wineCount" aria-live="polite"><span id="wineCountText">{{ n_poured | plus: n_upcoming }} wines</span></p>
+        <div class="wine-tools__filter">
+          <button type="button" class="filter-toggle" id="wineFilterToggle" aria-expanded="false" aria-controls="wineFilterPanel">
+            <svg class="filter-toggle__icon" width="13" height="13" viewBox="0 0 16 16"
+                 fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true">
+              <line x1="2" y1="4.5" x2="14" y2="4.5"/>
+              <line x1="4" y1="8" x2="12" y2="8"/>
+              <line x1="6" y1="11.5" x2="10" y2="11.5"/>
+            </svg>
+            <span class="filter-toggle__label">Filter</span>
+          </button>
+          <div class="filter-panel wine-panel" id="wineFilterPanel" role="dialog" aria-label="Filter wines" hidden>
+            <div class="filter-panel__head">
+              <span class="filter-panel__title">Filter</span>
+              <button type="button" class="filter-panel__close" id="wineFilterClose" aria-label="Close filters">&times;</button>
+            </div>
+            <div class="wine-filters" id="wineFilterGroups"></div>
+            <div class="wine-panel__foot">
+              <button type="button" class="btn btn--solid" id="wineFilterDone">Show wines</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="wine-filters" id="wineFilterGroups"></div>
+
+      <div class="wine-active-row" id="wineActiveRow" hidden>
+        <span class="wine-active" id="wineActive"></span>
+        <button type="button" class="btn btn--text" id="wineReset" hidden>Clear filters</button>
+      </div>
     </div>
 
-    <p class="wine-count" id="wineCount" aria-live="polite">
-      <span id="wineCountText">{{ n_poured | plus: n_upcoming }} wines</span>
-      <button type="button" class="btn btn--text" id="wineReset" hidden>Clear filters</button>
-    </p>
-
-    <ul class="wine-grid" id="wineGrid">
-      {{ grid_html }}
-    </ul>
+    <div class="wine-sections" id="wineGrid">
+      <section class="wine-section" data-section="poured" aria-labelledby="wineHeadPoured">
+        <h2 class="wine-section__head" id="wineHeadPoured">Poured <span class="wine-section__n">{{ n_poured }}</span></h2>
+        <ul class="wine-grid">
+          {{ poured_html }}
+        </ul>
+      </section>
+      <section class="wine-section" data-section="upcoming" aria-labelledby="wineHeadUpcoming">
+        <h2 class="wine-section__head" id="wineHeadUpcoming">Coming up <span class="wine-section__n">{{ n_upcoming }}</span></h2>
+        <ul class="wine-grid">
+          {{ upcoming_html }}
+        </ul>
+      </section>
+    </div>
 
     <p class="filter-empty text-light" id="wineEmpty" hidden>No wine matches these filters.</p>
 

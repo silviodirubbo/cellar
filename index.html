@@ -89,9 +89,18 @@ permalink: /
         {% if next %}
         <div class="home-next">
           <span class="home-next__label">Next up</span>
-          <time class="home-next__date" datetime="{{ next.date }}">{{ next.date | date: "%a %-d %b %Y" }}</time>
-          <span class="home-next__title">{{ next.title }}</span>
-          <a class="home-next__join" href="{{ '/tastings/' | relative_url }}#join-{{ next.slug }}">I'm coming →</a>
+          <div class="home-next__row home-next__row--first">
+            <time class="home-next__date" datetime="{{ next.date }}">{% if next.date_tbd %}Date to be set{% else %}{{ next.date | date: "%a %-d %b %Y" }}{% endif %}</time>
+            <span class="home-next__title">{{ next.title }}</span>
+            <a class="home-next__join" href="{{ '/tastings/' | relative_url }}#join-{{ next.slug }}">I'm coming →</a>
+          </div>
+          {% assign then = upcoming | slice: 1, 2 %}
+          {% for t in then %}
+          <div class="home-next__row">
+            <time class="home-next__date" datetime="{{ t.date }}">{% if t.date_tbd %}Date to be set{% else %}{{ t.date | date: "%a %-d %b %Y" }}{% endif %}</time>
+            <span class="home-next__title">{{ t.title }}</span>
+          </div>
+          {% endfor %}
         </div>
         {% endif %}
       </article>

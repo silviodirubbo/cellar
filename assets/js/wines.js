@@ -5,7 +5,9 @@
    data-status, data-colour, data-country, data-region, data-chapter,
    data-chapter-title, data-chapter-order, data-search.
    Filter groups and their chips are built here from that data, so new
-   wines or chapters appear without touching the template.
+   wines or chapters appear without touching the template. The chips sit
+   in a dropdown (a full-screen sheet on phones), the same pattern as the
+   Tastings filter; active filters are echoed as tokens beside the count.
    ============================================================ */
 (function () {
   'use strict';
@@ -14,14 +16,24 @@
   if (!grid) return;
 
   const cards      = Array.from(grid.querySelectorAll('.wine'));
+  const sections   = Array.from(grid.querySelectorAll('.wine-section'));
   const groupsEl   = document.getElementById('wineFilterGroups');
+  const panelEl    = document.getElementById('wineFilterPanel');
+  const closeEl    = document.getElementById('wineFilterClose');
+  const doneEl     = document.getElementById('wineFilterDone');
   const searchEl   = document.getElementById('wineSearch');
   const toggleEl   = document.getElementById('wineFilterToggle');
+  const toggleLbl  = toggleEl.querySelector('.filter-toggle__label');
   const countText  = document.getElementById('wineCountText');
+  const activeEl   = document.getElementById('wineActive');
+  const activeRow  = document.getElementById('wineActiveRow');
   const resetBtn   = document.getElementById('wineReset');
   const emptyEl    = document.getElementById('wineEmpty');
 
   const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+  // "pepiere" finds "Pépière": compare without accents
+  const fold = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  cards.forEach(c => { c.dataset.search = fold(c.dataset.search); });
 
   // Which filters exist, and how each one reads and sorts.
   const GROUPS = [
@@ -41,6 +53,7 @@
       sort: 'chapter' }
   ];
 
+  const labels = {};   // group key -> value -> chip text
   const state = { q: '' };
   GROUPS.forEach(g => { state[g.key] = null; });
 
@@ -92,7 +105,9 @@
       items.className = 'wine-filter__items';
 
       chipsByGroup[g.key] = [];
+      labels[g.key] = {};
       values.forEach(v => {
+        labels[g.key][v] = g.label_for(v, seen.get(v));
         const chip = document.createElement('button');
         chip.type = 'button';
         chip.className = 'chip';
@@ -135,12 +150,37 @@
       });
     });
 
-    const filtered = !!state.q || GROUPS.some(g => state[g.key]);
+    const active = GROUPS.filter(g => state[g.key]);
+    const filtered = !!state.q || active.length > 0;
     countText.textContent = filtered
-      ? 'Showing ' + shown + ' of ' + cards.length + ' wines'
+      ? shown + ' of ' + cards.length + ' wines'
       : cards.length + ' wines';
     resetBtn.hidden = !filtered;
+    activeRow.hidden = !filtered;
     emptyEl.hidden = shown !== 0;
+
+    // Active filters, readable while the panel is closed
+    activeEl.textContent = '';
+    active.forEach(g => {
+      const tok = document.createElement('button');
+      tok.type = 'button';
+      tok.className = 'wine-active__tok';
+      tok.dataset.group = g.key;
+      tok.setAttribute('aria-label', 'Remove filter ' + labels[g.key][state[g.key]]);
+      tok.textContent = labels[g.key][state[g.key]];
+      activeEl.appendChild(tok);
+    });
+    toggleLbl.textContent = active.length ? 'Filter · ' + active.length : 'Filter';
+    toggleEl.classList.toggle('filter-toggle--active', active.length > 0);
+    doneEl.textContent = shown === 1 ? 'Show 1 wine' : 'Show ' + shown + ' wines';
+
+    // Each section (poured, coming up) shows its own count, or hides when empty
+    sections.forEach(sec => {
+      const n = sec.querySelectorAll('.wine:not([hidden])').length;
+      sec.hidden = n === 0;
+      const num = sec.querySelector('.wine-section__n');
+      if (num) num.textContent = n;
+    });
 
     // A card that got filtered out must not stay open on touch screens.
     cards.forEach(c => { if (c.hidden) c.classList.remove('is-open'); });
@@ -156,8 +196,16 @@
   });
 
   searchEl.addEventListener('input', () => {
-    state.q = searchEl.value.trim().toLowerCase();
+    state.q = fold(searchEl.value.trim());
     apply();
+  });
+
+  activeEl.addEventListener('click', e => {
+    const tok = e.target.closest('.wine-active__tok');
+    if (!tok) return;
+    state[tok.dataset.group] = null;
+    apply();
+    toggleEl.focus();
   });
 
   resetBtn.addEventListener('click', () => {
@@ -167,13 +215,23 @@
     apply();
   });
 
-  // Filters panel: open on desktop, folded away on phones.
+  // Filters panel: a dropdown on desktop, a full-screen sheet on phones.
   function setPanel(open) {
-    groupsEl.hidden = !open;
+    panelEl.hidden = !open;
     toggleEl.setAttribute('aria-expanded', open);
     toggleEl.classList.toggle('filter-toggle--open', open);
+    document.body.classList.toggle('filter-open', open);
   }
-  toggleEl.addEventListener('click', () => setPanel(groupsEl.hidden));
+  toggleEl.addEventListener('click', e => {
+    e.stopPropagation();
+    setPanel(panelEl.hidden);
+  });
+  closeEl.addEventListener('click', () => { setPanel(false); toggleEl.focus(); });
+  doneEl.addEventListener('click', () => { setPanel(false); toggleEl.focus(); });
+  document.addEventListener('click', e => {
+    if (panelEl.hidden) return;
+    if (!panelEl.contains(e.target) && !toggleEl.contains(e.target)) setPanel(false);
+  });
 
   // Touch screens have no hover: a tap opens a bottle's details, a tap
   // elsewhere closes them. Links inside the details work as usual.
@@ -190,10 +248,11 @@
     });
   }
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') cards.forEach(c => c.classList.remove('is-open'));
+    if (e.key !== 'Escape') return;
+    cards.forEach(c => c.classList.remove('is-open'));
+    if (!panelEl.hidden) { setPanel(false); toggleEl.focus(); }
   });
 
   buildGroups();
-  setPanel(window.matchMedia('(min-width: 769px)').matches);
   apply();
 })();
