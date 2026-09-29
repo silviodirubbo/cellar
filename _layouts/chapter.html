@@ -55,9 +55,9 @@ layout: default
               {% elsif tasting.status == "past" %}
                 <span class="label">Presentation coming</span>
               {% elsif tasting.date_tbd %}
-                <a href="{{ '/planner/' | relative_url }}#{{ tasting.slug }}" class="btn btn--text">My availability →</a>
+                <a href="{{ '/tastings/' | relative_url }}#join-{{ tasting.slug }}" class="btn btn--text">My availability →</a>
               {% else %}
-                <a href="{{ '/planner/' | relative_url }}#{{ tasting.slug }}" class="btn btn--text">I'm coming →</a>
+                <a href="{{ '/tastings/' | relative_url }}#join-{{ tasting.slug }}" class="btn btn--text">I'm coming →</a>
               {% endif %}
               <a href="{{ '/tastings/' | relative_url }}#{{ tasting.slug }}" class="btn btn--text">On the calendar →</a>
             </div>

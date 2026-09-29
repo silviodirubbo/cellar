@@ -22,7 +22,10 @@ permalink: /tastings/
 <header class="page-header page-header--tastings">
   <div class="container">
     <span class="section-label">Events</span>
-    <h1 class="th-title">Tastings<span class="th-title__dot">.</span></h1>
+    <div class="th-head">
+      <h1 class="th-title">Tastings<span class="th-title__dot">.</span></h1>
+      <button type="button" class="btn btn--green th-cta js-open-propose">Propose a topic</button>
+    </div>
     <p class="mt-3">One grape, one place, one evening at a time. Everything we've poured and everything in the pipeline, on a single line from tonight backwards.</p>
     <div class="th-stats mt-4">
       <a class="th-stat" href="#coming-up">
@@ -200,14 +203,14 @@ permalink: /tastings/
 
             <div class="tl-card__foot">
               {% if tasting.date_tbd %}
-                <a href="{{ '/planner/' | relative_url }}#{{ tasting.slug }}" class="btn btn--solid">My availability</a>
+                <button type="button" class="btn btn--solid avail-btn" data-slug="{{ tasting.slug }}" data-title="{{ tasting.title }}">My availability</button>
               {% elsif is_next %}
-                <a href="{{ '/planner/' | relative_url }}#{{ tasting.slug }}" class="btn btn--hero">I'm coming</a>
+                <button type="button" class="btn btn--hero signup-btn" data-slug="{{ tasting.slug }}" data-title="{{ tasting.title }}">I'm coming</button>
                 <button class="btn btn--text-light js-ics"
                         data-date="{{ tasting.date }}" data-title="{{ tasting.title }}"
                         data-location="{{ tasting.location }}">Add to calendar</button>
               {% else %}
-                <a href="{{ '/planner/' | relative_url }}#{{ tasting.slug }}" class="btn btn--solid">I'm coming</a>
+                <button type="button" class="btn btn--solid signup-btn" data-slug="{{ tasting.slug }}" data-title="{{ tasting.title }}">I'm coming</button>
                 <button class="btn btn--text js-ics"
                         data-date="{{ tasting.date }}" data-title="{{ tasting.title }}"
                         data-location="{{ tasting.location }}">Add to calendar</button>
@@ -300,7 +303,7 @@ permalink: /tastings/
         <span class="tl-node tl-node--hollow" aria-hidden="true"></span>
         <div class="tl-row__label">
           The cellar opened {% if first_ever %}{{ first_ever.date | date: "%B %Y" }}{% endif %}:
-          <a href="{{ '/planner/' | relative_url }}#propose" class="tl-end-link">propose the next theme →</a>
+          <button type="button" class="tl-end-link js-open-propose">propose the next theme →</button>
         </div>
       </div>
 
@@ -308,3 +311,6 @@ permalink: /tastings/
 
   </div>
 </section>
+
+{% include forms-modals.html %}
+<script src="{{ '/assets/js/forms.js' | relative_url }}"></script>

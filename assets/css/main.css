@@ -400,81 +400,145 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
 .hero-stat-num { font-family: var(--font-serif); font-weight: 300; font-size: 2.2rem; color: var(--ink); line-height: 1; }
 .hero-stat-desc { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); margin-top: 0.2rem; }
 
-/* ── Home: curriculum band ────────────────────────────────── */
-.curriculum-band { background-color: var(--off-white); border-bottom: 1px solid var(--rule); padding: 4rem 0; }
-.curriculum-row { display: flex; gap: 3rem; flex-wrap: wrap; }
-.curriculum-item {
-  display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
-  padding-bottom: 0.25rem;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s var(--ease);
+/* ── Home: explore cards ──────────────────────────────────── */
+.home-explore { background-color: var(--off-white); padding: var(--section-pad) 0; }
+.home-cards {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.25rem;
 }
-.curriculum-item:hover { border-bottom-color: var(--chapter-accent, var(--ink-mid)); }
-.curriculum-item__numeral {
+.home-card {
+  position: relative;               /* anchors the whole-card link */
+  display: flex;
+  flex-direction: column;
+  min-height: 21rem;
+  padding: 2rem;
+  border: 1px solid var(--rule);
+  background: transparent;
+  transition: border-color 0.25s var(--ease);
+}
+.home-card:hover,
+.home-card:focus-within { border-color: var(--ink-mid); }
+
+.home-card__eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+.home-card__title {
+  margin-top: 0.9rem;
+  font-size: clamp(1.9rem, 3.4vw, 2.5rem);
+}
+.home-card__link::after { content: ''; position: absolute; inset: 0; }
+.home-card__link:focus-visible { outline: none; }
+.home-card__link:focus-visible::after { outline: 1px solid var(--green); outline-offset: 2px; }
+.home-card__text { margin-top: 0.7rem; font-size: 0.95rem; line-height: 1.65; color: var(--ink-mid); max-width: 38ch; }
+.home-card__arrow {
+  position: absolute;
+  top: 1.9rem; right: 2rem;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--ink-light);
+  transition: color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.home-card:hover .home-card__arrow,
+.home-card:focus-within .home-card__arrow { color: var(--ink); transform: translateX(4px); }
+
+/* Chapters: one row per chapter with its progress */
+.home-chapters { list-style: none; margin-top: auto; padding-top: 1.75rem; }
+.home-chapters__row {
+  display: grid;
+  grid-template-columns: 2rem 1fr minmax(9rem, 14rem);
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--rule);
+}
+.home-chapters__numeral {
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: 300;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   line-height: 1;
   color: var(--chapter-accent, var(--ink));
 }
-.curriculum-item__title { font-family: var(--font-serif); font-size: 1.05rem; color: var(--ink); }
-.curriculum-item__count { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; color: var(--ink-light); }
+.home-chapters__title { font-family: var(--font-serif); font-size: 1.1rem; color: var(--ink); }
+.home-chapters .chapter-progress { max-width: none; }
 
-/* ── Home two-column preview ──────────────────────────────── */
-.preview-grid { display: grid; grid-template-columns: 1fr 1px 1fr; min-height: 360px; }
-.preview-rule { background-color: var(--rule); width: 1px; }
-.preview-col { padding: var(--panel-pad-y) 2.5rem; }
-.preview-col--left  { background-color: var(--off-white); }
-.preview-col--right { background-color: var(--warm-white); }
-
-.preview-event { border: 1px solid var(--rule); padding: 1rem 1.1rem; margin-bottom: 0.75rem; }
-.preview-event--featured { border-left: 2px solid var(--green); }
-.preview-event--past { opacity: 0.5; }
-.preview-event-meta { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem; }
-.preview-event-meta time { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--ink-light); }
-.preview-event-title { font-family: var(--font-serif); font-weight: 300; font-size: 1.05rem; color: var(--ink); margin-bottom: 0.2rem; }
-.preview-event-region { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); }
-.preview-link {
-  display: inline-block;
-  margin-top: 1rem;
+/* Tastings: the next evening */
+.home-next {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.home-next__label { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green); }
+.home-next__date { font-size: 0.6rem; }
+.home-next__title { font-family: var(--font-serif); font-size: 1.25rem; line-height: 1.2; color: var(--ink); }
+.home-next__join {
+  position: relative; z-index: 1;    /* sits above the whole-card link */
+  align-self: flex-start;
+  margin-top: 0.6rem;
   font-family: var(--font-mono);
   font-size: 0.6rem;
-  letter-spacing: 0.13em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-mid);
   border-bottom: 1px solid var(--ink-mid);
   padding-bottom: 1px;
   transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
 }
-.preview-link:hover { color: var(--green); border-bottom-color: var(--green); }
+.home-next__join:hover { color: var(--green); border-bottom-color: var(--green); }
 
-/* Calendar */
-.cal-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); display: block; margin-bottom: 0.75rem; }
-.cal-row { display: flex; align-items: center; gap: 0.85rem; padding: 0.7rem 0; border-bottom: 1px solid var(--rule); }
-.cal-row:first-of-type { border-top: 1px solid var(--rule); }
-.cal-row--past { opacity: 0.4; }
-.cal-dot { width: 6px; height: 6px; border-radius: 50%; background-color: var(--green); flex-shrink: 0; }
-.cal-dot--past { background-color: var(--rule); }
-.cal-date { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--ink-light); min-width: 6rem; }
-.cal-title { font-family: var(--font-serif); font-size: 0.95rem; color: var(--ink); }
-.planner-cta { margin-top: 1.5rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+/* Wines: a strip of bottles from the latest evenings */
+.home-bottles {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  display: flex;
+  align-items: flex-end;
+  gap: 1.75rem;
+  height: 10.5rem;
+  box-sizing: content-box;
+  overflow: hidden;
+}
+.home-bottles img {
+  height: 100%;
+  width: auto;
+  max-width: 4.5rem;
+  object-fit: contain;
+  mix-blend-mode: multiply;         /* lets a photo's white background fall away */
+  filter: brightness(1.03);
+}
 
-/* ── Planner page ─────────────────────────────────────────── */
-.planner-grid { display: grid; grid-template-columns: 2fr 1fr; min-height: 500px; border-top: 1px solid var(--rule); }
-.planner-main { padding: var(--panel-pad-y) 2.5rem; background: var(--warm-white); border-right: 1px solid var(--rule); }
-.planner-aside { padding: var(--panel-pad-y) 2rem; background: var(--off-white); }
+/* Propose a topic: the one solid card, the accent green */
+.home-card--green { background: var(--green); border-color: var(--green); }
+.home-card--green:hover,
+.home-card--green:focus-within { border-color: var(--ink); background: var(--ink); }
+.home-card--green .home-card__eyebrow { color: rgba(253,252,250,0.65); }
+.home-card--green .home-card__title,
+.home-card--green .home-card__title a { color: var(--warm-white); }
+.home-card--green .home-card__text { color: rgba(253,252,250,0.8); }
+.home-card--green .home-card__arrow { color: rgba(253,252,250,0.65); }
+.home-card--green:hover .home-card__arrow,
+.home-card--green:focus-within .home-card__arrow { color: var(--warm-white); }
 
-.signup-block { border: 1px solid var(--rule); padding: 1.5rem; margin-bottom: 1rem; }
-.signup-block--featured { border-left: 2px solid var(--green); }
-.signup-meta { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
-.signup-meta time { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--ink-light); }
-.signup-title { font-family: var(--font-serif); font-weight: 300; font-size: 1.3rem; color: var(--ink); margin-bottom: 0.3rem; }
-.signup-cost { font-family: var(--font-serif); font-size: 0.85rem; color: var(--ink-mid); display: flex; align-items: baseline; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.4rem; max-width: none; }
-.signup-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); }
+@media (max-width: 768px) {
+  .home-cards { grid-template-columns: 1fr; }
+  .home-card { min-height: 0; padding: 1.5rem; }
+  .home-card__arrow { top: 1.4rem; right: 1.5rem; }
+  .home-chapters__row { grid-template-columns: 1.6rem 1fr; }
+  .home-chapters__row .chapter-progress { grid-column: 2; }
+  .home-card--green { min-height: 14rem; }
+  .home-bottles { gap: 1rem; height: 9rem; }
+  .home-bottles img:nth-child(n+5) { display: none; }   /* four fit a phone card */
+}
 
+/* ── Forms: dialogs on the Tastings page ──────────────────── */
 .propose-intro { font-family: var(--font-serif); font-size: 0.9rem; color: var(--ink-light); line-height: 1.65; margin-bottom: 1.5rem; max-width: none; }
 .propose-form { display: flex; flex-direction: column; gap: 0; }
 .form-field { margin-bottom: 1rem; }
@@ -485,43 +549,11 @@ textarea.form-input { min-height: 5rem; }
 .form-success { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-top: 0.75rem; max-width: none; }
 .form-error { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-top: 0.75rem; max-width: none; }
 
-/* ── Planner: stale deep-link notice ──────────────────────── */
-.planner-stale-notice { border-left: 2px solid var(--gold); padding: 1rem 1.25rem; margin-bottom: 1.5rem; background: var(--off-white); }
-.planner-stale-notice p { font-size: 0.9rem; color: var(--ink-mid); max-width: none; }
-.planner-stale-notice em { font-style: italic; }
-.planner-stale-notice a { color: var(--ink-mid); border-bottom: 1px solid var(--ink-mid); padding-bottom: 1px; transition: color 0.2s var(--ease), border-color 0.2s var(--ease); }
-.planner-stale-notice a:hover { color: var(--green); border-bottom-color: var(--green); }
-
-/* ── Planner: TBD tastings, grouped by chapter ────────────── */
-.tbd-group { margin-bottom: 2rem; }
-.tbd-group__label {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-light);
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.25rem;
-  border-bottom: 1px solid var(--rule);
-}
-.tbd-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.85rem 0;
-  border-bottom: 1px solid var(--rule);
-}
-.tbd-row:last-child { border-bottom: none; }
-.tbd-row__main { display: flex; flex-direction: column; gap: 0.15rem; }
-.tbd-row__title { font-family: var(--font-serif); font-size: 1rem; color: var(--ink); }
-.tbd-row__meta { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); }
-
 /* ── Availability modal ───────────────────────────────────── */
 .avail-overlay { position: fixed; inset: 0; background: rgba(26,24,20,0.7); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 2rem; }
 .avail-overlay[hidden] { display: none; }
-.avail-modal { background: var(--warm-white); max-width: 480px; width: 100%; padding: 2.5rem; position: relative; }
+.avail-modal { background: var(--warm-white); max-width: 480px; width: 100%; padding: 2.5rem; position: relative; max-height: calc(100vh - 4rem); overflow-y: auto; }
+body.modal-open { overflow: hidden; }
 .avail-modal__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
 .avail-close { font-family: var(--font-mono); font-size: 0.7rem; color: var(--ink-light); background: none; border: none; cursor: pointer; padding: 0.25rem; transition: color 0.2s var(--ease); }
 .avail-close:hover { color: var(--ink); }
@@ -539,10 +571,6 @@ textarea.form-input { min-height: 5rem; }
   :root { --section-pad: 4rem; }
 
   .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .preview-grid { grid-template-columns: 1fr; }
-  .preview-rule { width: 100%; height: 1px; }
-  .planner-grid { grid-template-columns: 1fr; }
-  .planner-main { border-right: none; border-bottom: 1px solid var(--rule); }
   .footer__inner { flex-direction: column; gap: 1rem; text-align: center; }
 
   /* Nav: burger takes over here, at the 4-item point where the inline
@@ -579,9 +607,6 @@ textarea.form-input { min-height: 5rem; }
 
   /* Page header */
   .page-header { padding-top: calc(3rem + 3.5rem); padding-bottom: 3rem; }
-
-  /* Planner: TBD rows stack instead of squeezing the button */
-  .tbd-row { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
 }
 
 /* ============================================================
@@ -603,6 +628,16 @@ textarea.form-input { min-height: 5rem; }
   letter-spacing: -0.02em;
 }
 .th-title__dot { color: var(--gold); font-style: normal; }
+.th-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  flex-wrap: wrap;
+}
+/* The green sits on the dark masthead: a hairline keeps its edge visible. */
+.th-cta { border-color: rgba(253,252,250,0.28); margin-bottom: 0.6rem; }
+.th-cta:hover { background: var(--warm-white); border-color: var(--warm-white); color: var(--ink); }
 
 .th-stats {
   display: flex;
@@ -982,9 +1017,15 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   padding-top: 0.25rem;
 }
 .tl-end-link {
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
   color: var(--ink-mid);
+  background: none;
+  border: none;
   border-bottom: 1px solid var(--ink-mid);
-  padding-bottom: 1px;
+  padding: 0 0 1px;
+  cursor: pointer;
   transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
 }
 .tl-end-link:hover { color: var(--green); border-bottom-color: var(--green); }
@@ -1686,3 +1727,168 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 .story--dark .story-word,
 .story--green .story-word { color: var(--warm-white); }
 
+/* ============================================================
+   WINES: the cellar book (grid, filters, hover details)
+   ============================================================ */
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.wines { padding: 3.5rem 0 var(--section-pad); background: var(--warm-white); }
+
+/* Search + filter toggle */
+.wine-tools { margin-bottom: 1.25rem; }
+.wine-tools__bar { display: flex; align-items: center; gap: 1rem; }
+.wine-search { flex: 1; max-width: 26rem; border-radius: 0; -webkit-appearance: none; appearance: none; }
+.wine-filters { margin-top: 1.25rem; border-top: 1px solid var(--rule); }
+.wine-filters[hidden] { display: none; }
+.wine-filter {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.wine-filter__label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+.wine-filter__items { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.chip--empty { opacity: 0.4; }
+
+.wine-count {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  margin: 1.5rem 0 1.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  max-width: none;
+}
+.wine-count .btn { font-size: 0.58rem; }
+.wine-count [hidden] { display: none; }
+
+/* The grid */
+.wine-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.25rem 1.25rem;
+}
+.wine[hidden] { display: none; }
+
+.wine__tile {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  background: var(--off-white);
+  overflow: hidden;
+  cursor: default;
+}
+.wine__tile:focus-visible { outline: 1px solid var(--green); outline-offset: 2px; }
+.wine__img {
+  position: absolute;
+  inset: 7% 14%;
+  width: 72%;
+  height: 86%;
+  object-fit: contain;
+  mix-blend-mode: multiply;        /* photos with a white background sit flat on the tile */
+  filter: brightness(1.03);        /* pushes a near-white photo background to pure white, so it vanishes */
+}
+.wine__ph {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 34%;
+  transform: translate(-50%, -50%);
+  color: #CFC9C0;                  /* darker than --rule so the outline reads on the tile */
+}
+.wine__flag { position: absolute; top: 0.7rem; left: 0.7rem; background: var(--off-white); }
+
+/* Details: cover the tile on hover, keyboard focus, or a tap */
+.wine__more {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.95rem 0.9rem;
+  overflow-y: auto;
+  background: var(--ink);
+  color: var(--warm-white);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s var(--ease), visibility 0.25s var(--ease);
+}
+.wine__tile:hover .wine__more,
+.wine__tile:focus-within .wine__more,
+.wine.is-open .wine__more { opacity: 1; visibility: visible; }
+
+.wine__more-app { font-family: var(--font-serif); font-size: 1rem; line-height: 1.2; color: var(--warm-white); }
+.wine__more-blend { font-family: var(--font-serif); font-size: 0.8rem; line-height: 1.35; color: rgba(253,252,250,0.7); }
+.wine__more-where,
+.wine__more-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-light-on-dark);
+}
+.wine__more-label { margin-top: auto; padding-top: 0.6rem; border-top: 1px solid rgba(253,252,250,0.18); }
+.wine__more-tastings { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.wine__more-tastings li { display: flex; flex-direction: column; gap: 0.1rem; }
+.wine__more-tastings time,
+.wine__more-date { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-light-on-dark); }
+.wine__more-tastings a {
+  align-self: flex-start;
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  line-height: 1.2;
+  color: var(--warm-white);
+  border-bottom: 1px solid rgba(253,252,250,0.35);
+  transition: border-color 0.2s var(--ease);
+}
+.wine__more-tastings a:hover { border-bottom-color: var(--warm-white); }
+.wine__more-tastings a:focus-visible { outline: 1px solid var(--warm-white); outline-offset: 2px; }
+
+/* Caption under each tile */
+.wine__cap { padding-top: 0.75rem; display: flex; flex-direction: column; gap: 0.15rem; }
+.wine__prod {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+.wine__name { font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.25; color: var(--ink); }
+.wine__vint {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+
+@media (max-width: 900px) {
+  .wine-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  .wine-filter { grid-template-columns: 1fr; gap: 0.5rem; }
+  .wine-search { max-width: none; }
+}
+@media (max-width: 560px) {
+  .wine-grid { grid-template-columns: repeat(2, 1fr); gap: 1.75rem 0.85rem; }
+  .wine__more { padding: 0.9rem 0.8rem; }
+  .wine__more-app { font-size: 0.95rem; }
+}

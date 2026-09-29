@@ -1,0 +1,122 @@
+{% comment %}
+  The three dialogs used on the Tastings page: sign up for an evening, give
+  availability for an evening without a date, propose a topic. Behaviour lives
+  in assets/js/forms.js. Form endpoints are Formspree; the hidden `type` field
+  tells the submissions apart.
+{% endcomment %}
+{% assign chapters_sorted = site.chapters | sort: "order" %}
+
+<!-- ── Sign-up dialog ──────────────────────────────────────── -->
+<div class="avail-overlay" id="signup-overlay" hidden>
+  <div class="avail-modal" role="dialog" aria-modal="true" aria-labelledby="signup-tasting-name">
+    <div class="avail-modal__header">
+      <span class="col-label" style="margin-bottom:0;" id="signup-tasting-name">Sign up</span>
+      <button class="avail-close" id="signup-close" aria-label="Close">✕</button>
+    </div>
+    <p class="propose-intro" style="margin-top:1rem;">Let me know you're coming and I'll be in touch with details.</p>
+    <form class="propose-form" action="https://formspree.io/f/xwvgwdgn" method="POST" id="signup-form">
+      <input type="hidden" name="type" value="signup">
+      <input type="hidden" name="tasting" id="signup-tasting-field">
+      <div class="form-field">
+        <label class="form-label" for="signup-firstname">First name</label>
+        <input class="form-input" type="text" id="signup-firstname" name="first_name" placeholder="First name" required>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="signup-lastname">Last name</label>
+        <input class="form-input" type="text" id="signup-lastname" name="last_name" placeholder="Last name" required>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="signup-email">Email</label>
+        <input class="form-input" type="email" id="signup-email" name="email" placeholder="your@email.com" required>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="signup-people">Number of people <span class="label" style="font-size:0.55rem;">(including yourself)</span></label>
+        <input class="form-input" type="number" id="signup-people" name="people" min="1" max="10" placeholder="e.g. 1" required>
+      </div>
+      <button type="submit" class="btn btn--green">Confirm attendance</button>
+      <p class="form-success" id="signup-success" hidden>You're in. See you there.</p>
+      <p class="form-error" id="signup-error" hidden>Something went wrong sending this. Please try again, or email me directly.</p>
+    </form>
+  </div>
+</div>
+
+<!-- ── Availability dialog ─────────────────────────────────── -->
+<div class="avail-overlay" id="avail-overlay" hidden>
+  <div class="avail-modal" role="dialog" aria-modal="true" aria-labelledby="avail-tasting-name">
+    <div class="avail-modal__header">
+      <span class="col-label" style="margin-bottom:0;" id="avail-tasting-name">Availability</span>
+      <button class="avail-close" id="avail-close" aria-label="Close">✕</button>
+    </div>
+    <p class="propose-intro" style="margin-top:1rem;">Let me know when you are free and I will pick the date that works for most people.</p>
+    <form class="propose-form" action="https://formspree.io/f/mqergvrv" method="POST" id="avail-form">
+      <input type="hidden" name="type" value="availability">
+      <input type="hidden" name="tasting" id="avail-tasting-field">
+      <div class="form-field">
+        <label class="form-label" for="avail-name">Your name</label>
+        <input class="form-input" type="text" id="avail-name" name="name" placeholder="First name" required>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="avail-email">Your email</label>
+        <input class="form-input" type="email" id="avail-email" name="email" placeholder="your@email.com" required>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="avail-dates">Your availability</label>
+        <textarea class="form-input" id="avail-dates" name="availability" placeholder="e.g. Any Friday in June except the 12th, weekends work too…" required></textarea>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="avail-people">Number of people <span class="label" style="font-size:0.55rem;">(including yourself)</span></label>
+        <input class="form-input" type="number" id="avail-people" name="people" min="1" max="20" placeholder="e.g. 2">
+      </div>
+      <button type="submit" class="btn btn--green">Send availability</button>
+      <p class="form-success" id="avail-success" hidden>Thank you. I will be in touch once the date is set.</p>
+      <p class="form-error" id="avail-error" hidden>Something went wrong sending this. Please try again, or email me directly.</p>
+    </form>
+  </div>
+</div>
+
+<!-- ── Propose-a-topic dialog ──────────────────────────────── -->
+<div class="avail-overlay" id="propose-overlay" hidden>
+  <div class="avail-modal" role="dialog" aria-modal="true" aria-labelledby="propose-title">
+    <div class="avail-modal__header">
+      <span class="col-label" style="margin-bottom:0;" id="propose-title">Propose a topic</span>
+      <button class="avail-close" id="propose-close" aria-label="Close">✕</button>
+    </div>
+    <p class="propose-intro" style="margin-top:1rem;">Have a grape, region, or theme in mind? Whether it slots into an existing chapter or opens up an entirely new one, send it over. I read every suggestion and build the curriculum from there.</p>
+    <form class="propose-form" action="https://formspree.io/f/xvzevjeq" method="POST" id="propose-form">
+      <input type="hidden" name="type" value="proposal">
+      <div class="form-field">
+        <label class="form-label" for="propose-name">Your name</label>
+        <input class="form-input" type="text" id="propose-name" name="name" placeholder="First name" required>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="propose-email">Your email</label>
+        <input class="form-input" type="email" id="propose-email" name="email" placeholder="your@email.com" required>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="propose-chapter">Which chapter? <span class="label" style="font-size:0.55rem;">(optional)</span></label>
+        <select class="form-input" id="propose-chapter" name="chapter">
+          <option value="">Not sure, surprise me</option>
+          {% for chapter in chapters_sorted %}
+          <option value="{{ chapter.title }}">An evening within {{ chapter.title }}</option>
+          {% endfor %}
+          <option value="new-chapter">A whole new chapter</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="propose-suggestion">Your suggestion</label>
+        <textarea class="form-input" id="propose-suggestion" name="suggestion" placeholder="e.g. Aged white Burgundy, natural wines from the Jura, Barolo vs Barbaresco…" required></textarea>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="propose-availability">Your availability <span class="label" style="font-size:0.55rem;">(optional)</span></label>
+        <input class="form-input" type="text" id="propose-availability" name="availability" placeholder="e.g. Fridays in June, not the 12th…">
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="propose-people">Number of people <span class="label" style="font-size:0.55rem;">(including yourself)</span></label>
+        <input class="form-input" type="number" id="propose-people" name="people" min="1" max="20" placeholder="e.g. 2">
+      </div>
+      <button type="submit" class="btn btn--green">Send suggestion</button>
+      <p class="form-success" id="propose-success" hidden>Thank you. Suggestion sent.</p>
+      <p class="form-error" id="propose-error" hidden>Something went wrong sending this. Please try again, or email me directly.</p>
+    </form>
+  </div>
+</div>

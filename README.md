@@ -28,7 +28,8 @@ _includes/              - nav, footer, chapter progress, story/ slide partials
 assets/css/main.css     - full site styles
 assets/js/              - site script (main.js) and Supabase client
 scripts/                - Story PNG renderer and daily tasting status sync
-planner/                - sign-up and topic proposal page
+wines/                  - wine grid with filters and hover details (built from _data/tastings.yml)
+planner/                - redirect stub to /tastings/ (old shared links); sign-up and proposals now live on the Tastings page
 tastings/               - public tastings index
 ```
 

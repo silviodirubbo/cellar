@@ -46,92 +46,85 @@ permalink: /
   </div>
 </section>
 
-<!-- ── Curriculum ───────────────────────────────────────────── -->
-<section class="curriculum-band">
+<!-- ── Explore: one card per section of the site ─────────────── -->
+{% assign chapters = site.chapters | sort: "order" %}
+{% assign wine_upcoming = 0 %}
+{% for t in upcoming %}{% assign wine_upcoming = wine_upcoming | plus: t.wines.size %}{% endfor %}
+
+<section class="home-explore">
   <div class="container">
-    <span class="section-label">Curriculum</span>
-    <div class="curriculum-row">
-      {% assign chapters = site.chapters | sort: "order" %}
-      {% for chapter in chapters %}
-        {% assign items = site.data.tastings | where: "chapter", chapter.slug %}
-        {% assign held = items | where: "status", "past" | size %}
-        {% assign total = items.size %}
-        {% if chapter.planned_total and chapter.planned_total > total %}
-          {% assign total = chapter.planned_total %}
+    <span class="section-label">Explore</span>
+
+    <div class="home-cards">
+
+      <!-- Chapters -->
+      <article class="home-card">
+        <span class="home-card__eyebrow">The curriculum</span>
+        <h2 class="home-card__title"><a class="home-card__link" href="{{ '/chapters/' | relative_url }}">Chapters</a></h2>
+        <p class="home-card__text">The evenings follow a path: one grape, one valley, one river at a time.</p>
+        <span class="home-card__arrow" aria-hidden="true">→</span>
+        <ul class="home-chapters">
+          {% for chapter in chapters %}
+            {% assign items = site.data.tastings | where: "chapter", chapter.slug %}
+            {% assign held = items | where: "status", "past" | size %}
+            {% assign total = items.size %}
+            {% if chapter.planned_total and chapter.planned_total > total %}
+              {% assign total = chapter.planned_total %}
+            {% endif %}
+            <li class="home-chapters__row" style="--chapter-accent: {{ chapter.color }};">
+              <span class="home-chapters__numeral" aria-hidden="true">{{ chapter.numeral }}</span>
+              <span class="home-chapters__title">{{ chapter.title }}</span>
+              {% include chapter-progress.html held=held total=total %}
+            </li>
+          {% endfor %}
+        </ul>
+      </article>
+
+      <!-- Tastings -->
+      <article class="home-card">
+        <span class="home-card__eyebrow">The calendar</span>
+        <h2 class="home-card__title"><a class="home-card__link" href="{{ '/tastings/' | relative_url }}">Tastings</a></h2>
+        <p class="home-card__text">{{ past | size }} evenings held, {{ upcoming | size }} to come.</p>
+        <span class="home-card__arrow" aria-hidden="true">→</span>
+        {% if next %}
+        <div class="home-next">
+          <span class="home-next__label">Next up</span>
+          <time class="home-next__date" datetime="{{ next.date }}">{{ next.date | date: "%a %-d %b %Y" }}</time>
+          <span class="home-next__title">{{ next.title }}</span>
+          <a class="home-next__join" href="{{ '/tastings/' | relative_url }}#join-{{ next.slug }}">I'm coming →</a>
+        </div>
         {% endif %}
-        <a class="curriculum-item" href="{{ chapter.url | relative_url }}" style="--chapter-accent: {{ chapter.color }};">
-          <span class="curriculum-item__numeral" aria-hidden="true">{{ chapter.numeral }}</span>
-          <span class="curriculum-item__title">{{ chapter.title }}</span>
-          <span class="curriculum-item__count">{{ held }} / {{ total }}</span>
-        </a>
-      {% endfor %}
+      </article>
+
+      <!-- Wines -->
+      <article class="home-card">
+        <span class="home-card__eyebrow">The cellar book</span>
+        <h2 class="home-card__title"><a class="home-card__link" href="{{ '/wines/' | relative_url }}">Wines</a></h2>
+        <p class="home-card__text">{{ wine_count }} wines poured so far, {{ wine_upcoming }} more on the way. Browse them by colour, region or chapter.</p>
+        <span class="home-card__arrow" aria-hidden="true">→</span>
+        <div class="home-bottles" aria-hidden="true">
+          {% assign strip_n = 0 %}
+          {% for t in past %}
+            {% assign with_img = t.wines | where_exp: "w", "w.image" %}
+            {% assign pick = with_img | first %}
+            {% assign odd = strip_n | modulo: 2 %}
+            {% if odd == 1 %}{% assign pick = with_img | last %}{% endif %}
+            {% if pick and strip_n < 5 %}
+              {% assign strip_n = strip_n | plus: 1 %}
+              <img src="{{ '/assets/tastings/' | append: pick.image | relative_url }}" alt="" loading="lazy" decoding="async">
+            {% endif %}
+          {% endfor %}
+        </div>
+      </article>
+
+      <!-- Propose a topic -->
+      <article class="home-card home-card--green">
+        <span class="home-card__eyebrow">Your turn</span>
+        <h2 class="home-card__title"><a class="home-card__link" href="{{ '/tastings/' | relative_url }}#propose">Propose a topic</a></h2>
+        <p class="home-card__text">A grape, a region, a theme you would like to taste? Send it over. Every suggestion is read.</p>
+        <span class="home-card__arrow" aria-hidden="true">→</span>
+      </article>
+
     </div>
-    <a class="preview-link mt-4" href="{{ '/chapters/' | relative_url }}">Browse all chapters →</a>
   </div>
 </section>
-
-<!-- ── Two-column preview ─────────────────────────────────── -->
-<div class="preview-grid">
-
-  <!-- Tastings preview -->
-  <div class="preview-col preview-col--left">
-    <span class="col-label">Tastings</span>
-
-    {% if next %}
-    <div class="preview-event preview-event--featured">
-      <div class="preview-event-meta">
-        <time datetime="{{ next.date }}">{{ next.date | date: "%a %-d %b %Y" }}</time>
-        <span class="tag tag--green">Upcoming</span>
-      </div>
-      <div class="preview-event-title">{{ next.title }}</div>
-      <div class="preview-event-region">{{ next.region }}</div>
-    </div>
-    {% endif %}
-
-    {% for tasting in past limit: 2 %}
-    <div class="preview-event preview-event--past">
-      <div class="preview-event-meta">
-        <time datetime="{{ tasting.date }}">{{ tasting.date | date: "%-d %b %Y" }}</time>
-      </div>
-      <div class="preview-event-title">{{ tasting.title }}</div>
-      <div class="preview-event-region">{{ tasting.region }}</div>
-    </div>
-    {% endfor %}
-
-    <a class="preview-link" href="{{ '/tastings/' | relative_url }}">Browse all tastings →</a>
-  </div>
-
-  <!-- vertical rule -->
-  <div class="preview-rule"></div>
-
-  <!-- Planner preview -->
-  <div class="preview-col preview-col--right">
-    <span class="col-label">Planner</span>
-
-    <span class="cal-label">Dates in the pipeline</span>
-
-    {% for tasting in upcoming limit: 3 %}
-    <div class="cal-row">
-      <div class="cal-dot"></div>
-      <time class="cal-date" datetime="{{ tasting.date }}">{{ tasting.date | date: "%-d %b %Y" }}</time>
-      <div class="cal-title">{{ tasting.title }}</div>
-    </div>
-    {% endfor %}
-
-    {% for tasting in past limit: 2 %}
-    <div class="cal-row cal-row--past">
-      <div class="cal-dot cal-dot--past"></div>
-      <time class="cal-date" datetime="{{ tasting.date }}">{{ tasting.date | date: "%-d %b %Y" }}</time>
-      <div class="cal-title">{{ tasting.title }}</div>
-    </div>
-    {% endfor %}
-
-    <div class="planner-cta">
-      {% if next %}
-      <a href="{{ '/planner/' | relative_url }}#{{ next.slug }}" class="btn btn--solid">I want to participate</a>
-      {% endif %}
-      <a href="{{ '/planner/' | relative_url }}#propose" class="btn btn--text">Propose a topic →</a>
-    </div>
-  </div>
-
-</div>
