@@ -25,7 +25,14 @@
 #   slides:            true once presentation is ready
 #   wines:             list of wines (for presentation slides); each wine may
 #                      include a url field, the producer page a QR code was
-#                      generated from
+#                      generated from. The /wines page also reads, per wine:
+#                        colour   red | white | rosé | sparkling
+#                        country  e.g. France, Italy
+#                        region   wine-level region (Northern Rhône, Loire...),
+#                                 which can differ from the tasting's own region
+#                        image    optional, path under assets/tastings/ to the
+#                                 bottle picture; without it the wine shows a
+#                                 neutral bottle outline
 # ─────────────────────────────────────────────────────────────
 
 - slug: southern-rhone-overview
@@ -62,21 +69,37 @@
       vintage: 2023
       appellation: "Lirac AOC"
       blend: "Viognier 33%, Roussanne 34%, Marsanne 33%"
+      colour: white
+      country: France
+      region: "Southern Rhône"
+      image: "southern-rhone-overview/bottle_lirac_mordoree.png"
     - name: "La Plume du Peintre"
       producer: "Domaine de la Mordorée"
       vintage: 2023
       appellation: "Tavel AOC"
       blend: "Grenache 50%, Syrah 20%, Clairette 15%, Cinsault 15%"
+      colour: rosé
+      country: France
+      region: "Southern Rhône"
+      image: "southern-rhone-overview/bottle_tavel_mordoree.png"
     - name: "Les Hautes Garrigues"
       producer: "Domaine Santa Duc"
       vintage: 2022
       appellation: "Gigondas AOC"
       blend: "Grenache 50%, Mourvèdre 50%"
+      colour: red
+      country: France
+      region: "Southern Rhône"
+      image: "southern-rhone-overview/bottle_les_hautes_garrigues.png"
     - name: "IGP Vaucluse"
       producer: "Domaine Gourt de Mautens"
       vintage: 2012
       appellation: "IGP Vaucluse"
       blend: "Grenache, Mourvèdre, Syrah, Carignan, Counoise, Vaccarèse"
+      colour: red
+      country: France
+      region: "Southern Rhône"
+      image: "southern-rhone-overview/bottle_gourt_de_mautens.png"
       
 - slug: condrieu-horizontal
   title: "Condrieu Horizontal"
@@ -105,16 +128,28 @@
       vintage: 2023
       appellation: "Condrieu AOC"
       blend: "100% Viognier"
+      colour: white
+      country: France
+      region: "Northern Rhône"
+      image: "condrieu-horizontal/bottle_vernay_terrasses.png.png"
     - name: "Les Chaillées de l'Enfer"
       producer: "Domaine Georges Vernay"
       vintage: 2023
       appellation: "Condrieu AOC"
       blend: "100% Viognier"
+      colour: white
+      country: France
+      region: "Northern Rhône"
+      image: "condrieu-horizontal/bottle_vernay_chaillees.png.png"
     - name: "Villa Pontciana"
       producer: "François Villard"
       vintage: 2020
       appellation: "Condrieu AOC"
       blend: "100% Viognier"
+      colour: white
+      country: France
+      region: "Northern Rhône"
+      image: "condrieu-horizontal/bottle_villard.png.png"
 
 - slug: bourgogne-chardonnay-brunello
   title: "Chardonnay & Barolo"
@@ -145,21 +180,37 @@
       vintage: 2020
       appellation: "Saint-Romain AOC"
       blend: "100% Chardonnay"
+      colour: white
+      country: France
+      region: "Burgundy"
+      image: "bourgogne-chardonnay-brunello/bottle_ami.jpg"
     - name: "Meursault"
       producer: "Chanson Père et Fils"
       vintage: 2005
       appellation: "Meursault AOC"
       blend: "100% Chardonnay"
+      colour: white
+      country: France
+      region: "Burgundy"
+      image: "bourgogne-chardonnay-brunello/bottle_chanson.png"
     - name: "Barolo La Morra"
       producer: "Agricola Brandini"
       vintage: 2017
       appellation: "Barolo DOCG"
       blend: "100% Nebbiolo"
+      colour: red
+      country: Italy
+      region: "Piedmont"
+      image: "bourgogne-chardonnay-brunello/bottle_brandini.png"
     - name: "Cerrati Vigna Cucco Riserva"
       producer: "Tenuta Cucco"
       vintage: 2007
       appellation: "Barolo DOCG"
       blend: "100% Nebbiolo"
+      colour: red
+      country: Italy
+      region: "Piedmont"
+      image: "bourgogne-chardonnay-brunello/bottle_cucco.png"
 
 - slug: chateauneuf-du-pape-the-whites
   title: "Châteauneuf-du-Pape: The Whites"
@@ -190,21 +241,37 @@
       vintage: 2021
       appellation: "Châteauneuf-du-Pape AOC"
       blend: "Grenache Blanc 30%, Clairette 35%, Roussanne 35%"
+      colour: white
+      country: France
+      region: "Southern Rhône"
+      image: "chateauneuf-du-pape-the-whites/bottle_vieux-telegraphe.png"
     - name: "Châteauneuf-du-Pape Blanc"
       producer: "Clos des Papes"
       vintage: 2021
       appellation: "Châteauneuf-du-Pape AOC"
       blend: "Grenache Blanc, Clairette, Roussanne, Picpoul, Bourboulenc, Picardan (16.6% each)"
+      colour: white
+      country: France
+      region: "Southern Rhône"
+      image: "chateauneuf-du-pape-the-whites/bottle_clos-des-papes.png"
     - name: "Châteauneuf-du-Pape Blanc"
       producer: "Famille Isabel Ferrando"
       vintage: 2021
       appellation: "Châteauneuf-du-Pape AOC"
       blend: "Clairette 60%, Roussanne 40%"
+      colour: white
+      country: France
+      region: "Southern Rhône"
+      image: "chateauneuf-du-pape-the-whites/bottle_ferrando.png"
     - name: "Châteauneuf-du-Pape Blanc"
       producer: "Clos des Papes"
       vintage: 2014
       appellation: "Châteauneuf-du-Pape AOC"
       blend: "Grenache Blanc, Clairette, Roussanne, Picpoul, Bourboulenc, Picardan (16.6% each)"
+      colour: white
+      country: France
+      region: "Southern Rhône"
+      image: "chateauneuf-du-pape-the-whites/bottle_clos-des-papes.png"
 
 - slug: chateauneuf-du-pape-the-reds
   title: "Châteauneuf-du-Pape: The Reds"
@@ -237,16 +304,28 @@
       vintage: 2023
       appellation: "Châteauneuf-du-Pape AOC"
       blend: "Grenache 65%, Mourvèdre 15%, Syrah 15%, Cinsault 5%"
+      colour: red
+      country: France
+      region: "Southern Rhône"
+      image: "chateauneuf-du-pape-the-reds/bottle_vieux-telegraphe.png"
     - name: "Châteauneuf-du-Pape"
       producer: "Clos des Papes"
       vintage: 2021
       appellation: "Châteauneuf-du-Pape AOC"
       blend: "Grenache 65%, Mourvèdre 20%, Syrah 10%, autres 5%"
+      colour: red
+      country: France
+      region: "Southern Rhône"
+      image: "chateauneuf-du-pape-the-reds/bottle_clos-des-papes.png"
     - name: "Châteauneuf-du-Pape"
       producer: "Château de Beaucastel"
       vintage: 2017
       appellation: "Châteauneuf-du-Pape AOC"
       blend: "Grenache 30%, Mourvèdre 30%, Syrah 10%, Counoise 10%, autres 20%"
+      colour: red
+      country: France
+      region: "Southern Rhône"
+      image: "chateauneuf-du-pape-the-reds/bottle_beaucastel.png"
 
 - slug: muscadet
   title: "Muscadet"
@@ -276,21 +355,37 @@
       vintage: 2022
       appellation: "Muscadet Sèvre-et-Maine AOC, cru communal"
       blend: "100% Melon de Bourgogne"
+      colour: white
+      country: France
+      region: "Loire"
+      image: "muscadet/bottle_chateau-thebaud.png"
     - name: "Clisson"
       producer: "Domaine de la Pépière"
       vintage: 2023
       appellation: "Muscadet Sèvre-et-Maine AOC, cru communal"
       blend: "100% Melon de Bourgogne"
+      colour: white
+      country: France
+      region: "Loire"
+      image: "muscadet/bottle_clisson.png"
     - name: "Monnières-Saint Fiacre"
       producer: "Domaine de la Pépière"
       vintage: 2022
       appellation: "Muscadet Sèvre-et-Maine AOC, cru communal"
       blend: "100% Melon de Bourgogne"
+      colour: white
+      country: France
+      region: "Loire"
+      image: "muscadet/bottle_monnieres-saint-fiacre.png"
     - name: "Gula Ana"
       producer: "Domaine Luneau-Papin"
       vintage: 2023
       appellation: "Muscadet Sèvre-et-Maine AOC, single vineyard"
       blend: "100% Melon de Bourgogne"
+      colour: white
+      country: France
+      region: "Loire"
+      image: "muscadet/bottle_gula-ana.png"
 
 - slug: savennieres-bonnezeaux
   title: "Savennières & Bonnezeaux"
@@ -323,20 +418,32 @@
       vintage: 2021
       appellation: "Savennières AOC"
       blend: "100% Chenin Blanc"
+      colour: white
+      country: France
+      region: "Loire"
     - name: "Savennières-Roche-aux-Moines"
       producer: "Domaine aux Moines"
       appellation: "Savennières-Roche-aux-Moines AOC"
       blend: "100% Chenin Blanc"
+      colour: white
+      country: France
+      region: "Loire"
     - name: "Coulée de Serrant"
       producer: "Nicolas Joly"
       vintage: 2022
       appellation: "Savennières-Coulée-de-Serrant AOC, Grand Cru"
       blend: "100% Chenin Blanc"
+      colour: white
+      country: France
+      region: "Loire"
     - name: "Bonnezeaux"
       producer: "Domaine du Petit Val"
       vintage: 2022
       appellation: "Bonnezeaux AOC"
       blend: "100% Chenin Blanc"
+      colour: white
+      country: France
+      region: "Loire"
 
 - slug: saumur-champigny
   title: "Saumur & Champigny"
@@ -369,21 +476,33 @@
       vintage: "NV"
       appellation: "Saumur AOC, sparkling"
       blend: "Chenin Blanc"
+      colour: sparkling
+      country: France
+      region: "Loire"
     - name: "Blanc de Blancs"
       producer: "Domaine Ogereau"
       vintage: 2022
       appellation: "Crémant de Loire AOC"
       blend: "100% Chenin Blanc"
+      colour: sparkling
+      country: France
+      region: "Loire"
     - name: "Clos de l'Echelier"
       producer: "Thierry Germain / Domaine des Roches Neuves"
       vintage: 2017
       appellation: "Saumur-Champigny AOC"
       blend: "100% Cabernet Franc"
+      colour: red
+      country: France
+      region: "Loire"
     - name: "Le Clos"
       producer: "Clos Rougeard"
       vintage: 2020
       appellation: "Saumur-Champigny AOC"
       blend: "100% Cabernet Franc"
+      colour: red
+      country: France
+      region: "Loire"
 
 - slug: vouvray-montlouis
   title: "Vouvray & Montlouis"
@@ -414,21 +533,33 @@
       vintage: 2023
       appellation: "Vouvray AOC"
       blend: "100% Chenin Blanc"
+      colour: white
+      country: France
+      region: "Loire"
     - name: "Les Hauts de Husseau"
       producer: "Jacky Blot / Domaine de la Taille aux Loups"
       vintage: 2023
       appellation: "Montlouis-sur-Loire AOC, sec"
       blend: "100% Chenin Blanc"
+      colour: white
+      country: France
+      region: "Loire"
     - name: "Les Tuffeaux"
       producer: "François Chidaine"
       vintage: 2020
       appellation: "Montlouis-sur-Loire AOC, demi-sec"
       blend: "100% Chenin Blanc"
+      colour: white
+      country: France
+      region: "Loire"
     - name: "Moelleux Réserve"
       producer: "Clos Naudin / Domaine Foreau"
       vintage: 2018
       appellation: "Vouvray AOC, moelleux"
       blend: "100% Chenin Blanc"
+      colour: white
+      country: France
+      region: "Loire"
 
 - slug: chinon-bourgueil
   title: "Chinon & Bourgueil"
@@ -462,21 +593,33 @@
       vintage: 2019
       appellation: "Vouvray AOC, sparkling"
       blend: "100% Chenin Blanc"
+      colour: sparkling
+      country: France
+      region: "Loire"
     - name: "Coteau de Noiré"
       producer: "Domaine Philippe Alliet"
       vintage: 2023
       appellation: "Chinon AOC"
       blend: "100% Cabernet Franc"
+      colour: red
+      country: France
+      region: "Loire"
     - name: "Perrières"
       producer: "Domaine de la Butte"
       vintage: 2022
       appellation: "Bourgueil AOC"
       blend: "100% Cabernet Franc"
+      colour: red
+      country: France
+      region: "Loire"
     - name: "Le Vau Renou"
       producer: "Clos des Quarterons / Amirault"
       vintage: 2020
       appellation: "Saint-Nicolas-de-Bourgueil AOC"
       blend: "100% Cabernet Franc"
+      colour: red
+      country: France
+      region: "Loire"
 
 - slug: sancerre-pouilly-fume
   title: "Sancerre & Pouilly-Fumé"
@@ -507,16 +650,25 @@
       vintage: 2023
       appellation: "Pouilly-Fumé AOC"
       blend: "100% Sauvignon Blanc"
+      colour: white
+      country: France
+      region: "Loire"
     - name: "Le Pavé"
       producer: "Domaine Vacheron"
       vintage: 2017
       appellation: "Sancerre AOC"
       blend: "100% Sauvignon Blanc"
+      colour: white
+      country: France
+      region: "Loire"
     - name: "Étienne Henri"
       producer: "Famille Bourgeois"
       vintage: 2013
       appellation: "Sancerre AOC"
       blend: "100% Sauvignon Blanc"
+      colour: white
+      country: France
+      region: "Loire"
 
 - slug: cote-rotie-horizontal
   title: "Côte-Rôtie Horizontal"
@@ -544,16 +696,28 @@
       vintage: 2022
       appellation: "Côte-Rôtie AOC"
       blend: "100% Syrah"
+      colour: red
+      country: France
+      region: "Northern Rhône"
+      image: "cote-rotie-horizontal/bottle_rostaing.png.png"
     - name: "Blonde du Seigneur"
       producer: "Domaine Georges Vernay"
       vintage: 2022
       appellation: "Côte-Rôtie AOC"
       blend: "Syrah 95%, Viognier 5%"
+      colour: red
+      country: France
+      region: "Northern Rhône"
+      image: "cote-rotie-horizontal/bottle_vernay.png.png"
     - name: "La Viallière"
       producer: "Yves Cuilleron"
       vintage: 2022
       appellation: "Côte-Rôtie AOC"
       blend: "100% Syrah"
+      colour: red
+      country: France
+      region: "Northern Rhône"
+      image: "cote-rotie-horizontal/bottle_cuilleron.png.png"
 
 - slug: northern-rhone-whites
   title: "Northern Rhône Whites"
@@ -585,16 +749,28 @@
       vintage: 2023
       appellation: "Condrieu AOC"
       blend: "100% Viognier"
+      colour: white
+      country: France
+      region: "Northern Rhône"
+      image: "northern-rhone-whites/bottle1.png.png"
     - name: "Pur Blanc"
       producer: "Domaine du Tunnel"
       vintage: 2023
       appellation: "Saint-Péray AOC"
       blend: "100% Marsanne · Vieilles Vignes"
+      colour: white
+      country: France
+      region: "Northern Rhône"
+      image: "northern-rhone-whites/bottle2.png.png"
     - name: "Chante-Alouette"
       producer: "M. Chapoutier"
       vintage: 2021
       appellation: "Hermitage AOC"
       blend: "100% Marsanne"
+      colour: white
+      country: France
+      region: "Northern Rhône"
+      image: "northern-rhone-whites/bottle3.png.png"
 
 - slug: northern-rhone-syrahs
   title: "Northern Rhône Syrahs"
@@ -625,16 +801,28 @@
       vintage: 2022
       appellation: "Cornas AOC"
       blend: "100% Syrah"
+      colour: red
+      country: France
+      region: "Northern Rhône"
+      image: "northern-rhone-syrahs/bottle1.png"
     - name: "Les Schistes"
       producer: "Clusel-Roch"
       vintage: 2020
       appellation: "Côte-Rôtie AOC"
       blend: "100% Syrah"
+      colour: red
+      country: France
+      region: "Northern Rhône"
+      image: "northern-rhone-syrahs/bottle2.png"
     - name: "Le Vignon"
       producer: "J.M.B. Sorrel"
       vintage: 2019
       appellation: "Hermitage AOC"
       blend: "100% Syrah"
+      colour: red
+      country: France
+      region: "Northern Rhône"
+      image: "northern-rhone-syrahs/bottle3.png"
 
 - slug: syrah-rhone-cortona
   title: "Syrah, from the Rhône to Cortona"
@@ -670,16 +858,28 @@
       vintage: 2022
       appellation: "Cortona DOC"
       blend: "100% Syrah"
+      colour: red
+      country: Italy
+      region: "Tuscany"
+      image: "syrah-rhone-cortona/bottle_amerighi.png.png"
     - name: "Saint-Joseph Le Ponts"
       producer: "Domaine Les Alexandrins"
       vintage: 2022
       appellation: "Saint-Joseph AOC"
       blend: "100% Syrah"
+      colour: red
+      country: France
+      region: "Northern Rhône"
+      image: "syrah-rhone-cortona/bottle_alexandrins.png.png"
     - name: "Châteauneuf-du-Pape"
       producer: "Le Vieux Donjon"
       vintage: 2022
       appellation: "Châteauneuf-du-Pape AOC"
       blend: "Grenache 70%, Syrah 15%, Mourvèdre 15%"
+      colour: red
+      country: France
+      region: "Southern Rhône"
+      image: "syrah-rhone-cortona/bottle_vieux_donjon.png.png"
 
 - slug: chardonnay-across-countries
   title: "Chardonnay across Countries"
@@ -710,16 +910,28 @@
       vintage: 2022
       appellation: "Côte Chalonnaise"
       blend: "100% Chardonnay"
+      colour: white
+      country: France
+      region: "Burgundy"
+      image: "chardonnay-across-countries/bottle_drouhin.png.png"
     - name: "Sanct Valentin Chardonnay"
       producer: "Sanct Valentin"
       vintage: 2023
       appellation: "Appiano"
       blend: "100% Chardonnay"
+      colour: white
+      country: Italy
+      region: "Alto Adige"
+      image: "chardonnay-across-countries/bottle_sanct_valentin.png.png"
     - name: "Jurosa"
       producer: "Lis Neris"
       vintage: 2022
       appellation: "Isonzo"
       blend: "100% Chardonnay"
+      colour: white
+      country: Italy
+      region: "Friuli"
+      image: "chardonnay-across-countries/bottle_lis_neris.png.png"
 
 - slug: fiano-horizontal
   title: "Fiano Horizontal"
@@ -749,21 +961,33 @@
       vintage: 2023
       appellation: "Fiano di Avellino DOCG · Summonte"
       blend: "100% Fiano"
+      colour: white
+      country: Italy
+      region: "Campania"
     - name: "La Congregazione"
       producer: "Villa Diamante"
       vintage: 2022
       appellation: "Fiano di Avellino DOCG · Montefredane"
       blend: "100% Fiano"
+      colour: white
+      country: Italy
+      region: "Campania"
     - name: "Clelia"
       producer: "Colli di Lapio"
       vintage: 2021
       appellation: "Fiano di Avellino DOCG · Lapio"
       blend: "100% Fiano"
+      colour: white
+      country: Italy
+      region: "Campania"
     - name: "Più Alto"
       producer: "i Satoli"
       vintage: 2021
       appellation: "Fiano di Avellino DOCG · Montefredane"
       blend: "100% Fiano"
+      colour: white
+      country: Italy
+      region: "Campania"
   featured: false
   slides: true
 
@@ -798,15 +1022,27 @@
       appellation: "Languedoc AOC Terrasses du Larzac"
       blend: "Syrah 60%, Mourvèdre 20%, Grenache 20%"
       url: "https://domainedemontcalmes.fr/les-vins/terrasses-du-larzac/"
+      colour: red
+      country: France
+      region: "Languedoc-Roussillon"
+      image: "gsm-across-regions/bottle_montcalmes.png"
     - name: "Côtes du Roussillon Villages"
       producer: "Le Clos des Fées"
       vintage: 2021
       appellation: "Côtes du Roussillon Villages AOC"
       blend: "Grenache 25%, Syrah 25%, Mourvèdre 25%, Carignan 25%"
       url: "https://www.closdesfees.com/en/wines/"
+      colour: red
+      country: France
+      region: "Languedoc-Roussillon"
+      image: "gsm-across-regions/bottle_clos-des-fees.png"
     - name: "Châteauneuf-du-Pape"
       producer: "Château de Beaucastel"
       vintage: 2020
       appellation: "Châteauneuf-du-Pape AOC"
       blend: "Grenache 30%, Mourvèdre 30%, Syrah 15%, Counoise 10%, Vaccarèse, Terret Noir, Muscardin, Clairette, Picpoul, Picardan, Bourboulenc and Roussanne (combined) 10%, Cinsault 5%"
       url: "https://www.beaucastel.com/en/products/chateau-de-beaucastel-chateauneuf-du-pape-rouge-2023"
+      colour: red
+      country: France
+      region: "Southern Rhône"
+      image: "gsm-across-regions/bottle_beaucastel.png"
