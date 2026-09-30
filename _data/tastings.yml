@@ -395,7 +395,7 @@
   region: "Anjou"
   description: >
     From Muscadet we move east into Anjou, where Chenin Blanc turns serious.
-    Three dry Savennières, including both of its named crus, then a glass of
+    Four dry Savennières, including both of its named crus, then a glass of
     Bonnezeaux to end on something sweet.
   tags:
     - Loire
@@ -430,7 +430,7 @@
       colour: white
       country: France
       region: "Loire"
-      image: "savennieres-bonnezeaux/bottle_roche-aux-moines.jpg"
+      image: "savennieres-bonnezeaux/bottle_roche-aux-moines.png"
     - name: "Coulée de Serrant"
       producer: "Nicolas Joly"
       vintage: 2022
@@ -439,7 +439,7 @@
       colour: white
       country: France
       region: "Loire"
-      image: "savennieres-bonnezeaux/bottle_coulee-de-serrant.jpg"
+      image: "savennieres-bonnezeaux/bottle_coulee-de-serrant.png"
     - name: "Clos la Royauté"
       producer: "Domaine Laffourcade"
       vintage: 1995
@@ -457,7 +457,7 @@
       colour: white
       country: France
       region: "Loire"
-      image: "savennieres-bonnezeaux/bottle_bonnezeaux.jpg"
+      image: "savennieres-bonnezeaux/bottle_bonnezeaux.png"
 
 - slug: saumur-champigny
   title: "Saumur & Champigny"
