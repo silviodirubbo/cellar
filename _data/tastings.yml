@@ -964,6 +964,7 @@
       colour: white
       country: Italy
       region: "Campania"
+      image: "fiano-horizontal/picariello_bttle.jpg"
     - name: "La Congregazione"
       producer: "Villa Diamante"
       vintage: 2022
@@ -972,6 +973,7 @@
       colour: white
       country: Italy
       region: "Campania"
+      image: "fiano-horizontal/diamante_bttle.jpg"
     - name: "Clelia"
       producer: "Colli di Lapio"
       vintage: 2021
@@ -980,6 +982,7 @@
       colour: white
       country: Italy
       region: "Campania"
+      image: "fiano-horizontal/clelia_bttle.jpg"
     - name: "Più Alto"
       producer: "i Satoli"
       vintage: 2021
@@ -988,6 +991,7 @@
       colour: white
       country: Italy
       region: "Campania"
+      image: "fiano-horizontal/isatoli.jpg"
   featured: false
   slides: true
 
