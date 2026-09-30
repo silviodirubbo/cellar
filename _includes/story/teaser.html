@@ -1,0 +1,30 @@
+{% comment %}
+  Teaser promo: invites people to an upcoming tasting with a question
+  hook rather than an urgency count or a wine rundown. CELLAR eyebrow,
+  a two-line title whose second line is the italic gold payoff, a short
+  follow-on line, a rule, Tasting/Chapter/Date/Spots rows read live
+  from _data/tastings.yml, and a closing CTA line pinned to the bottom.
+  Page front matter: tasting_slug, story_bg (green|offwhite|loire|dark),
+  hook (plain first line), hook_em (italic gold second line), follow,
+  cta. Spots shows spots_total as open spots (there is no spots_taken
+  field); use spots-left.html when a real remaining count matters.
+{% endcomment %}
+{% assign tasting = site.data.tastings | where: "slug", page.tasting_slug | first %}
+{% assign chapter = nil %}
+{% if tasting.chapter %}{% assign chapter = site.chapters | where: "slug", tasting.chapter | first %}{% endif %}
+<div class="story story--{{ page.story_bg }}">
+  <div class="story__inner">
+    {% include story/dots.html chapter=tasting.chapter %}
+    <p class="story-eyebrow">CELLAR</p>
+    <h1 class="story-title story-hook">{{ page.hook }}<span class="story-hook__em">{{ page.hook_em }}</span></h1>
+    <p class="story-italic" style="margin-bottom: 56px;">{{ page.follow }}</p>
+    <hr class="story-rule" style="margin-bottom: 56px;">
+    <dl class="story-facts">
+      <dt>Tasting</dt><dd>{{ tasting.title }}</dd>
+      {% if chapter %}<dt>Chapter</dt><dd>{{ chapter.title }}</dd>{% endif %}
+      <dt>Date</dt><dd>{{ tasting.date | date: "%A %-d %B %Y" }}</dd>
+      <dt>Spots</dt><dd>{{ tasting.spots_total }} open</dd>
+    </dl>
+    <p class="story-italic story-teaser__cta">{{ page.cta }}</p>
+  </div>
+</div>

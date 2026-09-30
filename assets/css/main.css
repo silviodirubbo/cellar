@@ -1801,6 +1801,59 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 .story--green .story-pair__divider,
 .story--loire .story-pair__divider { background: rgba(253,252,250,0.16); }
 
+/* ── Teaser: two-line hook, second line the italic gold payoff
+   (_includes/story/teaser.html). The payoff is a <span>, not an <em>,
+   so the sitewide em{color:var(--green)} rule can't recolour it, and it
+   sets font-style + a weight the italic face actually ships (300/400
+   are the only italic weights loaded; anything else is synthesised).
+   --gold is 1.15:1 on --loire and under 2:1 on --green, so dark
+   backgrounds get a lighter gold from the same family (3.4:1 on
+   --loire, 5.7:1 on --green, fine at this size). ── */
+.story-hook__em {
+  display: block;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold);
+}
+.story--dark .story-hook__em,
+.story--green .story-hook__em,
+.story--loire .story-hook__em,
+.story--magenta .story-hook__em,
+.story--blue .story-hook__em { color: #E2C27E; }
+.story-facts {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  align-items: baseline;
+  row-gap: 30px;
+  flex: 0 0 auto;
+}
+.story-facts dt {
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 25px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+.story-facts dd {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 46px;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.story--dark .story-facts dt,
+.story--green .story-facts dt,
+.story--loire .story-facts dt,
+.story--magenta .story-facts dt,
+.story--blue .story-facts dt { color: rgba(253,252,250,0.5); }
+.story--dark .story-facts dd,
+.story--green .story-facts dd,
+.story--loire .story-facts dd,
+.story--magenta .story-facts dd,
+.story--blue .story-facts dd { color: var(--warm-white); }
+.story-teaser__cta { margin-top: auto; font-size: 48px; }
+
 /* ── Section cover: single centered word, dots top-left only ─── */
 .story__inner--center { display: flex; flex: 1 1 auto; justify-content: center; align-items: center; text-align: center; }
 .story-word {
