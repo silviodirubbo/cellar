@@ -421,13 +421,16 @@
       colour: white
       country: France
       region: "Loire"
+      image: "savennieres-bonnezeaux/bottle_chamboureau.png"
     - name: "Savennières-Roche-aux-Moines"
       producer: "Domaine aux Moines"
+      vintage: 2024
       appellation: "Savennières-Roche-aux-Moines AOC"
       blend: "100% Chenin Blanc"
       colour: white
       country: France
       region: "Loire"
+      image: "savennieres-bonnezeaux/bottle_roche-aux-moines.jpg"
     - name: "Coulée de Serrant"
       producer: "Nicolas Joly"
       vintage: 2022
@@ -436,6 +439,7 @@
       colour: white
       country: France
       region: "Loire"
+      image: "savennieres-bonnezeaux/bottle_coulee-de-serrant.jpg"
     - name: "Clos la Royauté"
       producer: "Domaine Laffourcade"
       vintage: 1995
@@ -444,14 +448,16 @@
       colour: white
       country: France
       region: "Loire"
+      image: "savennieres-bonnezeaux/bottle_clos-la-royaute.png"
     - name: "Bonnezeaux"
       producer: "Domaine du Petit Val"
-      vintage: 2022
+      vintage: 2025
       appellation: "Bonnezeaux AOC"
       blend: "100% Chenin Blanc"
       colour: white
       country: France
       region: "Loire"
+      image: "savennieres-bonnezeaux/bottle_bonnezeaux.jpg"
 
 - slug: saumur-champigny
   title: "Saumur & Champigny"
