@@ -126,7 +126,7 @@ title: "Savennières & Bonnezeaux"
 }
 .w-hrule { width: 100%; height: 1px; background: var(--rule); }
 
-/* empty spacer: no bottle photos exist yet for these four wines, same
+/* empty spacer: no bottle photos exist yet for these five wines, same
    approach as saumur-champigny.html */
 .wine-bottle {
   flex: 1 1 auto; min-height: 0;
@@ -146,6 +146,11 @@ title: "Savennières & Bonnezeaux"
   letter-spacing: .14em; text-transform: uppercase; color: var(--ink-light); min-width: 46px;
 }
 .w-mv { font-size: 13px; font-weight: 300; color: var(--ink-mid); }
+
+/* QR block, same as _tastings/muscadet.html. Only Clos la Royauté has
+   a QR code so far; the other slides simply omit the .wine-qr div. */
+.wine-qr { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.wine-qr img { width: 74px; height: 74px; object-fit: contain; display: block; }
 </style>
 
 <!-- ─────────────────────────────────────────────────────────
@@ -165,8 +170,8 @@ title: "Savennières & Bonnezeaux"
     <div class="cover-title">Savennières</div>
     <div class="cover-subtitle">&amp; Bonnezeaux</div>
     <div class="cover-rule"></div>
-    <div class="cover-meta">Four wines · One grape · Dry to sweet</div>
-    <div class="cover-meta-gold">Domaine FL · Domaine aux Moines · Nicolas Joly · Domaine du Petit Val</div>
+    <div class="cover-meta">Five wines · One grape · Dry to sweet</div>
+    <div class="cover-meta-gold">Domaine FL · Domaine aux Moines · Nicolas Joly<br>Domaine Laffourcade · Domaine du Petit Val</div>
   </div>
   <div class="cover-credit">
     <div class="cover-credit-title">River Maine, Angers</div>
@@ -203,7 +208,7 @@ title: "Savennières & Bonnezeaux"
   </div>
   <div class="wine-panel">
     <div class="panel-head">
-      <div class="w-counter">01 / 04</div>
+      <div class="w-counter">01 / 05</div>
       <div class="w-appellation">Savennières AOC</div>
       <div class="w-hrule"></div>
     </div>
@@ -234,7 +239,7 @@ title: "Savennières & Bonnezeaux"
   </div>
   <div class="wine-panel">
     <div class="panel-head">
-      <div class="w-counter">02 / 04</div>
+      <div class="w-counter">02 / 05</div>
       <div class="w-appellation">Savennières-Roche-aux-Moines AOC</div>
       <div class="w-hrule"></div>
     </div>
@@ -261,7 +266,7 @@ title: "Savennières & Bonnezeaux"
   </div>
   <div class="wine-panel">
     <div class="panel-head">
-      <div class="w-counter">03 / 04</div>
+      <div class="w-counter">03 / 05</div>
       <div class="w-appellation">Savennières-Coulée-de-Serrant AOC</div>
       <div class="w-hrule"></div>
     </div>
@@ -278,7 +283,42 @@ title: "Savennières & Bonnezeaux"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 6 · WINE 4 · BONNEZEAUX · DOMAINE DU PETIT VAL · 2022
+     SLIDE 6 · WINE 4 · CLOS LA ROYAUTÉ · DOMAINE LAFFOURCADE · 1995
+     Fourth and last Savennières, poured before the Bonnezeaux.
+     Map: assets/tastings/savennieres-bonnezeaux/map_loire.jpg (shared)
+     No bottle image yet: empty .wine-bottle spacer, same as the
+     other slides in this deck.
+     QR:  assets/tastings/savennieres-bonnezeaux/qr_laffourcade.png
+          (http://www.vignobles-laffourcade.fr)
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/savennieres-bonnezeaux/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
+    <div class="map-tag">Loire Valley · Overview</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">04 / 05</div>
+      <div class="w-appellation">Savennières AOC</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle"></div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Clos la Royauté</div>
+        <div class="w-producer">Domaine Laffourcade</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">1995</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Chenin Blanc</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/savennieres-bonnezeaux/qr_laffourcade.png" alt="QR code for Domaine Laffourcade" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 7 · WINE 5 · BONNEZEAUX · DOMAINE DU PETIT VAL · 2022
      No standalone Bonnezeaux appellation slide precedes this either,
      for the same reason as slide 3: no suitable map or context asset
      for Bonnezeaux specifically was found, so the transition from dry
@@ -295,7 +335,7 @@ title: "Savennières & Bonnezeaux"
   </div>
   <div class="wine-panel">
     <div class="panel-head">
-      <div class="w-counter">04 / 04</div>
+      <div class="w-counter">05 / 05</div>
       <div class="w-appellation">Bonnezeaux AOC</div>
       <div class="w-hrule"></div>
     </div>

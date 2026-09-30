@@ -436,6 +436,14 @@
       colour: white
       country: France
       region: "Loire"
+    - name: "Clos la Royauté"
+      producer: "Domaine Laffourcade"
+      vintage: 1995
+      appellation: "Savennières AOC"
+      blend: "100% Chenin Blanc"
+      colour: white
+      country: France
+      region: "Loire"
     - name: "Bonnezeaux"
       producer: "Domaine du Petit Val"
       vintage: 2022
