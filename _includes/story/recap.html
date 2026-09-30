@@ -4,11 +4,13 @@
   tasting ahead of its date). Same eyebrow/title/winelist structure and
   data-pulling pattern as tasting-reveal.html, just past-tense framing.
   Page front matter: tasting_slug, number ("01".."07", omit for a
-  chapterless one-off), story_bg (green|offwhite), intro, wine_types
+  chapterless one-off), story_bg (green|offwhite|loire), intro, wine_types
   (array, same order/length as the tasting's wines, each red|white),
   closing, dots_chapter (optional override, see story/dots.html),
   texture_image + texture_opacity (optional, see story/dots.html and
   tasting-reveal.html for the same mechanism).
+  story_bg: loire is the Loire chapter's colour (#5B6670), used in place
+  of green for that chapter's green/light alternation.
   If the tasting has no chapter (site.chapters where: "slug" finds
   none), the eyebrow drops the number and chapter label for a plain
   "ONE-OFF" tag instead, same rule as tasting-reveal.html.

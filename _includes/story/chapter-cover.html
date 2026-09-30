@@ -1,8 +1,10 @@
 {% comment %}
   Slide 4 — chapter cover, new slide type. Eyebrow, chapter title, italic
   intro, full list of the chapter's tastings (any status), closing line.
-  Page front matter: chapter_slug, story_bg (green|offwhite), title,
+  Page front matter: chapter_slug, story_bg (green|offwhite|loire), title,
   intro, closing.
+  story_bg: loire is the Loire chapter's colour (#5B6670), used in place
+  of green for that chapter's green/light alternation.
 {% endcomment %}
 {% assign items = site.data.tastings | where: "chapter", page.chapter_slug | sort: "chapter_order" %}
 {% assign chapter = site.chapters | where: "slug", page.chapter_slug | first %}

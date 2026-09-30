@@ -2,13 +2,15 @@
   Slide 5+ — one per past tasting. Eyebrow (tasting number, chapter,
   date), serif title, italic intro, wine list, closing line.
   Page front matter: tasting_slug, number ("01".."07", omit for a
-  chapterless one-off), story_bg (green|offwhite), intro, wine_types
+  chapterless one-off), story_bg (green|offwhite|loire), intro, wine_types
   (array, same order/length as the tasting's wines, each red|white),
   dots_chapter (optional override, see story/dots.html — set this to
   a non-existent slug like "none" on a one-off so no dot lights up),
   texture_image + texture_opacity (optional — layers the tasting's own
   cover art in full-bleed behind the standard slide, see .story-texture
   in main.css; the slide's normal bg colour still shows through it).
+  story_bg: loire is the Loire chapter's colour (#5B6670), used in place
+  of green for that chapter's green/light alternation.
   If the tasting has no chapter (site.chapters where: "slug" finds
   none), the eyebrow drops the number and chapter label for a plain
   "ONE-OFF" tag instead, rather than rendering an empty chapter label.
