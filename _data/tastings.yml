@@ -350,15 +350,6 @@
   featured: false
   slides: true
   wines:
-    - name: "Château-Thébaud"
-      producer: "Domaine de la Pépière"
-      vintage: 2022
-      appellation: "Muscadet Sèvre-et-Maine AOC, cru communal"
-      blend: "100% Melon de Bourgogne"
-      colour: white
-      country: France
-      region: "Loire"
-      image: "muscadet/bottle_chateau-thebaud.png"
     - name: "Clisson"
       producer: "Domaine de la Pépière"
       vintage: 2023
@@ -368,6 +359,15 @@
       country: France
       region: "Loire"
       image: "muscadet/bottle_clisson.png"
+    - name: "Château-Thébaud"
+      producer: "Domaine de la Pépière"
+      vintage: 2022
+      appellation: "Muscadet Sèvre-et-Maine AOC, cru communal"
+      blend: "100% Melon de Bourgogne"
+      colour: white
+      country: France
+      region: "Loire"
+      image: "muscadet/bottle_chateau-thebaud.png"
     - name: "Monnières-Saint Fiacre"
       producer: "Domaine de la Pépière"
       vintage: 2022
