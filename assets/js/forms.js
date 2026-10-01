@@ -1,8 +1,14 @@
 /* ============================================================
-   forms.js: the sign-up, availability and proposal dialogs on the
-   Tastings page. Markup lives in _includes/forms-modals.html.
+   forms.js: the sign-up, availability and proposal dialogs. Markup lives
+   in _includes/forms-modals.html, included on the Tastings page (all three
+   dialogs) and on the home page (where only the proposal dialog has an
+   opener: the green Propose card).
 
-   Deep links (from the home page, chapter pages and old shared links):
+   A .js-open-propose element opens the proposal dialog in place. When it
+   is a link (the home card), its href is kept as the no-JavaScript
+   fallback and the navigation is cancelled here.
+
+   Deep links (from chapter pages and old shared links):
      /tastings/#propose        opens the proposal dialog
      /tastings/#join-<slug>    opens the sign-up dialog for that evening,
                                or the availability dialog if it has no date;
@@ -94,7 +100,10 @@
     btn.addEventListener('click', () => openAvail(btn.dataset.slug, btn.dataset.title, btn));
   });
   document.querySelectorAll('.js-open-propose').forEach(btn => {
-    btn.addEventListener('click', () => openPropose(btn));
+    btn.addEventListener('click', e => {
+      if (btn.tagName === 'A') e.preventDefault();   // stay on this page
+      openPropose(btn);
+    });
   });
 
   // ── Submits ────────────────────────────────────────────────

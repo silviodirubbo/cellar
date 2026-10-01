@@ -120,7 +120,7 @@ permalink: /
             {% if odd == 1 %}{% assign pick = with_img | last %}{% endif %}
             {% if pick and strip_n < 5 %}
               {% assign strip_n = strip_n | plus: 1 %}
-              <img src="{{ '/assets/tastings/' | append: pick.image | relative_url }}" alt="" loading="lazy" decoding="async">
+              <span class="home-bottles__slot"><img src="{{ '/assets/tastings/' | append: pick.image | relative_url }}" alt="" loading="lazy" decoding="async"></span>
             {% endif %}
           {% endfor %}
         </div>
@@ -129,7 +129,7 @@ permalink: /
       <!-- Propose a topic -->
       <article class="home-card home-card--green">
         <span class="home-card__eyebrow">Your turn</span>
-        <h2 class="home-card__title"><a class="home-card__link" href="{{ '/tastings/' | relative_url }}#propose">Propose a topic</a></h2>
+        <h2 class="home-card__title"><a class="home-card__link js-open-propose" href="{{ '/tastings/' | relative_url }}#propose">Propose a topic</a></h2>
         <p class="home-card__text">A grape, a region, a theme you would like to taste? Send it over. Every suggestion is read.</p>
         <span class="home-card__arrow" aria-hidden="true">→</span>
       </article>
@@ -137,3 +137,8 @@ permalink: /
     </div>
   </div>
 </section>
+
+{% comment %} The proposal dialog opens here too; the card's href to
+   /tastings/#propose stays as the no-JavaScript fallback. {% endcomment %}
+{% include forms-modals.html %}
+<script src="{{ '/assets/js/forms.js' | relative_url }}"></script>

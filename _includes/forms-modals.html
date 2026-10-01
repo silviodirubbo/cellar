@@ -1,7 +1,8 @@
 {% comment %}
-  The three dialogs used on the Tastings page: sign up for an evening, give
-  availability for an evening without a date, propose a topic. Behaviour lives
-  in assets/js/forms.js. Form endpoints are Formspree; the hidden `type` field
+  The three dialogs: sign up for an evening, give availability for an evening
+  without a date, propose a topic. Included on the Tastings page and on the
+  home page (which opens only the proposal dialog). Behaviour lives in
+  assets/js/forms.js. Form endpoints are Formspree; the hidden `type` field
   tells the submissions apart.
 {% endcomment %}
 {% assign chapters_sorted = site.chapters | sort: "order" %}
