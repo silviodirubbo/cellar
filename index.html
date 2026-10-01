@@ -111,19 +111,79 @@ permalink: /
         <h2 class="home-card__title"><a class="home-card__link" href="{{ '/wines/' | relative_url }}">Wines</a></h2>
         <p class="home-card__text">{{ wine_count }} wines poured so far, {{ wine_upcoming }} more on the way. Browse them by colour, region or chapter.</p>
         <span class="home-card__arrow" aria-hidden="true">→</span>
-        <div class="home-bottles" aria-hidden="true">
-          {% assign strip_n = 0 %}
-          {% for t in past %}
-            {% assign with_img = t.wines | where_exp: "w", "w.image" %}
-            {% assign pick = with_img | first %}
-            {% assign odd = strip_n | modulo: 2 %}
-            {% if odd == 1 %}{% assign pick = with_img | last %}{% endif %}
-            {% if pick and strip_n < 5 %}
-              {% assign strip_n = strip_n | plus: 1 %}
-              <span class="home-bottles__slot"><img src="{{ '/assets/tastings/' | append: pick.image | relative_url }}" alt="" loading="lazy" decoding="async"></span>
+        {% comment %}
+          Bottle shelf: five wines picked at random on every page load.
+          Pool: every wine with an image, poured or upcoming, de-duplicated
+          with the Wines page key (producer|name|vintage|appellation) and
+          then by image path, so two vintages sharing one photo never sit
+          side by side. Only image paths go into the page; the script below
+          requests just the five it picks.
+          The build-time picks (first or last wine with an image from the
+          latest past tastings) sit in <noscript>: with JavaScript they are
+          never parsed or requested, so nothing paints and then swaps; the
+          script also falls back to them if it fails.
+        {% endcomment %}
+        {% assign pool_seen = "" %}
+        {% assign pool = "" | split: "" %}
+        {% for t in site.data.tastings %}
+          {% for w in t.wines %}
+            {% if w.image %}
+              {% assign key = w.producer | append: "|" | append: w.name | append: "|" | append: w.vintage | append: "|" | append: w.appellation %}
+              {% assign kmark = "[k:" | append: key | append: "]" %}
+              {% assign imark = "[i:" | append: w.image | append: "]" %}
+              {% unless pool_seen contains kmark or pool_seen contains imark %}
+                {% assign pool_seen = pool_seen | append: kmark | append: imark %}
+                {% assign src = '/assets/tastings/' | append: w.image | relative_url %}
+                {% assign pool = pool | push: src %}
+              {% endunless %}
             {% endif %}
           {% endfor %}
+        {% endfor %}
+        <div class="home-bottles" aria-hidden="true">
+          <noscript>
+            {% assign strip_n = 0 %}
+            {% for t in past %}
+              {% assign with_img = t.wines | where_exp: "w", "w.image" %}
+              {% assign pick = with_img | first %}
+              {% assign odd = strip_n | modulo: 2 %}
+              {% if odd == 1 %}{% assign pick = with_img | last %}{% endif %}
+              {% if pick and strip_n < 5 %}
+                {% assign strip_n = strip_n | plus: 1 %}
+                <span class="home-bottles__slot"><img src="{{ '/assets/tastings/' | append: pick.image | relative_url }}" alt="" loading="lazy" decoding="async"></span>
+              {% endif %}
+            {% endfor %}
+          </noscript>
         </div>
+        <script type="application/json" id="home-bottle-pool">{{ pool | jsonify }}</script>
+        <script>
+          /* Runs while the page is parsed, before the strip first paints. */
+          (function () {
+            var strip = document.querySelector('.home-bottles');
+            if (!strip) return;
+            var fallback = strip.querySelector('noscript');
+            function slot(src) {
+              var s = document.createElement('span');
+              s.className = 'home-bottles__slot';
+              var img = document.createElement('img');
+              img.src = src; img.alt = ''; img.decoding = 'async';
+              s.appendChild(img);
+              return s;
+            }
+            try {
+              var pool = JSON.parse(document.getElementById('home-bottle-pool').textContent);
+              if (pool.length < 5) throw new Error('bottle pool too small');
+              for (var i = pool.length - 1; i > 0; i--) {   // Fisher-Yates
+                var j = Math.floor(Math.random() * (i + 1));
+                var t = pool[i]; pool[i] = pool[j]; pool[j] = t;
+              }
+              var frag = document.createDocumentFragment();
+              pool.slice(0, 5).forEach(function (src) { frag.appendChild(slot(src)); });
+              strip.insertBefore(frag, fallback);   // slots stay children 1 to 5 for the phone rule
+            } catch (e) {
+              if (fallback) fallback.insertAdjacentHTML('beforebegin', fallback.textContent);
+            }
+          })();
+        </script>
       </article>
 
       <!-- Propose a topic -->

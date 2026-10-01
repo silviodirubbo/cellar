@@ -556,6 +556,12 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
   justify-content: center;          /* a wider canvas overflows evenly both sides */
   align-items: flex-end;
 }
+/* Without JavaScript the build-time slots sit inside <noscript>; this lets
+   them join the flex row. Scoped to scripting: none, because with scripting
+   on a <noscript> holds raw text that must stay hidden. */
+@media (scripting: none) {
+  .home-bottles noscript { display: contents; }
+}
 .home-bottles img {
   flex: 0 0 auto;
   height: 100%;
