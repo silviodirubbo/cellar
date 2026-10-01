@@ -554,6 +554,7 @@
       colour: white
       country: France
       region: "Loire"
+      image: "vouvray-montlouis/bottle_clos-du-bourg-sec.png"
     - name: "Les Hauts de Husseau"
       producer: "Jacky Blot / Domaine de la Taille aux Loups"
       vintage: 2023
@@ -562,6 +563,7 @@
       colour: white
       country: France
       region: "Loire"
+      image: "vouvray-montlouis/bottle_les-hauts-de-husseau.png"
     - name: "Les Tuffeaux"
       producer: "François Chidaine"
       vintage: 2020
@@ -570,6 +572,7 @@
       colour: white
       country: France
       region: "Loire"
+      image: "vouvray-montlouis/bottle_les-tuffeaux.png"
     - name: "Moelleux Réserve"
       producer: "Clos Naudin / Domaine Foreau"
       vintage: 2018
@@ -578,6 +581,7 @@
       colour: white
       country: France
       region: "Loire"
+      image: "vouvray-montlouis/bottle_moelleux-reserve.png"
 
 - slug: chinon-bourgueil
   title: "Chinon & Bourgueil"
@@ -614,6 +618,7 @@
       colour: sparkling
       country: France
       region: "Loire"
+      image: "chinon-bourgueil/bottle_methode-traditionnelle-extra-brut.png"
     - name: "Coteau de Noiré"
       producer: "Domaine Philippe Alliet"
       vintage: 2023
@@ -622,6 +627,7 @@
       colour: red
       country: France
       region: "Loire"
+      image: "chinon-bourgueil/bottle_coteau-de-noire.png"
     - name: "Perrières"
       producer: "Domaine de la Butte"
       vintage: 2022
@@ -630,6 +636,7 @@
       colour: red
       country: France
       region: "Loire"
+      image: "chinon-bourgueil/bottle_perrieres.png"
     - name: "Le Vau Renou"
       producer: "Clos des Quarterons / Amirault"
       vintage: 2020
@@ -638,6 +645,7 @@
       colour: red
       country: France
       region: "Loire"
+      image: "chinon-bourgueil/bottle_le-vau-renou.png"
 
 - slug: sancerre-pouilly-fume
   title: "Sancerre & Pouilly-Fumé"
@@ -671,6 +679,7 @@
       colour: white
       country: France
       region: "Loire"
+      image: "sancerre-pouilly-fume/bottle_silex.png"
     - name: "Le Pavé"
       producer: "Domaine Vacheron"
       vintage: 2017
@@ -679,6 +688,7 @@
       colour: white
       country: France
       region: "Loire"
+      image: "sancerre-pouilly-fume/bottle_le-pave.png"
     - name: "Étienne Henri"
       producer: "Famille Bourgeois"
       vintage: 2013
@@ -687,6 +697,7 @@
       colour: white
       country: France
       region: "Loire"
+      image: "sancerre-pouilly-fume/bottle_etienne-henri.png"
 
 - slug: cote-rotie-horizontal
   title: "Côte-Rôtie Horizontal"

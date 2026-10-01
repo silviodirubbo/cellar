@@ -126,10 +126,14 @@ title: "Chinon & Bourgueil"
 }
 .w-hrule { width: 100%; height: 1px; background: var(--rule); }
 
-/* empty spacer: no bottle photos exist yet for these four wines, same
-   approach as saumur-champigny.html */
+/* bottle block, same as saumur-champigny.html */
 .wine-bottle {
   flex: 1 1 auto; min-height: 0;
+  display: flex; align-items: center; justify-content: center; padding: 16px 0;
+}
+.wine-bottle img {
+  max-height: 100%; max-width: 68%; object-fit: contain;
+  filter: drop-shadow(0 4px 24px rgba(26,24,20,.07));
 }
 
 .wine-info {
@@ -202,7 +206,8 @@ title: "Chinon & Bourgueil"
      suitable map or context asset for Vouvray specifically was found,
      so that context folds into this wine slide instead.
      Map: assets/tastings/chinon-bourgueil/map_loire.jpg (shared)
-     No bottle image or QR code: none exist yet for this wine.
+     Bottle: assets/tastings/chinon-bourgueil/bottle_methode-traditionnelle-extra-brut.png
+     No QR code yet.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
   <div class="wine-map">
@@ -215,7 +220,9 @@ title: "Chinon & Bourgueil"
       <div class="w-appellation">Vouvray AOC</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"></div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/chinon-bourgueil/bottle_methode-traditionnelle-extra-brut.png" alt="Méthode Traditionnelle Extra Brut, Clos Naudin / Domaine Foreau" loading="lazy">
+    </div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name" style="font-size:20px;">Méthode Traditionnelle Extra Brut</div>
@@ -233,7 +240,8 @@ title: "Chinon & Bourgueil"
      map or context asset for Chinon specifically was found, so that
      context folds into this wine slide instead.
      Map: assets/tastings/chinon-bourgueil/map_loire.jpg (shared)
-     No bottle image or QR code: none exist yet for this wine.
+     Bottle: assets/tastings/chinon-bourgueil/bottle_coteau-de-noire.png
+     No QR code yet.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
   <div class="wine-map">
@@ -246,7 +254,9 @@ title: "Chinon & Bourgueil"
       <div class="w-appellation">Chinon AOC</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"></div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/chinon-bourgueil/bottle_coteau-de-noire.png" alt="Coteau de Noiré, Domaine Philippe Alliet" loading="lazy">
+    </div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Coteau de Noiré</div>
@@ -264,7 +274,8 @@ title: "Chinon & Bourgueil"
      no suitable map or context asset for Bourgueil specifically was
      found, so that context folds into this wine slide instead.
      Map: assets/tastings/chinon-bourgueil/map_loire.jpg (shared)
-     No bottle image or QR code: none exist yet for this wine.
+     Bottle: assets/tastings/chinon-bourgueil/bottle_perrieres.png
+     No QR code yet.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
   <div class="wine-map">
@@ -277,7 +288,9 @@ title: "Chinon & Bourgueil"
       <div class="w-appellation">Bourgueil AOC</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"></div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/chinon-bourgueil/bottle_perrieres.png" alt="Perrières, Domaine de la Butte" loading="lazy">
+    </div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Perrières</div>
@@ -296,7 +309,8 @@ title: "Chinon & Bourgueil"
      deck, matching the no-closing-slide convention already used
      across the repo.
      Map: assets/tastings/chinon-bourgueil/map_loire.jpg (shared)
-     No bottle image or QR code: none exist yet for this wine.
+     Bottle: assets/tastings/chinon-bourgueil/bottle_le-vau-renou.png
+     No QR code yet.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
   <div class="wine-map">
@@ -309,7 +323,9 @@ title: "Chinon & Bourgueil"
       <div class="w-appellation">Saint-Nicolas-de-Bourgueil AOC</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"></div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/chinon-bourgueil/bottle_le-vau-renou.png" alt="Le Vau Renou, Clos des Quarterons / Amirault" loading="lazy">
+    </div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Le Vau Renou</div>

@@ -136,10 +136,14 @@ title: "Sancerre & Pouilly-Fumé"
 }
 .w-hrule { width: 100%; height: 1px; background: var(--rule); }
 
-/* empty spacer: no bottle photos exist yet for these three wines, same
-   approach as saumur-champigny.html */
+/* bottle block, same as saumur-champigny.html */
 .wine-bottle {
   flex: 1 1 auto; min-height: 0;
+  display: flex; align-items: center; justify-content: center; padding: 16px 0;
+}
+.wine-bottle img {
+  max-height: 100%; max-width: 68%; object-fit: contain;
+  filter: drop-shadow(0 4px 24px rgba(26,24,20,.07));
 }
 
 .wine-info {
@@ -205,7 +209,8 @@ title: "Sancerre & Pouilly-Fumé"
      suitable map or context asset for Pouilly-Fumé specifically was
      found, so that context folds into this wine slide instead.
      Map: assets/tastings/sancerre-pouilly-fume/map_loire.jpg (shared)
-     No bottle image or QR code: none exist yet for this wine.
+     Bottle: assets/tastings/sancerre-pouilly-fume/bottle_silex.png
+     No QR code yet.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
   <div class="wine-map">
@@ -218,7 +223,9 @@ title: "Sancerre & Pouilly-Fumé"
       <div class="w-appellation">Pouilly-Fumé AOC</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"></div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/sancerre-pouilly-fume/bottle_silex.png" alt="Silex, Didier Dagueneau" loading="lazy">
+    </div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Silex</div>
@@ -235,7 +242,8 @@ title: "Sancerre & Pouilly-Fumé"
      Crosses into Sancerre. No standalone Sancerre appellation slide
      precedes this either, same reason as above.
      Map: assets/tastings/sancerre-pouilly-fume/map_loire.jpg (shared)
-     No bottle image or QR code: none exist yet for this wine.
+     Bottle: assets/tastings/sancerre-pouilly-fume/bottle_le-pave.png
+     No QR code yet.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
   <div class="wine-map">
@@ -248,7 +256,9 @@ title: "Sancerre & Pouilly-Fumé"
       <div class="w-appellation">Sancerre AOC</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"></div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/sancerre-pouilly-fume/bottle_le-pave.png" alt="Le Pavé, Domaine Vacheron" loading="lazy">
+    </div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Le Pavé</div>
@@ -266,7 +276,8 @@ title: "Sancerre & Pouilly-Fumé"
      own description. Final slide in the deck, matching the
      no-closing-slide convention already used across the repo.
      Map: assets/tastings/sancerre-pouilly-fume/map_loire.jpg (shared)
-     No bottle image or QR code: none exist yet for this wine.
+     Bottle: assets/tastings/sancerre-pouilly-fume/bottle_etienne-henri.png
+     No QR code yet.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
   <div class="wine-map">
@@ -279,7 +290,9 @@ title: "Sancerre & Pouilly-Fumé"
       <div class="w-appellation">Sancerre AOC</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"></div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/sancerre-pouilly-fume/bottle_etienne-henri.png" alt="Étienne Henri, Famille Bourgeois" loading="lazy">
+    </div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Étienne Henri</div>
