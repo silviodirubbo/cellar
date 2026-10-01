@@ -489,10 +489,11 @@
       producer: "Domaine des Sanzay"
       vintage: "NV"
       appellation: "Saumur AOC, sparkling"
-      blend: "Chenin Blanc"
+      blend: "Chenin Blanc 85%, Chardonnay 15%"
       colour: sparkling
       country: France
       region: "Loire"
+      image: "saumur-champigny/bottle_saumur-brut.png"
     - name: "Blanc de Blancs"
       producer: "Domaine Ogereau"
       vintage: 2022
@@ -501,6 +502,7 @@
       colour: sparkling
       country: France
       region: "Loire"
+      image: "saumur-champigny/bottle_blanc-de-blancs.png"
     - name: "Clos de l'Echelier"
       producer: "Thierry Germain / Domaine des Roches Neuves"
       vintage: 2017
@@ -509,6 +511,7 @@
       colour: red
       country: France
       region: "Loire"
+      image: "saumur-champigny/bottle_clos-de-l-echelier.png"
     - name: "Le Clos"
       producer: "Clos Rougeard"
       vintage: 2020
@@ -517,6 +520,7 @@
       colour: red
       country: France
       region: "Loire"
+      image: "saumur-champigny/bottle_le-clos.png"
 
 - slug: vouvray-montlouis
   title: "Vouvray & Montlouis"

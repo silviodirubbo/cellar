@@ -126,12 +126,14 @@ title: "Saumur & Champigny"
 }
 .w-hrule { width: 100%; height: 1px; background: var(--rule); }
 
-/* empty spacer in this deck: no bottle photos exist yet for these four
-   wines, so this holds the panel-head/wine-info apart at the same
-   proportions the donor decks use for their bottle image, rather than
-   fabricating a bottle photo or leaving a cramped, unbalanced panel */
+/* bottle block, same as _tastings/muscadet.html */
 .wine-bottle {
   flex: 1 1 auto; min-height: 0;
+  display: flex; align-items: center; justify-content: center; padding: 16px 0;
+}
+.wine-bottle img {
+  max-height: 100%; max-width: 68%; object-fit: contain;
+  filter: drop-shadow(0 4px 24px rgba(26,24,20,.07));
 }
 
 .wine-info {
@@ -148,6 +150,10 @@ title: "Saumur & Champigny"
   letter-spacing: .14em; text-transform: uppercase; color: var(--ink-light); min-width: 46px;
 }
 .w-mv { font-size: 13px; font-weight: 300; color: var(--ink-mid); }
+
+/* QR block, same as _tastings/muscadet.html. One QR per wine. */
+.wine-qr { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.wine-qr img { width: 74px; height: 74px; object-fit: contain; display: block; }
 </style>
 
 <!-- ─────────────────────────────────────────────────────────
@@ -206,7 +212,10 @@ title: "Saumur & Champigny"
      The Anjou & Saumur map on slide 3 sets the Saumur context; the
      wine-map panel keeps the shared Loire overview.
      Map: assets/tastings/saumur-champigny/map_loire.jpg (shared)
-     No bottle image or QR code: none exist yet for this wine.
+     Bottle: assets/tastings/saumur-champigny/bottle_saumur-brut.png
+     QR:     assets/tastings/saumur-champigny/qr_saumur-brut.png
+             (https://www.domaine-sanzay.com/fra/pages/saumur-brut)
+     Sanzay vines average 40 years.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
   <div class="wine-map">
@@ -219,13 +228,19 @@ title: "Saumur & Champigny"
       <div class="w-appellation">Saumur AOC</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"></div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/saumur-champigny/bottle_saumur-brut.png" alt="Saumur Brut, Domaine des Sanzay" loading="lazy">
+    </div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Saumur Brut</div>
         <div class="w-producer">Domaine des Sanzay</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">NV</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chenin Blanc</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chenin Blanc 85%, Chardonnay 15%</span></div>
+        <div class="w-meta"><span class="w-ml">Soil</span><span class="w-mv">Clay-limestone</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/saumur-champigny/qr_saumur-brut.png" alt="QR code for Saumur Brut, Domaine des Sanzay" loading="lazy">
       </div>
     </div>
   </div>
@@ -234,7 +249,9 @@ title: "Saumur & Champigny"
 <!-- ─────────────────────────────────────────────────────────
      SLIDE 5 · WINE 2 · BLANC DE BLANCS · DOMAINE OGEREAU · 2022
      Map: assets/tastings/saumur-champigny/map_loire.jpg (shared)
-     No bottle image or QR code: none exist yet for this wine.
+     Bottle: assets/tastings/saumur-champigny/bottle_blanc-de-blancs.png
+     QR:     assets/tastings/saumur-champigny/qr_ogereau.png
+             (https://domaineogereau.com/)
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
   <div class="wine-map">
@@ -247,13 +264,18 @@ title: "Saumur & Champigny"
       <div class="w-appellation">Crémant de Loire AOC</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"></div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/saumur-champigny/bottle_blanc-de-blancs.png" alt="Blanc de Blancs, Domaine Ogereau" loading="lazy">
+    </div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Blanc de Blancs</div>
         <div class="w-producer">Domaine Ogereau</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Chenin Blanc</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/saumur-champigny/qr_ogereau.png" alt="QR code for Blanc de Blancs, Domaine Ogereau" loading="lazy">
       </div>
     </div>
   </div>
@@ -264,7 +286,10 @@ title: "Saumur & Champigny"
      Saumur-Champigny appears on the Anjou & Saumur map on slide 3;
      the transition into the reds folds into this wine slide.
      Map: assets/tastings/saumur-champigny/map_loire.jpg (shared)
-     No bottle image or QR code: none exist yet for this wine.
+     Bottle: assets/tastings/saumur-champigny/bottle_clos-de-l-echelier.png
+     QR:     assets/tastings/saumur-champigny/qr_clos-de-l-echelier.png
+             (https://rochesneuves.com/produit/clos-de-lechelier/)
+     Bottle photo label reads 2013; the wine poured is the 2017.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
   <div class="wine-map">
@@ -277,13 +302,19 @@ title: "Saumur & Champigny"
       <div class="w-appellation">Saumur-Champigny AOC</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"></div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/saumur-champigny/bottle_clos-de-l-echelier.png" alt="Clos de l'Echelier, Thierry Germain / Domaine des Roches Neuves" loading="lazy">
+    </div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Clos de l'Echelier</div>
         <div class="w-producer">Thierry Germain / Domaine des Roches Neuves</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2017</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Cabernet Franc</span></div>
+        <div class="w-meta"><span class="w-ml">Soil</span><span class="w-mv">Clay-limestone</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/saumur-champigny/qr_clos-de-l-echelier.png" alt="QR code for Clos de l'Echelier, Thierry Germain / Domaine des Roches Neuves" loading="lazy">
       </div>
     </div>
   </div>
@@ -295,7 +326,10 @@ title: "Saumur & Champigny"
      used by gsm-across-regions, fiano-horizontal, chardonnay-across-
      countries, northern-rhone-syrahs and northern-rhone-whites.
      Map: assets/tastings/saumur-champigny/map_loire.jpg (shared)
-     No bottle image or QR code: none exist yet for this wine.
+     Bottle: assets/tastings/saumur-champigny/bottle_le-clos.png
+     QR:     assets/tastings/saumur-champigny/qr_clos-rougeard.png
+             (https://www.clos-rougeard.com/en/)
+     Clos Rougeard works 15 clay-limestone plots.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-wine">
   <div class="wine-map">
@@ -308,13 +342,19 @@ title: "Saumur & Champigny"
       <div class="w-appellation">Saumur-Champigny AOC</div>
       <div class="w-hrule"></div>
     </div>
-    <div class="wine-bottle"></div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/saumur-champigny/bottle_le-clos.png" alt="Le Clos, Clos Rougeard" loading="lazy">
+    </div>
     <div class="wine-info">
       <div class="info-text">
         <div class="w-name">Le Clos</div>
         <div class="w-producer">Clos Rougeard</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2020</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Cabernet Franc</span></div>
+        <div class="w-meta"><span class="w-ml">Soil</span><span class="w-mv">Clay-limestone</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/saumur-champigny/qr_clos-rougeard.png" alt="QR code for Le Clos, Clos Rougeard" loading="lazy">
       </div>
     </div>
   </div>
