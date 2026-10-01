@@ -504,7 +504,7 @@
       region: "Loire"
       image: "saumur-champigny/bottle_blanc-de-blancs.png"
     - name: "Clos de l'Echelier"
-      producer: "Thierry Germain / Domaine des Roches Neuves"
+      producer: "Domaine des Roches Neuves"
       vintage: 2017
       appellation: "Saumur-Champigny AOC"
       blend: "100% Cabernet Franc"
