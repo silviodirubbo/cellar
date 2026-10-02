@@ -165,7 +165,7 @@ permalink: /tastings/
             </div>
             <p class="tl-card__desc">{{ tasting.description }}</p>
 
-            {% if tasting.wines %}
+            {% if tasting.wines.size > 0 %}
               {% if is_next %}
               <div class="tl-card__menu">
                 <span class="wine-menu__label">On the table</span>
@@ -262,14 +262,14 @@ permalink: /tastings/
               </span>
               <span class="past-entry__where">
                 {{ tasting.region }}{% if tasting.location %} &middot; {{ tasting.location }}{% endif %}
-                {% if tasting.wines %} &middot; {{ tasting.wines.size }} wines{% endif %}
+                {% if tasting.wines.size > 0 %} &middot; {{ tasting.wines.size }} wines{% endif %}
               </span>
             </span>
             <span class="past-entry__chevron" aria-hidden="true"></span>
           </summary>
           <div class="past-entry__body">
             <p class="past-entry__desc">{{ tasting.description }}</p>
-            {% if tasting.wines %}
+            {% if tasting.wines.size > 0 %}
             <ol class="wine-menu">
               {% for wine in tasting.wines %}
               <li class="wine-line">

@@ -45,7 +45,7 @@ layout: default
                 <time datetime="{{ tasting.date }}">{{ tasting.date | date: "%-d %b %Y" }}</time>
               {% endif %}
               <span class="label">{{ tasting.region }}</span>
-              {% if tasting.wines %}<span class="label">{{ tasting.wines.size }} wines</span>{% endif %}
+              {% if tasting.wines.size > 0 %}<span class="label">{{ tasting.wines.size }} wines</span>{% endif %}
             </div>
             <h2 class="chapter-item__title">{{ tasting.title }}</h2>
             <p class="chapter-item__desc">{{ tasting.description }}</p>

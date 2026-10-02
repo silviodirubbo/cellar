@@ -1024,6 +1024,21 @@
   featured: false
   slides: true
 
+- slug: tba-grape-studies
+  title: "To be announced"
+  date: 2026-10-19
+  date_tbd: false
+  region: "Region to be announced"
+  description: >
+    Theme and wines to be announced.
+  tags: []
+  chapter: grape-studies
+  chapter_order: 4
+  status: upcoming
+  featured: false
+  slides: false
+  wines: []
+
 - slug: gsm-across-regions
   title: "GSM Across Regions"
   date: 2026-11-08
@@ -1044,7 +1059,7 @@
     - Rhône
     - France
   chapter: grape-studies
-  chapter_order: 4
+  chapter_order: 5
   status: upcoming
   featured: false
   slides: true
@@ -1079,3 +1094,18 @@
       country: France
       region: "Southern Rhône"
       image: "gsm-across-regions/bottle_beaucastel.png"
+
+- slug: christmas-night-2026
+  title: "Christmas Night 2026"
+  date: 2026-12-18
+  date_tbd: false
+  region: "Region to be announced"
+  description: >
+    Wines to be announced.
+  tags: []
+  chapter: grape-studies
+  chapter_order: 6
+  status: upcoming
+  featured: false
+  slides: false
+  wines: []
