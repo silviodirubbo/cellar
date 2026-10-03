@@ -24,3 +24,8 @@ sancerre-pouilly-fume:
   taken: 2
   capacity: 6
   updated_at: "2026-10-03T12:29:33Z"
+
+vouvray-montlouis:
+  taken: 1
+  capacity: 6
+  updated_at: "2026-10-03T12:29:35Z"
