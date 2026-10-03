@@ -1237,15 +1237,6 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 }
 .card-link:hover { color: var(--ink); border-bottom-color: var(--ink); }
 .card-link:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; border-radius: 2px; }
-.card-link__arrow {
-  display: inline-block;
-  margin-left: 0.55em;
-  position: relative;
-  top: -0.08em; /* DM Mono centres the arrow on lowercase; lift it to the capitals without moving the underline */
-  transition: transform 0.2s var(--ease);
-}
-.card-link:hover .card-link__arrow,
-.card-link:focus-visible .card-link__arrow { transform: translateX(2px); }
 .card-actions__note {
   font-family: var(--font-mono);
   font-size: 0.62rem;
@@ -1262,11 +1253,6 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 .tl-card--feature .card-link:hover { color: var(--warm-white); border-bottom-color: var(--warm-white); }
 .tl-card--feature .card-actions__primary:focus-visible,
 .tl-card--feature .card-link:focus-visible { outline-color: var(--warm-white); }
-
-@media (prefers-reduced-motion: reduce) {
-  .card-link:hover .card-link__arrow,
-  .card-link:focus-visible .card-link__arrow { transform: none; }
-}
 
 /* Phones: the primary spans the card; the links share one row under it.
    Three links spread edge to edge so they line up with the button; two

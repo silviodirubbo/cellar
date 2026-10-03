@@ -218,7 +218,7 @@ permalink: /tastings/
                         data-location="{{ tasting.location }}">Add to calendar</button>
                 {% endunless %}
                 {% if tasting.slides %}
-                <a href="{{ site.baseurl }}/tastings/{{ tasting.slug }}/" class="card-link">Presentation<span class="card-link__arrow" aria-hidden="true">→</span></a>
+                <a href="{{ site.baseurl }}/tastings/{{ tasting.slug }}/" class="card-link">Presentation</a>
                 {% endif %}
                 <button type="button" class="card-link share-btn" data-slug="{{ tasting.slug }}" data-slides="{{ tasting.slides }}">Share</button>
               </div>
@@ -288,7 +288,7 @@ permalink: /tastings/
             {% endif %}
             <div class="past-entry__foot card-actions__links">
               {% if tasting.slides %}
-                <a href="{{ site.baseurl }}/tastings/{{ tasting.slug }}/" class="card-link">Presentation<span class="card-link__arrow" aria-hidden="true">→</span></a>
+                <a href="{{ site.baseurl }}/tastings/{{ tasting.slug }}/" class="card-link">Presentation</a>
               {% else %}
                 <span class="card-actions__note">Presentation coming</span>
               {% endif %}
