@@ -1,0 +1,16 @@
+# _data/availability.yml
+# ─────────────────────────────────────────────────────────────
+# Live places taken per tasting, keyed by tasting slug. Written by
+# .github/workflows/update-availability.yml (scripts/update-availability.js),
+# which the Google Calendar sync in tools/calendar-sync/ triggers whenever
+# an invite changes. Hand edits are fine but get overwritten on the next
+# sync for that tasting.
+#
+#   taken:       places taken (guests who have not declined, minus the
+#                Cellar Genève organiser account), never below 0
+#   capacity:    the tasting's capacity when this entry was written; the
+#                site itself reads capacity from _data/tastings.yml
+#   updated_at:  UTC timestamp of the last change to this entry
+#
+# A tasting with no entry here keeps the plain "N spots" display.
+# ─────────────────────────────────────────────────────────────

@@ -158,9 +158,13 @@ permalink: /tastings/
             <a class="chapter-tag" href="{{ chapter_obj.url | relative_url }}">{{ chapter_obj.title }}</a>
             {% endif %}
             <h2 class="tl-card__title">{{ tasting.title }}</h2>
+            {% capture avail_html %}{% include availability.html tasting=tasting %}{% endcapture %}
+            {% assign avail_html = avail_html | strip %}
+            {% assign avail_full = false %}
+            {% if avail_left == 0 and avail_html != "" %}{% assign avail_full = true %}{% endif %}
             <div class="tl-card__where">
               {{ tasting.region }}{% if tasting.location %} &middot; {{ tasting.location }}{% endif %}
-              {% if tasting.spots_total %} &middot; <span class="text-gold">{{ tasting.spots_total }} spots</span>{% endif %}
+              {% if avail_html != "" %} &middot; {{ avail_html }}{% elsif tasting.capacity %} &middot; <span class="text-gold">{{ tasting.capacity }} spots</span>{% endif %}
               {% if tasting.cost_estimate != "" and tasting.cost_estimate %} &middot; ~{{ tasting.cost_estimate }}{% endif %}
             </div>
             <p class="tl-card__desc">{{ tasting.description }}</p>
@@ -205,12 +209,12 @@ permalink: /tastings/
               {% if tasting.date_tbd %}
                 <button type="button" class="btn btn--solid avail-btn" data-slug="{{ tasting.slug }}" data-title="{{ tasting.title }}">My availability</button>
               {% elsif is_next %}
-                <button type="button" class="btn btn--hero signup-btn" data-slug="{{ tasting.slug }}" data-title="{{ tasting.title }}">I'm coming</button>
+                <button type="button" class="btn btn--hero signup-btn" data-slug="{{ tasting.slug }}" data-title="{{ tasting.title }}"{% if avail_full %} data-full="true"{% endif %}>I'm coming</button>
                 <button class="btn btn--text-light js-ics"
                         data-date="{{ tasting.date }}" data-title="{{ tasting.title }}"
                         data-location="{{ tasting.location }}">Add to calendar</button>
               {% else %}
-                <button type="button" class="btn btn--solid signup-btn" data-slug="{{ tasting.slug }}" data-title="{{ tasting.title }}">I'm coming</button>
+                <button type="button" class="btn btn--solid signup-btn" data-slug="{{ tasting.slug }}" data-title="{{ tasting.title }}"{% if avail_full %} data-full="true"{% endif %}>I'm coming</button>
                 <button class="btn btn--text js-ics"
                         data-date="{{ tasting.date }}" data-title="{{ tasting.title }}"
                         data-location="{{ tasting.location }}">Add to calendar</button>

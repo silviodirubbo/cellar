@@ -1,0 +1,73 @@
+name: Update availability
+
+# Records places taken for one tasting in _data/availability.yml and
+# commits to main, which redeploys the site through GitHub Pages.
+#
+# Triggered by the Google Calendar sync (tools/calendar-sync/) with:
+#   POST /repos/silviodirubbo/cellar/dispatches
+#   {"event_type": "availability-update",
+#    "client_payload": {"slug": "<tasting slug>", "taken": <places taken>}}
+# and by hand from the Actions tab (taken may also be "clear", which removes
+# the entry).
+#
+# No commit loop: the workflow does not run on push, and pushes made with
+# the built-in GITHUB_TOKEN never start other workflow runs. An update that
+# changes nothing makes no commit.
+
+on:
+  repository_dispatch:
+    types: [availability-update]
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "Tasting slug, as in _data/tastings.yml"
+        required: true
+      taken:
+        description: 'Places taken (whole number), or "clear" to remove the entry'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    env:
+      # format() turns a numeric 0 into the string "0", which an
+      # expression treats as true, so "0 places taken" is not lost.
+      SLUG: ${{ github.event_name == 'repository_dispatch' && format('{0}', github.event.client_payload.slug) || inputs.slug }}
+      TAKEN: ${{ github.event_name == 'repository_dispatch' && format('{0}', github.event.client_payload.taken) || inputs.taken }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Update, commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Several invites can change at once, so runs may race: on a
+          # rejected push, start again from the new main.
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/update-availability.js "$SLUG" "$TAKEN"
+            if git diff --quiet -- _data/availability.yml; then
+              echo "No change to commit."
+              exit 0
+            fi
+            git add _data/availability.yml
+            git commit -m "chore: availability ${SLUG} ${TAKEN} [automated]"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            sleep $((attempt * 3))
+          done
+          echo "Could not push after 5 attempts." >&2
+          exit 1

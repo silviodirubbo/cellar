@@ -13,6 +13,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - scripts
+  - tools
   - README.md
   - assets/social
 # Collections

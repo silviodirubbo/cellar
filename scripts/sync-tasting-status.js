@@ -10,7 +10,7 @@
 //
 // For every entry with `date_tbd: false` and a `date` before today
 // (Europe/Zurich) but still `status: upcoming`, flips it to
-// `status: past` and drops `spots_total`/`cost_estimate`, matching how
+// `status: past` and drops `capacity`/`cost_estimate`, matching how
 // already-past entries are formatted. Entries already `status: past`, or
 // with `date_tbd: true`, are left untouched.
 //
@@ -54,7 +54,7 @@ function needsFlip(block, today) {
 
 function flipBlock(block) {
   block = block.replace(/^( {2}status:)\s*upcoming\s*$/m, '$1 past');
-  block = block.replace(/^ {2}spots_total:.*\n/m, '');
+  block = block.replace(/^ {2}capacity:.*\n/m, '');
   block = block.replace(/^ {2}cost_estimate:.*\n/m, '');
   return block;
 }
