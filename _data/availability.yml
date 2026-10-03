@@ -44,3 +44,8 @@ tba-grape-studies:
   taken: 5
   capacity: 6
   updated_at: "2026-10-03T12:29:42Z"
+
+saumur-champigny:
+  taken: 2
+  capacity: 6
+  updated_at: "2026-10-03T12:29:45Z"
