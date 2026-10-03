@@ -67,14 +67,6 @@
       transition: color .2s, border-color .2s, background .2s;
     }
     #btn-back { top: 22px; right: 24px; }
-    /* live availability (_includes/availability.html): a label, not a control */
-    .chrome--avail {
-      top: 22px; left: 24px;
-      cursor: default;
-      background: rgba(44,74,62,.85);
-      border-color: rgba(253,252,250,.35);
-      color: #FDFCFA;
-    }
 
     #nav {
       position: absolute;
@@ -133,11 +125,6 @@
 
       <!-- Chrome inside the stage → scales with it, always aligned -->
       <a href="{{ '/tastings/' | relative_url }}" class="chrome" id="btn-back">← Back to tastings</a>
-      {% assign deck_tasting = site.data.tastings | where: "slug", page.slug | first %}
-      {% if deck_tasting %}
-        {% capture deck_avail %}{% include availability.html tasting=deck_tasting class="chrome chrome--avail" %}{% endcapture %}
-        {{ deck_avail | strip }}
-      {% endif %}
       <div id="nav">
         <button class="chrome" id="btn-prev">← Prev</button>
         <span id="nav-count"></span>

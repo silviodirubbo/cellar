@@ -160,8 +160,8 @@ permalink: /tastings/
             <h2 class="tl-card__title">{{ tasting.title }}</h2>
             {% capture avail_html %}{% include availability.html tasting=tasting %}{% endcapture %}
             {% assign avail_html = avail_html | strip %}
-            {% assign avail_full = false %}
-            {% if avail_left == 0 and avail_html != "" %}{% assign avail_full = true %}{% endif %}
+            {% assign avail_attrs = "" %}
+            {% if avail_html != "" %}{% capture avail_attrs %} data-available="{{ avail_left }}" data-capacity="{{ avail_capacity }}"{% endcapture %}{% endif %}
             <div class="tl-card__where">
               {{ tasting.region }}{% if tasting.location %} &middot; {{ tasting.location }}{% endif %}
               {% if avail_html != "" %} &middot; {{ avail_html }}{% elsif tasting.capacity %} &middot; <span class="text-gold">{{ tasting.capacity }} spots</span>{% endif %}
@@ -209,12 +209,12 @@ permalink: /tastings/
               {% if tasting.date_tbd %}
                 <button type="button" class="btn btn--solid avail-btn" data-slug="{{ tasting.slug }}" data-title="{{ tasting.title }}">My availability</button>
               {% elsif is_next %}
-                <button type="button" class="btn btn--hero signup-btn" data-slug="{{ tasting.slug }}" data-title="{{ tasting.title }}"{% if avail_full %} data-full="true"{% endif %}>I'm coming</button>
+                <button type="button" class="btn btn--hero signup-btn" data-slug="{{ tasting.slug }}" data-title="{{ tasting.title }}"{{ avail_attrs }}>I'm coming</button>
                 <button class="btn btn--text-light js-ics"
                         data-date="{{ tasting.date }}" data-title="{{ tasting.title }}"
                         data-location="{{ tasting.location }}">Add to calendar</button>
               {% else %}
-                <button type="button" class="btn btn--solid signup-btn" data-slug="{{ tasting.slug }}" data-title="{{ tasting.title }}"{% if avail_full %} data-full="true"{% endif %}>I'm coming</button>
+                <button type="button" class="btn btn--solid signup-btn" data-slug="{{ tasting.slug }}" data-title="{{ tasting.title }}"{{ avail_attrs }}>I'm coming</button>
                 <button class="btn btn--text js-ics"
                         data-date="{{ tasting.date }}" data-title="{{ tasting.title }}"
                         data-location="{{ tasting.location }}">Add to calendar</button>

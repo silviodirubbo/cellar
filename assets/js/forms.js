@@ -74,15 +74,29 @@
   }
 
   // ── Openers ────────────────────────────────────────────────
-  // full: the tasting has no places left (data-full on its button, set
-  // from _data/availability.yml); the dialog then opens with a note.
-  function openSignup(slug, title, trigger, full) {
+  // avail: { available, capacity } from the button's data-available and
+  // data-capacity (set from _data/availability.yml), or null when the
+  // tasting has no availability entry. The dialog then shows
+  // "N available out of C", plus the fully booked note at 0.
+  function openSignup(slug, title, trigger, avail) {
     document.getElementById('signup-success').hidden = true;
+    const availLine = document.getElementById('signup-avail');
     const fullNote = document.getElementById('signup-full');
-    if (fullNote) fullNote.hidden = !full;
+    if (availLine) {
+      availLine.hidden = !avail;
+      availLine.textContent = avail ? avail.available + ' available out of ' + avail.capacity : '';
+    }
+    if (fullNote) fullNote.hidden = !avail || avail.available !== '0';
     document.getElementById('signup-tasting-name').textContent = title;
     document.getElementById('signup-tasting-field').value = title;
     openModal(signupOverlay, trigger);
+  }
+
+  function signupAvail(btn) {
+    const d = btn.dataset;
+    return d.available !== undefined && d.capacity !== undefined
+      ? { available: d.available, capacity: d.capacity }
+      : null;
   }
 
   function openAvail(slug, title, trigger) {
@@ -98,7 +112,7 @@
   }
 
   document.querySelectorAll('.signup-btn').forEach(btn => {
-    btn.addEventListener('click', () => openSignup(btn.dataset.slug, btn.dataset.title, btn, btn.dataset.full === 'true'));
+    btn.addEventListener('click', () => openSignup(btn.dataset.slug, btn.dataset.title, btn, signupAvail(btn)));
   });
   document.querySelectorAll('.avail-btn').forEach(btn => {
     btn.addEventListener('click', () => openAvail(btn.dataset.slug, btn.dataset.title, btn));
@@ -143,7 +157,7 @@
     const cssSlug = window.CSS && CSS.escape ? CSS.escape(slug) : slug;
     const signup = document.querySelector('.signup-btn[data-slug="' + cssSlug + '"]');
     const avail  = document.querySelector('.avail-btn[data-slug="' + cssSlug + '"]');
-    if (signup) { openSignup(slug, signup.dataset.title, null, signup.dataset.full === 'true'); return; }
+    if (signup) { openSignup(slug, signup.dataset.title, null, signupAvail(signup)); return; }
     if (avail)  { openAvail(slug, avail.dataset.title, null); return; }
 
     // No dialog for this one (it has already happened): show its entry.
