@@ -13,10 +13,13 @@
  *      _data/tastings.yml and looks at the calendar's events from today to
  *      LOOKAHEAD_DAYS ahead.
  *   3. An event belongs to a tasting when it falls on the tasting's date
- *      (Geneva time) and its title matches the tasting title (at least
- *      half of the tasting title's significant words appear in the event
- *      title). Events that match on date but not on title are skipped and
- *      logged.
+ *      (Geneva time) and its description contains the Cellar tastings link
+ *      (silviodirubbo.github.io/cellar/tastings), so every invite should
+ *      carry that link. For events without the link, a title match is the
+ *      fallback: at least half of the tasting title's significant words
+ *      appear in the event title. Events on a tasting date that match
+ *      neither way are skipped and logged. When several events match the
+ *      same tasting, the first is kept and a warning is logged.
  *   4. Places taken = guests whose status is not "no" (yes, maybe and
  *      awaiting all count), excluding only the organiser account. The host
  *      counts like any other guest.
@@ -37,6 +40,7 @@ var DEFAULT_REPO = 'silviodirubbo/cellar';
 var TIME_ZONE = 'Europe/Zurich';
 var LOOKAHEAD_DAYS = 120;
 var RESEND_AFTER_MS = 24 * 60 * 60 * 1000;
+var TASTINGS_LINK = 'silviodirubbo.github.io/cellar/tastings';
 var STOP_WORDS = ['and', 'the', 'from', 'across', 'with', 'des', 'les', 'del', 'della', 'et'];
 
 // ── Entry points ──────────────────────────────────────────────
@@ -124,29 +128,19 @@ function countByTasting_(cfg, tastings) {
   var start = new Date();
   start.setHours(0, 0, 0, 0);
   var end = new Date(start.getTime() + LOOKAHEAD_DAYS * 24 * 60 * 60 * 1000);
-  var events = calendar.getEvents(start, end);
-
-  var byDate = {};
-  tastings.forEach(function (t) { (byDate[t.date] = byDate[t.date] || []).push(t); });
+  var events = calendar.getEvents(start, end).map(function (ev) {
+    return {
+      date: Utilities.formatDate(ev.getStartTime(), TIME_ZONE, 'yyyy-MM-dd'),
+      title: ev.getTitle(),
+      description: ev.getDescription(),
+      source: ev
+    };
+  });
 
   var counts = {};
-  events.forEach(function (ev) {
-    var date = Utilities.formatDate(ev.getStartTime(), TIME_ZONE, 'yyyy-MM-dd');
-    var candidates = byDate[date];
-    if (!candidates) return;
-
-    var match = null;
-    candidates.forEach(function (t) { if (!match && titleMatches_(t.title, ev.getTitle())) match = t; });
-    if (!match) {
-      Logger.log('Skipped "' + ev.getTitle() + '" on ' + date + ': date matches ' +
-        candidates.map(function (t) { return '"' + t.title + '"'; }).join(', ') + ' but the title does not.');
-      return;
-    }
-    if (counts.hasOwnProperty(match.slug)) {
-      Logger.log('Warning: more than one event matches ' + match.slug + '; keeping the first.');
-      return;
-    }
-    counts[match.slug] = takenPlaces_(ev, cfg.organiser);
+  var matches = matchEvents_(events, tastings);
+  Object.keys(matches).forEach(function (slug) {
+    counts[slug] = takenPlaces_(matches[slug].source, cfg.organiser);
   });
   return counts;
 }
@@ -167,10 +161,70 @@ function takenPlaces_(ev, organiser) {
 }
 
 // ── Matching ──────────────────────────────────────────────────
+//
+// An event belongs to a tasting when it falls on the tasting's date
+// (Geneva time) and either
+//   1. its description contains TASTINGS_LINK (the main rule), or
+//   2. its description lacks the link but its title matches the tasting
+//      title (the fallback, see titleMatches_).
+// When two tastings share a date, a linked event goes to the tasting whose
+// slug appears in the link, else to the one whose title matches.
+// Events on a tasting date that match neither way are skipped and logged.
+// When several events match the same tasting, the first (earliest start)
+// is kept and a warning is logged.
+
+/**
+ * Pure matching step, kept free of Calendar calls so it can be tested.
+ * events: [{ date: 'yyyy-MM-dd', title, description, source }] in start order.
+ * tastings: as returned by fetchTastings_.
+ * Returns { slug: event } with the event kept for each tasting.
+ */
+function matchEvents_(events, tastings) {
+  var byDate = {};
+  tastings.forEach(function (t) { (byDate[t.date] = byDate[t.date] || []).push(t); });
+
+  var kept = {};
+  events.forEach(function (ev) {
+    var candidates = byDate[ev.date];
+    if (!candidates) return;
+
+    var match = matchOne_(ev, candidates);
+    if (!match) {
+      Logger.log('Skipped "' + ev.title + '" on ' + ev.date + ': date matches ' +
+        candidates.map(function (t) { return '"' + t.title + '"'; }).join(', ') +
+        ' but the description has no Cellar tastings link and the title does not match.');
+      return;
+    }
+    if (kept.hasOwnProperty(match.tasting.slug)) {
+      Logger.log('Warning: "' + ev.title + '" on ' + ev.date + ' also matches ' + match.tasting.slug +
+        '; keeping the first event, "' + kept[match.tasting.slug].title + '".');
+      return;
+    }
+    Logger.log('"' + ev.title + '" on ' + ev.date + ' matched ' + match.tasting.slug + ' by ' + match.by + '.');
+    kept[match.tasting.slug] = ev;
+  });
+  return kept;
+}
+
+/** The tasting one event belongs to, as { tasting, by: 'link' | 'title' }, or null. */
+function matchOne_(ev, candidates) {
+  var description = String(ev.description || '').toLowerCase();
+  var at = description.indexOf(TASTINGS_LINK);
+  if (at !== -1) {
+    if (candidates.length === 1) return { tasting: candidates[0], by: 'link' };
+    var rest = description.slice(at + TASTINGS_LINK.length);
+    var bySlug = candidates.filter(function (t) { return rest.indexOf('/' + t.slug) === 0; })[0];
+    if (bySlug) return { tasting: bySlug, by: 'link' };
+    var byTitle = candidates.filter(function (t) { return titleMatches_(t.title, ev.title); })[0];
+    return byTitle ? { tasting: byTitle, by: 'link' } : null;
+  }
+  var fallback = candidates.filter(function (t) { return titleMatches_(t.title, ev.title); })[0];
+  return fallback ? { tasting: fallback, by: 'title (fallback, no link)' } : null;
+}
 
 function words_(text) {
   return String(text || '')
-    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, ' ')
     .trim()

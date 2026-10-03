@@ -6,12 +6,16 @@ A Google Apps Script that keeps the "places left" count on the Cellar site in st
 
 1. A guest accepts, declines or is added to a tasting invite in the Cellar calendar.
 2. The script (`Code.gs`) recounts the places taken for every upcoming tasting:
-   - an event belongs to a tasting when it falls on the tasting's date (Geneva time) and its title matches the tasting title in `_data/tastings.yml`. At least half of the significant words must appear in the event title, so "Cellar: Sancerre & Pouilly-Fumé" matches "Sancerre & Pouilly-Fumé", and "Sancerre night" does not;
+   - an event belongs to a tasting when it falls on the tasting's date (Geneva time) and its description contains the Cellar tastings link, `silviodirubbo.github.io/cellar/tastings` (any page under it works, for example `https://silviodirubbo.github.io/cellar/tastings/sancerre-pouilly-fume/`). The event title does not matter then;
+   - for an event whose description lacks the link, the title is the fallback: at least half of the tasting title's significant words must appear in the event title, so "Cellar: Sancerre & Pouilly-Fumé" matches "Sancerre & Pouilly-Fumé", and "Sancerre night" does not;
+   - any other event on a tasting date (a birthday, a dinner) is skipped and logged. If two events match the same tasting, the first one counts and a warning is logged;
    - places taken = guests whose status is not "no" (yes, maybe and awaiting all count), leaving out only the organiser account. The host counts like any other guest. The count never goes below 0.
 3. For each count that changed, it calls GitHub's `repository_dispatch` API (event type `availability-update`).
 4. The GitHub Action `.github/workflows/update-availability.yml` writes the count to `_data/availability.yml` and commits to `main`. GitHub Pages redeploys a minute or two later.
 
 The script runs on every calendar change and once an hour as a safety net. It only calls GitHub when a count has changed, and resends each count at most once a day. Repeats are harmless: the Action makes no commit when nothing changed.
+
+**Every tasting invite needs the Cellar tastings link in its description.** The title fallback only exists for older invites; with the link, a tasting is never missed because of its event title, and a private event on the same date is never counted by mistake.
 
 Example: an invite with 7 guests (4 yes, 3 awaiting), one of whom is the organiser account, gives 6 places taken, so the site shows "Fully booked · 0 places left out of 6".
 
@@ -56,7 +60,7 @@ Click **Save script properties**. The token stays in the script project and neve
 
 1. In the editor, pick `dryRun` in the function menu at the top and click **Run**.
 2. Google asks for permission the first time: **Review permissions**, choose cellar.geneve@gmail.com, then **Advanced > Go to Cellar calendar sync (unsafe) > Allow**. The warning appears because the script is your own and not published; it asks to read the calendar, connect to GitHub and manage its own triggers.
-3. Open **Execution log**. You should see one line per upcoming tasting that has an invite, for example `[dry run] would send sancerre-pouilly-fume: 3 taken`. Lines starting with `Skipped` mean an event fell on a tasting's date but its title did not match: rename the event or the tasting so they share the key words.
+3. Open **Execution log**. You should see one line per upcoming tasting that has an invite, for example `[dry run] would send sancerre-pouilly-fume: 3 taken`. Each matched invite logs a line ending in `by link` or `by title (fallback, no link)`. For a fallback line, add the tasting link to that invite's description. Lines starting with `Skipped` mean an event fell on a tasting's date but had neither the link nor a matching title: if it is a tasting invite, add the link to its description. A `Warning:` line means two invites match the same tasting and only the first one counts: merge them into one invite.
 
 ### 6. Turn it on
 
@@ -69,7 +73,7 @@ Click **Save script properties**. The token stays in the script project and neve
 
 ## Day to day
 
-- Nothing to do: invite guests as usual. Their replies update the site within a few minutes.
+- When you create a tasting invite, paste the tasting's page link (for example `https://silviodirubbo.github.io/cellar/tastings/muscadet/`) into its description. Then invite guests as usual: their replies update the site within a few minutes.
 - To change a tasting's capacity, set `capacity:` on that tasting in `_data/tastings.yml` (the default is 6). The site uses it straight away; the next sync records it in `_data/availability.yml`.
 - To remove a tasting's count from the site, run the **Update availability** workflow from the Actions tab with `taken` set to `clear`. A later calendar change for that tasting brings it back.
 - To push all counts again (for example after a GitHub outage), run `forceResend` in the Apps Script editor.
