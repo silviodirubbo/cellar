@@ -603,6 +603,24 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
 }
 
 /* ── Forms: dialogs on the Tastings page ──────────────────── */
+/* sign-up dialog, shown when the tasting has no places left */
+.signup-full {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--rule);
+  border-left: 2px solid var(--green);
+}
+.signup-full[hidden] { display: none; }
+.signup-full__label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 0.35rem;
+}
+.signup-full__text { font-size: 0.88rem; color: var(--ink-mid); line-height: 1.6; margin: 0; max-width: none; }
 .propose-intro { font-family: var(--font-serif); font-size: 0.9rem; color: var(--ink-light); line-height: 1.65; margin-bottom: 1.5rem; max-width: none; }
 .propose-form { display: flex; flex-direction: column; gap: 0; }
 .form-field { margin-bottom: 1rem; }
@@ -1239,6 +1257,10 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   color: var(--warm-white);
 }
 .tl-card--feature .tl-card__where { color: rgba(253,252,250,0.55); }
+
+/* live availability (_includes/availability.html), in the where line */
+.avail-count { color: var(--green); font-weight: 500; }
+.tl-card--feature .avail-count { color: var(--warm-white); }
 .tl-card--feature .tl-card__desc { color: rgba(253,252,250,0.75); }
 .tl-card__menu { margin-top: 1.3rem; max-width: 34rem; }
 .tl-card--feature .tl-card__foot { border-top-color: rgba(253,252,250,0.15); }

@@ -15,6 +15,7 @@ A lightweight site that tracks private wine tasting evenings in Geneva. Each eve
 ```
 _data/tastings.yml      - single source of truth for all events
 _data/tags.yml          - tag categories for the tastings filter
+_data/availability.yml  - live places taken per tasting, written by the calendar sync
 _tastings/              - one HTML presentation file per tasting
 _chapters/              - one file per curriculum chapter
 chapters/               - chapters index page
@@ -27,7 +28,8 @@ _layouts/               - chapter, default, presentation, and story layouts
 _includes/              - nav, footer, chapter progress, story/ slide partials
 assets/css/main.css     - full site styles
 assets/js/              - site script (main.js) and Supabase client
-scripts/                - Story PNG renderer and daily tasting status sync
+scripts/                - Story PNG renderer, daily tasting status sync, availability updater
+tools/calendar-sync/    - Google Apps Script that sends invite counts to GitHub (not built into the site; setup in its README)
 wines/                  - wine grid with filters and hover details (built from _data/tastings.yml)
 planner/                - redirect stub to /tastings/ (old shared links); sign-up and proposals now live on the Tastings page
 tastings/               - public tastings index

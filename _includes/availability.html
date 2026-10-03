@@ -1,0 +1,33 @@
+{% comment %}
+  Live availability for one upcoming tasting, from _data/availability.yml
+  (written by the calendar sync, see tools/calendar-sync/README.md).
+  Params: tasting (an entry of _data/tastings.yml), class (optional extra
+  class on the label).
+  Renders "N places left out of C", "1 place left out of C", or
+  "Fully booked · 0 places left out of C". Renders nothing for a past
+  tasting or one with no entry. Capacity comes from the tasting's own
+  `capacity` field, default 6.
+  Also sets avail_left for the caller (Jekyll includes share the page's
+  variables): the number of places left, or nil when nothing is shown.
+{% endcomment %}
+{% assign avail_left = nil %}
+{% assign avail_entry = site.data.availability[include.tasting.slug] %}
+{% assign avail_today = site.time | date: "%Y-%m-%d" %}
+{% assign avail_date = include.tasting.date | date: "%Y-%m-%d" %}
+{% assign avail_past = false %}
+{% if include.tasting.status == "past" %}{% assign avail_past = true %}{% endif %}
+{% if include.tasting.date and avail_date < avail_today %}{% assign avail_past = true %}{% endif %}
+{% if avail_entry and avail_past == false %}
+  {% assign avail_capacity = include.tasting.capacity | default: 6 %}
+  {% assign avail_taken = avail_entry.taken | default: 0 | at_least: 0 %}
+  {% assign avail_left = avail_capacity | minus: avail_taken | at_least: 0 %}
+  <span class="avail-count{% if avail_left == 0 %} avail-count--full{% endif %}{% if include.class %} {{ include.class }}{% endif %}">
+    {%- if avail_left == 0 -%}
+      Fully booked &middot; 0 places left out of {{ avail_capacity }}
+    {%- elsif avail_left == 1 -%}
+      1 place left out of {{ avail_capacity }}
+    {%- else -%}
+      {{ avail_left }} places left out of {{ avail_capacity }}
+    {%- endif -%}
+  </span>
+{% endif %}

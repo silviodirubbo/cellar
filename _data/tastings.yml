@@ -19,7 +19,10 @@
 #   status:            upcoming | past (kept in sync daily by
 #                      scripts/sync-tasting-status.js, not by position in this
 #                      file, so entries are not grouped by status below)
-#   spots_total:       integer
+#   capacity:          integer, places at the table (defaults to 6 when
+#                      omitted). The live count of places taken lives in
+#                      _data/availability.yml, written by the
+#                      update-availability workflow
 #   cost_estimate:     string e.g. "32 CHF"
 #   featured:          true | false
 #   slides:            true once presentation is ready
@@ -345,7 +348,7 @@
   chapter: loire
   chapter_order: 1
   status: upcoming
-  spots_total: 6
+  capacity: 6
   cost_estimate: "15.90 CHF"
   featured: false
   slides: true
@@ -408,7 +411,7 @@
   chapter: loire
   chapter_order: 2
   status: upcoming
-  spots_total: 6
+  capacity: 6
   cost_estimate: "35 CHF"
   featured: false
   slides: true
@@ -480,7 +483,7 @@
   chapter: loire
   chapter_order: 3
   status: upcoming
-  spots_total: 6
+  capacity: 6
   cost_estimate: "38 CHF"
   featured: false
   slides: true
@@ -541,7 +544,7 @@
   chapter: loire
   chapter_order: 4
   status: upcoming
-  spots_total: 6
+  capacity: 6
   cost_estimate: "23 CHF"
   featured: false
   slides: true
@@ -605,7 +608,7 @@
   chapter: loire
   chapter_order: 5
   status: upcoming
-  spots_total: 6
+  capacity: 6
   cost_estimate: "20 CHF"
   featured: false
   slides: true
@@ -666,7 +669,7 @@
   chapter: loire
   chapter_order: 6
   status: upcoming
-  spots_total: 6
+  capacity: 6
   cost_estimate: "42 CHF"
   featured: false
   slides: true
