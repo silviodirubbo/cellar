@@ -14,3 +14,8 @@
 #
 # A tasting with no entry here keeps the plain "N spots" display.
 # ─────────────────────────────────────────────────────────────
+
+sancerre-pouilly-fume:
+  taken: 3
+  capacity: 6
+  updated_at: "2026-10-03T11:39:21Z"
