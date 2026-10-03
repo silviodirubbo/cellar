@@ -3,14 +3,16 @@
   _data/availability.yml (written by the calendar sync, see
   tools/calendar-sync/README.md). Param: tasting (an entry of
   _data/tastings.yml).
-  Renders "N available", or "Fully booked" when no places are left.
+  Renders "N places available" ("1 place available" for exactly 1),
+  or "Fully booked" when no places are left.
   Renders nothing for a past tasting or one with no entry. Capacity comes
   from the tasting's own `capacity` field, default 6.
   Also sets, for the caller (Jekyll includes share the page's variables):
     avail_left      places left, or nil when nothing is shown
     avail_capacity  the tasting's capacity
   The sign-up dialog reads both from the "I'm coming" button's data
-  attributes and shows "N available out of C" (assets/js/forms.js).
+  attributes and shows "N places available out of C"
+  (assets/js/forms.js).
 {% endcomment %}
 {% assign avail_left = nil %}
 {% assign avail_entry = site.data.availability[include.tasting.slug] %}
@@ -26,8 +28,10 @@
   <span class="avail-count{% if avail_left == 0 %} avail-count--full{% endif %}">
     {%- if avail_left == 0 -%}
       Fully booked
+    {%- elsif avail_left == 1 -%}
+      1 place available
     {%- else -%}
-      {{ avail_left }} available
+      {{ avail_left }} places available
     {%- endif -%}
   </span>
 {% endif %}

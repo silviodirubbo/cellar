@@ -17,7 +17,7 @@ The script runs on every calendar change and once an hour as a safety net. It on
 
 **Every tasting invite needs the Cellar tastings link in its description.** The title fallback only exists for older invites; with the link, a tasting is never missed because of its event title, and a private event on the same date is never counted by mistake.
 
-Example: an invite with 7 guests (4 yes, 3 awaiting), one of whom is the organiser account, gives 6 places taken, so the Tastings page shows "Fully booked" and the sign-up form shows "0 available out of 6".
+Example: an invite with 7 guests (4 yes, 3 awaiting), one of whom is the organiser account, gives 6 places taken, so the Tastings page shows "Fully booked" and the sign-up form shows "0 places available out of 6".
 
 ## Setup (Silvio only)
 
@@ -69,7 +69,7 @@ Click **Save script properties**. The token stays in the script project and neve
    - **Triggers** (the clock icon) lists `onCalendarChange` (From calendar) and `syncAll` (Time-driven, every hour);
    - the Execution log shows `sent` lines;
    - <https://github.com/silviodirubbo/cellar/actions/workflows/update-availability.yml> shows one green run per tasting sent;
-   - after a couple of minutes the Tastings page shows "N available" on each card, and the sign-up form shows "N available out of 6".
+   - after a couple of minutes the Tastings page shows "N places available" on each card ("1 place available" for one), and the sign-up form shows "N places available out of 6".
 
 ## Day to day
 

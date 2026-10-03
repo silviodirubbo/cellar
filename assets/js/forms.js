@@ -77,14 +77,17 @@
   // avail: { available, capacity } from the button's data-available and
   // data-capacity (set from _data/availability.yml), or null when the
   // tasting has no availability entry. The dialog then shows
-  // "N available out of C", plus the fully booked note at 0.
+  // "N places available out of C" ("1 place available out of C" for
+  // exactly 1), plus the fully booked note at 0.
   function openSignup(slug, title, trigger, avail) {
     document.getElementById('signup-success').hidden = true;
     const availLine = document.getElementById('signup-avail');
     const fullNote = document.getElementById('signup-full');
     if (availLine) {
       availLine.hidden = !avail;
-      availLine.textContent = avail ? avail.available + ' available out of ' + avail.capacity : '';
+      availLine.textContent = avail
+        ? avail.available + (avail.available === '1' ? ' place' : ' places') + ' available out of ' + avail.capacity
+        : '';
     }
     if (fullNote) fullNote.hidden = !avail || avail.available !== '0';
     document.getElementById('signup-tasting-name').textContent = title;
