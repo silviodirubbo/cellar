@@ -19,3 +19,8 @@ gsm-across-regions:
   taken: 2
   capacity: 6
   updated_at: "2026-10-03T12:29:30Z"
+
+sancerre-pouilly-fume:
+  taken: 2
+  capacity: 6
+  updated_at: "2026-10-03T12:29:33Z"
