@@ -49,3 +49,8 @@ saumur-champigny:
   taken: 2
   capacity: 6
   updated_at: "2026-10-03T12:29:45Z"
+
+muscadet:
+  taken: 6
+  capacity: 6
+  updated_at: "2026-10-03T12:30:08Z"
