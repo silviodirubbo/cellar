@@ -17,9 +17,5 @@
   "dependencies": {
     "js-yaml": "^4.3.2",
     "playwright": "^1.56.0"
-  },
-  "optionalDependencies": {
-    "@fontsource/cormorant-garamond": "^5.2.0",
-    "@fontsource/dm-mono": "^5.2.0"
   }
 }

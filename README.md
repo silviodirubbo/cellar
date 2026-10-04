@@ -26,7 +26,8 @@ assets/social/          - off-site post assets, not used by the site
   linkedin/             - LinkedIn carousels, one folder per post
 _layouts/               - chapter, default, presentation, and story layouts
 _includes/              - nav, footer, chapter progress, story/ slide partials
-assets/css/main.css     - full site styles
+assets/css/main.css     - full site styles (fonts.css: the self-hosted @font-face rules)
+assets/fonts/           - Cormorant Garamond and DM Mono, woff2, latin and latin-ext
 assets/js/              - main.js (site-wide), forms.js (dialogs), wines.js (Wines page), supabase.js (reserved)
 scripts/                - status sync, availability updater, data and link checks, image size table, Story renderer
 tools/calendar-sync/    - Google Apps Script that sends invite counts to GitHub (not built into the site; setup in its README)
@@ -69,7 +70,7 @@ The schedule, the Wines page, the chapter pages, the cover date of each deck and
    cd scripts && npm install && npx playwright install chromium
    node render-stories.js
    ```
-   It needs the Ruby toolchain as well (it runs its own Jekyll build). Set `FONTSOURCE_DIR` to `scripts/node_modules/@fontsource` on a machine without access to Google Fonts.
+   It needs the Ruby toolchain as well (it runs its own Jekyll build). The fonts are self-hosted (`assets/fonts/`), so no access to Google Fonts is needed.
 
 ## Renaming a slug
 

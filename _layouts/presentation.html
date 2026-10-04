@@ -29,9 +29,9 @@
   <meta name="twitter:image" content="{{ seo_cover.path | absolute_url }}">{% else %}<meta name="twitter:card" content="summary">{% endif %}
   <meta name="twitter:title" content="{{ seo_title }}">
   <meta name="twitter:description" content="{{ seo_desc }}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <!-- Fonts, self-hosted (assets/css/fonts.css); the body face is preloaded -->
+  <link rel="preload" href="{{ '/assets/fonts/cormorant-garamond-normal-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ '/assets/css/fonts.css' | relative_url }}">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 

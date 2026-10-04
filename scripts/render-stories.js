@@ -21,10 +21,11 @@
 // instead of writing a PNG set in a fallback font.
 //
 // Optional environment:
-//   FONTSOURCE_DIR  path to a node_modules/@fontsource folder. When set, the
-//                   Google Fonts stylesheet the pages request is answered
-//                   from the matching local @fontsource files, for machines
-//                   without access to fonts.googleapis.com.
+//   FONTSOURCE_DIR  path to a node_modules/@fontsource folder. When set, any
+//                   Google Fonts stylesheet a page requests is answered from
+//                   local @fontsource files. Since the site self-hosts its
+//                   fonts (assets/css/fonts.css) the Story pages request none,
+//                   so this is only kept for older sources.
 //   CHROMIUM_PATH   Chromium executable to use instead of Playwright's own.
 
 const path = require('path');
