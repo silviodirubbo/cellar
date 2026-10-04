@@ -28,7 +28,7 @@ _layouts/               - chapter, default, presentation, and story layouts
 _includes/              - nav, footer, chapter progress, story/ slide partials
 assets/css/main.css     - full site styles
 assets/js/              - main.js (site-wide), forms.js (dialogs), wines.js (Wines page), supabase.js (reserved)
-scripts/                - Story PNG renderer, daily tasting status sync, availability updater
+scripts/                - status sync, availability updater, data and link checks, image size table, Story renderer
 tools/calendar-sync/    - Google Apps Script that sends invite counts to GitHub (not built into the site; setup in its README)
 wines/                  - wine grid with filters and hover details (built from _data/tastings.yml)
 planner/                - redirect stub to /tastings/ (old shared links); sign-up and proposals now live on the Tastings page

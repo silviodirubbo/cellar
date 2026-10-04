@@ -1,0 +1,58 @@
+name: Check
+
+# Builds the site the way GitHub Pages does and checks it: the data and
+# the files it points to (scripts/validate-data.js), the image size table
+# (scripts/image-sizes.js --check) and every internal link and asset
+# (scripts/check-links.js). It only reports: the Pages deploy does not
+# wait for it, so a red Check means "look at this", not "the site is down".
+#
+# Commits made by the availability and status workflows use the built-in
+# GITHUB_TOKEN, which does not start other workflows, so they are not
+# checked here; the next push from a person is.
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+
+      - name: Build with the GitHub Pages builder
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1.0.13
+        with:
+          source: ./
+          destination: ./_site
+
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: 24
+
+      - name: Install script dependencies
+        working-directory: scripts
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+        run: npm ci --no-audit --no-fund
+
+      - name: Data and file references
+        run: node scripts/validate-data.js
+
+      - name: Image size table is current
+        if: always()
+        run: node scripts/image-sizes.js --check
+
+      - name: Internal links and assets
+        if: always()
+        run: node scripts/check-links.js _site
