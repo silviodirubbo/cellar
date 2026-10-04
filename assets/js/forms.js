@@ -42,9 +42,30 @@
     lastTrigger = null;
   }
 
+  // Focus trap: while a dialog is open, Tab and Shift+Tab cycle through
+  // its own controls only (the honeypot field is hidden, so it is skipped).
+  const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), ' +
+                    'select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+  function trapTab(e, overlay) {
+    const items = [...overlay.querySelectorAll(FOCUSABLE)]
+      .filter(el => !el.hidden && el.getClientRects().length > 0 && el.tabIndex !== -1);
+    if (!items.length) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    const inside = overlay.contains(document.activeElement);
+    if (e.shiftKey && (document.activeElement === first || !inside)) {
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && (document.activeElement === last || !inside)) {
+      e.preventDefault(); first.focus();
+    }
+  }
+
   document.addEventListener('keydown', e => {
-    if (e.key !== 'Escape') return;
-    overlays.forEach(o => { if (!o.hidden) closeModal(o); });
+    const open = overlays.find(o => !o.hidden);
+    if (!open) return;
+    if (e.key === 'Escape') closeModal(open);
+    else if (e.key === 'Tab') trapTab(e, open);
   });
 
   overlays.forEach(o => {
