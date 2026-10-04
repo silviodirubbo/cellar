@@ -40,7 +40,8 @@ permalink: /404.html
     letter-spacing: .18em;
     text-transform: uppercase;
     color: var(--ink-light, #736E6B);
-    margin-bottom: 1.2rem;
+    margin: 0 0 1.2rem;
+    line-height: 1.7; /* as before it became the page's h1 */
   }
 
   .error-message {
@@ -78,9 +79,9 @@ permalink: /404.html
 </style>
 
 <div class="error-page">
-  <div class="error-code">404</div>
+  <div class="error-code" aria-hidden="true">404</div>
   <div class="error-rule"></div>
-  <div class="error-label">Page not found</div>
+  <h1 class="error-label">Page not found</h1>
   <p class="error-message">This glass is <em>empty</em>. The page you were looking for doesn't exist or has been moved.</p>
   <a href="{{ site.baseurl }}/" class="error-back">← Back to the cellar</a>
 </div>

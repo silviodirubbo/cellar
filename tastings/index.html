@@ -68,7 +68,7 @@ permalink: /tastings/
         </div>
         <div class="chipbar" id="chipbar">
           <div class="chip-group chip-group--all">
-            <button class="chip chip--active" data-tag="" aria-pressed="true">All</button>
+            <button type="button" class="chip chip--active" data-tag="" aria-pressed="true">All</button>
           </div>
 
           <details class="chip-group">
@@ -76,7 +76,7 @@ permalink: /tastings/
             <div class="chip-group__items">
               {% for chapter in chapters_sorted %}
                 {% assign chapter_items = site.data.tastings | where: "chapter", chapter.slug %}
-                <button class="chip" data-chapter="{{ chapter.slug }}" aria-pressed="false">{{ chapter.title }}&nbsp;<span class="chip__n">{{ chapter_items.size }}</span></button>
+                <button type="button" class="chip" data-chapter="{{ chapter.slug }}" aria-pressed="false">{{ chapter.title }}&nbsp;<span class="chip__n">{{ chapter_items.size }}</span></button>
               {% endfor %}
             </div>
           </details>
@@ -97,7 +97,7 @@ permalink: /tastings/
                 {% for tag in group_tags %}
                   {% assign tg = tag_counts | where: "name", tag.name | first %}
                   {% if tg %}
-                    <button class="chip" data-tag="{{ tag.name }}" aria-pressed="false">{{ tag.name }}&nbsp;<span class="chip__n">{{ tg.items.size }}</span></button>
+                    <button type="button" class="chip" data-tag="{{ tag.name }}" aria-pressed="false">{{ tag.name }}&nbsp;<span class="chip__n">{{ tg.items.size }}</span></button>
                   {% endif %}
                 {% endfor %}
               </div>
