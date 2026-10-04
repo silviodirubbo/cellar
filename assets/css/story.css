@@ -1,0 +1,382 @@
+/* ============================================================
+   story.css: Instagram Story slides only. Loaded after main.css by
+   _layouts/story.html (the Story pages under
+   assets/social/instagram/stories/src/, rendered to PNG by
+   scripts/render-stories.js); the public site never loads it.
+   Uses the tokens and base styles from main.css.
+   ============================================================ */
+
+/* ============================================================
+   INSTAGRAM STORIES: fixed 1080x1920 export canvas
+   (_layouts/story.html + _includes/story/*). Not responsive by
+   design, exported as PNG via Playwright. Colour/type come from
+   the tokens above; sizing here is new, scaled for the canvas.
+   ============================================================ */
+
+.story {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  font-family: var(--font-serif);
+}
+.story--dark     { background: var(--ink); }
+.story--green    { background: var(--green); }
+/* Loire chapter colour, grey-blue. */
+.story--loire    { background: #5B6670; }
+.story--offwhite {
+  background: var(--off-white);
+  /* bottle glyph tints for this light background, see "Bottle glyph" below */
+  --bottle-red:   #C97F72;
+  --bottle-white: #B7C2AC;
+}
+/* Dark bordeaux, same tonal family as --ink but with a wine-red hue.
+   Used for chapter-specific wordmark covers (e.g. the Rhône cover). */
+.story--red      { background: #3B1712; }
+/* Muted navy, same family again. Used for the Grape Studies cover. */
+.story--navy     { background: #1E2A38; }
+/* Muted magenta, same tonal family as --ink. Used for the Fiano
+   Horizontal tasting-reveal cover. */
+.story--magenta  { background: #3B1A2E; }
+/* Muted slate-blue, warmer and less saturated than a "cold" blue so it
+   still sits in the --ink/--green/--gold family. One-off exception to
+   the green/light alternation, used only for urgency promos (e.g. a
+   "spots left" slide) that need to stand apart from the rest of a
+   story batch. */
+.story--blue     { background: #2A4656; }
+
+.story__inner {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  padding: 132px 104px 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Optional full-bleed texture layer (e.g. a tasting's cover painting,
+   faded in behind the standard slide content). Opt-in: any story adds
+   this div before .story__inner and sets its background-image/opacity
+   inline via page front matter. Not a cutout: full-bleed art blended
+   translucently, so mix-blend-mode/opacity is what does the work. */
+.story-texture {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+/* ── Chapter dots: which chapter this batch belongs to ────── */
+.story-dots { display: flex; gap: 20px; margin-bottom: 92px; flex: 0 0 auto; }
+.story-dots__dot {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--ink-mid);
+  box-sizing: border-box;
+}
+.story--dark .story-dots__dot,
+.story--green .story-dots__dot,
+.story--loire .story-dots__dot,
+.story--red .story-dots__dot,
+.story--navy .story-dots__dot,
+.story--magenta .story-dots__dot,
+.story--blue .story-dots__dot { border-color: rgba(253,252,250,0.4); }
+.story-dots__dot--active { background: var(--green); border-color: var(--green); }
+.story--green .story-dots__dot--active,
+.story--loire .story-dots__dot--active,
+.story--red .story-dots__dot--active,
+.story--navy .story-dots__dot--active,
+.story--magenta .story-dots__dot--active,
+.story--blue .story-dots__dot--active { background: rgba(253,252,250,0.55); border-color: rgba(253,252,250,0.55); }
+
+/* ── Eyebrow / meta line ───────────────────────────────────── */
+.story-eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 25px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 22px;
+  flex: 0 0 auto;
+}
+.story--dark .story-eyebrow,
+.story--green .story-eyebrow,
+.story--loire .story-eyebrow,
+.story--magenta .story-eyebrow,
+.story--blue .story-eyebrow { color: rgba(253,252,250,0.5); }
+
+/* ── Title ─────────────────────────────────────────────────── */
+.story-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 82px;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 48px;
+  flex: 0 0 auto;
+}
+.story--dark .story-title,
+.story--green .story-title,
+.story--loire .story-title,
+.story--magenta .story-title,
+.story--blue .story-title { color: var(--warm-white); }
+
+/* ── Rule ──────────────────────────────────────────────────── */
+.story-rule { border: none; border-top: 1px solid var(--rule); margin: 0 0 48px; flex: 0 0 auto; }
+.story--dark .story-rule,
+.story--green .story-rule,
+.story--loire .story-rule,
+.story--magenta .story-rule,
+.story--blue .story-rule { border-top-color: rgba(253,252,250,0.16); }
+
+/* ── Italic intro / closing paragraphs (whole-paragraph italic,
+   distinct from the selective <em> emphasis used in "how it works") ── */
+.story-italic {
+  font-style: italic;
+  font-weight: 300;
+  font-size: 40px;
+  line-height: 1.5;
+  color: var(--ink-light);
+  max-width: none;
+}
+.story--dark .story-italic,
+.story--green .story-italic,
+.story--loire .story-italic,
+.story--magenta .story-italic,
+.story--blue .story-italic { color: rgba(247,245,240,0.72); }
+
+/* ── Plain lede paragraph (slide 2: "what it is") ─────────── */
+.story-lede {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 46px;
+  line-height: 1.55;
+  color: var(--warm-white);
+  max-width: none;
+}
+
+/* ── Body copy with selective <em> emphasis (slide 3: "how it
+   works"). Reuses the site's default em{color:var(--green)} rule. ── */
+.story-body {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 46px;
+  line-height: 1.55;
+  color: var(--ink);
+  max-width: none;
+}
+
+/* ── Wine list rows ────────────────────────────────────────── */
+.story-winelist { display: flex; flex-direction: column; gap: 40px; flex: 1 1 auto; }
+.story-wine { display: flex; align-items: center; gap: 32px; }
+.story-wine__name {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 42px;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.story--dark .story-wine__name,
+.story--green .story-wine__name,
+.story--loire .story-wine__name,
+.story--magenta .story-wine__name,
+.story--blue .story-wine__name { color: var(--warm-white); }
+.story-wine__meta {
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 21px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-top: 6px;
+}
+.story--dark .story-wine__meta,
+.story--green .story-wine__meta,
+.story--loire .story-wine__meta,
+.story--magenta .story-wine__meta,
+.story--blue .story-wine__meta { color: rgba(253,252,250,0.5); }
+
+/* ── Bottle glyph: colour comes from the wine's type, tinted
+   lighter on light backgrounds and richer on the dark/green one
+   so the outline stays legible either way. ── */
+.story--dark, .story--green, .story--loire, .story--magenta, .story--blue {
+  --bottle-red:   #B3402E;
+  --bottle-white: #C9D2BE;
+}
+.story-bottle { flex: 0 0 auto; width: 48px; height: 136px; }
+.story-bottle--red   { color: var(--bottle-red); }
+.story-bottle--white { color: var(--bottle-white); }
+
+/* ── Link bar (slides 2 & 3): URL + tap chip ──────────────────── */
+.story-linkbar-wrap { flex: 0 0 auto; margin-top: auto; }
+.story-linkbar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: var(--ink);
+  padding: 34px 30px;
+}
+.story-linkbar__url {
+  flex: 1 1 auto;
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 30px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--warm-white);
+}
+.story-linkbar__tap {
+  flex: 0 0 auto;
+  width: 64px;
+  height: 64px;
+  background: rgba(253,252,250,0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+}
+
+/* ── Chapter-cover / all-tastings-style list (timeline dots) ─ */
+.story-list { display: flex; flex-direction: column; gap: 34px; flex: 1 1 auto; overflow: hidden; position: relative; }
+.story-list::before {
+  content: '';
+  position: absolute;
+  top: 19px;
+  bottom: 19px;
+  left: 11px;
+  width: 1px;
+  background: rgba(253,252,250,0.22);
+}
+.story--offwhite .story-list::before { background: var(--rule); }
+.story-list__row { position: relative; z-index: 1; display: flex; align-items: flex-start; gap: 26px; }
+.story-list__marker { flex: 0 0 auto; width: 22px; display: flex; flex-direction: column; align-items: center; margin-top: 8px; }
+.story-list__dot { width: 22px; height: 22px; border-radius: 50%; background: var(--warm-white); }
+.story-list__dot--hollow { background: transparent; border: 2px solid rgba(253,252,250,0.55); box-sizing: border-box; }
+.story-list__title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 38px;
+  line-height: 1.25;
+  color: var(--warm-white);
+}
+.story-list__date {
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 21px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(253,252,250,0.5);
+  margin-top: 6px;
+}
+.story--offwhite .story-list__title { color: var(--ink); }
+.story--offwhite .story-list__date  { color: var(--ink-light); }
+.story--offwhite .story-list__dot   { background: var(--green); }
+.story--offwhite .story-list__dot--hollow { background: transparent; border-color: var(--ink-light); }
+
+/* ── Tasting pair: two tastings released as one story, centered
+   in the remaining space instead of a many-row timeline list ── */
+.story-pair {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 56px;
+  flex: 1 1 auto;
+}
+.story-pair__item { display: flex; flex-direction: column; gap: 14px; }
+.story-pair__label {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 96px;
+  line-height: 1.05;
+  color: var(--ink);
+}
+.story--dark .story-pair__label,
+.story--green .story-pair__label,
+.story--loire .story-pair__label { color: var(--warm-white); }
+.story-pair__date {
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 28px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+.story--dark .story-pair__date,
+.story--green .story-pair__date,
+.story--loire .story-pair__date { color: rgba(253,252,250,0.55); }
+.story-pair__divider { height: 1px; background: var(--rule); flex: 0 0 auto; }
+.story--dark .story-pair__divider,
+.story--green .story-pair__divider,
+.story--loire .story-pair__divider { background: rgba(253,252,250,0.16); }
+
+/* ── Teaser: two-line hook, second line the italic gold payoff
+   (_includes/story/teaser.html). The payoff is a <span>, not an <em>,
+   so the sitewide em{color:var(--green)} rule can't recolour it, and it
+   sets font-style + a weight the italic face actually ships (300/400
+   are the only italic weights loaded; anything else is synthesised).
+   --gold is 1.15:1 on --loire and under 2:1 on --green, so dark
+   backgrounds get a lighter gold from the same family (3.4:1 on
+   --loire, 5.7:1 on --green, fine at this size). ── */
+.story-hook__em {
+  display: block;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold);
+}
+.story--dark .story-hook__em,
+.story--green .story-hook__em,
+.story--loire .story-hook__em,
+.story--magenta .story-hook__em,
+.story--blue .story-hook__em { color: #E2C27E; }
+.story-facts {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  align-items: baseline;
+  row-gap: 30px;
+  flex: 0 0 auto;
+}
+.story-facts dt {
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 25px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+.story-facts dd {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 46px;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.story--dark .story-facts dt,
+.story--green .story-facts dt,
+.story--loire .story-facts dt,
+.story--magenta .story-facts dt,
+.story--blue .story-facts dt { color: rgba(253,252,250,0.5); }
+.story--dark .story-facts dd,
+.story--green .story-facts dd,
+.story--loire .story-facts dd,
+.story--magenta .story-facts dd,
+.story--blue .story-facts dd { color: var(--warm-white); }
+.story-teaser__cta { margin-top: auto; font-size: 48px; }
+
+/* ── Section cover: single centered word, dots top-left only ─── */
+.story__inner--center { display: flex; flex: 1 1 auto; justify-content: center; align-items: center; text-align: center; }
+.story-word {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 230px;
+  line-height: 1;
+  color: var(--ink);
+}
+.story--dark .story-word,
+.story--green .story-word,
+.story--loire .story-word { color: var(--warm-white); }
