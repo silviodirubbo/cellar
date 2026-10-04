@@ -116,8 +116,8 @@ permalink: /
           Pool: every wine with an image, poured or upcoming, de-duplicated
           with the Wines page key (producer|name|vintage|appellation) and
           then by image path, so two vintages sharing one photo never sit
-          side by side. Only image paths go into the page; the script below
-          requests just the five it picks.
+          side by side. Only image paths (with their pixel size) go into the
+          page; the script below requests just the five it picks.
           The build-time picks (first or last wine with an image from the
           latest past tastings) sit in <noscript>: with JavaScript they are
           never parsed or requested, so nothing paints and then swaps; the
@@ -134,6 +134,8 @@ permalink: /
               {% unless pool_seen contains kmark or pool_seen contains imark %}
                 {% assign pool_seen = pool_seen | append: kmark | append: imark %}
                 {% assign src = '/assets/tastings/' | append: w.image | relative_url %}
+                {% assign sz = site.data.image_sizes[w.image] %}
+                {% if sz %}{% assign src = src | append: "|" | append: sz[0] | append: "|" | append: sz[1] %}{% endif %}
                 {% assign pool = pool | push: src %}
               {% endunless %}
             {% endif %}
@@ -149,7 +151,8 @@ permalink: /
               {% if odd == 1 %}{% assign pick = with_img | last %}{% endif %}
               {% if pick and strip_n < 5 %}
                 {% assign strip_n = strip_n | plus: 1 %}
-                <span class="home-bottles__slot"><img src="{{ '/assets/tastings/' | append: pick.image | relative_url }}" alt="" loading="lazy" decoding="async"></span>
+                {% assign sz = site.data.image_sizes[pick.image] %}
+                <span class="home-bottles__slot"><img src="{{ '/assets/tastings/' | append: pick.image | relative_url }}" alt="" loading="lazy" decoding="async"{% if sz %} width="{{ sz[0] }}" height="{{ sz[1] }}"{% endif %}></span>
               {% endif %}
             {% endfor %}
           </noscript>
@@ -161,11 +164,13 @@ permalink: /
             var strip = document.querySelector('.home-bottles');
             if (!strip) return;
             var fallback = strip.querySelector('noscript');
-            function slot(src) {
+            function slot(entry) {          // "path|width|height" (size from _data/image_sizes.yml)
+              var p = entry.split('|');
               var s = document.createElement('span');
               s.className = 'home-bottles__slot';
               var img = document.createElement('img');
-              img.src = src; img.alt = ''; img.decoding = 'async';
+              img.src = p[0]; img.alt = ''; img.decoding = 'async';
+              if (p[2]) { img.width = +p[1]; img.height = +p[2]; }
               s.appendChild(img);
               return s;
             }
@@ -177,7 +182,7 @@ permalink: /
                 var t = pool[i]; pool[i] = pool[j]; pool[j] = t;
               }
               var frag = document.createDocumentFragment();
-              pool.slice(0, 5).forEach(function (src) { frag.appendChild(slot(src)); });
+              pool.slice(0, 5).forEach(function (entry) { frag.appendChild(slot(entry)); });
               strip.insertBefore(frag, fallback);   // slots stay children 1 to 5 for the phone rule
             } catch (e) {
               if (fallback) fallback.insertAdjacentHTML('beforebegin', fallback.textContent);

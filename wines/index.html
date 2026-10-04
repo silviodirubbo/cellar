@@ -78,8 +78,10 @@ permalink: /wines/
         <div class="wine__tile" tabindex="0" role="group" aria-label="{{ w.producer }}, {{ w.name }}{% if w.vintage %}, {{ w.vintage }}{% endif %}">
           {% if w.image %}
             <span class="wine__photo">
+              {% assign sz = site.data.image_sizes[w.image] %}
               <img class="wine__img"
-                   src="{{ '/assets/tastings/' | append: w.image | relative_url }}"
+                   src="{{ '/assets/tastings/' | append: w.image | relative_url }}"{% if sz %}
+                   width="{{ sz[0] }}" height="{{ sz[1] }}"{% endif %}
                    alt="Bottle of {{ w.name }} by {{ w.producer }}"
                    loading="lazy" decoding="async">
             </span>

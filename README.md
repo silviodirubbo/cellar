@@ -53,6 +53,7 @@ The schedule, the Wines page, the chapter pages, the cover date of each deck and
 3. **Assets.** Create `assets/tastings/<slug>/`:
    - the cover: a file whose name starts with `cover` (`cover.jpg` or `cover.png`). It is found by that prefix and used on the schedule card, the feature card and as the link preview image.
    - bottle pictures (`bottle_<name>.png`), maps (`map_<area>.jpg`) and QR codes (`qr_<producer>.png`). Each wine's `image` field points to its bottle, relative to `assets/tastings/`.
+   - then run `node scripts/image-sizes.js`: it records the pixel size of the cover and bottles in `_data/image_sizes.yml`, which the pages use for the `width` and `height` of those images. The Check workflow fails when this file is out of date.
 4. **Deck.** Copy the most recent deck (for example `_tastings/sancerre-pouilly-fume.html`) to `_tastings/<slug>.html`:
    - set `title` in the front matter to the tasting title;
    - keep the `{% assign this_tasting = ... %}` line, which fills in the cover date from the data;

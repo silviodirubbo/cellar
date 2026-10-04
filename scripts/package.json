@@ -2,11 +2,12 @@
   "name": "cellar-scripts",
   "version": "1.0.0",
   "private": true,
-  "description": "Out-of-band scripts for Silvio's Cellar: daily tasting status sync, availability updater (both run in GitHub Actions) and the Instagram Story renderer",
+  "description": "Out-of-band scripts for Silvio's Cellar: daily tasting status sync, availability updater (both run in GitHub Actions), image size table and the Instagram Story renderer",
   "scripts": {
     "sync-status": "node sync-tasting-status.js",
     "update-availability": "node update-availability.js",
-    "render-stories": "node render-stories.js"
+    "render-stories": "node render-stories.js",
+    "image-sizes": "node image-sizes.js"
   },
   "engines": {
     "node": ">=22"

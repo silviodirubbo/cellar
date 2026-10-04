@@ -123,6 +123,7 @@ permalink: /tastings/
       {% for tasting in upcoming %}
       {% capture cover_prefix %}/assets/tastings/{{ tasting.slug }}/cover{% endcapture %}
       {% assign cover = site.static_files | where_exp: "f", "f.path contains cover_prefix" | first %}
+      {% if cover %}{% assign cover_key = cover.path | remove_first: "/assets/tastings/" %}{% endif %}
       <article class="tl-row tl-row--upcoming {% if next and tasting.slug == next.slug %}tl-row--next{% endif %}"
                id="{{ tasting.slug }}" data-tags="{{ tasting.tags | join: ',' }}" data-chapter="{{ tasting.chapter }}">
 
@@ -150,7 +151,8 @@ permalink: /tastings/
              style="{% if chapter_obj %}--chapter-accent: {{ chapter_obj.color }};{% endif %}{% if is_next and cover %}background-image: url('{{ cover.path | relative_url }}');{% endif %}">
           {% if is_next %}<span class="tl-card__ghost" aria-hidden="true">{{ tasting.date | date: "%-d" }}</span>{% endif %}
           {% if cover and is_next == false %}
-          <div class="tl-card__cover"><img src="{{ cover.path | relative_url }}" alt="" loading="lazy"></div>
+          {% assign sz = site.data.image_sizes[cover_key] %}
+          <div class="tl-card__cover"><img src="{{ cover.path | relative_url }}" alt="" loading="lazy"{% if sz %} width="{{ sz[0] }}" height="{{ sz[1] }}"{% endif %}></div>
           {% endif %}
           <div class="tl-card__body">
             {% if is_next %}
@@ -242,6 +244,7 @@ permalink: /tastings/
       {% for tasting in past %}
       {% capture cover_prefix %}/assets/tastings/{{ tasting.slug }}/cover{% endcapture %}
       {% assign cover = site.static_files | where_exp: "f", "f.path contains cover_prefix" | first %}
+      {% if cover %}{% assign cover_key = cover.path | remove_first: "/assets/tastings/" %}{% endif %}
       <article class="tl-row tl-row--past" id="{{ tasting.slug }}" data-tags="{{ tasting.tags | join: ',' }}" data-chapter="{{ tasting.chapter }}">
 
         <time class="tl-row__date" datetime="{{ tasting.date }}">
@@ -257,7 +260,8 @@ permalink: /tastings/
         <details class="past-entry" style="{% if chapter_obj %}--chapter-accent: {{ chapter_obj.color }};{% endif %}">
           <summary class="past-entry__head">
             {% if cover %}
-              <img class="past-entry__thumb" src="{{ cover.path | relative_url }}" alt="" loading="lazy">
+              {% assign sz = site.data.image_sizes[cover_key] %}
+              <img class="past-entry__thumb" src="{{ cover.path | relative_url }}" alt="" loading="lazy"{% if sz %} width="{{ sz[0] }}" height="{{ sz[1] }}"{% endif %}>
             {% else %}
               <span class="past-entry__thumb past-entry__thumb--empty" aria-hidden="true"></span>
             {% endif %}
