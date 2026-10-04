@@ -1,5 +1,21 @@
 {
   "name": "cellar-scripts",
   "version": "1.0.0",
-  "description": "Build scripts for Silvio's Cellar Jekyll site"
+  "private": true,
+  "description": "Out-of-band scripts for Silvio's Cellar: daily tasting status sync, availability updater (both run in GitHub Actions) and the Instagram Story renderer",
+  "scripts": {
+    "sync-status": "node sync-tasting-status.js",
+    "update-availability": "node update-availability.js",
+    "render-stories": "node render-stories.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "playwright": "^1.56.0"
+  },
+  "optionalDependencies": {
+    "@fontsource/cormorant-garamond": "^5.2.0",
+    "@fontsource/dm-mono": "^5.2.0"
+  }
 }
