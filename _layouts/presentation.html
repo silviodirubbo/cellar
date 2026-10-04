@@ -4,6 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>{{ page.title }} · Silvio di Rubbo</title>
+  {% comment %}
+    Link previews for a deck, built from its _data/tastings.yml entry and
+    its existing cover. Written here rather than with {% seo %}: the plugin
+    only reads a description from front matter, and copying each tasting's
+    description into its deck would be a second copy to keep in step.
+  {% endcomment %}
+  {% assign seo_tasting = site.data.tastings | where: "slug", page.slug | first %}
+  {% capture seo_cover_prefix %}/assets/tastings/{{ page.slug }}/cover{% endcapture %}
+  {% assign seo_cover = site.static_files | where_exp: "f", "f.path contains seo_cover_prefix" | first %}
+  {% assign seo_title = page.title | append: " · " | append: site.title | escape %}
+  {% assign seo_desc = seo_tasting.description | default: site.description | strip_newlines | strip | escape %}
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.title | escape }}">
+  <meta property="og:locale" content="{{ site.lang }}">
+  <meta property="og:title" content="{{ seo_title }}">
+  <meta property="og:description" content="{{ seo_desc }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  {% if seo_cover %}<meta property="og:image" content="{{ seo_cover.path | absolute_url }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ seo_cover.path | absolute_url }}">{% else %}<meta name="twitter:card" content="summary">{% endif %}
+  <meta name="twitter:title" content="{{ seo_title }}">
+  <meta name="twitter:description" content="{{ seo_desc }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">

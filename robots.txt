@@ -1,0 +1,10 @@
+---
+layout: null
+sitemap: false
+---
+# Crawlers only read robots.txt at the domain root, so this copy under
+# /cellar/ is informational; submit the sitemap in Search Console instead.
+User-agent: *
+Allow: /
+
+Sitemap: {{ "/sitemap.xml" | absolute_url }}

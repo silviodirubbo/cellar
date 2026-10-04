@@ -1,9 +1,16 @@
 title: Silvio's Cellar
 description: Friendly wine tastings in Geneva.
+lang: en_GB
 baseurl: "/cellar"
 url: "https://silviodirubbo.github.io"
 # Build
 markdown: kramdown
+# Both are on the GitHub Pages allow-list: jekyll-seo-tag writes the
+# canonical, Open Graph and Twitter tags ({% seo %} in _layouts/default.html),
+# jekyll-sitemap writes /sitemap.xml
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
 highlighter: rouge
 permalink: pretty
 future: true
