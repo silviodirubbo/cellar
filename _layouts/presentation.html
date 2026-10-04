@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>{{ page.title }} · Silvio di Rubbo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} · {{ site.title }}</title>
   {% comment %}
     Link previews for a deck, built from its _data/tastings.yml entry and
     its existing cover. Written here rather than with {% seo %}: the plugin
@@ -15,6 +15,8 @@
   {% assign seo_cover = site.static_files | where_exp: "f", "f.path contains seo_cover_prefix" | first %}
   {% assign seo_title = page.title | append: " · " | append: site.title | escape %}
   {% assign seo_desc = seo_tasting.description | default: site.description | strip_newlines | strip | escape %}
+  <meta name="description" content="{{ seo_desc }}">
+  <link rel="icon" type="image/svg+xml" href="{{ '/assets/favicon.svg' | relative_url }}">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="{{ site.title | escape }}">
@@ -40,6 +42,11 @@
       background: #1A1814;
       -webkit-font-smoothing: antialiased;
     }
+
+    /* The cover title is an h1 (one per deck). Zero specificity, so each
+       deck's own .cover-title rule still sets its size and weight; this
+       only removes the browser's default h1 margin, size and weight. */
+    :where(.slide h1) { margin: 0; font-size: inherit; font-weight: inherit; }
 
     #viewport {
       position: fixed;
@@ -141,7 +148,7 @@
   </style>
 </head>
 <body>
-  <div id="viewport">
+  <main id="viewport">
     <div id="stage">
 
       {{ content }}
@@ -155,7 +162,7 @@
       </div>
 
     </div>
-  </div>
+  </main>
 
   <script>
   (function () {
