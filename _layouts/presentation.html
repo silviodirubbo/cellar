@@ -146,6 +146,8 @@
       * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
   </style>
+  <!-- slide rules shared by every deck; each deck's own <style> follows in the page -->
+  <link rel="stylesheet" href="{{ '/assets/css/deck.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 </head>
 <body>
   <main id="viewport">

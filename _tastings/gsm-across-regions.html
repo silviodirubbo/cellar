@@ -3,25 +3,6 @@ layout: presentation
 title: "GSM Across Regions"
 ---
 <style>
-:root {
-  --warm-white: #FDFCFA;
-  --off-white:  #F7F5F0;
-  --ink:        #1A1814;
-  --ink-mid:    #4A4640;
-  --ink-light:  #736E6B;
-  --green:      #2C4A3E;
-  --gold:       #8B6914;
-  --rule:       #E2DED8;
-}
-
-.slide {
-  position: absolute;
-  inset: 0;
-  width: 1280px;
-  height: 720px;
-  display: none;
-}
-.slide.active { display: flex; }
 
 /* ── COVER ──────────────────────────────────────────── */
 .slide-cover {
@@ -119,67 +100,8 @@ title: "GSM Across Regions"
 }
 
 /* ── WINE SLIDE ─────────────────────────────────────── */
-.slide-wine { background: var(--warm-white); color: var(--ink); flex-direction: row; }
 
-.wine-map {
-  width: 853px; height: 720px; flex: 0 0 853px;
-  position: relative; overflow: hidden; background: var(--warm-white); cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-}
-.wine-map img {
-  width: 100%; height: 100%;
-  object-fit: contain;
-  object-position: center;
-  display: block;
-}
-.map-tag {
-  position: absolute; bottom: 16px; left: 16px;
-  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
-  letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
-  background: rgba(253,252,250,.9); padding: 5px 9px;
-}
-
-.wine-panel {
-  width: 427px; height: 720px; flex: 0 0 427px;
-  display: flex; flex-direction: column;
-  padding: 62px 35px 60px;
-  border-left: 1px solid var(--rule); background: var(--warm-white);
-}
-
-.panel-head { flex: 0 0 auto; }
-.w-counter {
-  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
-  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 6px;
-}
-.w-appellation {
-  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
-  letter-spacing: .13em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
-}
-.w-hrule { width: 100%; height: 1px; background: var(--rule); }
-
-.wine-bottle {
-  flex: 1 1 auto; min-height: 0;
-  display: flex; align-items: center; justify-content: center; padding: 16px 0;
-}
-.wine-bottle img {
-  max-height: 100%; max-width: 68%; object-fit: contain;
-  filter: drop-shadow(0 4px 24px rgba(26,24,20,.07));
-}
-
-.wine-info {
-  flex: 0 0 auto;
-  padding-top: 18px; border-top: 1px solid var(--rule);
-  display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
-}
-.info-text { flex: 1 1 auto; min-width: 0; }
-.w-name { font-size: 26px; font-weight: 300; color: var(--ink); line-height: 1.12; margin-bottom: 3px; }
-.w-producer { font-size: 14px; font-weight: 300; font-style: italic; color: var(--green); margin-bottom: 11px; }
 .w-meta { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
-.w-ml {
-  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
-  letter-spacing: .14em; text-transform: uppercase; color: var(--ink-light); min-width: 46px;
-}
-.w-mv { font-size: 13px; font-weight: 300; color: var(--ink-mid); }
 
 .wine-qr { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .wine-qr img { width: 74px; height: 74px; object-fit: contain; display: block; }
