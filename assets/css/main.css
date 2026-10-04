@@ -1983,7 +1983,10 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
 /* ============================================================
    WINES: the cellar book (grid, filters, hover details)
    ============================================================ */
-.visually-hidden {
+/* hidden visually, still read by screen readers (.sr-only is the same
+   utility, used site-wide, e.g. the full dates on the Tastings timeline) */
+.visually-hidden,
+.sr-only {
   position: absolute;
   width: 1px; height: 1px;
   margin: -1px; padding: 0;

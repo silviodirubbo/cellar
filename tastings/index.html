@@ -127,12 +127,14 @@ permalink: /tastings/
                id="{{ tasting.slug }}" data-tags="{{ tasting.tags | join: ',' }}" data-chapter="{{ tasting.chapter }}">
 
         {% if tasting.date_tbd %}
-        <div class="tl-row__date" aria-label="Date to be announced">
+        <div class="tl-row__date">
+          <span class="sr-only">Date to be announced</span>
           <span class="tl-row__day tl-row__day--tbd" aria-hidden="true">?</span>
           <span class="tl-row__mon" aria-hidden="true">date TBD</span>
         </div>
         {% else %}
-        <time class="tl-row__date" datetime="{{ tasting.date }}" aria-label="{{ tasting.date | date: '%A %-d %B %Y' }}">
+        <time class="tl-row__date" datetime="{{ tasting.date }}">
+          <span class="sr-only">{{ tasting.date | date: '%A %-d %B %Y' }}</span>
           <span class="tl-row__dow" aria-hidden="true">{{ tasting.date | date: "%a" }}</span>
           <span class="tl-row__day" aria-hidden="true">{{ tasting.date | date: "%-d" }}</span>
           <span class="tl-row__mon" aria-hidden="true">{{ tasting.date | date: "%b %Y" }}</span>
@@ -242,7 +244,8 @@ permalink: /tastings/
       {% assign cover = site.static_files | where_exp: "f", "f.path contains cover_prefix" | first %}
       <article class="tl-row tl-row--past" id="{{ tasting.slug }}" data-tags="{{ tasting.tags | join: ',' }}" data-chapter="{{ tasting.chapter }}">
 
-        <time class="tl-row__date" datetime="{{ tasting.date }}" aria-label="{{ tasting.date | date: '%A %-d %B %Y' }}">
+        <time class="tl-row__date" datetime="{{ tasting.date }}">
+          <span class="sr-only">{{ tasting.date | date: '%A %-d %B %Y' }}</span>
           <span class="tl-row__dow" aria-hidden="true">{{ tasting.date | date: "%a" }}</span>
           <span class="tl-row__day tl-row__day--past" aria-hidden="true">{{ tasting.date | date: "%-d" }}</span>
           <span class="tl-row__mon" aria-hidden="true">{{ tasting.date | date: "%b %Y" }}</span>
