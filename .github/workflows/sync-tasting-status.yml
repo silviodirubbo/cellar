@@ -12,20 +12,39 @@ permissions:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
-          node-version: 20
+          node-version: 24
 
-      - name: Sync _data/tastings.yml status
-        run: node scripts/sync-tasting-status.js
-
-      - name: Commit and push if changed
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore: sync tasting status [automated]"
-          file_pattern: _data/tastings.yml
+      # Same pattern as update-availability.yml: the calendar sync can push
+      # to main at any moment, so on a rejected push start again from the
+      # new main (the script is idempotent).
+      - name: Sync status, commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/sync-tasting-status.js
+            if git diff --quiet -- _data/tastings.yml; then
+              echo "No change to commit."
+              exit 0
+            fi
+            git add _data/tastings.yml
+            git commit -m "chore: sync tasting status [automated]"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            sleep $((attempt * 3))
+          done
+          echo "Could not push after 5 attempts." >&2
+          exit 1
