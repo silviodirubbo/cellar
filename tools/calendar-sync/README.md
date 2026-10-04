@@ -26,7 +26,7 @@ These steps need your Google and GitHub accounts, so only you can do them. They 
 ### 1. Create the GitHub token
 
 1. Open <https://github.com/settings/personal-access-tokens/new> (Settings > Developer settings > Personal access tokens > Fine-grained tokens > Generate new token).
-2. Token name: `cellar-calendar-sync`. Expiration: the longest you are comfortable with (for example 1 year). Put a reminder in your calendar to renew it.
+2. Token name: `cellar-calendar-sync`. Expiration: the longest you are comfortable with (for example 1 year). Put the expiry date in your calendar with a reminder two weeks before (see "Renewing the GitHub token" below).
 3. Resource owner: `silviodirubbo`. Repository access: **Only select repositories**, then pick `cellar`.
 4. Permissions > Repository permissions > **Contents: Read and write**. Leave everything else as it is (Metadata: Read-only is added automatically).
 5. Click **Generate token** and copy it (it starts with `github_pat_`). GitHub shows it only once.
@@ -77,7 +77,17 @@ Click **Save script properties**. The token stays in the script project and neve
 - To change a tasting's capacity, set `capacity:` on that tasting in `_data/tastings.yml` (the default is 6). The site uses it straight away; the next sync records it in `_data/availability.yml`.
 - To remove a tasting's count from the site, run the **Update availability** workflow from the Actions tab with `taken` set to `clear`. A later calendar change for that tasting brings it back.
 - To push all counts again (for example after a GitHub outage), run `forceResend` in the Apps Script editor.
-- If the token expires, GitHub returns HTTP 401 and the Execution log says "GitHub refused the update". Create a new token (step 1) and replace `GITHUB_TOKEN` (step 4).
+- If GitHub refuses an update (HTTP 401 means the token has expired or been revoked), the run still tries every tasting, then fails with "GitHub refused the update for ...", and Apps Script emails you about the failed run. Create a new token (step 1), replace `GITHUB_TOKEN` (step 4), then run `forceResend`.
+- To get that email straight away rather than in a daily digest: **Triggers** (the clock icon), open each trigger, set **Failure notification settings** to **Notify me immediately**.
+
+## Renewing the GitHub token
+
+The fine-grained token has an expiry date. Renew it **before** it expires, so no update is lost:
+
+1. Put the expiry date in your calendar when you create the token, with a reminder about two weeks earlier.
+2. At the reminder: on <https://github.com/settings/personal-access-tokens>, open `cellar-calendar-sync` and click **Regenerate token** (or create a new one as in step 1 of the setup, with the same repository and Contents: Read and write).
+3. Paste the new value into `GITHUB_TOKEN` in **Project Settings > Script Properties**, and save.
+4. Run `dryRun`, then `forceResend`, and check for a green run under Actions > **Update availability**.
 
 ## Testing the GitHub side by hand
 

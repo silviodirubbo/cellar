@@ -26,7 +26,9 @@
  *   5. When a count differs from the last one sent (or the last send is
  *      older than a day), it calls GitHub's repository_dispatch API with
  *      event type "availability-update". The GitHub Action then updates
- *      _data/availability.yml and the site redeploys.
+ *      _data/availability.yml and the site redeploys. If GitHub refuses
+ *      any update, the run fails after trying all of them, so Apps
+ *      Script sends its failure email.
  *
  * Script Properties (Project Settings > Script properties)
  *   GITHUB_TOKEN     fine-grained token, Contents read and write on
@@ -95,6 +97,7 @@ function run_(dry, force) {
     var counts = countByTasting_(cfg, tastings);
     var store = PropertiesService.getScriptProperties();
     var now = Date.now();
+    var failed = [];
 
     Object.keys(counts).forEach(function (slug) {
       var taken = counts[slug];
@@ -113,8 +116,19 @@ function run_(dry, force) {
       if (dispatch_(cfg, slug, taken)) {
         store.setProperty(key, JSON.stringify({ taken: taken, at: now }));
         Logger.log(slug + ': sent ' + taken + ' taken');
+      } else {
+        failed.push(slug);
       }
     });
+
+    // A refused update is otherwise only logged. Failing the run makes
+    // Apps Script send its failure email (an expired GITHUB_TOKEN shows up
+    // here first). The other tastings were still sent, and a failed one is
+    // not marked as sent, so the next run retries it.
+    if (failed.length) {
+      throw new Error('GitHub refused the update for ' + failed.join(', ') +
+        '. See the log above; HTTP 401 means GITHUB_TOKEN has expired or been revoked.');
+    }
   } finally {
     lock.releaseLock();
   }
