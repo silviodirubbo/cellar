@@ -1,0 +1,49 @@
+{% comment %}
+  Post-tasting detail slides that follow a recap.html cover: one per
+  wine, then a closing slide. Built from the existing story pieces
+  (dots, eyebrow, title, bottle glyph, rule, the teaser's facts rows,
+  bottom-pinned CTA line); no new styles. Wine facts are read live from
+  _data/tastings.yml; the lieu-dit is not a data field, so it is copied
+  from the deck's Lieu-Dit row into front matter.
+  Page front matter: tasting_slug, number, story_bg (offwhite|loire|...),
+  cta, and for a wine slide wine_index (1-based), wine_type (red|white),
+  lieu_dit (optional). Without wine_index the slide is the closing one.
+{% endcomment %}
+{% assign tasting = site.data.tastings | where: "slug", page.tasting_slug | first %}
+{% assign chapter = nil %}
+{% if tasting.chapter %}{% assign chapter = site.chapters | where: "slug", tasting.chapter | first %}{% endif %}
+{% assign total = tasting.wines.size %}
+<div class="story story--{{ page.story_bg }}">
+  <div class="story__inner">
+    {% include story/dots.html chapter=tasting.chapter %}
+    <p class="story-eyebrow">{% if chapter %}TASTING {{ page.number }} &middot; {{ chapter.story_label | upcase }}{% else %}ONE-OFF{% endif %} &middot; {{ tasting.date | date: "%-d %b %Y" | upcase }}</p>
+    {% if page.wine_index %}
+      {% assign wi = page.wine_index | minus: 1 %}
+      {% assign wine = tasting.wines[wi] %}
+      <p class="story-eyebrow" style="margin-bottom: 56px;">WINE {% if page.wine_index < 10 %}0{% endif %}{{ page.wine_index }} / {% if total < 10 %}0{% endif %}{{ total }}</p>
+      <div class="story-wine" style="margin-bottom: 56px;">
+        {% include story/bottle.html type=page.wine_type %}
+        <h1 class="story-title" style="margin-bottom: 0;">{{ wine.name }}</h1>
+      </div>
+      <hr class="story-rule" style="margin-bottom: 56px;">
+      <dl class="story-facts">
+        <dt>Producer</dt><dd>{{ wine.producer }}</dd>
+        <dt>Vintage</dt><dd>{{ wine.vintage }}</dd>
+        <dt>Appellation</dt><dd>{{ wine.appellation }}</dd>
+        {% if wine.blend %}<dt>Blend</dt><dd>{{ wine.blend }}</dd>{% endif %}
+        {% if page.lieu_dit %}<dt>Lieu-dit</dt><dd>{{ page.lieu_dit }}</dd>{% endif %}
+      </dl>
+    {% else %}
+      {% assign producers = tasting.wines | map: "producer" | uniq %}
+      <h1 class="story-title">{{ tasting.title }}</h1>
+      <hr class="story-rule" style="margin-bottom: 56px;">
+      <dl class="story-facts">
+        {% if chapter %}<dt>Chapter</dt><dd>{{ chapter.title }}</dd>{% endif %}
+        <dt>Date</dt><dd>{{ tasting.date | date: "%A %-d %B %Y" }}</dd>
+        <dt>Wines</dt><dd>{{ total }}</dd>
+        <dt>Producers</dt><dd>{{ producers | join: "<br>" }}</dd>
+      </dl>
+    {% endif %}
+    <p class="story-italic story-teaser__cta">{{ page.cta }}</p>
+  </div>
+</div>
