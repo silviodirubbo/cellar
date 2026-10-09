@@ -1,0 +1,342 @@
+---
+layout: presentation
+title: "Christmas Night 2026"
+---
+<style>
+
+/* ── COVER ──────────────────────────────────────────── */
+/* No cover image yet. Once cover.jpg is in this tasting's assets folder,
+   add it to the background below the way gsm-across-regions.html does. */
+.slide-cover {
+  background: var(--ink);
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; cursor: pointer; position: relative;
+}
+.slide-cover::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(26,24,20,.62);
+  z-index: 0;
+}
+.cover-content { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
+.eyebrow {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 23px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 36px;
+}
+.cover-title { font-size: 104px; font-weight: 300; line-height: 1; color: var(--warm-white); }
+.cover-subtitle { font-size: 28px; font-weight: 300; font-style: italic; color: var(--warm-white); margin-top: 12px; }
+.cover-rule { width: 40px; height: 1px; background: var(--gold); margin: 28px auto; }
+.cover-meta {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 21px;
+  letter-spacing: .14em; text-transform: uppercase; color: rgba(253,252,250,.55);
+}
+.cover-meta-gold { font-size: 21px; font-weight: 500; }
+
+/* ── FORMAT INTRO ───────────────────────────────────── */
+.slide-intro {
+  background: var(--warm-white); color: var(--ink);
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 72px; cursor: pointer;
+}
+.intro-label {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 23px;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 18px;
+}
+.intro-grapes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.intro-grape-primary {
+  font-size: 112px; font-weight: 300; color: var(--ink); letter-spacing: -.02em;
+}
+.intro-grape-secondary {
+  font-size: 40px; font-weight: 300; font-style: italic; color: var(--ink-mid);
+  margin-top: 14px; letter-spacing: -.01em;
+}
+
+.intro-vline { width: 1px; height: 38px; background: var(--rule); margin: 28px auto; }
+.intro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; max-width: 640px; }
+.ig-label {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 20px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 8px;
+}
+.ig-val { font-size: 14px; font-weight: 300; color: var(--ink-mid); line-height: 1.5; }
+.ig-val em { color: var(--green); font-style: italic; }
+
+/* ── WINE SLIDE ─────────────────────────────────────── */
+
+.w-meta { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+
+/* new for this deck: each guest presents the bottle they bring, so every
+   wine slide names its bringer under the panel rule */
+.w-brought { display: flex; align-items: baseline; gap: 8px; margin-top: 14px; }
+.w-brought-label {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink-light);
+}
+.w-brought-name {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 9px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--green);
+}
+
+</style>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 1 · COVER
+     Structure from gsm-across-regions.html (the most recent Grape
+     Studies deck). No cover image or painting credit yet: the credit
+     block returns with the image.
+     ───────────────────────────────────────────────────────── -->
+{% assign this_tasting = site.data.tastings | where: "slug", page.slug | first %}
+<div class="slide slide-cover active">
+  <div class="cover-content">
+    <div class="eyebrow">Wine Tasting · {{ this_tasting.date | date: "%-d %B %Y" }}</div>
+    <h1 class="cover-title">Christmas Night</h1>
+    <div class="cover-subtitle">2026</div>
+    <div class="cover-rule"></div>
+    <div class="cover-meta">Seven wines · Ten guests · One night</div>
+    <div class="cover-meta-gold">Brought and presented by the guests</div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 2 · FORMAT INTRO
+     No images needed. Same layout as the donor's grape trio intro,
+     framing the format instead of a grape: seven bottles brought by
+     seven of the ten guests, each presented by its bringer.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-intro">
+  <div class="intro-label">The Format</div>
+  <div class="intro-grapes">
+    <div class="intro-grape-primary">Seven Wines</div>
+    <div class="intro-grape-secondary">Brought by the guests</div>
+  </div>
+  <div class="intro-vline"></div>
+  <div class="intro-grid">
+    <div><div class="ig-label">Table</div><div class="ig-val">10 guests<br>7 bottles</div></div>
+    <div><div class="ig-label">Style</div><div class="ig-val"><em>No restrictions</em></div></div>
+    <div><div class="ig-label">Order</div><div class="ig-val">Each bringer<br>presents their wine</div></div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 3 · WINE 1 · PLACEHOLDER
+     Presented by the guest who brings it. Producer, region, grape,
+     vintage and notes to be filled in once the bottle is known.
+     No map, bottle image or QR code yet.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <div class="map-tag">Map to be added</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">01 / 07</div>
+      <div class="w-appellation">Appellation to be announced</div>
+      <div class="w-hrule"></div>
+      <div class="w-brought"><span class="w-brought-label">Brought by</span><span class="w-brought-name">Guest name</span></div>
+    </div>
+    <div class="wine-bottle"></div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Wine 1</div>
+        <div class="w-producer">Producer to be announced</div>
+        <div class="w-meta"><span class="w-ml">Region</span><span class="w-mv">To be announced</span></div>
+        <div class="w-meta"><span class="w-ml">Grape</span><span class="w-mv">To be announced</span></div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">To be announced</span></div>
+        <div class="w-meta"><span class="w-ml">Notes</span><span class="w-mv">To be announced</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 4 · WINE 2 · PLACEHOLDER
+     Presented by the guest who brings it. Producer, region, grape,
+     vintage and notes to be filled in once the bottle is known.
+     No map, bottle image or QR code yet.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <div class="map-tag">Map to be added</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">02 / 07</div>
+      <div class="w-appellation">Appellation to be announced</div>
+      <div class="w-hrule"></div>
+      <div class="w-brought"><span class="w-brought-label">Brought by</span><span class="w-brought-name">Guest name</span></div>
+    </div>
+    <div class="wine-bottle"></div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Wine 2</div>
+        <div class="w-producer">Producer to be announced</div>
+        <div class="w-meta"><span class="w-ml">Region</span><span class="w-mv">To be announced</span></div>
+        <div class="w-meta"><span class="w-ml">Grape</span><span class="w-mv">To be announced</span></div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">To be announced</span></div>
+        <div class="w-meta"><span class="w-ml">Notes</span><span class="w-mv">To be announced</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 5 · WINE 3 · PLACEHOLDER
+     Presented by the guest who brings it. Producer, region, grape,
+     vintage and notes to be filled in once the bottle is known.
+     No map, bottle image or QR code yet.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <div class="map-tag">Map to be added</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">03 / 07</div>
+      <div class="w-appellation">Appellation to be announced</div>
+      <div class="w-hrule"></div>
+      <div class="w-brought"><span class="w-brought-label">Brought by</span><span class="w-brought-name">Guest name</span></div>
+    </div>
+    <div class="wine-bottle"></div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Wine 3</div>
+        <div class="w-producer">Producer to be announced</div>
+        <div class="w-meta"><span class="w-ml">Region</span><span class="w-mv">To be announced</span></div>
+        <div class="w-meta"><span class="w-ml">Grape</span><span class="w-mv">To be announced</span></div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">To be announced</span></div>
+        <div class="w-meta"><span class="w-ml">Notes</span><span class="w-mv">To be announced</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 6 · WINE 4 · PLACEHOLDER
+     Presented by the guest who brings it. Producer, region, grape,
+     vintage and notes to be filled in once the bottle is known.
+     No map, bottle image or QR code yet.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <div class="map-tag">Map to be added</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">04 / 07</div>
+      <div class="w-appellation">Appellation to be announced</div>
+      <div class="w-hrule"></div>
+      <div class="w-brought"><span class="w-brought-label">Brought by</span><span class="w-brought-name">Guest name</span></div>
+    </div>
+    <div class="wine-bottle"></div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Wine 4</div>
+        <div class="w-producer">Producer to be announced</div>
+        <div class="w-meta"><span class="w-ml">Region</span><span class="w-mv">To be announced</span></div>
+        <div class="w-meta"><span class="w-ml">Grape</span><span class="w-mv">To be announced</span></div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">To be announced</span></div>
+        <div class="w-meta"><span class="w-ml">Notes</span><span class="w-mv">To be announced</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 7 · WINE 5 · PLACEHOLDER
+     Presented by the guest who brings it. Producer, region, grape,
+     vintage and notes to be filled in once the bottle is known.
+     No map, bottle image or QR code yet.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <div class="map-tag">Map to be added</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">05 / 07</div>
+      <div class="w-appellation">Appellation to be announced</div>
+      <div class="w-hrule"></div>
+      <div class="w-brought"><span class="w-brought-label">Brought by</span><span class="w-brought-name">Guest name</span></div>
+    </div>
+    <div class="wine-bottle"></div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Wine 5</div>
+        <div class="w-producer">Producer to be announced</div>
+        <div class="w-meta"><span class="w-ml">Region</span><span class="w-mv">To be announced</span></div>
+        <div class="w-meta"><span class="w-ml">Grape</span><span class="w-mv">To be announced</span></div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">To be announced</span></div>
+        <div class="w-meta"><span class="w-ml">Notes</span><span class="w-mv">To be announced</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 8 · WINE 6 · PLACEHOLDER
+     Presented by the guest who brings it. Producer, region, grape,
+     vintage and notes to be filled in once the bottle is known.
+     No map, bottle image or QR code yet.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <div class="map-tag">Map to be added</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">06 / 07</div>
+      <div class="w-appellation">Appellation to be announced</div>
+      <div class="w-hrule"></div>
+      <div class="w-brought"><span class="w-brought-label">Brought by</span><span class="w-brought-name">Guest name</span></div>
+    </div>
+    <div class="wine-bottle"></div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Wine 6</div>
+        <div class="w-producer">Producer to be announced</div>
+        <div class="w-meta"><span class="w-ml">Region</span><span class="w-mv">To be announced</span></div>
+        <div class="w-meta"><span class="w-ml">Grape</span><span class="w-mv">To be announced</span></div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">To be announced</span></div>
+        <div class="w-meta"><span class="w-ml">Notes</span><span class="w-mv">To be announced</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 9 · WINE 7 · PLACEHOLDER
+     Presented by the guest who brings it. Producer, region, grape,
+     vintage and notes to be filled in once the bottle is known.
+     Final slide in the deck, ending on the last wine slide as the
+     donor does, with no separate closing slide.
+     No map, bottle image or QR code yet.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <div class="map-tag">Map to be added</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">07 / 07</div>
+      <div class="w-appellation">Appellation to be announced</div>
+      <div class="w-hrule"></div>
+      <div class="w-brought"><span class="w-brought-label">Brought by</span><span class="w-brought-name">Guest name</span></div>
+    </div>
+    <div class="wine-bottle"></div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Wine 7</div>
+        <div class="w-producer">Producer to be announced</div>
+        <div class="w-meta"><span class="w-ml">Region</span><span class="w-mv">To be announced</span></div>
+        <div class="w-meta"><span class="w-ml">Grape</span><span class="w-mv">To be announced</span></div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">To be announced</span></div>
+        <div class="w-meta"><span class="w-ml">Notes</span><span class="w-mv">To be announced</span></div>
+      </div>
+    </div>
+  </div>
+</div>

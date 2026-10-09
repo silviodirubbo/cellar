@@ -87,6 +87,7 @@
       });
       if (!res.ok) throw new Error('Form submission failed: ' + res.status);
       form.reset();
+      syncBottleDetails();
       document.getElementById(successId).hidden = false;
       if (onSuccess) onSuccess();
     } catch (err) {
@@ -94,13 +95,36 @@
     }
   }
 
+  // ── Bottle choice (evenings where the guests bring the wines) ─
+  // Shown when the "I'm coming" button carries data-bring. While hidden,
+  // the fieldset stays disabled, so its required radios neither block the
+  // submit nor get sent. The wine details and price fields appear only
+  // for "I bring a bottle".
+  const bottleSet     = document.getElementById('signup-bottle');
+  const bottleDetails = document.getElementById('signup-bottle-details');
+
+  function syncBottleDetails() {
+    if (!bottleSet || !bottleDetails) return;
+    const picked = bottleSet.querySelector('input[name="bottle"]:checked');
+    bottleDetails.hidden = !picked || picked.value !== 'I bring a bottle';
+  }
+
+  function setBottleChoice(on) {
+    if (!bottleSet) return;
+    bottleSet.hidden = !on;
+    bottleSet.disabled = !on;
+    syncBottleDetails();
+  }
+
+  if (bottleSet) bottleSet.addEventListener('change', syncBottleDetails);
+
   // ── Openers ────────────────────────────────────────────────
   // avail: { available, capacity } from the button's data-available and
   // data-capacity (set from _data/availability.yml), or null when the
   // tasting has no availability entry. The dialog then shows
   // "N places available out of C" ("1 place available out of C" for
   // exactly 1), plus the fully booked note at 0.
-  function openSignup(slug, title, trigger, avail) {
+  function openSignup(slug, title, trigger, avail, bring) {
     document.getElementById('signup-success').hidden = true;
     const availLine = document.getElementById('signup-avail');
     const fullNote = document.getElementById('signup-full');
@@ -113,6 +137,7 @@
     if (fullNote) fullNote.hidden = !avail || avail.available !== '0';
     document.getElementById('signup-tasting-name').textContent = title;
     document.getElementById('signup-tasting-field').value = title;
+    setBottleChoice(bring);
     openModal(signupOverlay, trigger);
   }
 
@@ -136,7 +161,7 @@
   }
 
   document.querySelectorAll('.signup-btn').forEach(btn => {
-    btn.addEventListener('click', () => openSignup(btn.dataset.slug, btn.dataset.title, btn, signupAvail(btn)));
+    btn.addEventListener('click', () => openSignup(btn.dataset.slug, btn.dataset.title, btn, signupAvail(btn), 'bring' in btn.dataset));
   });
   document.querySelectorAll('.avail-btn').forEach(btn => {
     btn.addEventListener('click', () => openAvail(btn.dataset.slug, btn.dataset.title, btn));
@@ -181,7 +206,7 @@
     const cssSlug = window.CSS && CSS.escape ? CSS.escape(slug) : slug;
     const signup = document.querySelector('.signup-btn[data-slug="' + cssSlug + '"]');
     const avail  = document.querySelector('.avail-btn[data-slug="' + cssSlug + '"]');
-    if (signup) { openSignup(slug, signup.dataset.title, null, signupAvail(signup)); return; }
+    if (signup) { openSignup(slug, signup.dataset.title, null, signupAvail(signup), 'bring' in signup.dataset); return; }
     if (avail)  { openAvail(slug, avail.dataset.title, null); return; }
 
     // No dialog for this one (it has already happened): show its entry.

@@ -13,8 +13,9 @@
 //   - chapter: one of _chapters/*.md
 //   - tags: each one listed in _data/tags.yml
 //   - wine images: the file exists under assets/tastings/
-//   - decks: _tastings/<slug>.html exists exactly when slides: true, and
-//     every deck file matches a tasting slug
+//   - decks: _tastings/<slug>.html exists when slides: true, and every
+//     deck file matches a tasting slug; a deck without slides: true (staged
+//     for review before activation) is a warning
 //   - availability: every key in _data/availability.yml is a tasting
 //   - capacity: a whole number above 0 when present; an upcoming tasting
 //     without one gets a warning (the site then assumes 6)
@@ -61,7 +62,7 @@ for (const t of tastings) {
   });
 
   if (t.slides === true && !decks.has(s)) err(`${where}: slides: true but _tastings/${s}.html does not exist`);
-  if (t.slides !== true && decks.has(s)) err(`${where}: _tastings/${s}.html exists but slides is not true`);
+  if (t.slides !== true && decks.has(s)) warn(`${where}: _tastings/${s}.html exists but slides is not true (a deck staged for review, unlinked until activated)`);
 
   if (t.capacity !== undefined && !(Number.isInteger(t.capacity) && t.capacity > 0)) err(`${where}: capacity must be a whole number above 0`);
   if (t.status === 'upcoming' && t.capacity === undefined) warn(`${where}: upcoming without capacity (the site assumes 6)`);

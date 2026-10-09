@@ -632,6 +632,11 @@ select.form-input {
 }
 .form-input:focus { border-color: var(--ink-mid); }
 textarea.form-input { min-height: 5rem; }
+.form-choice { border: 0; padding: 0; min-width: 0; }
+.form-choice[hidden], .form-choice__details[hidden] { display: none; }
+.form-choice__option { display: flex; align-items: center; gap: 0.6rem; min-height: 44px; font-family: var(--font-serif); font-size: 0.95rem; color: var(--ink); cursor: pointer; }
+.form-choice__option input { accent-color: var(--green); margin: 0; }
+.form-choice__details { margin-top: 0.5rem; }
 .form-success { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-top: 0.75rem; max-width: none; }
 .form-error { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-top: 0.75rem; max-width: none; }
 

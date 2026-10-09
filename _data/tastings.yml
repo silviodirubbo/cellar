@@ -1080,14 +1080,79 @@
 
 - slug: christmas-night-2026
   title: "Christmas Night 2026"
-  date: 2026-12-18
+  date: 2026-12-17
   date_tbd: false
   region: "Region to be announced"
   description: >
-    Wines to be announced.
+    10 places, 7 wines. A different format: the wines are brought by the
+    guests. The first 7 people to sign up each provide one bottle, either
+    brought by you (ideal, with wine details and price sent to me in advance)
+    or chosen by me on your behalf. Bringers own their slide and present their
+    wine on the night. The last 3 to sign up have nothing to prepare. No
+    restrictions on wine style. The price range is only an indication (CHF 30
+    to 100), no need to reach the top of it. Bottles and food (indicatively
+    CHF 20 each, managed by me) are pooled and the total is split evenly
+    across the 10 guests.
   tags: []
   chapter: grape-studies
   chapter_order: 6
   status: upcoming
+  capacity: 10
   slides: false
-  wines: []
+  wines:
+    - name: "Wine 1"
+      producer: "To be announced"
+      vintage:
+      appellation: "To be announced"
+      blend:
+      colour:
+      country:
+      region:
+    - name: "Wine 2"
+      producer: "To be announced"
+      vintage:
+      appellation: "To be announced"
+      blend:
+      colour:
+      country:
+      region:
+    - name: "Wine 3"
+      producer: "To be announced"
+      vintage:
+      appellation: "To be announced"
+      blend:
+      colour:
+      country:
+      region:
+    - name: "Wine 4"
+      producer: "To be announced"
+      vintage:
+      appellation: "To be announced"
+      blend:
+      colour:
+      country:
+      region:
+    - name: "Wine 5"
+      producer: "To be announced"
+      vintage:
+      appellation: "To be announced"
+      blend:
+      colour:
+      country:
+      region:
+    - name: "Wine 6"
+      producer: "To be announced"
+      vintage:
+      appellation: "To be announced"
+      blend:
+      colour:
+      country:
+      region:
+    - name: "Wine 7"
+      producer: "To be announced"
+      vintage:
+      appellation: "To be announced"
+      blend:
+      colour:
+      country:
+      region:
