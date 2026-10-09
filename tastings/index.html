@@ -224,7 +224,7 @@ permalink: /tastings/
                 {% if tasting.slides %}
                 <a href="{{ site.baseurl }}/tastings/{{ tasting.slug }}/" class="card-link">Presentation</a>
                 {% endif %}
-                <button type="button" class="card-link share-btn" data-slug="{{ tasting.slug }}" data-slides="{{ tasting.slides }}">Share</button>
+                <button type="button" class="card-link share-btn" data-slug="{{ tasting.slug }}" data-slides="{{ tasting.slides }}" data-upcoming data-date="{% unless tasting.date_tbd %}{{ tasting.date | date: '%Y-%m-%d' }}{% endunless %}">Share</button>
               </div>
             </div>
           </div>

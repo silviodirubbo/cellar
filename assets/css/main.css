@@ -1134,6 +1134,11 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   background: var(--warm-white);
   transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
 }
+/* a card opened from a shared /tastings/#<slug> link (main.js): a hairline
+   in its chapter colour that fades back after a moment */
+.tl-card.is-shared { border-color: var(--chapter-accent, var(--ink-light)); }
+.past-entry { transition: outline-color 0.25s var(--ease); outline: 1px solid transparent; outline-offset: 6px; }
+.past-entry.is-shared { outline-color: var(--chapter-accent, var(--ink-light)); }
 .tl-row--upcoming:hover .tl-card {
   border-color: var(--ink-light);
   border-left-color: var(--chapter-accent, var(--ink-light));

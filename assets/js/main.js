@@ -34,12 +34,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ── Share buttons ─────────────────────────────────────────
+  // An upcoming evening (button marked data-upcoming, with no date yet or
+  // a date of today or later in the visitor's calendar) shares its card on
+  // the Tastings page, /tastings/#<slug>. Anything else keeps the deck link
+  // when there is a deck, else the Tastings page.
+  const isoToday = () => {
+    const t = new Date();
+    return t.getFullYear() + '-' + String(t.getMonth() + 1).padStart(2, '0') + '-' + String(t.getDate()).padStart(2, '0');
+  };
   document.querySelectorAll('.share-btn').forEach(btn => {
     btn.addEventListener('click', async () => {
       const slug   = btn.dataset.slug;
       const slides = btn.dataset.slides === 'true';
       const base   = 'https://silviodirubbo.github.io/cellar';
-      const url    = slides ? `${base}/tastings/${slug}/` : `${base}/tastings/`;
+      const date   = btn.dataset.date;
+      const upcoming = 'upcoming' in btn.dataset && (!date || date >= isoToday());
+      const url    = upcoming ? `${base}/tastings/#${slug}`
+                   : slides   ? `${base}/tastings/${slug}/` : `${base}/tastings/`;
       if (navigator.share) {
         try { await navigator.share({ url }); } catch (e) {}
       } else {
@@ -192,5 +203,40 @@ document.addEventListener('DOMContentLoaded', () => {
       filterToggle.classList.toggle('filter-toggle--active', !!tag);
     });
   }
+
+  // ── Tastings: #<slug> opens on that evening ───────────────
+  // When the address ends in the id of a tasting row (its slug, as in a
+  // shared card link): any active filter is reset to All, a past entry is
+  // unfolded, the row is scrolled into view below the fixed nav and its
+  // card gets a brief hairline outline in its chapter colour. Any other
+  // hash (#coming-up, #archive, #join-..., #propose) is left as before.
+  const showShared = () => {
+    let id;
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) { return; }
+    if (!id) return;
+    const row = document.getElementById(id);
+    if (!row || !row.matches('article.tl-row')) return;
+
+    const all = chipbar && chipbar.querySelector('.chip[data-tag=""]');
+    const active = chipbar && chipbar.querySelector('.chip.chip--active');
+    if (all && active && active !== all) all.click();
+
+    const card = row.querySelector('.tl-card, .past-entry');
+    if (card && card.tagName === 'DETAILS') card.open = true;
+
+    // only this row gets the offset, so the browser's own jump to the
+    // anchor (which may land after this runs) also clears the nav
+    const navEl = document.querySelector('.nav');
+    row.style.scrollMarginTop = ((navEl ? navEl.getBoundingClientRect().height : 0) + 24) + 'px';
+    row.scrollIntoView({ block: 'start' });
+
+    if (card && !card.classList.contains('is-shared')) {
+      card.classList.add('is-shared');
+      setTimeout(() => card.classList.remove('is-shared'), 3000);
+    }
+  };
+  showShared();
+  window.addEventListener('load', showShared);
+  window.addEventListener('hashchange', showShared);
 
 });
