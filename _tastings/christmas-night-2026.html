@@ -5,10 +5,8 @@ title: "Christmas Night 2026"
 <style>
 
 /* ── COVER ──────────────────────────────────────────── */
-/* No cover image yet. Once cover.jpg is in this tasting's assets folder,
-   add it to the background below the way gsm-across-regions.html does. */
 .slide-cover {
-  background: var(--ink);
+  background: var(--ink) url('{{ site.baseurl }}/assets/tastings/christmas-night-2026/cover.jpg') center/cover no-repeat;
   flex-direction: column; align-items: center; justify-content: center;
   text-align: center; cursor: pointer; position: relative;
 }
@@ -31,6 +29,27 @@ title: "Christmas Night 2026"
   letter-spacing: .14em; text-transform: uppercase; color: rgba(253,252,250,.55);
 }
 .cover-meta-gold { font-size: 21px; font-weight: 500; }
+.cover-credit {
+  position: absolute; z-index: 1;
+  bottom: 20px; left: 24px;
+  text-align: left;
+}
+.cover-credit-title {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  font-style: italic; letter-spacing: .06em; color: rgba(253,252,250,.5);
+  margin-bottom: 2px;
+}
+.cover-credit-artist {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .1em; text-transform: uppercase; color: rgba(253,252,250,.38);
+}
+/* same footnote line as sancerre-pouilly-fume.html, here naming where
+   the painting hangs */
+.cover-credit-note {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 7px;
+  letter-spacing: .04em; color: rgba(253,252,250,.3);
+  margin-top: 5px; max-width: 230px; line-height: 1.5;
+}
 
 /* ── FORMAT INTRO ───────────────────────────────────── */
 .slide-intro {
@@ -86,9 +105,15 @@ title: "Christmas Night 2026"
 
 <!-- ─────────────────────────────────────────────────────────
      SLIDE 1 · COVER
+     Image: assets/tastings/christmas-night-2026/cover.jpg
+     Lorenzo Lotto, Recanati Annunciation (Annunciazione), c. 1534,
+     oil on canvas, Museo Civico Villa Colloredo Mels, Recanati.
+     Source file: https://commons.wikimedia.org/wiki/File:Lorenzo_Lotto_066.jpg
+     Title, date and museum checked against
+     https://en.wikipedia.org/wiki/Recanati_Annunciation (c. 1534;
+     other sources range from 1533 to 1535).
      Structure from gsm-across-regions.html (the most recent Grape
-     Studies deck). No cover image or painting credit yet: the credit
-     block returns with the image.
+     Studies deck).
      ───────────────────────────────────────────────────────── -->
 {% assign this_tasting = site.data.tastings | where: "slug", page.slug | first %}
 <div class="slide slide-cover active">
@@ -99,6 +124,11 @@ title: "Christmas Night 2026"
     <div class="cover-rule"></div>
     <div class="cover-meta">Seven wines · Ten guests · One night</div>
     <div class="cover-meta-gold">Brought and presented by the guests</div>
+  </div>
+  <div class="cover-credit">
+    <div class="cover-credit-title">Recanati Annunciation</div>
+    <div class="cover-credit-artist">Lorenzo Lotto, c. 1534</div>
+    <div class="cover-credit-note">Museo Civico Villa Colloredo Mels, Recanati.</div>
   </div>
 </div>
 
