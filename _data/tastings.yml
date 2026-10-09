@@ -341,9 +341,7 @@
     - France
   chapter: loire
   chapter_order: 1
-  status: upcoming
-  capacity: 6
-  cost_estimate: "15.90 CHF"
+  status: past
   slides: true
   wines:
     - name: "Clisson"
