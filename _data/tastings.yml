@@ -1082,17 +1082,17 @@
   title: "Christmas Night 2026"
   date: 2026-12-17
   date_tbd: false
-  region: "Region to be announced"
-  description: >
-    10 places, 7 wines. A different format: the wines are brought by the
-    guests. The first 7 people to sign up each provide one bottle, either
-    brought by you (ideal, with wine details and price sent to me in advance)
-    or chosen by me on your behalf. Bringers own their slide and present their
-    wine on the night. The last 3 to sign up have nothing to prepare. No
-    restrictions on wine style. The price range is only an indication (CHF 30
-    to 100), no need to reach the top of it. Bottles and food (indicatively
-    CHF 20 each, managed by me) are pooled and the total is split evenly
-    across the 10 guests.
+  location: "Krieg 13"
+  region: "Worldwide"
+  description:
+    - "10 places, 7 wines"
+    - "Format: the wines are brought by the guests"
+    - "First 7 to sign up provide one bottle: bring it (send me wine details and price in advance) or ask me to choose it for you"
+    - "Bringers present their wine on their own slide"
+    - "Last 3 to sign up: nothing to prepare"
+    - "Any wine style. Indicative price CHF 40 to 100, no need to reach the top"
+    - "Food managed by me, indicatively CHF 20 per person"
+    - "Bottles and food are pooled, total split evenly across the 10 guests"
   tags: []
   chapter: grape-studies
   chapter_order: 6

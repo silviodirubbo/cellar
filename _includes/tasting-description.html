@@ -1,0 +1,13 @@
+{% comment %}
+  A tasting's description. Params: tasting (an entry of _data/tastings.yml)
+  and class (the paragraph class of the calling page). A description is
+  normally one short paragraph; written as a YAML list instead, it renders
+  as a bullet list with the same class, so it keeps the page's type.
+{% endcomment %}
+{% if include.tasting.description.first %}
+<ul class="{{ include.class }} desc-list">
+  {% for item in include.tasting.description %}<li>{{ item }}</li>{% endfor %}
+</ul>
+{% else %}
+<p class="{{ include.class }}">{{ include.tasting.description }}</p>
+{% endif %}

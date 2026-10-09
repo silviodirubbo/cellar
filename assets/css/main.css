@@ -1178,6 +1178,10 @@ a.th-stat:hover .th-stat__num { color: var(--warm-white); }
   margin-bottom: 0.6rem;
 }
 .tl-card__desc { font-size: 0.92rem; color: var(--ink-mid); max-width: 58ch; }
+/* a description written as a list in _data/tastings.yml (_includes/tasting-description.html) */
+.desc-list { font-family: var(--font-serif); list-style: disc; padding-left: 1.1em; }
+.desc-list li { margin-bottom: 0.2em; }
+.desc-list li::marker { color: var(--ink-light); }
 .tl-card__foot {
   margin-top: 1.75rem;
   padding-top: 1.6rem;

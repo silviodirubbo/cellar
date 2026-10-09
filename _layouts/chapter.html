@@ -48,7 +48,7 @@ layout: default
               {% if tasting.wines.size > 0 %}<span class="label">{{ tasting.wines.size }} wines</span>{% endif %}
             </div>
             <h2 class="chapter-item__title">{{ tasting.title }}</h2>
-            <p class="chapter-item__desc">{{ tasting.description }}</p>
+            {% include tasting-description.html tasting=tasting class="chapter-item__desc" %}
             <div class="chapter-item__foot">
               {% if tasting.slides %}
                 <a href="{{ site.baseurl }}/tastings/{{ tasting.slug }}/" class="btn btn--text">Presentation →</a>

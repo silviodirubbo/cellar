@@ -14,7 +14,7 @@
   {% capture seo_cover_prefix %}/assets/tastings/{{ page.slug }}/cover{% endcapture %}
   {% assign seo_cover = site.static_files | where_exp: "f", "f.path contains seo_cover_prefix" | first %}
   {% assign seo_title = page.title | append: " · " | append: site.title | escape %}
-  {% assign seo_desc = seo_tasting.description | default: site.description | strip_newlines | strip | escape %}
+  {% if seo_tasting.description.first %}{% assign seo_desc = seo_tasting.description | join: ". " | strip | escape %}{% else %}{% assign seo_desc = seo_tasting.description | default: site.description | strip_newlines | strip | escape %}{% endif %}
   <meta name="description" content="{{ seo_desc }}">
   <link rel="icon" type="image/svg+xml" href="{{ '/assets/favicon.svg' | relative_url }}">
   <link rel="canonical" href="{{ page.url | absolute_url }}">

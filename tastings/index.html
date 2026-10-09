@@ -171,7 +171,7 @@ permalink: /tastings/
               {% if avail_html != "" %} &middot; {{ avail_html }}{% elsif tasting.capacity %} &middot; <span class="text-gold">{{ tasting.capacity }} spots</span>{% endif %}
               {% if tasting.cost_estimate != "" and tasting.cost_estimate %} &middot; ~{{ tasting.cost_estimate }}{% endif %}
             </div>
-            <p class="tl-card__desc">{{ tasting.description }}</p>
+            {% include tasting-description.html tasting=tasting class="tl-card__desc" %}
 
             {% if tasting.wines.size > 0 %}
               {% if is_next %}
@@ -278,7 +278,7 @@ permalink: /tastings/
             <span class="past-entry__chevron" aria-hidden="true"></span>
           </summary>
           <div class="past-entry__body">
-            <p class="past-entry__desc">{{ tasting.description }}</p>
+            {% include tasting-description.html tasting=tasting class="past-entry__desc" %}
             {% if tasting.wines.size > 0 %}
             <ol class="wine-menu">
               {% for wine in tasting.wines %}
