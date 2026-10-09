@@ -1098,7 +1098,7 @@
   chapter_order: 6
   status: upcoming
   capacity: 10
-  slides: false
+  slides: true
   wines:
     - name: "Wine 1"
       producer: "To be announced"
