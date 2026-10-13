@@ -1023,8 +1023,8 @@
 
 - slug: gsm-across-regions
   title: "GSM Across Regions"
-  date: 2026-11-08
-  date_tbd: false
+  date: null
+  date_tbd: true
   location: "Stefano's"
   region: "Languedoc-Roussillon & Southern Rhône"
   description: >
