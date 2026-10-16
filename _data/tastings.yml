@@ -1008,18 +1008,69 @@
   slides: true
 
 - slug: tba-grape-studies
-  title: "To be announced"
+  title: "Pinot Noir Across Regions"
   date: 2026-10-19
   date_tbd: false
-  region: "Region to be announced"
+  region: "France & Switzerland"
   description: >
-    Theme and wines to be announced.
-  tags: []
+    Pinot Noir traced across four regions, the Jura, Sancerre in the Loire,
+    Valais and the Côte Chalonnaise in Burgundy, closing on a Givry Premier
+    Cru. Four wines in total.
+  tags:
+    - Pinot Noir
+    - Jura
+    - Côtes du Jura
+    - Loire
+    - Sancerre
+    - Valais
+    - Bourgogne
+    - Côte Chalonnaise
+    - Givry
+    - France
+    - Switzerland
   chapter: grape-studies
   chapter_order: 4
   status: upcoming
   slides: false
-  wines: []
+  wines:
+    - name: "Pinot Noir"
+      producer: "Domaine des Marnes Blanches"
+      vintage: 2025
+      appellation: "Côtes du Jura AOC"
+      blend: "Pinot Noir"
+      colour: red
+      country: France
+      region: "Jura"
+      image: "tba-grape-studies/bottle_marnes-blanches.png"
+    - name: "Sancerre Rouge"
+      producer: "Domaine Vacheron"
+      vintage: 2023
+      appellation: "Sancerre AOC"
+      blend: "Pinot Noir"
+      colour: red
+      country: France
+      region: "Loire"
+      image: "tba-grape-studies/bottle_vacheron.png"
+    - name: "L'Enfer de la Passion"
+      producer: "Histoire d'Enfer"
+      vintage: 2016
+      appellation: "Valais AOC · Les Coteaux de Sierre"
+      blend: "Pinot Noir"
+      url: "https://www.histoiredenfer.ch"
+      colour: red
+      country: Switzerland
+      region: "Valais"
+      image: "tba-grape-studies/bottle_histoire-d-enfer.png"
+    - name: "Le Pied du Clou"
+      producer: "Domaine François Lumpp"
+      vintage: 2023
+      appellation: "Givry Premier Cru AOC"
+      blend: "Pinot Noir"
+      url: "https://francoislumpp.com/fr/wine-type/le-pied-du-clou/"
+      colour: red
+      country: France
+      region: "Burgundy"
+      image: "tba-grape-studies/bottle_lumpp.png"
 
 - slug: gsm-across-regions
   title: "GSM Across Regions"

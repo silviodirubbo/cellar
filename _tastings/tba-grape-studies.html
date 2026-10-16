@@ -1,0 +1,348 @@
+---
+layout: presentation
+title: "Pinot Noir Across Regions"
+---
+<style>
+
+/* ── COVER ──────────────────────────────────────────── */
+.slide-cover {
+  background: var(--ink) url('{{ site.baseurl }}/assets/tastings/tba-grape-studies/cover.jpg') center/cover no-repeat;
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; cursor: pointer; position: relative;
+}
+.slide-cover::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(26,24,20,.62);
+  z-index: 0;
+}
+.cover-content { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
+.eyebrow {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 23px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 36px;
+}
+.cover-title { font-size: 104px; font-weight: 300; line-height: 1; color: var(--warm-white); }
+.cover-subtitle { font-size: 28px; font-weight: 300; font-style: italic; color: var(--warm-white); margin-top: 12px; }
+.cover-rule { width: 40px; height: 1px; background: var(--gold); margin: 28px auto; }
+.cover-meta {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 21px;
+  letter-spacing: .14em; text-transform: uppercase; color: rgba(253,252,250,.55);
+}
+.cover-meta-gold { font-size: 21px; font-weight: 500; }
+.cover-credit {
+  position: absolute; z-index: 1;
+  bottom: 20px; left: 24px;
+  text-align: left;
+}
+.cover-credit-title {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  font-style: italic; letter-spacing: .06em; color: rgba(253,252,250,.5);
+  margin-bottom: 2px;
+}
+.cover-credit-artist {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .1em; text-transform: uppercase; color: rgba(253,252,250,.38);
+}
+
+/* ── GRAPE/BLEND INTRO ──────────────────────────────── */
+.slide-intro {
+  background: var(--warm-white); color: var(--ink);
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 72px; cursor: pointer;
+}
+.intro-label {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 23px;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 18px;
+}
+.intro-grapes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.intro-grape-primary {
+  font-size: 112px; font-weight: 300; color: var(--ink); letter-spacing: -.02em;
+}
+.intro-grape-secondary {
+  font-size: 40px; font-weight: 300; font-style: italic; color: var(--ink-mid);
+  margin-top: 14px; letter-spacing: -.01em;
+}
+
+.intro-vline { width: 1px; height: 38px; background: var(--rule); margin: 28px auto; }
+.intro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; max-width: 640px; }
+.ig-label {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 20px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 8px;
+}
+.ig-val { font-size: 14px; font-weight: 300; color: var(--ink-mid); line-height: 1.5; }
+.ig-val em { color: var(--green); font-style: italic; }
+
+/* ── MAP-ONLY SLIDE ─────────────────────────────────── */
+.slide-map {
+  background: var(--warm-white);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.slide-map img {
+  max-width: 100%; max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.map-label-center {
+  position: absolute;
+  bottom: 16px; left: 16px;
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 8px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
+  background: rgba(253,252,250,.9); padding: 5px 9px;
+}
+
+/* ── WINE SLIDE ─────────────────────────────────────── */
+
+.w-meta { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+
+.wine-qr { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.wine-qr img { width: 74px; height: 74px; object-fit: contain; display: block; }
+.qr-label {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 7px;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-light);
+  text-align: center; line-height: 1.6;
+}
+
+</style>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 1 · COVER
+     Image: assets/tastings/tba-grape-studies/cover.jpg
+     Painting to be supplied by Silvio. Title and artist in the
+     credit block to be filled in once the painting is chosen.
+     ───────────────────────────────────────────────────────── -->
+{% assign this_tasting = site.data.tastings | where: "slug", page.slug | first %}
+<div class="slide slide-cover active">
+  <div class="cover-content">
+    <div class="eyebrow">Wine Tasting · {% if this_tasting.date_tbd %}Date TBD{% else %}{{ this_tasting.date | date: "%-d %B %Y" }}{% endif %}</div>
+    <h1 class="cover-title">Pinot Noir</h1>
+    <div class="cover-subtitle">Across Regions</div>
+    <div class="cover-rule"></div>
+    <div class="cover-meta">Four wines · Four regions · One grape</div>
+    <div class="cover-meta-gold">Marnes Blanches · Vacheron · Histoire d'Enfer · Lumpp</div>
+  </div>
+  <div class="cover-credit">
+    <div class="cover-credit-title">Painting to be supplied</div>
+    <div class="cover-credit-artist"></div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 2 · GRAPE INTRO
+     No images needed. Modelled on the GSM Trio slide. All four
+     wines are Pinot Noir, so the intro frames the grape and the grid
+     sets up the four-region arc. The Character cell of the donor is
+     dropped: no tasting descriptors could be verified from primary
+     sources, so the grid runs on two columns instead of three.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-intro">
+  <div class="intro-label">The Grape</div>
+  <div class="intro-grapes">
+    <div class="intro-grape-primary">Pinot Noir</div>
+    <div class="intro-grape-secondary">France &amp; Switzerland</div>
+  </div>
+  <div class="intro-vline"></div>
+  <div class="intro-grid" style="grid-template-columns: repeat(2, 1fr);">
+    <div><div class="ig-label">Regions</div><div class="ig-val">Jura · Loire<br>Valais · Burgundy</div></div>
+    <div><div class="ig-label">Constant</div><div class="ig-val">One grape, four places</div></div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 3 · OVERVIEW MAP · FRANCE AND SWITZERLAND
+     Image: assets/tastings/tba-grape-studies/map_overview.jpg
+     To be supplied: one map showing the Jura, Centre-Loire, Valais
+     and the Côte Chalonnaise together.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-map" style="position:relative;">
+  <img src="{{ site.baseurl }}/assets/tastings/tba-grape-studies/map_overview.jpg" alt="France &amp; Switzerland · Wine Regions" loading="lazy">
+  <div class="map-label-center">France &amp; Switzerland · Wine Regions</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 4 · WINE 1 · DOMAINE DES MARNES BLANCHES · PINOT NOIR · 2025
+     Pauline et Géraud Fromont, Sainte-Agnès (Jura).
+     From the back label: 11.5% ABV, organic, vines 10 to 45 years
+     old, short whole-cluster maceration, 10 months in demi-muids and
+     barrels, bottled unfiltered.
+     Appellation (Côtes du Jura cahier des charges, INAO and the Jura
+     interprofession): Pinot Noir is one of the principal red
+     varieties alongside Poulsard and Trousseau; the appellation ties
+     its character to marly, clay-limestone soils under limestone
+     scree; Sainte-Agnès lies within the appellation area.
+     Producer site not reachable from the working session, so no
+     parcel, soil or altitude detail specific to this cuvée is given.
+     Map:    assets/tastings/tba-grape-studies/map_jura.png
+     Bottle: assets/tastings/tba-grape-studies/bottle_marnes-blanches.png
+     QR:     assets/tastings/tba-grape-studies/qr_marnes-blanches.png
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/tba-grape-studies/map_jura.png" alt="Jura · Côtes du Jura" loading="lazy">
+    <div class="map-tag">Jura · Côtes du Jura</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">01 / 04</div>
+      <div class="w-appellation">Côtes du Jura AOC</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/tba-grape-studies/bottle_marnes-blanches.png" alt="Pinot Noir, Domaine des Marnes Blanches, 2025" loading="lazy">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Pinot Noir</div>
+        <div class="w-producer">Domaine des Marnes Blanches</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2025</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Pinot Noir</span></div>
+        <div class="w-meta"><span class="w-ml">Vines</span><span class="w-mv">Organic · 10 to 45 years old</span></div>
+        <div class="w-meta"><span class="w-ml">Vinification</span><span class="w-mv">Short whole-cluster maceration</span></div>
+        <div class="w-meta"><span class="w-ml">Ageing</span><span class="w-mv">10 months, demi-muids and barrels · Unfiltered</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/tba-grape-studies/qr_marnes-blanches.png" alt="QR code for Domaine des Marnes Blanches" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 5 · WINE 2 · DOMAINE VACHERON · SANCERRE ROUGE · 2023
+     Vacheron & Fils, Sancerre (Cher). ABV not legible on the label.
+     Appellation (INAO, Sancerre rouge): three soil types, terres
+     blanches (marls), caillottes (limestone) and silex (clay-silica);
+     reds and rosés recognised in 1959, whites in 1936.
+     Producer site not reachable from the working session; importer
+     and retailer sheets disagree on the cellar work, so vinification
+     and ageing are left out until confirmed with the domaine.
+     Map:    assets/tastings/tba-grape-studies/map_sancerre.png
+     Bottle: assets/tastings/tba-grape-studies/bottle_vacheron.png
+     QR:     assets/tastings/tba-grape-studies/qr_vacheron.png
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/tba-grape-studies/map_sancerre.png" alt="Sancerre · Communes" loading="lazy">
+    <div class="map-tag">Sancerre · Communes</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">02 / 04</div>
+      <div class="w-appellation">Sancerre AOC</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/tba-grape-studies/bottle_vacheron.png" alt="Sancerre Rouge, Domaine Vacheron, 2023" loading="lazy">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Sancerre Rouge</div>
+        <div class="w-producer">Domaine Vacheron</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Pinot Noir</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/tba-grape-studies/qr_vacheron.png" alt="QR code for Domaine Vacheron" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 6 · WINE 3 · HISTOIRE D'ENFER · L'ENFER DE LA PASSION · 2016
+     Histoire d'Enfer SA (Dr Patrick Regamey, Alexandre Challand,
+     James Paget), Corin-sur-Sierre (Valais). 13.6% ABV on the label.
+     Producer site (histoiredenfer.ch): domaine founded in 2008,
+     vineyards in Corin, Miège, Sierre and Varen-Salquenen; the shop
+     lists this Pinot Noir as AOC Valais, Les Coteaux de Sierre. The
+     same cuvée name is also used for a Gamay, whose site data
+     (600 to 800 m, limestone) is not carried over to this wine.
+     No vinification or ageing detail for this Pinot Noir found on
+     the producer site.
+     Map:    assets/tastings/tba-grape-studies/map_valais.png
+     Bottle: assets/tastings/tba-grape-studies/bottle_histoire-d-enfer.png
+     QR:     assets/tastings/tba-grape-studies/qr_histoire-d-enfer.png
+             (from https://www.histoiredenfer.ch)
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/tba-grape-studies/map_valais.png" alt="Valais · Les Coteaux de Sierre" loading="lazy">
+    <div class="map-tag">Valais · Les Coteaux de Sierre</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">03 / 04</div>
+      <div class="w-appellation">Valais AOC · Les Coteaux de Sierre</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/tba-grape-studies/bottle_histoire-d-enfer.png" alt="L'Enfer de la Passion, Histoire d'Enfer, 2016" loading="lazy">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">L'Enfer de la Passion</div>
+        <div class="w-producer">Histoire d'Enfer</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2016</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Pinot Noir</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/tba-grape-studies/qr_histoire-d-enfer.png" alt="QR code for Histoire d'Enfer" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 7 · WINE 4 · DOMAINE FRANÇOIS LUMPP · LE PIED DU CLOU · 2023
+     Final slide in the deck, no closing slide, as in the donor.
+     14% ABV on the label.
+     Le Pied du Clou is one of the Givry Premier Cru climats
+     (Bourgogne interprofession list); the appellation's vines face
+     east-south-east to south at 240 to 280 m.
+     Producer site (francoislumpp.com): no chemical weeding since
+     1995, soils worked mechanically, hand harvest with sorting;
+     around 12 months in barrel, a mix of new, one-wine and two-wine
+     casks, then racked, filtered and bottled. These are described as
+     domaine practice, not cuvée-specific. No soil or exposure detail
+     for this climat found on the producer site.
+     Map:    assets/tastings/tba-grape-studies/map_givry.png
+     Bottle: assets/tastings/tba-grape-studies/bottle_lumpp.png
+     QR:     assets/tastings/tba-grape-studies/qr_lumpp.png
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}/assets/tastings/tba-grape-studies/map_givry.png" alt="Givry · Premier Cru Climats" loading="lazy">
+    <div class="map-tag">Givry · Premier Cru Climats</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">04 / 04</div>
+      <div class="w-appellation">Givry Premier Cru AOC</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/tba-grape-studies/bottle_lumpp.png" alt="Le Pied du Clou, Domaine François Lumpp, 2023" loading="lazy">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">Le Pied du Clou</div>
+        <div class="w-producer">Domaine François Lumpp</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Pinot Noir</span></div>
+        <div class="w-meta"><span class="w-ml">Lieu-Dit</span><span class="w-mv">Le Pied du Clou · Premier Cru climat</span></div>
+        <div class="w-meta"><span class="w-ml">Ageing</span><span class="w-mv">About 12 months in barrel (domaine practice)</span></div>
+      </div>
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}/assets/tastings/tba-grape-studies/qr_lumpp.png" alt="QR code for Domaine François Lumpp" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>

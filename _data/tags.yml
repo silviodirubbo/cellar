@@ -30,6 +30,10 @@
   category: Region
 - name: Roussillon
   category: Region
+- name: Jura
+  category: Region
+- name: Valais
+  category: Region
 
 - name: Côte-Rôtie
   category: Appellation
@@ -97,6 +101,10 @@
   category: Appellation
 - name: Barolo
   category: Appellation
+- name: Côtes du Jura
+  category: Appellation
+- name: Givry
+  category: Appellation
 
 - name: Syrah
   category: Grape
@@ -130,8 +138,12 @@
   category: Grape
 - name: Nebbiolo
   category: Grape
+- name: Pinot Noir
+  category: Grape
 
 - name: France
   category: Country
 - name: Italy
+  category: Country
+- name: Switzerland
   category: Country
