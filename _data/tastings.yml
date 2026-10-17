@@ -1038,6 +1038,7 @@
       vintage: 2025
       appellation: "Côtes du Jura AOC"
       blend: "Pinot Noir"
+      url: "https://www.vinetrail.co.uk/growers/domaine-des-marnes-blanches"
       colour: red
       country: France
       region: "Jura"
@@ -1047,6 +1048,7 @@
       vintage: 2023
       appellation: "Sancerre AOC"
       blend: "Pinot Noir"
+      url: "https://www.europeancellars.com/wine/sancerre-rouge/"
       colour: red
       country: France
       region: "Loire"
@@ -1066,7 +1068,7 @@
       vintage: 2023
       appellation: "Givry Premier Cru AOC"
       blend: "Pinot Noir"
-      url: "https://francoislumpp.com/fr/wine-type/le-pied-du-clou/"
+      url: "https://francoislumpp.com/fr/accueil/"
       colour: red
       country: France
       region: "Burgundy"
