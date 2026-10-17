@@ -1060,7 +1060,7 @@
       colour: red
       country: Switzerland
       region: "Valais"
-      image: "tba-grape-studies/bottle_histoire-d-enfer.png"
+      image: "tba-grape-studies/bottle_histoire-denfer.png"
     - name: "Le Pied du Clou"
       producer: "Domaine François Lumpp"
       vintage: 2023
@@ -1070,7 +1070,7 @@
       colour: red
       country: France
       region: "Burgundy"
-      image: "tba-grape-studies/bottle_lumpp.png"
+      image: "tba-grape-studies/bottle_lumpp.jpg"
 
 - slug: gsm-across-regions
   title: "GSM Across Regions"
