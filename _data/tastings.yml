@@ -1031,7 +1031,7 @@
   chapter: grape-studies
   chapter_order: 4
   status: upcoming
-  slides: false
+  slides: true
   wines:
     - name: "Pinot Noir"
       producer: "Domaine des Marnes Blanches"
