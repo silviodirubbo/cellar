@@ -1053,16 +1053,6 @@
       country: France
       region: "Loire"
       image: "tba-grape-studies/bottle_vacheron.png"
-    - name: "L'Enfer de la Passion"
-      producer: "Histoire d'Enfer"
-      vintage: 2016
-      appellation: "Valais AOC · Les Coteaux de Sierre"
-      blend: "Pinot Noir"
-      url: "https://www.histoiredenfer.ch"
-      colour: red
-      country: Switzerland
-      region: "Valais"
-      image: "tba-grape-studies/bottle_histoire-denfer.png"
     - name: "Le Pied du Clou"
       producer: "Domaine François Lumpp"
       vintage: 2023
@@ -1073,6 +1063,16 @@
       country: France
       region: "Burgundy"
       image: "tba-grape-studies/bottle_lumpp.jpg"
+    - name: "L'Enfer de la Passion"
+      producer: "Histoire d'Enfer"
+      vintage: 2016
+      appellation: "Valais AOC · Les Coteaux de Sierre"
+      blend: "Pinot Noir"
+      url: "https://www.histoiredenfer.ch"
+      colour: red
+      country: Switzerland
+      region: "Valais"
+      image: "tba-grape-studies/bottle_histoire-denfer.png"
 
 - slug: gsm-across-regions
   title: "GSM Across Regions"
