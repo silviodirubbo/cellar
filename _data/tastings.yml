@@ -1007,7 +1007,7 @@
       image: "fiano-horizontal/isatoli.jpg"
   slides: true
 
-- slug: tba-grape-studies
+- slug: pinot-noir-across-regions
   title: "Pinot Noir Across Regions"
   date: 2026-10-19
   date_tbd: false
@@ -1042,7 +1042,7 @@
       colour: red
       country: France
       region: "Jura"
-      image: "tba-grape-studies/bottle_marnes-blanches.png"
+      image: "pinot-noir-across-regions/bottle_marnes-blanches.png"
     - name: "Sancerre Rouge"
       producer: "Domaine Vacheron"
       vintage: 2023
@@ -1052,7 +1052,7 @@
       colour: red
       country: France
       region: "Loire"
-      image: "tba-grape-studies/bottle_vacheron.png"
+      image: "pinot-noir-across-regions/bottle_vacheron.png"
     - name: "Le Pied du Clou"
       producer: "Domaine François Lumpp"
       vintage: 2023
@@ -1062,7 +1062,7 @@
       colour: red
       country: France
       region: "Burgundy"
-      image: "tba-grape-studies/bottle_lumpp.jpg"
+      image: "pinot-noir-across-regions/bottle_lumpp.jpg"
     - name: "L'Enfer de la Passion"
       producer: "Histoire d'Enfer"
       vintage: 2016
@@ -1072,7 +1072,7 @@
       colour: red
       country: Switzerland
       region: "Valais"
-      image: "tba-grape-studies/bottle_histoire-denfer.png"
+      image: "pinot-noir-across-regions/bottle_histoire-denfer.png"
 
 - slug: gsm-across-regions
   title: "GSM Across Regions"
