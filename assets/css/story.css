@@ -44,6 +44,16 @@
    "spots left" slide) that need to stand apart from the rest of a
    story batch. */
 .story--blue     { background: #2A4656; }
+/* Muted clay, a warm earthy terracotta brown in the warm-neutral
+   family. Used only for the Pinot Noir Across Regions recap. Flat
+   colour; its own lighter bottle red, since the standard dark-ground
+   red (#B3402E) is too close to the clay to read. */
+.story--clay {
+  --clay: #7A4B3A;
+  background: var(--clay);
+  --bottle-red:   #E3A08F;
+  --bottle-white: #C9D2BE;
+}
 
 .story__inner {
   position: absolute;
@@ -84,14 +94,16 @@
 .story--red .story-dots__dot,
 .story--navy .story-dots__dot,
 .story--magenta .story-dots__dot,
-.story--blue .story-dots__dot { border-color: rgba(253,252,250,0.4); }
+.story--blue .story-dots__dot,
+.story--clay .story-dots__dot { border-color: rgba(253,252,250,0.4); }
 .story-dots__dot--active { background: var(--green); border-color: var(--green); }
 .story--green .story-dots__dot--active,
 .story--loire .story-dots__dot--active,
 .story--red .story-dots__dot--active,
 .story--navy .story-dots__dot--active,
 .story--magenta .story-dots__dot--active,
-.story--blue .story-dots__dot--active { background: rgba(253,252,250,0.55); border-color: rgba(253,252,250,0.55); }
+.story--blue .story-dots__dot--active,
+.story--clay .story-dots__dot--active { background: rgba(253,252,250,0.55); border-color: rgba(253,252,250,0.55); }
 
 /* ── Eyebrow / meta line ───────────────────────────────────── */
 .story-eyebrow {
@@ -108,7 +120,8 @@
 .story--green .story-eyebrow,
 .story--loire .story-eyebrow,
 .story--magenta .story-eyebrow,
-.story--blue .story-eyebrow { color: rgba(253,252,250,0.5); }
+.story--blue .story-eyebrow,
+.story--clay .story-eyebrow { color: rgba(253,252,250,0.5); }
 
 /* ── Title ─────────────────────────────────────────────────── */
 .story-title {
@@ -125,7 +138,8 @@
 .story--green .story-title,
 .story--loire .story-title,
 .story--magenta .story-title,
-.story--blue .story-title { color: var(--warm-white); }
+.story--blue .story-title,
+.story--clay .story-title { color: var(--warm-white); }
 
 /* ── Rule ──────────────────────────────────────────────────── */
 .story-rule { border: none; border-top: 1px solid var(--rule); margin: 0 0 48px; flex: 0 0 auto; }
@@ -133,7 +147,8 @@
 .story--green .story-rule,
 .story--loire .story-rule,
 .story--magenta .story-rule,
-.story--blue .story-rule { border-top-color: rgba(253,252,250,0.16); }
+.story--blue .story-rule,
+.story--clay .story-rule { border-top-color: rgba(253,252,250,0.16); }
 
 /* ── Italic intro / closing paragraphs (whole-paragraph italic,
    distinct from the selective <em> emphasis used in "how it works") ── */
@@ -149,7 +164,8 @@
 .story--green .story-italic,
 .story--loire .story-italic,
 .story--magenta .story-italic,
-.story--blue .story-italic { color: rgba(247,245,240,0.72); }
+.story--blue .story-italic,
+.story--clay .story-italic { color: rgba(247,245,240,0.72); }
 
 /* ── Plain lede paragraph (slide 2: "what it is") ─────────── */
 .story-lede {
@@ -186,7 +202,8 @@
 .story--green .story-wine__name,
 .story--loire .story-wine__name,
 .story--magenta .story-wine__name,
-.story--blue .story-wine__name { color: var(--warm-white); }
+.story--blue .story-wine__name,
+.story--clay .story-wine__name { color: var(--warm-white); }
 .story-wine__meta {
   font-family: var(--font-mono);
   font-weight: 300;
@@ -200,7 +217,8 @@
 .story--green .story-wine__meta,
 .story--loire .story-wine__meta,
 .story--magenta .story-wine__meta,
-.story--blue .story-wine__meta { color: rgba(253,252,250,0.5); }
+.story--blue .story-wine__meta,
+.story--clay .story-wine__meta { color: rgba(253,252,250,0.5); }
 
 /* ── Bottle glyph: colour comes from the wine's type, tinted
    lighter on light backgrounds and richer on the dark/green one
