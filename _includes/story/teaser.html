@@ -8,7 +8,9 @@
   hook (plain first line), hook_em (italic gold second line), follow,
   cta. Spots shows capacity (default 6) as open spots, not the live count
   in _data/availability.yml; use spots-left.html when a real remaining
-  count matters.
+  count matters. Optional: hide_spots: true drops the Spots row;
+  regions (list of names) adds one red-bottle row per region, using the
+  recap's wine-list markup, for an overview without wine details.
 {% endcomment %}
 {% assign tasting = site.data.tastings | where: "slug", page.tasting_slug | first %}
 {% assign chapter = nil %}
@@ -24,8 +26,18 @@
       <dt>Tasting</dt><dd>{{ tasting.title }}</dd>
       {% if chapter %}<dt>Chapter</dt><dd>{{ chapter.title }}</dd>{% endif %}
       <dt>Date</dt><dd>{{ tasting.date | date: "%A %-d %B %Y" }}</dd>
-      <dt>Spots</dt><dd>{{ tasting.capacity | default: 6 }} open</dd>
+      {% unless page.hide_spots %}<dt>Spots</dt><dd>{{ tasting.capacity | default: 6 }} open</dd>{% endunless %}
     </dl>
+    {% if page.regions %}
+    <div class="story-winelist" style="margin-top: 56px;">
+      {% for r in page.regions %}
+        <div class="story-wine">
+          {% include story/bottle.html type="red" %}
+          <div class="story-wine__name">{{ r }}</div>
+        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
     <p class="story-italic story-teaser__cta">{{ page.cta }}</p>
   </div>
 </div>

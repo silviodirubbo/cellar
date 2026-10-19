@@ -351,7 +351,8 @@
 .story--green .story-hook__em,
 .story--loire .story-hook__em,
 .story--magenta .story-hook__em,
-.story--blue .story-hook__em { color: #E2C27E; }
+.story--blue .story-hook__em,
+.story--clay .story-hook__em { color: #E2C27E; }
 .story-facts {
   display: grid;
   grid-template-columns: 230px 1fr;
@@ -378,12 +379,14 @@
 .story--green .story-facts dt,
 .story--loire .story-facts dt,
 .story--magenta .story-facts dt,
-.story--blue .story-facts dt { color: rgba(253,252,250,0.5); }
+.story--blue .story-facts dt,
+.story--clay .story-facts dt { color: rgba(253,252,250,0.5); }
 .story--dark .story-facts dd,
 .story--green .story-facts dd,
 .story--loire .story-facts dd,
 .story--magenta .story-facts dd,
-.story--blue .story-facts dd { color: var(--warm-white); }
+.story--blue .story-facts dd,
+.story--clay .story-facts dd { color: var(--warm-white); }
 .story-teaser__cta { margin-top: auto; font-size: 48px; }
 
 /* ── Section cover: single centered word, dots top-left only ─── */
