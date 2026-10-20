@@ -3,7 +3,7 @@ slug: loire
 title: "Loire"
 numeral: "II"
 order: 2
-state: planned
+state: ongoing
 color: "#5B6670"
 story_label: "Loire Valley Chapter"
 blurb: >
