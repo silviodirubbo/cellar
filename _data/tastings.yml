@@ -1096,6 +1096,7 @@
   chapter: grape-studies
   chapter_order: 5
   status: upcoming
+  capacity: 6
   slides: true
   wines:
     - name: "Terrasses du Larzac"
