@@ -24,7 +24,8 @@
  *      awaiting all count), excluding only the organiser account. The host
  *      counts like any other guest. A guest's "+1" (additional guests, as
  *      Google Calendar stores it) takes places too: a guest with +1 counts
- *      as 2.
+ *      as 2. The organiser's own seat is not counted, but +1s added on the
+ *      organiser row are.
  *   5. When a count differs from the last one sent (or the last send is
  *      older than a day), it calls GitHub's repository_dispatch API with
  *      event type "availability-update". The GitHub Action then updates
@@ -162,8 +163,9 @@ function countByTasting_(cfg, tastings) {
 }
 
 /**
- * Guests whose status is not "no", plus each guest's additional guests ("+1"),
- * without the organiser account. Never below 0.
+ * Guests whose status is not "no", plus each guest's additional guests ("+1").
+ * The organiser account itself is left out, its additional guests are not.
+ * Never below 0.
  */
 function takenPlaces_(ev, organiser) {
   var seen = {};
@@ -172,7 +174,12 @@ function takenPlaces_(ev, organiser) {
     var email = String(guest.getEmail() || '').trim().toLowerCase();
     if (!email || seen[email]) return;
     seen[email] = true;
-    if (email === organiser) return;
+    if (email === organiser) {
+      // The organiser's own seat is not a place, but the +1s added to the
+      // organiser row by hand are guests like any other.
+      taken += additionalGuests_(guest);
+      return;
+    }
     if (guest.getGuestStatus() === CalendarApp.GuestStatus.NO) return;
     taken += 1 + additionalGuests_(guest);
   });
