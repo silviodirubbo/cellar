@@ -9,7 +9,7 @@ A Google Apps Script that keeps the "places left" count on the Cellar site in st
    - an event belongs to a tasting when it falls on the tasting's date (Geneva time) and its description contains the Cellar tastings link, `silviodirubbo.github.io/cellar/tastings` (any page under it works, for example `https://silviodirubbo.github.io/cellar/tastings/sancerre-pouilly-fume/`). The event title does not matter then;
    - for an event whose description lacks the link, the title is the fallback: at least half of the tasting title's significant words must appear in the event title, so "Cellar: Sancerre & Pouilly-Fumé" matches "Sancerre & Pouilly-Fumé", and "Sancerre night" does not;
    - any other event on a tasting date (a birthday, a dinner) is skipped and logged. If two events match the same tasting, the first one counts and a warning is logged;
-   - places taken = guests whose status is not "no" (yes, maybe and awaiting all count), leaving out only the organiser account. The host counts like any other guest. The count never goes below 0.
+   - places taken = guests whose status is not "no" (yes, maybe and awaiting all count), leaving out only the organiser account. The host counts like any other guest. A guest's "+1" (additional guests) takes places too, so a guest with +1 counts as 2. The count never goes below 0.
 3. For each count that changed, it calls GitHub's `repository_dispatch` API (event type `availability-update`).
 4. The GitHub Action `.github/workflows/update-availability.yml` writes the count to `_data/availability.yml` and commits to `main`. GitHub Pages redeploys a minute or two later.
 

@@ -22,7 +22,9 @@
  *      same tasting, the first is kept and a warning is logged.
  *   4. Places taken = guests whose status is not "no" (yes, maybe and
  *      awaiting all count), excluding only the organiser account. The host
- *      counts like any other guest.
+ *      counts like any other guest. A guest's "+1" (additional guests, as
+ *      Google Calendar stores it) takes places too: a guest with +1 counts
+ *      as 2.
  *   5. When a count differs from the last one sent (or the last send is
  *      older than a day), it calls GitHub's repository_dispatch API with
  *      event type "availability-update". The GitHub Action then updates
@@ -159,7 +161,10 @@ function countByTasting_(cfg, tastings) {
   return counts;
 }
 
-/** Guests whose status is not "no", without the organiser account. Never below 0. */
+/**
+ * Guests whose status is not "no", plus each guest's additional guests ("+1"),
+ * without the organiser account. Never below 0.
+ */
 function takenPlaces_(ev, organiser) {
   var seen = {};
   var taken = 0;
@@ -169,9 +174,15 @@ function takenPlaces_(ev, organiser) {
     seen[email] = true;
     if (email === organiser) return;
     if (guest.getGuestStatus() === CalendarApp.GuestStatus.NO) return;
-    taken++;
+    taken += 1 + additionalGuests_(guest);
   });
   return Math.max(0, taken);
+}
+
+/** The guest's "+1" count as stored by Google Calendar. 0 when absent or not a number. */
+function additionalGuests_(guest) {
+  var n = Number(guest.getAdditionalGuests());
+  return isFinite(n) && n > 0 ? Math.floor(n) : 0;
 }
 
 // ── Matching ──────────────────────────────────────────────────
