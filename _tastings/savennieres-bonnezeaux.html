@@ -47,6 +47,36 @@ title: "Savennières & Bonnezeaux"
   letter-spacing: .1em; text-transform: uppercase; color: rgba(253,252,250,.38);
 }
 
+/* ── GRAPE INTRO ────────────────────────────────────── */
+.slide-intro {
+  background: var(--warm-white); color: var(--ink);
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 72px; cursor: pointer;
+}
+.intro-label {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 23px;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 18px;
+}
+.intro-grapes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.intro-grape-primary {
+  font-size: 112px; font-weight: 300; color: var(--ink); letter-spacing: -.02em;
+}
+
+.intro-vline { width: 1px; height: 38px; background: var(--rule); margin: 28px auto; }
+.intro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; max-width: 640px; }
+.ig-label {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 20px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 8px;
+}
+.ig-val { font-size: 14px; font-weight: 300; color: var(--ink-mid); line-height: 1.5; }
+.ig-val em { color: var(--green); font-style: italic; }
+
 /* ── MAP-ONLY SLIDE ─────────────────────────────────── */
 .slide-map {
   background: var(--warm-white);
@@ -106,7 +136,27 @@ title: "Savennières & Bonnezeaux"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 2 · LOIRE VALLEY MAP
+     SLIDE 2 · GRAPE INTRO
+     No images needed. Chenin Blanc at 100% across all five wines,
+     so only the primary grape line is used, as in
+     _tastings/muscadet.html. Style column covers the dry to sweet
+     range of the deck.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-intro">
+  <div class="intro-label">The Grape</div>
+  <div class="intro-grapes">
+    <div class="intro-grape-primary">Chenin Blanc</div>
+  </div>
+  <div class="intro-vline"></div>
+  <div class="intro-grid">
+    <div><div class="ig-label">Origin</div><div class="ig-val">Anjou<br>Loire Valley, France</div></div>
+    <div><div class="ig-label">Character</div><div class="ig-val"><em>Quince · Apple<br>Honey · High acidity</em></div></div>
+    <div><div class="ig-label">Style</div><div class="ig-val">Dry in Savennières<br>sweet in Bonnezeaux</div></div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 3 · LOIRE VALLEY MAP
      Image: assets/tastings/savennieres-bonnezeaux/map_loire.jpg
      Copied from assets/tastings/muscadet/ (identical file, left in
      place there). Used on this slide only: the Anjou overview has its
@@ -119,7 +169,7 @@ title: "Savennières & Bonnezeaux"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 3 · ANJOU & SAUMUR MAP
+     SLIDE 4 · ANJOU & SAUMUR MAP
      Image: assets/tastings/savennieres-bonnezeaux/map_anjou_saumur.jpg
      Appellations overview for Anjou and Saumur, placing Savennières
      and Bonnezeaux before the wine slides. Built like the Pays
@@ -131,10 +181,10 @@ title: "Savennières & Bonnezeaux"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 4 · WINE 1 · CHAMBOUREAU · DOMAINE FL · 2021
+     SLIDE 5 · WINE 1 · CHAMBOUREAU · DOMAINE FL · 2021
      The Savennières lieu-dit and soil map fills the wine-map panel on
-     all four Savennières slides (4 to 7).
-     Map:    assets/tastings/savennieres-bonnezeaux/map_savennieres.jpg (shared by slides 4 to 7)
+     all four Savennières slides (5 to 8).
+     Map:    assets/tastings/savennieres-bonnezeaux/map_savennieres.jpg (shared by slides 5 to 8)
      Bottle: assets/tastings/savennieres-bonnezeaux/bottle_chamboureau.png
      QR:     assets/tastings/savennieres-bonnezeaux/qr_chamboureau.png
              (https://domainefl.com/en/products/chamboureau)
@@ -169,8 +219,8 @@ title: "Savennières & Bonnezeaux"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 5 · WINE 2 · SAVENNIÈRES-ROCHE-AUX-MOINES · DOMAINE AUX MOINES · 2024
-     Map:    assets/tastings/savennieres-bonnezeaux/map_savennieres.jpg (shared by slides 4 to 7)
+     SLIDE 6 · WINE 2 · SAVENNIÈRES-ROCHE-AUX-MOINES · DOMAINE AUX MOINES · 2024
+     Map:    assets/tastings/savennieres-bonnezeaux/map_savennieres.jpg (shared by slides 5 to 8)
      Bottle: assets/tastings/savennieres-bonnezeaux/bottle_roche-aux-moines.png
      QR:     assets/tastings/savennieres-bonnezeaux/qr_roche-aux-moines.png
              (https://www.domaine-aux-moines.com/nos-vins)
@@ -205,8 +255,8 @@ title: "Savennières & Bonnezeaux"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 6 · WINE 3 · COULÉE DE SERRANT · NICOLAS JOLY · 2022
-     Map:    assets/tastings/savennieres-bonnezeaux/map_savennieres.jpg (shared by slides 4 to 7)
+     SLIDE 7 · WINE 3 · COULÉE DE SERRANT · NICOLAS JOLY · 2022
+     Map:    assets/tastings/savennieres-bonnezeaux/map_savennieres.jpg (shared by slides 5 to 8)
      Bottle: assets/tastings/savennieres-bonnezeaux/bottle_coulee-de-serrant.png
      QR:     assets/tastings/savennieres-bonnezeaux/qr_coulee-de-serrant.png
              (https://coulee-de-serrant.com/en/presentation-wines/)
@@ -241,12 +291,12 @@ title: "Savennières & Bonnezeaux"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 7 · WINE 4 · CLOS LA ROYAUTÉ · DOMAINE LAFFOURCADE · 1995
+     SLIDE 8 · WINE 4 · CLOS LA ROYAUTÉ · DOMAINE LAFFOURCADE · 1995
      Fourth and last Savennières, poured before the Bonnezeaux.
      No lieu-dit row: none applies to this wine.
      Clos la Royauté is not labelled on the Savennières map and is
      left unmarked.
-     Map:    assets/tastings/savennieres-bonnezeaux/map_savennieres.jpg (shared by slides 4 to 7)
+     Map:    assets/tastings/savennieres-bonnezeaux/map_savennieres.jpg (shared by slides 5 to 8)
      Bottle: assets/tastings/savennieres-bonnezeaux/bottle_clos-la-royaute.png
      QR:     assets/tastings/savennieres-bonnezeaux/qr_laffourcade.png
              (http://www.vignobles-laffourcade.fr)
@@ -280,7 +330,7 @@ title: "Savennières & Bonnezeaux"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 8 · WINE 5 · BONNEZEAUX · DOMAINE DU PETIT VAL · 2025
+     SLIDE 9 · WINE 5 · BONNEZEAUX · DOMAINE DU PETIT VAL · 2025
      The Bonnezeaux AOP map fills the wine-map panel, so the move
      from dry to sweet happens on this wine slide. Final slide in the
      deck, matching the no-closing-slide convention already used
