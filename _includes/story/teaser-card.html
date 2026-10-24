@@ -1,0 +1,33 @@
+{% comment %}
+  Teaser card: one slide of a short multi-slide teaser for an upcoming
+  tasting. Built only from the existing story pieces (dots, eyebrow,
+  title, italic sub, wine list rows, link bar), no new styles.
+  Page front matter: tasting_slug, story_bg (loire|offwhite|green|dark),
+  label (optional eyebrow), headline (may hold an <em> key phrase; em is
+  green italic via main.css, so use it on light slides only), sub
+  (optional), show_wines (optional, lists the tasting's wines from
+  _data/tastings.yml as "Producer, Name Vintage", vintage dropped for
+  NV, bottle glyph red for colour: red, white otherwise), linkbar
+  (optional, adds the website link bar at the bottom).
+{% endcomment %}
+{% assign tasting = site.data.tastings | where: "slug", page.tasting_slug | first %}
+<div class="story story--{{ page.story_bg }}">
+  <div class="story__inner">
+    {% include story/dots.html chapter=tasting.chapter %}
+    {% if page.label %}<p class="story-eyebrow">{{ page.label }}</p>{% endif %}
+    <h1 class="story-title">{{ page.headline }}</h1>
+    {% if page.sub %}<p class="story-italic" style="margin-bottom: 56px;">{{ page.sub }}</p>{% endif %}
+    {% if page.show_wines %}
+      <div class="story-winelist" style="margin-top: 24px;">
+        {% for wine in tasting.wines %}
+          {% if wine.colour == "red" %}{% assign wtype = "red" %}{% else %}{% assign wtype = "white" %}{% endif %}
+          <div class="story-wine">
+            {% include story/bottle.html type=wtype %}
+            <div class="story-wine__name">{{ wine.producer }}, {{ wine.name }}{% unless wine.vintage == "NV" %} {{ wine.vintage }}{% endunless %}</div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% if page.linkbar %}{% include story/linkbar.html %}{% endif %}
+  </div>
+</div>
