@@ -47,6 +47,29 @@ title: "Saumur & Champigny"
   letter-spacing: .1em; text-transform: uppercase; color: rgba(253,252,250,.38);
 }
 
+/* ── INTRO ──────────────────────────────────────────── */
+/* grapes slide, same as _tastings/northern-rhone-whites.html */
+.slide-intro {
+  background: var(--warm-white); color: var(--ink);
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 72px; cursor: pointer;
+}
+.intro-label {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 10px;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 28px;
+}
+.intro-grapes { display: flex; align-items: flex-start; gap: 0; width: 100%; max-width: 700px; }
+.intro-grape-col { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 0 40px; }
+.ig-name { font-size: 68px; font-weight: 300; color: var(--ink); line-height: 1; letter-spacing: -.02em; }
+.ig-direction { font-size: 16px; font-weight: 300; font-style: italic; color: var(--green); margin-top: 6px; margin-bottom: 16px; }
+.ig-apps {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .13em; text-transform: uppercase; color: var(--ink-light); line-height: 2;
+}
+.intro-divider { width: 1px; background: var(--rule); align-self: stretch; margin: 8px 0; }
+.intro-vline { width: 1px; height: 38px; background: var(--rule); margin: 36px auto; }
+.intro-throughline { font-size: 20px; font-weight: 300; font-style: italic; color: var(--green); }
+
 /* ── MAP-ONLY SLIDE ─────────────────────────────────── */
 .slide-map {
   background: var(--warm-white);
@@ -103,12 +126,37 @@ title: "Saumur & Champigny"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 2 · LOIRE VALLEY MAP
+     SLIDE 2 · THE GRAPES
+     Two-column grape intro, same structure as
+     _tastings/northern-rhone-whites.html. Chenin Blanc for the two
+     sparklings, Cabernet Franc for the two reds.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-intro">
+  <div class="intro-label">The Grapes</div>
+  <div class="intro-grapes">
+    <div class="intro-grape-col">
+      <div class="ig-name">Chenin Blanc</div>
+      <div class="ig-direction">sparkling</div>
+      <div class="ig-apps">Saumur Brut<br>Crémant de Loire</div>
+    </div>
+    <div class="intro-divider"></div>
+    <div class="intro-grape-col">
+      <div class="ig-name">Cabernet Franc</div>
+      <div class="ig-direction">red</div>
+      <div class="ig-apps">Saumur-Champigny</div>
+    </div>
+  </div>
+  <div class="intro-vline"></div>
+  <div class="intro-throughline">Chenin Blanc · Cabernet Franc</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 3 · LOIRE VALLEY MAP
      Image: assets/tastings/saumur-champigny/map_loire.jpg
      Copied from assets/tastings/muscadet/ (identical file, left in
      place there), the same shared Loire Valley overview map used
      across the Loire chapter's decks. The Anjou & Saumur appellations
-     map follows on slide 3; this overview map also stands in as the
+     map follows on slide 4; this overview map also stands in as the
      wine-map background on every wine slide below, as no
      Saumur-Champigny specific wine-panel map exists in the repo.
      ───────────────────────────────────────────────────────── -->
@@ -118,7 +166,7 @@ title: "Saumur & Champigny"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 3 · ANJOU & SAUMUR MAP
+     SLIDE 4 · ANJOU & SAUMUR MAP
      Image: assets/tastings/saumur-champigny/map_anjou_saumur.jpg
      Copied from assets/tastings/savennieres-bonnezeaux/ (identical
      file, left in place there). Appellations overview for Anjou and
@@ -131,8 +179,8 @@ title: "Saumur & Champigny"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 4 · WINE 1 · SAUMUR BRUT · DOMAINE DES SANZAY
-     The Anjou & Saumur map on slide 3 sets the Saumur context; the
+     SLIDE 5 · WINE 1 · SAUMUR BRUT · DOMAINE DES SANZAY
+     The Anjou & Saumur map on slide 4 sets the Saumur context; the
      wine-map panel keeps the shared Loire overview.
      Map: assets/tastings/saumur-champigny/map_loire.jpg (shared)
      Bottle: assets/tastings/saumur-champigny/bottle_saumur-brut.png
@@ -160,7 +208,7 @@ title: "Saumur & Champigny"
         <div class="w-producer">Domaine des Sanzay</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">NV</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chenin Blanc 85%, Chardonnay 15%</span></div>
-        <div class="w-meta"><span class="w-ml">Soil</span><span class="w-mv">Clay-limestone</span></div>
+        <div class="w-meta"><span class="w-ml">Soil</span><span class="w-mv">Tuffeau limestone</span></div>
       </div>
       <div class="wine-qr">
         <img src="{{ site.baseurl }}/assets/tastings/saumur-champigny/qr_saumur-brut.png" alt="QR code for Saumur Brut, Domaine des Sanzay" loading="lazy">
@@ -170,7 +218,7 @@ title: "Saumur & Champigny"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 5 · WINE 2 · BLANC DE BLANCS · DOMAINE OGEREAU · 2022
+     SLIDE 6 · WINE 2 · BLANC DE BLANCS · DOMAINE OGEREAU · 2022
      Map: assets/tastings/saumur-champigny/map_loire.jpg (shared)
      Bottle: assets/tastings/saumur-champigny/bottle_blanc-de-blancs.png
      QR:     assets/tastings/saumur-champigny/qr_ogereau.png
@@ -196,6 +244,7 @@ title: "Saumur & Champigny"
         <div class="w-producer">Domaine Ogereau</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Chenin Blanc</span></div>
+        <div class="w-meta"><span class="w-ml">Soil</span><span class="w-mv">Schist</span></div>
       </div>
       <div class="wine-qr">
         <img src="{{ site.baseurl }}/assets/tastings/saumur-champigny/qr_ogereau.png" alt="QR code for Blanc de Blancs, Domaine Ogereau" loading="lazy">
@@ -205,8 +254,8 @@ title: "Saumur & Champigny"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 6 · WINE 3 · CLOS DE L'ECHELIER · DOMAINE DES ROCHES NEUVES · 2017
-     Saumur-Champigny appears on the Anjou & Saumur map on slide 3;
+     SLIDE 7 · WINE 3 · CLOS DE L'ECHELIER · DOMAINE DES ROCHES NEUVES · 2017
+     Saumur-Champigny appears on the Anjou & Saumur map on slide 4;
      the transition into the reds folds into this wine slide.
      Map: assets/tastings/saumur-champigny/map_loire.jpg (shared)
      Bottle: assets/tastings/saumur-champigny/bottle_clos-de-l-echelier.png
@@ -234,7 +283,8 @@ title: "Saumur & Champigny"
         <div class="w-producer">Domaine des Roches Neuves</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2017</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Cabernet Franc</span></div>
-        <div class="w-meta"><span class="w-ml">Soil</span><span class="w-mv">Clay-limestone</span></div>
+        <div class="w-meta"><span class="w-ml">Lieu-Dit</span><span class="w-mv">Clos de l'Echelier</span></div>
+        <div class="w-meta"><span class="w-ml">Soil</span><span class="w-mv">Clay-limestone (Upper Turonian)</span></div>
       </div>
       <div class="wine-qr">
         <img src="{{ site.baseurl }}/assets/tastings/saumur-champigny/qr_clos-de-l-echelier.png" alt="QR code for Clos de l'Echelier, Domaine des Roches Neuves" loading="lazy">
@@ -244,7 +294,7 @@ title: "Saumur & Champigny"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 7 · WINE 4 · LE CLOS · CLOS ROUGEARD · 2020
+     SLIDE 8 · WINE 4 · LE CLOS · CLOS ROUGEARD · 2020
      Final slide in the deck, matching the no-closing-slide convention
      used by gsm-across-regions, fiano-horizontal, chardonnay-across-
      countries, northern-rhone-syrahs and northern-rhone-whites.
@@ -274,7 +324,7 @@ title: "Saumur & Champigny"
         <div class="w-producer">Clos Rougeard</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2020</span></div>
         <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Cabernet Franc</span></div>
-        <div class="w-meta"><span class="w-ml">Soil</span><span class="w-mv">Clay-limestone</span></div>
+        <div class="w-meta"><span class="w-ml">Soil</span><span class="w-mv">Clay and limestone (tuffeau)</span></div>
       </div>
       <div class="wine-qr">
         <img src="{{ site.baseurl }}/assets/tastings/saumur-champigny/qr_clos-rougeard.png" alt="QR code for Le Clos, Clos Rougeard" loading="lazy">
