@@ -230,6 +230,9 @@
 .story-bottle { flex: 0 0 auto; width: 48px; height: 136px; }
 .story-bottle--red   { color: var(--bottle-red); }
 .story-bottle--white { color: var(--bottle-white); }
+/* Large bottle row, names withheld (teaser-card bottles_only). */
+.story-bottlerow { display: flex; gap: 72px; align-items: flex-end; margin: 40px 0 72px; flex: 0 0 auto; }
+.story-bottlerow .story-bottle { width: 110px; height: 312px; }
 
 /* ── Link bar (slides 2 & 3): URL + tap chip ──────────────────── */
 .story-linkbar-wrap { flex: 0 0 auto; margin-top: auto; }

@@ -7,7 +7,9 @@
   green italic via main.css, so use it on light slides only), sub
   (optional), show_wines (optional, lists the tasting's wines from
   _data/tastings.yml as "Producer, Name Vintage", vintage dropped for
-  NV, bottle glyph red for colour: red, white otherwise), linkbar
+  NV, bottle glyph red for colour: red, white otherwise), bottles_only
+  (optional, the same glyphs as one large row with no names), after
+  (optional italic line below the row), linkbar
   (optional, adds the website link bar at the bottom).
 {% endcomment %}
 {% assign tasting = site.data.tastings | where: "slug", page.tasting_slug | first %}
@@ -28,6 +30,15 @@
         {% endfor %}
       </div>
     {% endif %}
+    {% if page.bottles_only %}
+      <div class="story-bottlerow">
+        {% for wine in tasting.wines %}
+          {% if wine.colour == "red" %}{% assign wtype = "red" %}{% else %}{% assign wtype = "white" %}{% endif %}
+          {% include story/bottle.html type=wtype %}
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% if page.after %}<p class="story-italic">{{ page.after }}</p>{% endif %}
     {% if page.linkbar %}{% include story/linkbar.html %}{% endif %}
   </div>
 </div>
