@@ -401,9 +401,7 @@
     - France
   chapter: loire
   chapter_order: 2
-  status: upcoming
-  capacity: 6
-  cost_estimate: "35 CHF"
+  status: past
   slides: true
   wines:
     - name: "Chamboureau"
