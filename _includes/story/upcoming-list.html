@@ -9,8 +9,8 @@
   left, the tasting title over the live place status on the right, the
   status read through
   _includes/availability.html (same logic and wording as the schedule
-  cards). A full tasting reads "Fully booked, C places" in the same
-  style as every other row. A tasting with no availability entry falls
+  cards). A full tasting reads "Fully booked" in the same style as
+  every other row. A tasting with no availability entry falls
   back to "C places" from its capacity. Footer: venue line, then the
   link bar, pinned to the bottom of the safe area by the flex column.
   No chapter dots: the list spans chapters.
@@ -45,7 +45,7 @@
               {%- if avail_left == nil -%}
                 {{ avail_capacity }} places
               {%- elsif avail_left == 0 -%}
-                Fully booked, {{ avail_capacity }} places
+                Fully booked
               {%- elsif avail_left == 1 -%}
                 1 place available
               {%- else -%}
