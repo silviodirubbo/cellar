@@ -406,24 +406,29 @@
 .story--loire .story-word { color: var(--warm-white); }
 
 /* ── Upcoming list: every upcoming tasting with its live place
-   status (_includes/story/upcoming-list.html). Rows reuse
-   .story-facts (mono date, serif title), set a step larger here so
-   five rows fill the slide. The status line is the mono meta style
-   (as .story-wine__meta) at a phone-readable size; a full tasting
-   swaps it for the italic accent, same face and colour as
-   .story-hook__em. No chapter dots, so the top padding alone keeps the
-   eyebrow below the Instagram top bar, and the bottom padding keeps
-   the venue and link bar clear of the reply bar. The list takes the
-   free height and spreads its rows across it. ── */
-.story__inner--upcoming { padding-top: 260px; padding-bottom: 260px; }
+   status (_includes/story/upcoming-list.html), on story--green. Rows
+   reuse .story-facts (mono date, serif title), set a step larger here
+   so five rows fill the slide. Every status line, "Fully booked"
+   included, is the same mono meta style. Dates, status lines and the
+   venue are raised to 88% warm white (7.8:1 on --green) and the eyebrow
+   to 70% (5.6:1), up from the shared 50%. No chapter dots, so the top
+   padding alone keeps the eyebrow below the Instagram top bar. The
+   bottom padding is the 250 px reply-bar zone: the footer sits at the
+   end of the flex column, so the link bar's bottom edge lands exactly
+   on it whatever the row count, and the list takes the height between
+   the rule and the footer and spreads its rows across it. ── */
+.story__inner--upcoming { padding-top: 260px; padding-bottom: 250px; }
+.story__inner--upcoming .story-eyebrow { color: rgba(253,252,250,0.7); }
 .story-upcoming {
   flex: 1 1 auto;
   grid-template-columns: 236px 1fr;
   align-content: space-between;
   row-gap: 44px;
+  margin-bottom: 72px;
 }
 .story-upcoming dt { font-size: 28px; }
 .story-upcoming dd { font-size: 52px; }
+.story--green .story-upcoming dt { color: rgba(253,252,250,0.88); }
 .story-upcoming__meta {
   font-family: var(--font-mono);
   font-weight: 300;
@@ -435,25 +440,7 @@
   color: var(--ink-light);
   margin-top: 12px;
 }
-.story--dark .story-upcoming__meta,
-.story--green .story-upcoming__meta,
-.story--loire .story-upcoming__meta,
-.story--magenta .story-upcoming__meta,
-.story--blue .story-upcoming__meta,
-.story--clay .story-upcoming__meta { color: rgba(253,252,250,0.5); }
-.story-upcoming__full {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 44px;
-  line-height: 1.2;
-  margin-top: 6px;
-  color: var(--gold);
-}
-.story--dark .story-upcoming__full,
-.story--green .story-upcoming__full,
-.story--loire .story-upcoming__full,
-.story--magenta .story-upcoming__full,
-.story--blue .story-upcoming__full,
-.story--clay .story-upcoming__full { color: #E2C27E; }
-.story-upcoming__foot { flex: 0 0 auto; margin-top: 72px; }
+.story--green .story-upcoming__meta { color: rgba(253,252,250,0.88); }
+.story-upcoming__foot { flex: 0 0 auto; margin-top: auto; }
+.story-upcoming__venue { margin-bottom: 28px; }
+.story--green .story-upcoming__venue { color: rgba(253,252,250,0.88); }
