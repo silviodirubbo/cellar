@@ -404,3 +404,29 @@
 .story--dark .story-word,
 .story--green .story-word,
 .story--loire .story-word { color: var(--warm-white); }
+
+/* ── Upcoming list: every upcoming tasting with its live place
+   status (_includes/story/upcoming-list.html). Rows reuse
+   .story-facts (mono date, serif title) and .story-wine__meta for the
+   status line. A full tasting swaps the meta line for the italic
+   accent, same face and colour as .story-hook__em. The bottom padding
+   keeps the venue and link bar clear of the Instagram reply bar. ── */
+.story__inner--upcoming { padding-bottom: 260px; }
+.story-upcoming { row-gap: 44px; }
+.story-upcoming dd .story-wine__meta { margin-top: 10px; }
+.story-upcoming__full {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 38px;
+  line-height: 1.2;
+  margin-top: 4px;
+  color: var(--gold);
+}
+.story--dark .story-upcoming__full,
+.story--green .story-upcoming__full,
+.story--loire .story-upcoming__full,
+.story--magenta .story-upcoming__full,
+.story--blue .story-upcoming__full,
+.story--clay .story-upcoming__full { color: #E2C27E; }
+.story-upcoming__foot { flex: 0 0 auto; margin-top: auto; }

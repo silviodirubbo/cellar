@@ -1,0 +1,47 @@
+{% comment %}
+  Upcoming list: every upcoming tasting with a set date, today or later,
+  one row each, ordered by date. Each row has the weekday and date, the
+  title, and the live place status read through _includes/availability.html
+  (same logic and wording as the schedule cards), plus "N of C booked"
+  while places are left. A full tasting reads "Fully booked, C places",
+  in the italic accent. A tasting with no availability entry falls back
+  to "C places" from its capacity. Footer: venue line and the link bar,
+  lifted clear of the bottom Instagram UI zone.
+  Page front matter: story_bg, dots_chapter, label (eyebrow), headline,
+  sub (italic line), skip_slugs (list of slugs to leave out), venue.
+{% endcomment %}
+{% assign today = site.time | date: "%Y-%m-%d" %}
+{% assign upcoming = site.data.tastings | where: "status", "upcoming" | where_exp: "t", "t.date_tbd != true" | where_exp: "t", "t.date" | sort: "date" %}
+<div class="story story--{{ page.story_bg }}">
+  <div class="story__inner story__inner--upcoming">
+    {% include story/dots.html %}
+    {% if page.label %}<p class="story-eyebrow">{{ page.label }}</p>{% endif %}
+    <h1 class="story-title" style="margin-bottom: 16px;">{{ page.headline }}</h1>
+    {% if page.sub %}<p class="story-italic" style="margin-bottom: 44px;">{{ page.sub }}</p>{% endif %}
+    <hr class="story-rule" style="margin-bottom: 52px;">
+    <dl class="story-facts story-upcoming">
+      {% for t in upcoming %}
+        {% if page.skip_slugs contains t.slug %}{% continue %}{% endif %}
+        {% assign t_date = t.date | date: "%Y-%m-%d" %}
+        {% if t_date < today %}{% continue %}{% endif %}
+        {% capture avail_html %}{% include availability.html tasting=t %}{% endcapture %}
+        <dt>{{ t.date | date: "%a %-d %b" }}</dt>
+        <dd>
+          <div>{{ t.title }}</div>
+          {% if avail_left == nil %}
+            <div class="story-wine__meta">{{ avail_capacity }} places</div>
+          {% elsif avail_left == 0 %}
+            <div class="story-upcoming__full">Fully booked, {{ avail_capacity }} places</div>
+          {% else %}
+            {% assign avail_booked = avail_capacity | minus: avail_left %}
+            <div class="story-wine__meta">{% if avail_left == 1 %}1 place available{% else %}{{ avail_left }} places available{% endif %} &middot; {{ avail_booked }} of {{ avail_capacity }} booked</div>
+          {% endif %}
+        </dd>
+      {% endfor %}
+    </dl>
+    <div class="story-upcoming__foot">
+      {% if page.venue %}<p class="story-italic" style="margin-bottom: 28px;">{{ page.venue }}</p>{% endif %}
+      {% include story/linkbar.html %}
+    </div>
+  </div>
+</div>
