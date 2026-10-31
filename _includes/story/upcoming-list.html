@@ -1,45 +1,61 @@
 {% comment %}
-  Upcoming list: every upcoming tasting with a set date, today or later,
-  one row each, ordered by date. Each row has the weekday and date, the
-  title, and the live place status read through _includes/availability.html
-  (same logic and wording as the schedule cards). The "N of C booked"
-  count is left out: at the status size it no longer fits on one line
-  beside the date column. A full tasting reads "Fully booked, C places"
-  in the same style as every other status line; the wording alone sets it
-  apart. A tasting with no availability entry falls back to "C places"
-  from its capacity. Footer: venue line, then the link bar, pinned to the
-  bottom of the safe area by the flex column, clear of the bottom
-  Instagram UI zone. No chapter dots: the list spans chapters, so no
-  single dot would be right.
-  Page front matter: story_bg, label (eyebrow), headline,
-  skip_slugs (list of slugs to leave out), venue.
+  Upcoming list: invites people to every upcoming tasting with a set
+  date, today or later, ordered by date. Same frame as the teaser
+  (_includes/story/teaser.html): CELLAR eyebrow, a two-line hook whose
+  second line is the italic gold payoff, an italic intro and a rule.
+  Then a timeline list in the style of the chapter cover
+  (_includes/story/chapter-cover.html), one row per tasting in two
+  columns: the chapter title (from _chapters/) over the date on the
+  left, the tasting title over the live place status on the right, the
+  status read through
+  _includes/availability.html (same logic and wording as the schedule
+  cards). A full tasting reads "Fully booked, C places" in the same
+  style as every other row. A tasting with no availability entry falls
+  back to "C places" from its capacity. Footer: venue line, then the
+  link bar, pinned to the bottom of the safe area by the flex column.
+  No chapter dots: the list spans chapters.
+  Page front matter: story_bg, label (eyebrow), hook (plain first line),
+  hook_em (italic gold second line), intro, skip_slugs (list of slugs to
+  leave out), venue.
 {% endcomment %}
 {% assign today = site.time | date: "%Y-%m-%d" %}
 {% assign upcoming = site.data.tastings | where: "status", "upcoming" | where_exp: "t", "t.date_tbd != true" | where_exp: "t", "t.date" | sort: "date" %}
 <div class="story story--{{ page.story_bg }}">
   <div class="story__inner story__inner--upcoming">
     {% if page.label %}<p class="story-eyebrow">{{ page.label }}</p>{% endif %}
-    <h1 class="story-title" style="margin-bottom: 40px;">{{ page.headline }}</h1>
-    <hr class="story-rule" style="margin-bottom: 52px;">
-    <dl class="story-facts story-upcoming">
+    <h1 class="story-title story-hook">{{ page.hook }}<span class="story-hook__em">{{ page.hook_em }}</span></h1>
+    {% if page.intro %}<p class="story-italic story-upcoming__intro">{{ page.intro }}</p>{% endif %}
+    <hr class="story-rule story-upcoming__rule">
+    <div class="story-list story-upcoming">
       {% for t in upcoming %}
         {% if page.skip_slugs contains t.slug %}{% continue %}{% endif %}
         {% assign t_date = t.date | date: "%Y-%m-%d" %}
         {% if t_date < today %}{% continue %}{% endif %}
+        {% assign t_chapter = site.chapters | where: "slug", t.chapter | first %}
         {% capture avail_html %}{% include availability.html tasting=t %}{% endcapture %}
-        <dt>{{ t.date | date: "%a %-d %b" }}</dt>
-        <dd>
-          <div>{{ t.title }}</div>
-          {% if avail_left == nil %}
-            <div class="story-upcoming__meta">{{ avail_capacity }} places</div>
-          {% elsif avail_left == 0 %}
-            <div class="story-upcoming__meta">Fully booked, {{ avail_capacity }} places</div>
-          {% else %}
-            <div class="story-upcoming__meta">{% if avail_left == 1 %}1 place available{% else %}{{ avail_left }} places available{% endif %}</div>
-          {% endif %}
-        </dd>
+        <div class="story-list__row">
+          <div class="story-list__marker">
+            <span class="story-list__dot story-list__dot--hollow"></span>
+          </div>
+          <div class="story-upcoming__body">
+            <div class="story-upcoming__tag">{% if t_chapter %}{{ t_chapter.title }}{% endif %}</div>
+            <div class="story-list__title story-upcoming__title">{{ t.title }}</div>
+            <div class="story-upcoming__date">{{ t.date | date: "%a %-d %b" }}</div>
+            <div class="story-upcoming__status">
+              {%- if avail_left == nil -%}
+                {{ avail_capacity }} places
+              {%- elsif avail_left == 0 -%}
+                Fully booked, {{ avail_capacity }} places
+              {%- elsif avail_left == 1 -%}
+                1 place available
+              {%- else -%}
+                {{ avail_left }} places available
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
       {% endfor %}
-    </dl>
+    </div>
     <div class="story-upcoming__foot">
       {% if page.venue %}<p class="story-italic story-upcoming__venue">{{ page.venue }}</p>{% endif %}
       {% include story/linkbar.html %}
