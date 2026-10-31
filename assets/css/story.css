@@ -407,20 +407,47 @@
 
 /* ── Upcoming list: every upcoming tasting with its live place
    status (_includes/story/upcoming-list.html). Rows reuse
-   .story-facts (mono date, serif title) and .story-wine__meta for the
-   status line. A full tasting swaps the meta line for the italic
-   accent, same face and colour as .story-hook__em. The bottom padding
-   keeps the venue and link bar clear of the Instagram reply bar. ── */
-.story__inner--upcoming { padding-bottom: 260px; }
-.story-upcoming { row-gap: 44px; }
-.story-upcoming dd .story-wine__meta { margin-top: 10px; }
+   .story-facts (mono date, serif title), set a step larger here so
+   five rows fill the slide. The status line is the mono meta style
+   (as .story-wine__meta) at a phone-readable size; a full tasting
+   swaps it for the italic accent, same face and colour as
+   .story-hook__em. No chapter dots, so the top padding alone keeps the
+   eyebrow below the Instagram top bar, and the bottom padding keeps
+   the venue and link bar clear of the reply bar. The list takes the
+   free height and spreads its rows across it. ── */
+.story__inner--upcoming { padding-top: 260px; padding-bottom: 260px; }
+.story-upcoming {
+  flex: 1 1 auto;
+  grid-template-columns: 236px 1fr;
+  align-content: space-between;
+  row-gap: 44px;
+}
+.story-upcoming dt { font-size: 28px; }
+.story-upcoming dd { font-size: 52px; }
+.story-upcoming__meta {
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 28px;
+  line-height: 1.3;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ink-light);
+  margin-top: 12px;
+}
+.story--dark .story-upcoming__meta,
+.story--green .story-upcoming__meta,
+.story--loire .story-upcoming__meta,
+.story--magenta .story-upcoming__meta,
+.story--blue .story-upcoming__meta,
+.story--clay .story-upcoming__meta { color: rgba(253,252,250,0.5); }
 .story-upcoming__full {
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: 400;
-  font-size: 38px;
+  font-size: 44px;
   line-height: 1.2;
-  margin-top: 4px;
+  margin-top: 6px;
   color: var(--gold);
 }
 .story--dark .story-upcoming__full,
@@ -429,4 +456,4 @@
 .story--magenta .story-upcoming__full,
 .story--blue .story-upcoming__full,
 .story--clay .story-upcoming__full { color: #E2C27E; }
-.story-upcoming__foot { flex: 0 0 auto; margin-top: auto; }
+.story-upcoming__foot { flex: 0 0 auto; margin-top: 72px; }
