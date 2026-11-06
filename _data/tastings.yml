@@ -452,7 +452,7 @@
 
 - slug: saumur-champigny
   title: "Saumur & Champigny"
-  date: 2026-11-07
+  date: 2026-11-14
   date_tbd: false
   location: "Krieg 13"
   region: "Saumur"
@@ -514,7 +514,7 @@
 
 - slug: vouvray-montlouis
   title: "Vouvray & Montlouis"
-  date: 2026-11-14
+  date: 2026-11-21
   date_tbd: false
   location: "Krieg 13"
   region: "Touraine"
@@ -574,7 +574,7 @@
 
 - slug: chinon-bourgueil
   title: "Chinon & Bourgueil"
-  date: 2026-11-20
+  date: 2026-11-27
   date_tbd: false
   location: "Krieg 13"
   region: "Touraine"
@@ -637,7 +637,7 @@
 
 - slug: sancerre-pouilly-fume
   title: "Sancerre & Pouilly-Fumé"
-  date: 2026-11-27
+  date: 2026-12-04
   date_tbd: false
   location: "Krieg 13"
   region: "Centre-Loire"
