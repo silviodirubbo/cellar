@@ -1,0 +1,34 @@
+{% comment %}
+  Note: a short personal teaser for one tasting, in the teaser's frame
+  (_includes/story/teaser.html) but quieter. CELLAR eyebrow, a two-line
+  hook whose second line is the italic gold payoff, a short italic body,
+  then open space; the tasting block (Tasting, Chapter and When rows
+  read from _data/tastings.yml and _chapters/, the teaser's styling a
+  step smaller), an optional italic line on what is in the glass, and the
+  link bar sit at the bottom of the safe area. No chapter dots and no
+  place count.
+  Page front matter: tasting_slug, story_bg, label (eyebrow), hook
+  (plain first line), hook_em (italic gold second line), body (list of
+  lines), city (appended to the tasting's location), glass (optional
+  list of lines).
+{% endcomment %}
+{% assign tasting = site.data.tastings | where: "slug", page.tasting_slug | first %}
+{% assign chapter = nil %}
+{% if tasting.chapter %}{% assign chapter = site.chapters | where: "slug", tasting.chapter | first %}{% endif %}
+<div class="story story--{{ page.story_bg }}">
+  <div class="story__inner story__inner--note">
+    {% if page.label %}<p class="story-eyebrow">{{ page.label }}</p>{% endif %}
+    <h1 class="story-title story-hook">{{ page.hook }}<span class="story-hook__em">{{ page.hook_em }}</span></h1>
+    <p class="story-italic story-note__body">{{ page.body | join: "<br>" }}</p>
+    <div class="story-note__foot">
+      <hr class="story-rule story-note__rule">
+      <dl class="story-facts story-note__facts">
+        <dt>Tasting</dt><dd>{{ tasting.title }}</dd>
+        {% if chapter %}<dt>Chapter</dt><dd>{{ chapter.title }}</dd>{% endif %}
+        <dt>When</dt><dd>{{ tasting.date | date: "%a %-d %b" }}, {{ tasting.location }}{% if page.city %}, {{ page.city }}{% endif %}</dd>
+      </dl>
+      {% if page.glass %}<p class="story-italic story-note__glass">{{ page.glass | join: "<br>" }}</p>{% endif %}
+      {% include story/linkbar.html %}
+    </div>
+  </div>
+</div>

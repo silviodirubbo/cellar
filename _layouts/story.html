@@ -37,6 +37,8 @@
     {% include story/teaser-card.html %}
   {% elsif page.story_type == "upcoming-list" %}
     {% include story/upcoming-list.html %}
+  {% elsif page.story_type == "note" %}
+    {% include story/note.html %}
   {% endif %}
 </body>
 </html>

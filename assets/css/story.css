@@ -462,3 +462,23 @@
 }
 .story-upcoming__foot { flex: 0 0 auto; margin-top: auto; }
 .story-upcoming__venue { margin-bottom: 28px; }
+
+/* ── Note: a short personal teaser (_includes/story/note.html,
+   story-28), on story--loire like the Saumur & Champigny invite. The
+   teaser's eyebrow, hook and italic body at the top, open space, then
+   the tasting block and link bar at the bottom. No chapter dots, so the
+   top padding puts the eyebrow where the other stories have it (132 px
+   plus the dots' 126 px). The bottom padding is the 250 px reply-bar
+   zone: the footer ends the flex column, so the link bar's bottom edge
+   sits on it. Full warm white is 5.7:1 on --loire, so the secondary
+   text is raised from the shared 50% and 72%: eyebrow and labels to 85%
+   warm white (4.7:1), italic body and glass line to 90% (4.7:1). ── */
+.story__inner--note { padding-top: 258px; padding-bottom: 250px; }
+.story__inner--note .story-eyebrow,
+.story__inner--note .story-facts dt { color: rgba(253,252,250,0.85); }
+.story__inner--note .story-italic { color: rgba(247,245,240,0.9); }
+.story-note__foot { flex: 0 0 auto; margin-top: auto; }
+.story-note__rule { margin-bottom: 44px; }
+.story-note__facts { grid-template-columns: 210px 1fr; row-gap: 22px; }
+.story-note__facts dd { font-size: 38px; }
+.story-note__glass { font-size: 38px; margin: 40px 0 56px; }
