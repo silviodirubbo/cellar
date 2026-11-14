@@ -58,7 +58,9 @@ title: "Saumur & Champigny"
   font-family: 'DM Mono', monospace; font-weight: 300; font-size: 10px;
   letter-spacing: .18em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 28px;
 }
-.intro-grapes { display: flex; align-items: flex-start; gap: 0; width: 100%; max-width: 700px; }
+/* wider than the donor's 700px so "Chenin Blanc" and "Chardonnay" each
+   hold one line in the sparkling column */
+.intro-grapes { display: flex; align-items: flex-start; gap: 0; width: 100%; max-width: 1000px; }
 .intro-grape-col { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 0 40px; }
 .ig-name { font-size: 68px; font-weight: 300; color: var(--ink); line-height: 1; letter-spacing: -.02em; }
 .ig-direction { font-size: 16px; font-weight: 300; font-style: italic; color: var(--green); margin-top: 6px; margin-bottom: 16px; }
@@ -116,7 +118,7 @@ title: "Saumur & Champigny"
     <h1 class="cover-title">Saumur</h1>
     <div class="cover-subtitle">&amp; Champigny</div>
     <div class="cover-rule"></div>
-    <div class="cover-meta">Four wines · Two colours · Two grapes</div>
+    <div class="cover-meta">Four wines · Two colours · Three grapes</div>
     <div class="cover-meta-gold">Sanzay · Ogereau · Roches Neuves · Clos Rougeard</div>
   </div>
   <div class="cover-credit">
@@ -128,14 +130,16 @@ title: "Saumur & Champigny"
 <!-- ─────────────────────────────────────────────────────────
      SLIDE 2 · THE GRAPES
      Two-column grape intro, same structure as
-     _tastings/northern-rhone-whites.html. Chenin Blanc for the two
-     sparklings, Cabernet Franc for the two reds.
+     _tastings/northern-rhone-whites.html. Chenin Blanc and Chardonnay
+     for the two sparklings (both 85% and 15%), Cabernet Franc for the
+     two reds.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-intro">
   <div class="intro-label">The Grapes</div>
   <div class="intro-grapes">
     <div class="intro-grape-col">
       <div class="ig-name">Chenin Blanc</div>
+      <div class="ig-name">Chardonnay</div>
       <div class="ig-direction">sparkling</div>
       <div class="ig-apps">Saumur Brut<br>Crémant de Loire</div>
     </div>
@@ -147,7 +151,7 @@ title: "Saumur & Champigny"
     </div>
   </div>
   <div class="intro-vline"></div>
-  <div class="intro-throughline">Chenin Blanc · Cabernet Franc</div>
+  <div class="intro-throughline">Chenin Blanc · Chardonnay · Cabernet Franc</div>
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
@@ -244,7 +248,7 @@ title: "Saumur & Champigny"
         <div class="w-name">Blanc de Blancs</div>
         <div class="w-producer">Domaine Ogereau</div>
         <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Chenin Blanc</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">Chenin Blanc 85%, Chardonnay 15%</span></div>
         <div class="w-meta"><span class="w-ml">Soil</span><span class="w-mv">Schist</span></div>
       </div>
       <div class="wine-qr">
