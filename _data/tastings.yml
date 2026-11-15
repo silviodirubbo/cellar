@@ -530,7 +530,7 @@
   chapter_order: 4
   status: upcoming
   capacity: 6
-  cost_estimate: "23 CHF"
+  cost_estimate: "25 CHF"
   slides: true
   wines:
     - name: "Clos du Bourg Sec"
