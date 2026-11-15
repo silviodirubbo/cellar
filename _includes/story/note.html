@@ -16,13 +16,19 @@
   a mono tag above the rows, as on the upcoming list, in place of the
   Chapter row), show_places (the live place status from
   _includes/availability.html, same wording as the schedule cards and
-  the upcoming list), cta (list of lines above the link bar).
+  the upcoming list), cta (list of lines above the link bar), hero (the
+  hook set larger, as the slide's one focal point), texture_image and
+  texture_opacity (the tasting's cover faded in behind the slide, the
+  same mechanism as recap.html).
 {% endcomment %}
 {% assign tasting = site.data.tastings | where: "slug", page.tasting_slug | first %}
 {% assign chapter = nil %}
 {% if tasting.chapter %}{% assign chapter = site.chapters | where: "slug", tasting.chapter | first %}{% endif %}
 <div class="story story--{{ page.story_bg }}">
-  <div class="story__inner story__inner--note">
+  {% if page.texture_image %}
+    <div class="story-texture" style="background-image: url('{{ page.texture_image | relative_url }}'); opacity: {{ page.texture_opacity | default: 0.16 }};" aria-hidden="true"></div>
+  {% endif %}
+  <div class="story__inner story__inner--note{% if page.hero %} story__inner--note-hero{% endif %}">
     {% if page.label %}<p class="story-eyebrow">{{ page.label }}</p>{% endif %}
     <h1 class="story-title story-hook">{{ page.hook }}<span class="story-hook__em">{{ page.hook_em }}</span></h1>
     {% if page.plain %}{% assign note_text = "story-note__plain" %}{% else %}{% assign note_text = "story-italic" %}{% endif %}

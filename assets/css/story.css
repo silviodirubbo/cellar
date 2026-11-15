@@ -497,3 +497,6 @@
 .story-note__tag { margin-bottom: 26px; }
 .story-note__places { margin-top: 30px; }
 .story-note__cta { margin: 48px 0 40px; }
+/* hero: the hook at the deck covers' title size (104px), for a teaser
+   whose headline carries the slide. */
+.story__inner--note-hero .story-hook { font-size: 104px; line-height: 1.05; margin-bottom: 56px; }
