@@ -11,6 +11,12 @@
   (plain first line), hook_em (italic gold second line), body (list of
   lines), city (appended to the tasting's location), glass (optional
   list of lines).
+  Optional, all off by default: plain (body and cta set in roman, so the
+  gold hook line is the only italic), chapter_tag (the chapter title as
+  a mono tag above the rows, as on the upcoming list, in place of the
+  Chapter row), show_places (the live place status from
+  _includes/availability.html, same wording as the schedule cards and
+  the upcoming list), cta (list of lines above the link bar).
 {% endcomment %}
 {% assign tasting = site.data.tastings | where: "slug", page.tasting_slug | first %}
 {% assign chapter = nil %}
@@ -19,15 +25,26 @@
   <div class="story__inner story__inner--note">
     {% if page.label %}<p class="story-eyebrow">{{ page.label }}</p>{% endif %}
     <h1 class="story-title story-hook">{{ page.hook }}<span class="story-hook__em">{{ page.hook_em }}</span></h1>
-    <p class="story-italic story-note__body">{{ page.body | join: "<br>" }}</p>
+    {% if page.plain %}{% assign note_text = "story-note__plain" %}{% else %}{% assign note_text = "story-italic" %}{% endif %}
+    <p class="{{ note_text }} story-note__body">{{ page.body | join: "<br>" }}</p>
     <div class="story-note__foot">
       <hr class="story-rule story-note__rule">
+      {% if page.chapter_tag and chapter %}<div class="story-upcoming__tag story-note__tag">{{ chapter.title }}</div>{% endif %}
       <dl class="story-facts story-note__facts">
         <dt>Tasting</dt><dd>{{ tasting.title }}</dd>
-        {% if chapter %}<dt>Chapter</dt><dd>{{ chapter.title }}</dd>{% endif %}
+        {% if chapter and page.chapter_tag != true %}<dt>Chapter</dt><dd>{{ chapter.title }}</dd>{% endif %}
         <dt>When</dt><dd>{{ tasting.date | date: "%a %-d %b" }}, {{ tasting.location }}{% if page.city %}, {{ page.city }}{% endif %}</dd>
       </dl>
+      {% if page.show_places %}
+        {% capture avail_html %}{% include availability.html tasting=tasting %}{% endcapture %}
+        {% if avail_left == nil %}{% assign note_places = avail_capacity | append: " places" %}
+        {% elsif avail_left == 0 %}{% assign note_places = "Fully booked" %}
+        {% elsif avail_left == 1 %}{% assign note_places = "1 place available" %}
+        {% else %}{% assign note_places = avail_left | append: " places available" %}{% endif %}
+        <div class="story-upcoming__status story-note__places">{{ note_places }}</div>
+      {% endif %}
       {% if page.glass %}<p class="story-italic story-note__glass">{{ page.glass | join: "<br>" }}</p>{% endif %}
+      {% if page.cta %}<p class="{{ note_text }} story-note__cta">{{ page.cta | join: "<br>" }}</p>{% endif %}
       {% include story/linkbar.html %}
     </div>
   </div>

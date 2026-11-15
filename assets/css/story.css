@@ -482,3 +482,18 @@
 .story-note__facts { grid-template-columns: 210px 1fr; row-gap: 22px; }
 .story-note__facts dd { font-size: 38px; }
 .story-note__glass { font-size: 38px; margin: 40px 0 56px; }
+
+/* Note, optional parts (story-30): roman body and call to action for
+   slides where the gold hook line is the only italic, the chapter tag
+   above the rows (.story-upcoming__tag), and the place status line
+   (.story-upcoming__status). Same size and colour as the italic body. */
+.story-note__plain {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 40px;
+  line-height: 1.5;
+  color: rgba(253,252,250,0.9);
+}
+.story-note__tag { margin-bottom: 26px; }
+.story-note__places { margin-top: 30px; }
+.story-note__cta { margin: 48px 0 40px; }
