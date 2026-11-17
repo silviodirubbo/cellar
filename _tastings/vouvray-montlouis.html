@@ -4,8 +4,8 @@ title: "Vouvray & Montlouis"
 # Deck-only facts for the wine slides, matched to tastings.yml by name.
 # Name, producer, vintage, appellation and blend are NOT repeated here:
 # _includes/deck/wine-slide.html reads them from the data. Sources are in
-# the slide comments below. A map shows up on its slide as soon as the
-# file exists; until then the slide falls back to the Loire overview.
+# the slide comments below. Each map shows up on its slide once the
+# file exists (both are in place: map_vouvray_aop.png, map_montlouis_aop.png).
 wine_notes:
   - name: "Clos du Bourg Sec"
     style: "Sec"
@@ -76,32 +76,36 @@ wine_notes:
   letter-spacing: .1em; text-transform: uppercase; color: rgba(253,252,250,.38);
 }
 
-/* ── INTRO ──────────────────────────────────────────── */
-/* grapes slide, same as _tastings/saumur-champigny.html */
+/* ── GRAPE SLIDE ────────────────────────────────────── */
+/* One slide for the grape and the sweetness scale. Type pieces as in the
+   grapes slides of saumur-champigny.html (label, direction, apps) and
+   the Chenin Blanc slide of savennieres-bonnezeaux.html (grape name),
+   laid out as an asymmetric 2fr / 1fr grid. */
 .slide-intro {
   background: var(--warm-white); color: var(--ink);
   flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; padding: 72px; cursor: pointer;
+  padding: 72px 96px; cursor: pointer;
+}
+.grape-split {
+  display: grid; grid-template-columns: 2fr 1fr; column-gap: 88px;
+  align-items: center; width: 100%; max-width: 1088px; text-align: left;
 }
 .intro-label {
   font-family: 'DM Mono', monospace; font-weight: 300; font-size: 10px;
-  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 28px;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 22px;
 }
-.intro-grapes { display: flex; align-items: flex-start; gap: 0; width: 100%; max-width: 1000px; }
-.intro-grape-col { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 0 40px; }
-.ig-name { font-size: 68px; font-weight: 300; color: var(--ink); line-height: 1; letter-spacing: -.02em; }
-.ig-direction { font-size: 16px; font-weight: 300; font-style: italic; color: var(--green); margin-top: 6px; margin-bottom: 16px; }
+.gs-grape { font-size: 112px; font-weight: 300; color: var(--ink); line-height: 1; letter-spacing: -.02em; }
+.gs-lede { font-size: 24px; font-weight: 300; color: var(--ink-mid); line-height: 1.45; margin-top: 30px; max-width: 640px; }
+.ig-direction { font-size: 16px; font-weight: 300; font-style: italic; color: var(--green); }
+.gs-banks { margin-top: 26px; }
+.gs-scale { border-left: 1px solid var(--rule); padding-left: 44px; }
+.gs-tier + .gs-tier { margin-top: 30px; padding-top: 30px; border-top: 1px solid var(--rule); }
+.gs-tier-name { font-size: 40px; font-weight: 300; color: var(--ink); line-height: 1; }
+.gs-tier .ig-direction { margin-top: 6px; margin-bottom: 10px; }
 .ig-apps {
   font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
   letter-spacing: .13em; text-transform: uppercase; color: var(--ink-light); line-height: 2;
 }
-.intro-divider { width: 1px; background: var(--rule); align-self: stretch; margin: 8px 0; }
-.intro-vline { width: 1px; height: 38px; background: var(--rule); margin: 36px auto; }
-.intro-throughline { font-size: 20px; font-weight: 300; font-style: italic; color: var(--green); max-width: 860px; }
-/* three-column variant for the sweetness slide */
-.intro-grapes--three { max-width: 1100px; }
-.intro-grapes--three .intro-grape-col { padding: 0 28px; }
-.intro-grapes--three .ig-name { font-size: 56px; }
 
 /* ── MAP-ONLY SLIDE ─────────────────────────────────── */
 .slide-map {
@@ -161,30 +165,41 @@ wine_notes:
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 2 · ONE GRAPE, TWO BANKS
-     Same component as the grapes slide in saumur-champigny.html.
-     Vouvray: right (north) bank of the Loire, east of Tours (INAO
-     product sheet). Montlouis-sur-Loire: left bank, between the Loire
-     and the Cher, facing Vouvray (INAO product sheet). Wines listed in
-     the order of tastings.yml.
+     SLIDE 2 · CHENIN BLANC, DRY TO SWEET
+     The one grape of the evening and the three sweetness styles it
+     takes tonight. All four wines are 100% Chenin Blanc
+     (tastings.yml). Banks: Vouvray on the right bank of the Loire,
+     Montlouis-sur-Loire on the left, between the Loire and the Cher
+     (INAO product sheets). Styles as labelled (tastings.yml
+     appellation field, and "Sec" in the Huet cuvee name); g/L figures
+     are the usual residual sugar ceilings for each still-wine term.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-intro">
-  <div class="intro-label">One Grape · Two Banks</div>
-  <div class="intro-grapes">
-    <div class="intro-grape-col">
-      <div class="ig-name">Vouvray</div>
-      <div class="ig-direction">right bank</div>
-      <div class="ig-apps">Clos du Bourg Sec<br>Moelleux Réserve</div>
+  <div class="grape-split">
+    <div class="gs-main">
+      <div class="intro-label">The Grape of the Evening</div>
+      <div class="gs-grape">Chenin Blanc</div>
+      <div class="gs-lede">One grape behind all four wines. Its high acidity lets the same slopes give a wine bone dry, gently off-dry or richly sweet.</div>
+      <div class="ig-direction gs-banks">Vouvray on the right bank, Montlouis facing it on the left</div>
     </div>
-    <div class="intro-divider"></div>
-    <div class="intro-grape-col">
-      <div class="ig-name">Montlouis</div>
-      <div class="ig-direction">left bank</div>
-      <div class="ig-apps">Les Hauts de Husseau<br>Les Tuffeaux</div>
+    <div class="gs-scale">
+      <div class="gs-tier">
+        <div class="gs-tier-name">Sec</div>
+        <div class="ig-direction">up to 4 g/L</div>
+        <div class="ig-apps">Clos du Bourg Sec<br>Les Hauts de Husseau</div>
+      </div>
+      <div class="gs-tier">
+        <div class="gs-tier-name">Demi-sec</div>
+        <div class="ig-direction">up to 12 g/L</div>
+        <div class="ig-apps">Les Tuffeaux</div>
+      </div>
+      <div class="gs-tier">
+        <div class="gs-tier-name">Moelleux</div>
+        <div class="ig-direction">up to 45 g/L</div>
+        <div class="ig-apps">Moelleux Réserve</div>
+      </div>
     </div>
   </div>
-  <div class="intro-vline"></div>
-  <div class="intro-throughline">Chenin Blanc on both banks of the Loire</div>
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
@@ -202,47 +217,7 @@ wine_notes:
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 4 · THE SWEETNESS SCALE
-     The evening's theme: same grape, same stretch of river, different
-     residual sugar. Columns are the EU labelling terms for still wine;
-     each wine sits under the style on its label (tastings.yml
-     appellation field, and "Sec" in the Huet cuvée name).
-     Thresholds (residual sugar per litre): sec up to 4 g/L, or up to
-     9 g/L when total acidity is within 2 g/L of the sugar; demi-sec up
-     to 12 g/L, or 18 g/L with the same kind of acidity allowance;
-     moelleux up to 45 g/L; doux above. Taken from secondary sources
-     that agree with each other and cite the EU rules (Regulation
-     2019/33, formerly 607/2009); the primary text could not be read
-     from this environment, so confirm before the evening.
-     Per-wine residual sugar is not shown: no producer figure found.
-     ───────────────────────────────────────────────────────── -->
-<div class="slide slide-intro">
-  <div class="intro-label">Same Grape · Different Sweetness</div>
-  <div class="intro-grapes intro-grapes--three">
-    <div class="intro-grape-col">
-      <div class="ig-name">Sec</div>
-      <div class="ig-direction">up to 4 g/L</div>
-      <div class="ig-apps">Clos du Bourg Sec<br>Les Hauts de Husseau</div>
-    </div>
-    <div class="intro-divider"></div>
-    <div class="intro-grape-col">
-      <div class="ig-name">Demi-sec</div>
-      <div class="ig-direction">up to 12 g/L</div>
-      <div class="ig-apps">Les Tuffeaux</div>
-    </div>
-    <div class="intro-divider"></div>
-    <div class="intro-grape-col">
-      <div class="ig-name">Moelleux</div>
-      <div class="ig-direction">up to 45 g/L</div>
-      <div class="ig-apps">Moelleux Réserve</div>
-    </div>
-  </div>
-  <div class="intro-vline"></div>
-  <div class="intro-throughline">Residual sugar per litre, EU terms for still wine. With high acidity, sec may reach 9 g/L and demi-sec 18 g/L.</div>
-</div>
-
-<!-- ─────────────────────────────────────────────────────────
-     SLIDES 5 TO 8 · THE FOUR WINES, generated from tastings.yml
+     SLIDES 4 TO 7 · THE FOUR WINES, generated from tastings.yml
      Order, names, producers, vintages, appellations and blends come
      from the data (driest first, as listed there); extras from
      wine_notes in the front matter. Sources for the extras:
