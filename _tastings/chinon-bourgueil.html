@@ -1,6 +1,38 @@
 ---
 layout: presentation
 title: "Chinon & Bourgueil"
+# Deck-only facts for the wine slides, matched to tastings.yml by name.
+# Name, producer, vintage, appellation and blend are NOT repeated here:
+# _includes/deck/wine-slide.html reads them from the data. Sources are in
+# the slide comments below. A map shows up on its slide as soon as the
+# file exists; until then the slide falls back to the Loire overview.
+# The Vouvray map is shared with the Vouvray & Montlouis deck.
+wine_notes:
+  - name: "Méthode Traditionnelle Extra Brut"
+    rows:
+      - label: "Dosage"
+        value: "Extra Brut, 1.3 g/L"
+      - label: "On lees"
+        value: "4 years"
+    map: "vouvray-montlouis/map_vouvray_aop.png"
+    map_tag: "Vouvray · AOP Area"
+    qr: "chinon-bourgueil/qr_foreau.png"
+  - name: "Coteau de Noiré"
+    lieu_dit: "Coteau de Noiré"
+    soil: "Clay-limestone, south-facing slope"
+    map: "chinon-bourgueil/map_chinon_aop.png"
+    map_tag: "Chinon · AOP Area"
+    qr: "chinon-bourgueil/qr_alliet.png"
+  - name: "Perrières"
+    lieu_dit: "Perrières"
+    soil: "Clay over limestone, on the slope"
+    map: "chinon-bourgueil/map_bourgueil_aop.png"
+    map_tag: "Bourgueil · AOP Area"
+    qr: "chinon-bourgueil/qr_la-butte.png"
+  - name: "Le Vau Renou"
+    map: "chinon-bourgueil/map_saint_nicolas_de_bourgueil_aop.png"
+    map_tag: "Saint-Nicolas-de-Bourgueil · AOP Area"
+    qr: "chinon-bourgueil/qr_amirault.png"
 ---
 <style>
 
@@ -47,6 +79,33 @@ title: "Chinon & Bourgueil"
   letter-spacing: .1em; text-transform: uppercase; color: rgba(253,252,250,.38);
 }
 
+/* ── INTRO ──────────────────────────────────────────── */
+/* grapes slide, same as _tastings/saumur-champigny.html */
+.slide-intro {
+  background: var(--warm-white); color: var(--ink);
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 72px; cursor: pointer;
+}
+.intro-label {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 10px;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 28px;
+}
+.intro-grapes { display: flex; align-items: flex-start; gap: 0; width: 100%; max-width: 1000px; }
+.intro-grape-col { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 0 40px; }
+.ig-name { font-size: 68px; font-weight: 300; color: var(--ink); line-height: 1; letter-spacing: -.02em; }
+.ig-direction { font-size: 16px; font-weight: 300; font-style: italic; color: var(--green); margin-top: 6px; margin-bottom: 16px; }
+.ig-apps {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .13em; text-transform: uppercase; color: var(--ink-light); line-height: 2;
+}
+.intro-divider { width: 1px; background: var(--rule); align-self: stretch; margin: 8px 0; }
+.intro-vline { width: 1px; height: 38px; background: var(--rule); margin: 36px auto; }
+.intro-throughline { font-size: 20px; font-weight: 300; font-style: italic; color: var(--green); max-width: 860px; }
+/* three-column variant for the terroir slide */
+.intro-grapes--three { max-width: 1100px; }
+.intro-grapes--three .intro-grape-col { padding: 0 28px; }
+.intro-grapes--three .ig-name { font-size: 50px; }
+
 /* ── MAP-ONLY SLIDE ─────────────────────────────────── */
 .slide-map {
   background: var(--warm-white);
@@ -70,9 +129,14 @@ title: "Chinon & Bourgueil"
 
 /* ── WINE SLIDE ─────────────────────────────────────── */
 
-/* bottle block, same as saumur-champigny.html */
+/* bottle block, same as saumur-champigny.html; the slides themselves come
+   from _includes/deck/wine-slide.html */
 
 .w-meta { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+
+/* QR block, same as saumur-champigny.html, shown once a QR file exists */
+.wine-qr { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.wine-qr img { width: 74px; height: 74px; object-fit: contain; display: block; }
 </style>
 
 <!-- ─────────────────────────────────────────────────────────
@@ -92,7 +156,7 @@ title: "Chinon & Bourgueil"
     <h1 class="cover-title">Chinon</h1>
     <div class="cover-subtitle">&amp; Bourgueil</div>
     <div class="cover-rule"></div>
-    <div class="cover-meta">Four wines · Three appellations · One sparkling opening</div>
+    <div class="cover-meta">Four wines · Four appellations · Two grapes</div>
     <div class="cover-meta-gold">Foreau · Alliet · Domaine de la Butte · Amirault</div>
   </div>
   <div class="cover-credit">
@@ -102,12 +166,34 @@ title: "Chinon & Bourgueil"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 2 · LOIRE VALLEY MAP
-     Image: assets/tastings/chinon-bourgueil/map_loire.jpg
-     Copied from assets/tastings/muscadet/ (identical file, left in
-     place there). No suitable Chinon, Bourgueil or Vouvray specific
-     map was found anywhere in the repo, so this overview map also
-     stands in as the wine-map background on every wine slide below.
+     SLIDE 2 · THE GRAPES
+     Same component as the grapes slide in saumur-champigny.html.
+     Chenin Blanc for the opening sparkling Vouvray, Cabernet Franc for
+     the three reds (blends from tastings.yml).
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-intro">
+  <div class="intro-label">The Grapes</div>
+  <div class="intro-grapes">
+    <div class="intro-grape-col">
+      <div class="ig-name">Chenin Blanc</div>
+      <div class="ig-direction">sparkling</div>
+      <div class="ig-apps">Vouvray</div>
+    </div>
+    <div class="intro-divider"></div>
+    <div class="intro-grape-col">
+      <div class="ig-name">Cabernet Franc</div>
+      <div class="ig-direction">red</div>
+      <div class="ig-apps">Chinon<br>Bourgueil<br>Saint-Nicolas-de-Bourgueil</div>
+    </div>
+  </div>
+  <div class="intro-vline"></div>
+  <div class="intro-throughline">Chenin Blanc · Cabernet Franc</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 3 · LOIRE VALLEY MAP
+     Image: assets/tastings/chinon-bourgueil/map_loire.jpg, the shared
+     Loire overview used across the chapter's decks.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-map" style="position:relative;">
   <img src="{{ site.baseurl }}/assets/tastings/chinon-bourgueil/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
@@ -115,147 +201,55 @@ title: "Chinon & Bourgueil"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 3 · WINE 1 · MÉTHODE TRADITIONNELLE EXTRA BRUT · CLOS NAUDIN / DOMAINE FOREAU · 2019
-     Kept in tastings.yml list order (unlike Vouvray and Montlouis,
-     there is no cleaner appellation grouping available here: this one
-     sparkling Vouvray wine opens the tasting before the three
-     Cabernet Franc reds, per the tasting's own description, so the
-     order given is already the intended narrative). This sparkling
-     Vouvray's presence in a "Chinon & Bourgueil" tasting is unusual
-     given the deck's name, flagged here rather than silently dropped
-     or reassigned: it is confirmed live in tastings.yml and built as
-     given.
-     No standalone Vouvray appellation slide precedes this: no
-     suitable map or context asset for Vouvray specifically was found,
-     so that context folds into this wine slide instead.
-     Map: assets/tastings/chinon-bourgueil/map_loire.jpg (shared)
-     Bottle: assets/tastings/chinon-bourgueil/bottle_methode-traditionnelle-extra-brut.png
-     No QR code yet.
+     SLIDE 4 · CABERNET FRANC, TERRACE AND SLOPE
+     The reds' terroir contrast. Appellation soils: Bourgueil, a sand
+     and gravel terrace left by the Loire and a clay-limestone slope
+     above it; Saint-Nicolas-de-Bourgueil, a sand and gravel terrace
+     reaching up onto a limestone slope (INAO product sheets). Chinon,
+     gravel terraces along the Vienne and tuffeau slopes (Parc naturel
+     regional Loire-Anjou-Touraine and secondary sources). The two reds
+     with a sourced site are both slope wines (see slides 6 and 7).
      ───────────────────────────────────────────────────────── -->
-<div class="slide slide-wine">
-  <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/chinon-bourgueil/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
-    <div class="map-tag">Loire Valley · Overview</div>
-  </div>
-  <div class="wine-panel">
-    <div class="panel-head">
-      <div class="w-counter">01 / 04</div>
-      <div class="w-appellation">Vouvray AOC</div>
-      <div class="w-hrule"></div>
+<div class="slide slide-intro">
+  <div class="intro-label">Cabernet Franc · Terrace and Slope</div>
+  <div class="intro-grapes intro-grapes--three">
+    <div class="intro-grape-col">
+      <div class="ig-name">Chinon</div>
+      <div class="ig-direction">gravel terraces, tuffeau slopes</div>
+      <div class="ig-apps">Coteau de Noiré</div>
     </div>
-    <div class="wine-bottle">
-      <img src="{{ site.baseurl }}/assets/tastings/chinon-bourgueil/bottle_methode-traditionnelle-extra-brut.png" alt="Méthode Traditionnelle Extra Brut, Clos Naudin / Domaine Foreau" loading="lazy">
+    <div class="intro-divider"></div>
+    <div class="intro-grape-col">
+      <div class="ig-name">Bourgueil</div>
+      <div class="ig-direction">gravel terrace, clay-limestone slope</div>
+      <div class="ig-apps">Perrières</div>
     </div>
-    <div class="wine-info">
-      <div class="info-text">
-        <div class="w-name" style="font-size:20px;">Méthode Traditionnelle Extra Brut</div>
-        <div class="w-producer">Clos Naudin / Domaine Foreau</div>
-        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2019</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Chenin Blanc</span></div>
-      </div>
+    <div class="intro-divider"></div>
+    <div class="intro-grape-col">
+      <div class="ig-name">Saint-Nicolas</div>
+      <div class="ig-direction">sand and gravel terrace, limestone slope</div>
+      <div class="ig-apps">Le Vau Renou</div>
     </div>
   </div>
+  <div class="intro-vline"></div>
+  <div class="intro-throughline">Gravel gives the lighter, earlier wines; the limestone slopes the more structured ones.</div>
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 4 · WINE 2 · COTEAU DE NOIRÉ · DOMAINE PHILIPPE ALLIET · 2023
-     No standalone Chinon appellation slide precedes this: no suitable
-     map or context asset for Chinon specifically was found, so that
-     context folds into this wine slide instead.
-     Map: assets/tastings/chinon-bourgueil/map_loire.jpg (shared)
-     Bottle: assets/tastings/chinon-bourgueil/bottle_coteau-de-noire.png
-     No QR code yet.
+     SLIDES 5 TO 8 · THE FOUR WINES, generated from tastings.yml
+     Order, names, producers, vintages, appellations and blends come
+     from the data; extras from wine_notes in the front matter.
+     Sources for the extras:
+     Extra Brut (Clos Naudin): dosage 1.33 g/L, four years on lees
+       (producer notes quoted by several merchants).
+     Coteau de Noire (Alliet): steep south-facing clay-limestone slope
+       (importer and merchant sheets, several agreeing).
+     Perrieres (La Butte): clay over limestone on the slope (merchant
+       sheets, agreeing; they differ on mid or top of the slope, so the
+       position is left out).
+     Le Vau Renou (Amirault): no sourced soil for the cuvee; Vau Renou
+       is the estate's tuffeau quarry cellar, so no Lieu-Dit row either.
      ───────────────────────────────────────────────────────── -->
-<div class="slide slide-wine">
-  <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/chinon-bourgueil/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
-    <div class="map-tag">Loire Valley · Overview</div>
-  </div>
-  <div class="wine-panel">
-    <div class="panel-head">
-      <div class="w-counter">02 / 04</div>
-      <div class="w-appellation">Chinon AOC</div>
-      <div class="w-hrule"></div>
-    </div>
-    <div class="wine-bottle">
-      <img src="{{ site.baseurl }}/assets/tastings/chinon-bourgueil/bottle_coteau-de-noire.png" alt="Coteau de Noiré, Domaine Philippe Alliet" loading="lazy">
-    </div>
-    <div class="wine-info">
-      <div class="info-text">
-        <div class="w-name">Coteau de Noiré</div>
-        <div class="w-producer">Domaine Philippe Alliet</div>
-        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Cabernet Franc</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ─────────────────────────────────────────────────────────
-     SLIDE 5 · WINE 3 · PERRIÈRES · DOMAINE DE LA BUTTE · 2022
-     No standalone Bourgueil appellation slide precedes this either:
-     no suitable map or context asset for Bourgueil specifically was
-     found, so that context folds into this wine slide instead.
-     Map: assets/tastings/chinon-bourgueil/map_loire.jpg (shared)
-     Bottle: assets/tastings/chinon-bourgueil/bottle_perrieres.png
-     No QR code yet.
-     ───────────────────────────────────────────────────────── -->
-<div class="slide slide-wine">
-  <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/chinon-bourgueil/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
-    <div class="map-tag">Loire Valley · Overview</div>
-  </div>
-  <div class="wine-panel">
-    <div class="panel-head">
-      <div class="w-counter">03 / 04</div>
-      <div class="w-appellation">Bourgueil AOC</div>
-      <div class="w-hrule"></div>
-    </div>
-    <div class="wine-bottle">
-      <img src="{{ site.baseurl }}/assets/tastings/chinon-bourgueil/bottle_perrieres.png" alt="Perrières, Domaine de la Butte" loading="lazy">
-    </div>
-    <div class="wine-info">
-      <div class="info-text">
-        <div class="w-name">Perrières</div>
-        <div class="w-producer">Domaine de la Butte</div>
-        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2022</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Cabernet Franc</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ─────────────────────────────────────────────────────────
-     SLIDE 6 · WINE 4 · LE VAU RENOU · CLOS DES QUARTERONS / AMIRAULT · 2020
-     No standalone Saint-Nicolas-de-Bourgueil appellation slide
-     precedes this either, same reason as above. Final slide in the
-     deck, matching the no-closing-slide convention already used
-     across the repo.
-     Map: assets/tastings/chinon-bourgueil/map_loire.jpg (shared)
-     Bottle: assets/tastings/chinon-bourgueil/bottle_le-vau-renou.png
-     No QR code yet.
-     ───────────────────────────────────────────────────────── -->
-<div class="slide slide-wine">
-  <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/chinon-bourgueil/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
-    <div class="map-tag">Loire Valley · Overview</div>
-  </div>
-  <div class="wine-panel">
-    <div class="panel-head">
-      <div class="w-counter">04 / 04</div>
-      <div class="w-appellation">Saint-Nicolas-de-Bourgueil AOC</div>
-      <div class="w-hrule"></div>
-    </div>
-    <div class="wine-bottle">
-      <img src="{{ site.baseurl }}/assets/tastings/chinon-bourgueil/bottle_le-vau-renou.png" alt="Le Vau Renou, Clos des Quarterons / Amirault" loading="lazy">
-    </div>
-    <div class="wine-info">
-      <div class="info-text">
-        <div class="w-name">Le Vau Renou</div>
-        <div class="w-producer">Clos des Quarterons / Amirault</div>
-        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2020</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Cabernet Franc</span></div>
-      </div>
-    </div>
-  </div>
-</div>
+{% for wine in this_tasting.wines %}
+{% include deck/wine-slide.html wine=wine index=forloop.index total=forloop.length %}
+{% endfor %}
