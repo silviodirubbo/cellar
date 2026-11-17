@@ -1,6 +1,35 @@
 ---
 layout: presentation
 title: "Vouvray & Montlouis"
+# Deck-only facts for the wine slides, matched to tastings.yml by name.
+# Name, producer, vintage, appellation and blend are NOT repeated here:
+# _includes/deck/wine-slide.html reads them from the data. Sources are in
+# the slide comments below. A map shows up on its slide as soon as the
+# file exists; until then the slide falls back to the Loire overview.
+wine_notes:
+  - name: "Clos du Bourg Sec"
+    style: "Sec"
+    lieu_dit: "Clos du Bourg"
+    soil: "Clay-limestone over tuffeau"
+    map: "vouvray-montlouis/map_vouvray_aop.png"
+    map_tag: "Vouvray · AOP Area"
+    qr: "vouvray-montlouis/qr_huet.png"
+  - name: "Les Hauts de Husseau"
+    soil: "Clay-limestone over tuffeau"
+    map: "vouvray-montlouis/map_montlouis_aop.png"
+    map_tag: "Montlouis-sur-Loire · AOP Area"
+    qr: "vouvray-montlouis/qr_taille-aux-loups.png"
+  - name: "Les Tuffeaux"
+    map: "vouvray-montlouis/map_montlouis_aop.png"
+    map_tag: "Montlouis-sur-Loire · AOP Area"
+    qr: "vouvray-montlouis/qr_chidaine.png"
+  - name: "Moelleux Réserve"
+    rows:
+      - label: "Grapes"
+        value: "Botrytised (noble rot)"
+    map: "vouvray-montlouis/map_vouvray_aop.png"
+    map_tag: "Vouvray · AOP Area"
+    qr: "vouvray-montlouis/qr_foreau.png"
 ---
 <style>
 
@@ -47,6 +76,33 @@ title: "Vouvray & Montlouis"
   letter-spacing: .1em; text-transform: uppercase; color: rgba(253,252,250,.38);
 }
 
+/* ── INTRO ──────────────────────────────────────────── */
+/* grapes slide, same as _tastings/saumur-champigny.html */
+.slide-intro {
+  background: var(--warm-white); color: var(--ink);
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 72px; cursor: pointer;
+}
+.intro-label {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 10px;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 28px;
+}
+.intro-grapes { display: flex; align-items: flex-start; gap: 0; width: 100%; max-width: 1000px; }
+.intro-grape-col { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 0 40px; }
+.ig-name { font-size: 68px; font-weight: 300; color: var(--ink); line-height: 1; letter-spacing: -.02em; }
+.ig-direction { font-size: 16px; font-weight: 300; font-style: italic; color: var(--green); margin-top: 6px; margin-bottom: 16px; }
+.ig-apps {
+  font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
+  letter-spacing: .13em; text-transform: uppercase; color: var(--ink-light); line-height: 2;
+}
+.intro-divider { width: 1px; background: var(--rule); align-self: stretch; margin: 8px 0; }
+.intro-vline { width: 1px; height: 38px; background: var(--rule); margin: 36px auto; }
+.intro-throughline { font-size: 20px; font-weight: 300; font-style: italic; color: var(--green); max-width: 860px; }
+/* three-column variant for the sweetness slide */
+.intro-grapes--three { max-width: 1100px; }
+.intro-grapes--three .intro-grape-col { padding: 0 28px; }
+.intro-grapes--three .ig-name { font-size: 56px; }
+
 /* ── MAP-ONLY SLIDE ─────────────────────────────────── */
 .slide-map {
   background: var(--warm-white);
@@ -70,9 +126,14 @@ title: "Vouvray & Montlouis"
 
 /* ── WINE SLIDE ─────────────────────────────────────── */
 
-/* bottle block, same as saumur-champigny.html */
+/* bottle block, same as saumur-champigny.html; the slides themselves come
+   from _includes/deck/wine-slide.html */
 
 .w-meta { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+
+/* QR block, same as saumur-champigny.html, shown once a QR file exists */
+.wine-qr { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.wine-qr img { width: 74px; height: 74px; object-fit: contain; display: block; }
 </style>
 
 <!-- ─────────────────────────────────────────────────────────
@@ -91,7 +152,7 @@ title: "Vouvray & Montlouis"
     <div class="cover-subtitle">&amp; Montlouis</div>
     <div class="cover-rule"></div>
     <div class="cover-meta">Four wines · Two appellations · One grape</div>
-    <div class="cover-meta-gold">Huet · Foreau · Taille aux Loups · Chidaine</div>
+    <div class="cover-meta-gold">Huet · Taille aux Loups · Chidaine · Foreau</div>
   </div>
   <div class="cover-credit">
     <div class="cover-credit-title">Bords de Loire</div>
@@ -100,12 +161,36 @@ title: "Vouvray & Montlouis"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 2 · LOIRE VALLEY MAP
-     Image: assets/tastings/vouvray-montlouis/map_loire.jpg
-     Copied from assets/tastings/muscadet/ (identical file, left in
-     place there). No suitable Vouvray or Montlouis specific map was
-     found anywhere in the repo, so this overview map also stands in
-     as the wine-map background on every wine slide below.
+     SLIDE 2 · ONE GRAPE, TWO BANKS
+     Same component as the grapes slide in saumur-champigny.html.
+     Vouvray: right (north) bank of the Loire, east of Tours (INAO
+     product sheet). Montlouis-sur-Loire: left bank, between the Loire
+     and the Cher, facing Vouvray (INAO product sheet). Wines listed in
+     the order of tastings.yml.
+     ───────────────────────────────────────────────────────── -->
+<div class="slide slide-intro">
+  <div class="intro-label">One Grape · Two Banks</div>
+  <div class="intro-grapes">
+    <div class="intro-grape-col">
+      <div class="ig-name">Vouvray</div>
+      <div class="ig-direction">right bank</div>
+      <div class="ig-apps">Clos du Bourg Sec<br>Moelleux Réserve</div>
+    </div>
+    <div class="intro-divider"></div>
+    <div class="intro-grape-col">
+      <div class="ig-name">Montlouis</div>
+      <div class="ig-direction">left bank</div>
+      <div class="ig-apps">Les Hauts de Husseau<br>Les Tuffeaux</div>
+    </div>
+  </div>
+  <div class="intro-vline"></div>
+  <div class="intro-throughline">Chenin Blanc on both banks of the Loire</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 3 · LOIRE VALLEY MAP
+     Image: assets/tastings/vouvray-montlouis/map_loire.jpg, the shared
+     Loire overview used across the chapter's decks.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-map" style="position:relative;">
   <img src="{{ site.baseurl }}/assets/tastings/vouvray-montlouis/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
@@ -113,142 +198,60 @@ title: "Vouvray & Montlouis"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 3 · WINE 1 · CLOS DU BOURG SEC · DOMAINE HUET · 2023
-     Wines are ordered here by appellation (both Vouvray wines first,
-     then both Montlouis wines), dry to sweet within each, rather than
-     the tastings.yml list order (which alternates Vouvray, Montlouis,
-     Montlouis, Vouvray), for a cleaner geography and sweetness
-     narrative across the deck.
-     No standalone Vouvray appellation slide precedes this: no
-     suitable map or context asset for Vouvray specifically was found,
-     so that context folds into this wine slide instead.
-     Map: assets/tastings/vouvray-montlouis/map_loire.jpg (shared)
-     Bottle: assets/tastings/vouvray-montlouis/bottle_clos-du-bourg-sec.png
-     No QR code yet.
+     SLIDE 4 · THE SWEETNESS SCALE
+     The evening's theme: same grape, same stretch of river, different
+     residual sugar. Columns are the EU labelling terms for still wine;
+     each wine sits under the style on its label (tastings.yml
+     appellation field, and "Sec" in the Huet cuvée name).
+     Thresholds (residual sugar per litre): sec up to 4 g/L, or up to
+     9 g/L when total acidity is within 2 g/L of the sugar; demi-sec up
+     to 12 g/L, or 18 g/L with the same kind of acidity allowance;
+     moelleux up to 45 g/L; doux above. Taken from secondary sources
+     that agree with each other and cite the EU rules (Regulation
+     2019/33, formerly 607/2009); the primary text could not be read
+     from this environment, so confirm before the evening.
+     Per-wine residual sugar is not shown: no producer figure found.
      ───────────────────────────────────────────────────────── -->
-<div class="slide slide-wine">
-  <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/vouvray-montlouis/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
-    <div class="map-tag">Loire Valley · Overview</div>
-  </div>
-  <div class="wine-panel">
-    <div class="panel-head">
-      <div class="w-counter">01 / 04</div>
-      <div class="w-appellation">Vouvray AOC</div>
-      <div class="w-hrule"></div>
+<div class="slide slide-intro">
+  <div class="intro-label">Same Grape · Different Sweetness</div>
+  <div class="intro-grapes intro-grapes--three">
+    <div class="intro-grape-col">
+      <div class="ig-name">Sec</div>
+      <div class="ig-direction">up to 4 g/L</div>
+      <div class="ig-apps">Clos du Bourg Sec<br>Les Hauts de Husseau</div>
     </div>
-    <div class="wine-bottle">
-      <img src="{{ site.baseurl }}/assets/tastings/vouvray-montlouis/bottle_clos-du-bourg-sec.png" alt="Clos du Bourg Sec, Domaine Huet" loading="lazy">
+    <div class="intro-divider"></div>
+    <div class="intro-grape-col">
+      <div class="ig-name">Demi-sec</div>
+      <div class="ig-direction">up to 12 g/L</div>
+      <div class="ig-apps">Les Tuffeaux</div>
     </div>
-    <div class="wine-info">
-      <div class="info-text">
-        <div class="w-name">Clos du Bourg Sec</div>
-        <div class="w-producer">Domaine Huet</div>
-        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Chenin Blanc</span></div>
-      </div>
+    <div class="intro-divider"></div>
+    <div class="intro-grape-col">
+      <div class="ig-name">Moelleux</div>
+      <div class="ig-direction">up to 45 g/L</div>
+      <div class="ig-apps">Moelleux Réserve</div>
     </div>
   </div>
+  <div class="intro-vline"></div>
+  <div class="intro-throughline">Residual sugar per litre, EU terms for still wine. With high acidity, sec may reach 9 g/L and demi-sec 18 g/L.</div>
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 4 · WINE 2 · MOELLEUX RÉSERVE · CLOS NAUDIN / DOMAINE FOREAU · 2018
-     Second Vouvray wine, moving dry to sweet within the appellation
-     before crossing to Montlouis.
-     Map: assets/tastings/vouvray-montlouis/map_loire.jpg (shared)
-     Bottle: assets/tastings/vouvray-montlouis/bottle_moelleux-reserve.png
-     No QR code yet.
+     SLIDES 5 TO 8 · THE FOUR WINES, generated from tastings.yml
+     Order, names, producers, vintages, appellations and blends come
+     from the data (driest first, as listed there); extras from
+     wine_notes in the front matter. Sources for the extras:
+     Clos du Bourg Sec (Huet): walled Clos du Bourg on the Premiere
+       Cote above Vouvray, about 6 ha, shallow stony clay-limestone over
+       tuffeau (importer and merchant sheets, several agreeing).
+     Les Hauts de Husseau (Taille aux Loups): parcels above the hamlet
+       of Husseau, clay-limestone on tuffeau (merchant sheets, agreeing).
+     Les Tuffeaux (Chidaine): demi-sec per the data; no sourced soil.
+     Moelleux Reserve (Clos Naudin): made from botrytised grapes, a
+       Reserve only in years that allow it (producer material quoted by
+       merchants). Residual sugar not shown, no producer figure.
      ───────────────────────────────────────────────────────── -->
-<div class="slide slide-wine">
-  <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/vouvray-montlouis/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
-    <div class="map-tag">Loire Valley · Overview</div>
-  </div>
-  <div class="wine-panel">
-    <div class="panel-head">
-      <div class="w-counter">02 / 04</div>
-      <div class="w-appellation">Vouvray AOC</div>
-      <div class="w-hrule"></div>
-    </div>
-    <div class="wine-bottle">
-      <img src="{{ site.baseurl }}/assets/tastings/vouvray-montlouis/bottle_moelleux-reserve.png" alt="Moelleux Réserve, Clos Naudin / Domaine Foreau" loading="lazy">
-    </div>
-    <div class="wine-info">
-      <div class="info-text">
-        <div class="w-name">Moelleux Réserve</div>
-        <div class="w-producer">Clos Naudin / Domaine Foreau</div>
-        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2018</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Chenin Blanc</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ─────────────────────────────────────────────────────────
-     SLIDE 5 · WINE 3 · LES HAUTS DE HUSSEAU · JACKY BLOT / TAILLE AUX LOUPS · 2023
-     Crosses into Montlouis. No standalone Montlouis appellation slide
-     precedes this either, for the same reason as slide 3: no suitable
-     map or context asset for Montlouis specifically was found, so
-     that transition folds into this wine slide instead.
-     Map: assets/tastings/vouvray-montlouis/map_loire.jpg (shared)
-     Bottle: assets/tastings/vouvray-montlouis/bottle_les-hauts-de-husseau.png
-     No QR code yet.
-     ───────────────────────────────────────────────────────── -->
-<div class="slide slide-wine">
-  <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/vouvray-montlouis/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
-    <div class="map-tag">Loire Valley · Overview</div>
-  </div>
-  <div class="wine-panel">
-    <div class="panel-head">
-      <div class="w-counter">03 / 04</div>
-      <div class="w-appellation">Montlouis-sur-Loire AOC</div>
-      <div class="w-hrule"></div>
-    </div>
-    <div class="wine-bottle">
-      <img src="{{ site.baseurl }}/assets/tastings/vouvray-montlouis/bottle_les-hauts-de-husseau.png" alt="Les Hauts de Husseau, Jacky Blot / Domaine de la Taille aux Loups" loading="lazy">
-    </div>
-    <div class="wine-info">
-      <div class="info-text">
-        <div class="w-name">Les Hauts de Husseau</div>
-        <div class="w-producer">Jacky Blot / Domaine de la Taille aux Loups</div>
-        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Chenin Blanc</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ─────────────────────────────────────────────────────────
-     SLIDE 6 · WINE 4 · LES TUFFEAUX · FRANÇOIS CHIDAINE · 2020
-     Second Montlouis wine, dry to demi-sec. Final slide in the deck,
-     matching the no-closing-slide convention already used across the
-     repo.
-     Map: assets/tastings/vouvray-montlouis/map_loire.jpg (shared)
-     Bottle: assets/tastings/vouvray-montlouis/bottle_les-tuffeaux.png
-     No QR code yet.
-     ───────────────────────────────────────────────────────── -->
-<div class="slide slide-wine">
-  <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/vouvray-montlouis/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
-    <div class="map-tag">Loire Valley · Overview</div>
-  </div>
-  <div class="wine-panel">
-    <div class="panel-head">
-      <div class="w-counter">04 / 04</div>
-      <div class="w-appellation">Montlouis-sur-Loire AOC</div>
-      <div class="w-hrule"></div>
-    </div>
-    <div class="wine-bottle">
-      <img src="{{ site.baseurl }}/assets/tastings/vouvray-montlouis/bottle_les-tuffeaux.png" alt="Les Tuffeaux, François Chidaine" loading="lazy">
-    </div>
-    <div class="wine-info">
-      <div class="info-text">
-        <div class="w-name">Les Tuffeaux</div>
-        <div class="w-producer">François Chidaine</div>
-        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2020</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Chenin Blanc</span></div>
-      </div>
-    </div>
-  </div>
-</div>
+{% for wine in this_tasting.wines %}
+{% include deck/wine-slide.html wine=wine index=forloop.index total=forloop.length %}
+{% endfor %}

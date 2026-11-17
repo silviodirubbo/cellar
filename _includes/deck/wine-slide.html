@@ -1,0 +1,77 @@
+{% comment %}
+  One wine slide, built from the wine's entry in _data/tastings.yml so
+  the deck can never drift from the data: name, producer, vintage,
+  appellation, blend and bottle image all come from there, and the
+  counter from the wine's position in the list.
+  Params: wine (an entry of tasting.wines), index (1-based), total.
+  Deck-only extras live in the deck's front matter under wine_notes,
+  one entry per wine, matched by name (so reordering the yaml cannot
+  misalign them). All optional:
+    name      must equal the wine's name in tastings.yml
+    style     shown as the Style row; defaults to the part of the
+              appellation after a comma ("Vouvray AOC, moelleux")
+    lieu_dit  Lieu-Dit row
+    soil      Soil row
+    rows      extra rows, a list of { label, value }
+    map       path under assets/tastings/, used only once the file
+              exists; until then the shared Loire map is shown
+    map_tag   label for that map
+    qr        path under assets/tastings/, shown only if it exists
+{% endcomment %}
+{% assign w = include.wine %}
+{% assign note = page.wine_notes | where: "name", w.name | first %}
+{% assign appel_parts = w.appellation | split: ", " %}
+{% assign appel = appel_parts | first %}
+{% assign style = note.style %}
+{% if style == nil and appel_parts.size > 1 %}{% assign style = appel_parts | last | capitalize %}{% endif %}
+
+{% assign map_file = nil %}
+{% if note.map %}
+  {% assign map_path = "/assets/tastings/" | append: note.map %}
+  {% assign map_file = site.static_files | where: "path", map_path | first %}
+{% endif %}
+{% if map_file %}
+  {% assign map_src = map_path %}{% assign map_label = note.map_tag | default: appel %}
+{% else %}
+  {% assign map_src = "/assets/tastings/" | append: page.slug | append: "/map_loire.jpg" %}{% assign map_label = "Loire Valley · Overview" %}
+{% endif %}
+
+{% assign qr_file = nil %}
+{% if note.qr %}
+  {% assign qr_path = "/assets/tastings/" | append: note.qr %}
+  {% assign qr_file = site.static_files | where: "path", qr_path | first %}
+{% endif %}
+
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}{{ map_src }}" alt="{{ map_label }}" loading="lazy">
+    <div class="map-tag">{{ map_label }}</div>
+  </div>
+  <div class="wine-panel">
+    <div class="panel-head">
+      <div class="w-counter">{% if include.index < 10 %}0{% endif %}{{ include.index }} / {% if include.total < 10 %}0{% endif %}{{ include.total }}</div>
+      <div class="w-appellation">{{ appel }}</div>
+      <div class="w-hrule"></div>
+    </div>
+    <div class="wine-bottle">
+      <img src="{{ site.baseurl }}/assets/tastings/{{ w.image }}" alt="{{ w.name }}, {{ w.producer }}" loading="lazy">
+    </div>
+    <div class="wine-info">
+      <div class="info-text">
+        <div class="w-name">{{ w.name }}</div>
+        <div class="w-producer">{{ w.producer }}</div>
+        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">{{ w.vintage }}</span></div>
+        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">{{ w.blend }}</span></div>
+        {% if style %}<div class="w-meta"><span class="w-ml">Style</span><span class="w-mv">{{ style }}</span></div>{% endif %}
+        {% if note.lieu_dit %}<div class="w-meta"><span class="w-ml">Lieu-Dit</span><span class="w-mv">{{ note.lieu_dit }}</span></div>{% endif %}
+        {% if note.soil %}<div class="w-meta"><span class="w-ml">Soil</span><span class="w-mv">{{ note.soil }}</span></div>{% endif %}
+        {% for r in note.rows %}<div class="w-meta"><span class="w-ml">{{ r.label }}</span><span class="w-mv">{{ r.value }}</span></div>{% endfor %}
+      </div>
+      {% if qr_file %}
+      <div class="wine-qr">
+        <img src="{{ site.baseurl }}{{ qr_path }}" alt="QR code for {{ w.name }}, {{ w.producer }}" loading="lazy">
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
