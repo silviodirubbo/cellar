@@ -59,7 +59,7 @@ The schedule, the Wines page, the chapter pages, the cover date of each deck and
    - set `title` in the front matter to the tasting title;
    - keep the `{% assign this_tasting = ... %}` line, which fills in the cover date from the data;
    - keep the cover title as `<h1 class="cover-title">`;
-   - rewrite the wine slides, copying names, producers and vintages exactly from `tastings.yml`;
+   - build the wine slides with `{% for wine in this_tasting.wines %}{% include deck/wine-slide.html wine=wine index=forloop.index total=forloop.length %}{% endfor %}` (see `_tastings/vouvray-montlouis.html`). Names, producers, vintages, appellations and blends then come from `tastings.yml`, in its order. Deck-only extras (style, lieu-dit, soil, extra rows, map, QR) go in the deck's front matter under `wine_notes`, matched by wine name. A map or QR file named there appears on its slide as soon as the file exists;
    - then set `slides: true` in the data.
 5. **Check locally.** `bundle exec jekyll serve`, then look at `/cellar/tastings/` and `/cellar/tastings/<slug>/`. The Check workflow runs the same build, the data checks and a link crawl on every push.
 6. **Calendar invite.** In the Cellar calendar (cellar.geneve@gmail.com), create the event on the tasting date and paste the tasting link into its description, for example `https://silviodirubbo.github.io/cellar/tastings/<slug>/`. The calendar sync matches events by date and this link (the title is only a fallback). Then invite guests as usual.
