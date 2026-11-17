@@ -1204,3 +1204,73 @@
       colour:
       country:
       region:
+
+- slug: tbd-2027-01-08
+  title: "Theme to be announced"
+  date: 2027-01-08
+  date_tbd: false
+  location: "Krieg 13"
+  region: "TBD"
+  description: >
+    Theme and wines are still to be decided.
+  tags: []
+  status: upcoming
+  capacity: 6
+  slides: false
+  wines: []
+
+- slug: tbd-2027-01-15
+  title: "Theme to be announced"
+  date: 2027-01-15
+  date_tbd: false
+  location: "Krieg 13"
+  region: "TBD"
+  description: >
+    Theme and wines are still to be decided.
+  tags: []
+  status: upcoming
+  capacity: 6
+  slides: false
+  wines: []
+
+- slug: tbd-2027-01-29
+  title: "Theme to be announced"
+  date: 2027-01-29
+  date_tbd: false
+  location: "Krieg 13"
+  region: "TBD"
+  description: >
+    Theme and wines are still to be decided.
+  tags: []
+  status: upcoming
+  capacity: 6
+  slides: false
+  wines: []
+
+- slug: tbd-2027-02-12
+  title: "Theme to be announced"
+  date: 2027-02-12
+  date_tbd: false
+  location: "Krieg 13"
+  region: "TBD"
+  description: >
+    Theme and wines are still to be decided.
+  tags: []
+  status: upcoming
+  capacity: 6
+  slides: false
+  wines: []
+
+- slug: tbd-2027-02-26
+  title: "Theme to be announced"
+  date: 2027-02-26
+  date_tbd: false
+  location: "Krieg 13"
+  region: "TBD"
+  description: >
+    Theme and wines are still to be decided.
+  tags: []
+  status: upcoming
+  capacity: 6
+  slides: false
+  wines: []
