@@ -4,8 +4,9 @@ title: "Vouvray & Montlouis"
 # Deck-only facts for the wine slides, matched to tastings.yml by name.
 # Name, producer, vintage, appellation and blend are NOT repeated here:
 # _includes/deck/wine-slide.html reads them from the data. Sources are in
-# the slide comments below. Each map shows up on its slide once the
-# file exists (both are in place: map_vouvray_aop.png, map_montlouis_aop.png).
+# the slide comments below. Each wine gets two slides: the topline
+# appellation map (map), then the detailed map (map_detail), each shown
+# once its file exists.
 wine_notes:
   - name: "Clos du Bourg Sec"
     style: "Sec"
@@ -13,15 +14,21 @@ wine_notes:
     soil: "Clay-limestone over tuffeau"
     map: "vouvray-montlouis/map_vouvray_aop.png"
     map_tag: "Vouvray · AOP Area"
+    map_detail: "vouvray-montlouis/map_vouvray_communes.png"
+    map_detail_tag: "Vouvray · Communes"
     qr: "vouvray-montlouis/qr_huet.png"
   - name: "Les Hauts de Husseau"
     soil: "Clay-limestone over tuffeau"
     map: "vouvray-montlouis/map_montlouis_aop.png"
     map_tag: "Montlouis-sur-Loire · AOP Area"
+    map_detail: "vouvray-montlouis/map_montlouis_vineyards.png"
+    map_detail_tag: "Montlouis-sur-Loire · Vineyards"
     qr: "vouvray-montlouis/qr_taille-aux-loups.png"
   - name: "Les Tuffeaux"
     map: "vouvray-montlouis/map_montlouis_aop.png"
     map_tag: "Montlouis-sur-Loire · AOP Area"
+    map_detail: "vouvray-montlouis/map_montlouis_vineyards.png"
+    map_detail_tag: "Montlouis-sur-Loire · Vineyards"
     qr: "vouvray-montlouis/qr_chidaine.png"
   - name: "Moelleux Réserve"
     rows:
@@ -29,6 +36,8 @@ wine_notes:
         value: "Botrytised (noble rot)"
     map: "vouvray-montlouis/map_vouvray_aop.png"
     map_tag: "Vouvray · AOP Area"
+    map_detail: "vouvray-montlouis/map_vouvray_communes.png"
+    map_detail_tag: "Vouvray · Communes"
     qr: "vouvray-montlouis/qr_foreau.png"
 ---
 <style>
@@ -220,10 +229,16 @@ wine_notes:
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDES 5 TO 8 · THE FOUR WINES, generated from tastings.yml
+     SLIDES 5 TO 12 · THE FOUR WINES, two slides each, generated from
+     tastings.yml
      Order, names, producers, vintages, appellations and blends come
      from the data (driest first, as listed there); extras from
-     wine_notes in the front matter. Sources for the extras:
+     wine_notes in the front matter. Per wine: slide A with the topline
+     AOP map, slide B with the detailed map and the same panel.
+       5, 6    Clos du Bourg Sec      Vouvray AOP, Vouvray communes
+       7, 8    Les Hauts de Husseau   Montlouis AOP, Montlouis vineyards
+       9, 10   Les Tuffeaux           Montlouis AOP, Montlouis vineyards
+       11, 12  Moelleux Reserve       Vouvray AOP, Vouvray communes Sources for the extras:
      Clos du Bourg Sec (Huet): walled Clos du Bourg on the Premiere
        Cote above Vouvray, about 6 ha, shallow stony clay-limestone over
        tuffeau (importer and merchant sheets, several agreeing).
