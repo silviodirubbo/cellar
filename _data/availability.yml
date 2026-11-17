@@ -59,3 +59,8 @@ pinot-noir-across-regions:
   taken: 5
   capacity: 6
   updated_at: "2026-10-19T10:56:08Z"
+
+tbd-2027-01-15:
+  taken: 1
+  capacity: 6
+  updated_at: "2026-11-17T20:47:33Z"
