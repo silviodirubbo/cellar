@@ -1,0 +1,70 @@
+---
+layout: presentation
+title: "Theme to be announced"
+# Placeholder deck for a dated slot whose theme is not decided yet (see
+# README, "Theme-less slots"). Date and venue come from tastings.yml.
+# When the theme is set: rename the slug, update the cover title, add the
+# wines to tastings.yml and their extras here under wine_notes; the wine
+# slides below then appear on their own.
+wine_notes: []
+---
+<style>
+
+/* ── COVER ──────────────────────────────────────────── */
+.slide-cover {
+  background: var(--ink);
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; cursor: pointer; position: relative;
+}
+.cover-content { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
+.eyebrow {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 23px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 36px;
+}
+.cover-title { font-size: 104px; font-weight: 300; line-height: 1; color: var(--warm-white); }
+.cover-subtitle { font-size: 28px; font-weight: 300; font-style: italic; color: var(--warm-white); margin-top: 12px; }
+.cover-rule { width: 40px; height: 1px; background: var(--gold); margin: 28px auto; }
+.cover-meta {
+  font-family: 'DM Mono', monospace; font-weight: 500; font-size: 21px;
+  letter-spacing: .14em; text-transform: uppercase; color: rgba(253,252,250,.55);
+}
+/* overrides the shared .cover-meta-gold from _layouts/presentation.html,
+   scoped to this deck only (this <style> block renders after the
+   layout's, so it wins for this page without touching other decks) */
+.cover-meta-gold { font-size: 21px; font-weight: 500; }
+
+/* ── WINE SLIDE ─────────────────────────────────────── */
+
+/* bottle block, same as saumur-champigny.html; the slides themselves come
+   from _includes/deck/wine-slide.html */
+
+.w-meta { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+
+/* QR block, same as saumur-champigny.html, shown once a QR file exists */
+.wine-qr { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.wine-qr img { width: 74px; height: 74px; object-fit: contain; display: block; }
+</style>
+
+<!-- ─────────────────────────────────────────────────────────
+     SLIDE 1 · COVER
+     Friday 26 February 2027, theme not decided yet. No cover painting yet, so the
+     cover is the plain ink background of the other decks.
+     ───────────────────────────────────────────────────────── -->
+{% assign this_tasting = site.data.tastings | where: "slug", page.slug | first %}
+<div class="slide slide-cover active">
+  <div class="cover-content">
+    <div class="eyebrow">Wine Tasting · {{ this_tasting.date | date: "%-d %B %Y" }}</div>
+    <h1 class="cover-title">Theme</h1>
+    <div class="cover-subtitle">to be announced</div>
+    <div class="cover-rule"></div>
+    <div class="cover-meta">{{ this_tasting.location }}</div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     WINE SLIDES, generated from tastings.yml through
+     _includes/deck/wine-slide.html. None yet: the slot has no wines.
+     ───────────────────────────────────────────────────────── -->
+{% for wine in this_tasting.wines %}
+{% include deck/wine-slide.html wine=wine index=forloop.index total=forloop.length %}
+{% endfor %}
