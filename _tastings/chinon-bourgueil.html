@@ -4,9 +4,10 @@ title: "Chinon & Bourgueil"
 # Deck-only facts for the wine slides, matched to tastings.yml by name.
 # Name, producer, vintage, appellation and blend are NOT repeated here:
 # _includes/deck/wine-slide.html reads them from the data. Sources are in
-# the slide comments below. A map shows up on its slide as soon as the
-# file exists; until then the slide falls back to the Loire overview.
-# The Vouvray map is shared with the Vouvray & Montlouis deck.
+# the slide comments below. Each wine gets two slides: the topline
+# appellation map (map), then the detailed map (map_detail), each shown
+# once its file exists. The Vouvray maps are shared with the Vouvray &
+# Montlouis deck, not copied.
 wine_notes:
   - name: "Méthode Traditionnelle Extra Brut"
     rows:
@@ -16,22 +17,30 @@ wine_notes:
         value: "4 years"
     map: "vouvray-montlouis/map_vouvray_aop.png"
     map_tag: "Vouvray · AOP Area"
+    map_detail: "vouvray-montlouis/map_vouvray_communes.png"
+    map_detail_tag: "Vouvray · Communes"
     qr: "chinon-bourgueil/qr_foreau.png"
   - name: "Coteau de Noiré"
     lieu_dit: "Coteau de Noiré"
     soil: "Clay-limestone, south-facing slope"
     map: "chinon-bourgueil/map_chinon_aop.png"
     map_tag: "Chinon · AOP Area"
+    map_detail: "chinon-bourgueil/map_chinon_vineyards.png"
+    map_detail_tag: "Chinon · Vineyards"
     qr: "chinon-bourgueil/qr_alliet.png"
   - name: "Perrières"
     lieu_dit: "Perrières"
     soil: "Clay over limestone, on the slope"
     map: "chinon-bourgueil/map_bourgueil_aop.png"
     map_tag: "Bourgueil · AOP Area"
+    map_detail: "chinon-bourgueil/map_bourgueil_vineyards.png"
+    map_detail_tag: "Bourgueil · Vineyards"
     qr: "chinon-bourgueil/qr_la-butte.png"
   - name: "Le Vau Renou"
     map: "chinon-bourgueil/map_saint_nicolas_de_bourgueil_aop.png"
     map_tag: "Saint-Nicolas-de-Bourgueil · AOP Area"
+    map_detail: "chinon-bourgueil/map_saint_nicolas_de_bourgueil_vineyards.png"
+    map_detail_tag: "Saint-Nicolas-de-Bourgueil · Vineyards"
     qr: "chinon-bourgueil/qr_amirault.png"
 ---
 <style>
@@ -224,7 +233,7 @@ wine_notes:
      reaching up onto a limestone slope (INAO product sheets). Chinon,
      gravel terraces along the Vienne and tuffeau slopes (Parc naturel
      regional Loire-Anjou-Touraine and secondary sources). The two reds
-     with a sourced site are both slope wines (see slides 7 and 8).
+     with a sourced site are both slope wines (see slides 8 to 11).
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-intro">
   <div class="intro-label">Cabernet Franc · Terrace and Slope</div>
@@ -252,9 +261,16 @@ wine_notes:
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDES 6 TO 9 · THE FOUR WINES, generated from tastings.yml
+     SLIDES 6 TO 13 · THE FOUR WINES, two slides each, generated from
+     tastings.yml
      Order, names, producers, vintages, appellations and blends come
-     from the data; extras from wine_notes in the front matter.
+     from the data; extras from wine_notes in the front matter. Per
+     wine: slide A with the topline AOP map, slide B with the detailed
+     vineyard map and the same panel.
+       6, 7    Extra Brut        Vouvray AOP, Vouvray communes
+       8, 9    Coteau de Noire   Chinon AOP, Chinon vineyards
+       10, 11  Perrieres         Bourgueil AOP, Bourgueil vineyards
+       12, 13  Le Vau Renou      Saint-Nicolas-de-Bourgueil AOP and vineyards
      Sources for the extras:
      Extra Brut (Clos Naudin): dosage 1.33 g/L, four years on lees
        (producer notes quoted by several merchants).
