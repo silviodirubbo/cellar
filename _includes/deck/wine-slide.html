@@ -16,7 +16,15 @@
     map       path under assets/tastings/, used only once the file
               exists; until then the shared Loire map is shown
     map_tag   label for that map
+    map_detail      path under assets/tastings/ of a detailed map (commune,
+                    vineyard or lieu-dit). Once the file exists, a second
+                    slide with the same panel and counter follows the
+                    first one, showing this map; until then the wine keeps
+                    its single topline slide.
+    map_detail_tag  label for the detailed map
     qr        path under assets/tastings/, shown only if it exists
+  The slide markup sits in one capture and is printed once or twice, so
+  both slides of a wine can never differ except for the map.
 {% endcomment %}
 {% assign w = include.wine %}
 {% assign note = page.wine_notes | where: "name", w.name | first %}
@@ -36,17 +44,19 @@
   {% assign map_src = "/assets/tastings/" | append: page.slug | append: "/map_loire.jpg" %}{% assign map_label = "Loire Valley · Overview" %}
 {% endif %}
 
+{% assign detail_file = nil %}
+{% if note.map_detail %}
+  {% assign detail_path = "/assets/tastings/" | append: note.map_detail %}
+  {% assign detail_file = site.static_files | where: "path", detail_path | first %}
+{% endif %}
+
 {% assign qr_file = nil %}
 {% if note.qr %}
   {% assign qr_path = "/assets/tastings/" | append: note.qr %}
   {% assign qr_file = site.static_files | where: "path", qr_path | first %}
 {% endif %}
 
-<div class="slide slide-wine">
-  <div class="wine-map">
-    <img src="{{ site.baseurl }}{{ map_src }}" alt="{{ map_label }}" loading="lazy">
-    <div class="map-tag">{{ map_label }}</div>
-  </div>
+{% capture wine_panel %}
   <div class="wine-panel">
     <div class="panel-head">
       <div class="w-counter">{% if include.index < 10 %}0{% endif %}{{ include.index }} / {% if include.total < 10 %}0{% endif %}{{ include.total }}</div>
@@ -74,4 +84,19 @@
       {% endif %}
     </div>
   </div>
-</div>
+{% endcapture %}
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}{{ map_src }}" alt="{{ map_label }}" loading="lazy">
+    <div class="map-tag">{{ map_label }}</div>
+  </div>
+{{ wine_panel }}</div>
+{% if detail_file %}
+{% assign detail_label = note.map_detail_tag | default: appel %}
+<div class="slide slide-wine">
+  <div class="wine-map">
+    <img src="{{ site.baseurl }}{{ detail_path }}" alt="{{ detail_label }}" loading="lazy">
+    <div class="map-tag">{{ detail_label }}</div>
+  </div>
+{{ wine_panel }}</div>
+{% endif %}
