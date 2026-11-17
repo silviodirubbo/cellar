@@ -1,6 +1,30 @@
 ---
 layout: presentation
 title: "Sancerre & Pouilly-Fumé"
+# Deck-only facts for the wine slides, matched to tastings.yml by name.
+# Name, producer, vintage, appellation and blend are NOT repeated here:
+# _includes/deck/wine-slide.html reads them from the data. Each wine gets
+# its topline appellation map (map); a detailed map (map_detail) adds a
+# second slide once its file exists. QR codes show once their files exist.
+wine_notes:
+  - name: "Silex"
+    map: "sancerre-pouilly-fume/map_pouilly_fume_aop.png"
+    map_tag: "Pouilly-Fumé · AOP Area"
+    map_detail: "sancerre-pouilly-fume/map_pouilly_fume_vineyards.png"
+    map_detail_tag: "Pouilly-Fumé · Vineyards"
+    qr: "sancerre-pouilly-fume/qr_dagueneau.png"
+  - name: "Le Pavé"
+    map: "sancerre-pouilly-fume/map_sancerre_aop.png"
+    map_tag: "Sancerre · AOP Area"
+    map_detail: "sancerre-pouilly-fume/map_sancerre_vineyards.png"
+    map_detail_tag: "Sancerre · Vineyards"
+    qr: "sancerre-pouilly-fume/qr_vacheron.png"
+  - name: "Étienne Henri"
+    map: "sancerre-pouilly-fume/map_sancerre_aop.png"
+    map_tag: "Sancerre · AOP Area"
+    map_detail: "sancerre-pouilly-fume/map_sancerre_vineyards.png"
+    map_detail_tag: "Sancerre · Vineyards"
+    qr: "sancerre-pouilly-fume/qr_bourgeois.png"
 ---
 <style>
 
@@ -80,9 +104,14 @@ title: "Sancerre & Pouilly-Fumé"
 
 /* ── WINE SLIDE ─────────────────────────────────────── */
 
-/* bottle block, same as saumur-champigny.html */
+/* bottle block, same as saumur-champigny.html; the slides themselves come
+   from _includes/deck/wine-slide.html */
 
 .w-meta { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+
+/* QR block, same as saumur-champigny.html, shown once a QR file exists */
+.wine-qr { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.wine-qr img { width: 74px; height: 74px; object-fit: contain; display: block; }
 </style>
 
 <!-- ─────────────────────────────────────────────────────────
@@ -117,9 +146,7 @@ title: "Sancerre & Pouilly-Fumé"
      SLIDE 2 · LOIRE VALLEY MAP
      Image: assets/tastings/sancerre-pouilly-fume/map_loire.jpg
      Copied from assets/tastings/muscadet/ (identical file, left in
-     place there). No suitable Sancerre or Pouilly-Fumé specific map
-     was found anywhere in the repo, so this overview map also stands
-     in as the wine-map background on every wine slide below.
+     place there). The wine slides carry their own appellation maps.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-map" style="position:relative;">
   <img src="{{ site.baseurl }}/assets/tastings/sancerre-pouilly-fume/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
@@ -127,102 +154,15 @@ title: "Sancerre & Pouilly-Fumé"
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDE 3 · WINE 1 · SILEX · DIDIER DAGUENEAU · 2023
-     No standalone Pouilly-Fumé appellation slide precedes this: no
-     suitable map or context asset for Pouilly-Fumé specifically was
-     found, so that context folds into this wine slide instead.
-     Map: assets/tastings/sancerre-pouilly-fume/map_loire.jpg (shared)
-     Bottle: assets/tastings/sancerre-pouilly-fume/bottle_silex.png
-     No QR code yet.
+     SLIDES 3 TO 5 · THE THREE WINES, generated from tastings.yml
+     Order, names, producers, vintages, appellations and blends come
+     from the data; extras from wine_notes in the front matter.
+       3  Silex (Dagueneau)              Pouilly-Fumé AOP map
+       4  Le Pavé (Vacheron)             Sancerre AOP map
+       5  Étienne Henri (Bourgeois)      Sancerre AOP map
+     A detailed map named in wine_notes adds a second slide after each
+     wine once the file is uploaded.
      ───────────────────────────────────────────────────────── -->
-<div class="slide slide-wine">
-  <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/sancerre-pouilly-fume/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
-    <div class="map-tag">Loire Valley · Overview</div>
-  </div>
-  <div class="wine-panel">
-    <div class="panel-head">
-      <div class="w-counter">01 / 03</div>
-      <div class="w-appellation">Pouilly-Fumé AOC</div>
-      <div class="w-hrule"></div>
-    </div>
-    <div class="wine-bottle">
-      <img src="{{ site.baseurl }}/assets/tastings/sancerre-pouilly-fume/bottle_silex.png" alt="Silex, Didier Dagueneau" loading="lazy">
-    </div>
-    <div class="wine-info">
-      <div class="info-text">
-        <div class="w-name">Silex</div>
-        <div class="w-producer">Didier Dagueneau</div>
-        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2023</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Sauvignon Blanc</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ─────────────────────────────────────────────────────────
-     SLIDE 4 · WINE 2 · LE PAVÉ · DOMAINE VACHERON · 2017
-     Crosses into Sancerre. No standalone Sancerre appellation slide
-     precedes this either, same reason as above.
-     Map: assets/tastings/sancerre-pouilly-fume/map_loire.jpg (shared)
-     Bottle: assets/tastings/sancerre-pouilly-fume/bottle_le-pave.png
-     No QR code yet.
-     ───────────────────────────────────────────────────────── -->
-<div class="slide slide-wine">
-  <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/sancerre-pouilly-fume/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
-    <div class="map-tag">Loire Valley · Overview</div>
-  </div>
-  <div class="wine-panel">
-    <div class="panel-head">
-      <div class="w-counter">02 / 03</div>
-      <div class="w-appellation">Sancerre AOC</div>
-      <div class="w-hrule"></div>
-    </div>
-    <div class="wine-bottle">
-      <img src="{{ site.baseurl }}/assets/tastings/sancerre-pouilly-fume/bottle_le-pave.png" alt="Le Pavé, Domaine Vacheron" loading="lazy">
-    </div>
-    <div class="wine-info">
-      <div class="info-text">
-        <div class="w-name">Le Pavé</div>
-        <div class="w-producer">Domaine Vacheron</div>
-        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2017</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Sauvignon Blanc</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ─────────────────────────────────────────────────────────
-     SLIDE 5 · WINE 3 · ÉTIENNE HENRI · FAMILLE BOURGEOIS · 2013
-     Second Sancerre, six years older than wine 2, per the tasting's
-     own description. Final slide in the deck, matching the
-     no-closing-slide convention already used across the repo.
-     Map: assets/tastings/sancerre-pouilly-fume/map_loire.jpg (shared)
-     Bottle: assets/tastings/sancerre-pouilly-fume/bottle_etienne-henri.png
-     No QR code yet.
-     ───────────────────────────────────────────────────────── -->
-<div class="slide slide-wine">
-  <div class="wine-map">
-    <img src="{{ site.baseurl }}/assets/tastings/sancerre-pouilly-fume/map_loire.jpg" alt="Loire Valley · Overview" loading="lazy">
-    <div class="map-tag">Loire Valley · Overview</div>
-  </div>
-  <div class="wine-panel">
-    <div class="panel-head">
-      <div class="w-counter">03 / 03</div>
-      <div class="w-appellation">Sancerre AOC</div>
-      <div class="w-hrule"></div>
-    </div>
-    <div class="wine-bottle">
-      <img src="{{ site.baseurl }}/assets/tastings/sancerre-pouilly-fume/bottle_etienne-henri.png" alt="Étienne Henri, Famille Bourgeois" loading="lazy">
-    </div>
-    <div class="wine-info">
-      <div class="info-text">
-        <div class="w-name">Étienne Henri</div>
-        <div class="w-producer">Famille Bourgeois</div>
-        <div class="w-meta"><span class="w-ml">Vintage</span><span class="w-mv">2013</span></div>
-        <div class="w-meta"><span class="w-ml">Blend</span><span class="w-mv">100% Sauvignon Blanc</span></div>
-      </div>
-    </div>
-  </div>
-</div>
+{% for wine in this_tasting.wines %}
+{% include deck/wine-slide.html wine=wine index=forloop.index total=forloop.length %}
+{% endfor %}
