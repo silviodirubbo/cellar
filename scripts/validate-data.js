@@ -10,7 +10,8 @@
 // break a build, a page or a sync. Warnings: worth a look, never fail.
 //
 //   - slugs: unique, lowercase words joined by hyphens
-//   - chapter: one of _chapters/*.md
+//   - chapter: one of _chapters/*.md when present; a slot whose theme is
+//     not decided yet carries no chapter (see README, "Theme-less slots")
 //   - tags: each one listed in _data/tags.yml
 //   - wine images: the file exists under assets/tastings/
 //   - decks: _tastings/<slug>.html exists when slides: true, and every
@@ -54,7 +55,7 @@ for (const t of tastings) {
   if (slugs.has(s)) err(`${where}: duplicate slug`);
   slugs.add(s);
 
-  if (!chapters.has(t.chapter)) err(`${where}: chapter "${t.chapter}" has no _chapters/${t.chapter}.md`);
+  if (t.chapter !== undefined && !chapters.has(t.chapter)) err(`${where}: chapter "${t.chapter}" has no _chapters/${t.chapter}.md`);
   for (const tag of t.tags || []) if (!tags.has(tag)) err(`${where}: tag "${tag}" is not in _data/tags.yml`);
 
   (t.wines || []).forEach((w, i) => {

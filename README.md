@@ -72,6 +72,17 @@ The schedule, the Wines page, the chapter pages, the cover date of each deck and
    ```
    It needs the Ruby toolchain as well (it runs its own Jekyll build). The fonts are self-hosted (`assets/fonts/`), so no access to Google Fonts is needed.
 
+## Theme-less slots
+
+A date can be held before its theme is decided, as the one-off slot of September 2026 was. The entry uses:
+
+- `slug: tbd-YYYY-MM-DD`, so it cannot clash with a real tasting;
+- `title: "Theme to be announced"`, `region: "TBD"`, `description: Theme and wines are still to be decided.`;
+- the real `date`, `date_tbd: false`, `location`, `capacity`, `status: upcoming`, `slides: false`, `tags: []` and `wines: []`;
+- no `chapter` and no `chapter_order`, so the slot stays off the chapter pages and chapter filters until it has a theme.
+
+It shows on the schedule as a dated upcoming evening with the usual sign-up. Its deck in `_tastings/<slug>.html` is a cover only, plus the shared wine-slide loop, so it grows as wines are added. To turn the slot into a tasting, rename the slug (see below), set the title, description, tags, chapter and wines, add the assets, and set `slides: true` once the deck is ready.
+
 ## Renaming a slug
 
 A slug appears in several places. Change all of them in one commit:
