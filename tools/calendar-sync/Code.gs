@@ -12,14 +12,15 @@
  *   2. syncAll() reads the tasting list from the site's public
  *      _data/tastings.yml and looks at the calendar's events from today to
  *      LOOKAHEAD_DAYS ahead.
- *   3. An event belongs to a tasting when it falls on the tasting's date
- *      (Geneva time) and its description contains the Cellar tastings link
- *      (silviodirubbo.github.io/cellar/tastings), so every invite should
- *      carry that link. For events without the link, a title match is the
- *      fallback: at least half of the tasting title's significant words
- *      appear in the event title. Events on a tasting date that match
- *      neither way are skipped and logged. When several events match the
- *      same tasting, the first is kept and a warning is logged.
+ *   3. An event belongs to the tasting its description links to
+ *      (silviodirubbo.github.io/cellar/tastings/<slug>/), whatever date the
+ *      event sits on, so a reschedule never moves guests between tastings.
+ *      Every invite should carry its tasting's own link. Only an event
+ *      without such a link falls back to the date (Geneva time): a bare
+ *      tastings link, or failing that a title match (at least half of the
+ *      tasting title's significant words appear in the event title). Events
+ *      that match neither way are skipped and logged. When several events
+ *      match the same tasting, the first is kept and a warning is logged.
  *   4. Places taken = guests whose status is not "no" (yes, maybe and
  *      awaiting all count), excluding only the organiser account. The host
  *      counts like any other guest. A guest's "+1" (additional guests, as
@@ -194,18 +195,22 @@ function additionalGuests_(guest) {
 
 // ── Matching ──────────────────────────────────────────────────
 //
-// An event belongs to a tasting when it falls on the tasting's date
-// (Geneva time) and either
-//   1. its description contains TASTINGS_LINK (the main rule), or
-//   2. its description lacks the link but its title matches the tasting
-//      title (the fallback, see titleMatches_).
-// A link that names a tasting (/tastings/<slug>/) only ever matches that
-// tasting; an invite still on an old date after a reschedule is skipped.
-// A bare tastings link matches the single tasting on that date, or, when
-// two share it, the one whose title matches.
-// Events on a tasting date that match neither way are skipped and logged.
-// When several events match the same tasting, the first (earliest start)
-// is kept and a warning is logged.
+// The tasting link decides first, the date only as a fallback, so a
+// reschedule never moves guests from one tasting to another:
+//   1. An event whose description holds a link naming a tasting
+//      (TASTINGS_LINK + /<slug>/) belongs to that tasting, whatever date
+//      the event sits on. A link naming a slug that is not an upcoming
+//      tasting is skipped and logged, never guessed from the date.
+//   2. Any other event (bare tastings link, or no link) goes to the one
+//      tasting its title clearly names (see titleMatches_), whatever the
+//      date. Only when the title names none, or several, does the date
+//      (Geneva time) decide: with a bare link, the single tasting on that
+//      date, or, when two share it, the one whose title matches; without a
+//      link, the tasting on that date whose title matches.
+//      A tasting already matched by a named link is not offered again.
+// Events that match neither way are skipped and logged. When several
+// events match the same tasting, the first (earliest start) is kept and
+// a warning is logged.
 
 /**
  * Pure matching step, kept free of Calendar calls so it can be tested.
@@ -214,49 +219,74 @@ function additionalGuests_(guest) {
  * Returns { slug: event } with the event kept for each tasting.
  */
 function matchEvents_(events, tastings) {
-  var byDate = {};
-  tastings.forEach(function (t) { (byDate[t.date] = byDate[t.date] || []).push(t); });
+  var bySlug = {};
+  tastings.forEach(function (t) { bySlug[t.slug] = t; });
 
   var kept = {};
+  var keep = function (ev, tasting, by) {
+    if (kept.hasOwnProperty(tasting.slug)) {
+      Logger.log('Warning: "' + ev.title + '" on ' + ev.date + ' also matches ' + tasting.slug +
+        '; keeping the first event, "' + kept[tasting.slug].title + '".');
+      return;
+    }
+    Logger.log('"' + ev.title + '" on ' + ev.date + ' matched ' + tasting.slug + ' by ' + by + '.');
+    kept[tasting.slug] = ev;
+  };
+
+  // 1. Named links, whatever the date.
+  var rest = [];
   events.forEach(function (ev) {
+    var named = linkedSlug_(ev.description);
+    if (named === null) { rest.push(ev); return; }
+    if (!bySlug.hasOwnProperty(named)) {
+      Logger.log('Skipped "' + ev.title + '" on ' + ev.date + ': its link names "' + named +
+        '", which is not an upcoming tasting.');
+      return;
+    }
+    keep(ev, bySlug[named], 'link');
+  });
+
+  // 2. Title, then date, only for tastings no named link has claimed.
+  var open = tastings.filter(function (t) { return !kept.hasOwnProperty(t.slug); });
+  var byDate = {};
+  open.forEach(function (t) { (byDate[t.date] = byDate[t.date] || []).push(t); });
+  rest.forEach(function (ev) {
+    var named = open.filter(function (t) { return titleMatches_(t.title, ev.title); });
+    if (named.length === 1) { keep(ev, named[0], 'title'); return; }
     var candidates = byDate[ev.date];
     if (!candidates) return;
-
-    var match = matchOne_(ev, candidates);
+    var match = matchByDate_(ev, candidates);
     if (!match) {
       Logger.log('Skipped "' + ev.title + '" on ' + ev.date + ': date matches ' +
         candidates.map(function (t) { return '"' + t.title + '"'; }).join(', ') +
-        ' but its Cellar tastings link names another tasting (or is missing) and the title does not match.');
+        ' but the description has no Cellar tastings link and the title does not match.');
       return;
     }
-    if (kept.hasOwnProperty(match.tasting.slug)) {
-      Logger.log('Warning: "' + ev.title + '" on ' + ev.date + ' also matches ' + match.tasting.slug +
-        '; keeping the first event, "' + kept[match.tasting.slug].title + '".');
-      return;
-    }
-    Logger.log('"' + ev.title + '" on ' + ev.date + ' matched ' + match.tasting.slug + ' by ' + match.by + '.');
-    kept[match.tasting.slug] = ev;
+    keep(ev, match.tasting, match.by);
   });
   return kept;
 }
 
-/** The tasting one event belongs to, as { tasting, by: 'link' | 'title' }, or null. */
-function matchOne_(ev, candidates) {
+/**
+ * The slug named by the Cellar tastings link in a description
+ * (".../cellar/tastings/<slug>/"), or null when there is no link or the
+ * link names no tasting (a bare ".../cellar/tastings/").
+ */
+function linkedSlug_(description) {
+  var text = String(description || '').toLowerCase();
+  var at = text.indexOf(TASTINGS_LINK);
+  if (at === -1) return null;
+  var m = text.slice(at + TASTINGS_LINK.length).match(/^\/([a-z0-9-]+)/);
+  return m ? m[1] : null;
+}
+
+/** Date fallback for one event: { tasting, by } or null. */
+function matchByDate_(ev, candidates) {
   var description = String(ev.description || '').toLowerCase();
-  var at = description.indexOf(TASTINGS_LINK);
-  if (at !== -1) {
-    var rest = description.slice(at + TASTINGS_LINK.length);
-    // A link that names a tasting (/tastings/<slug>/) matches that tasting
-    // only, even when it is the only one on this date: an invite left on
-    // an old date after a reschedule must not count for another tasting.
-    var named = (rest.match(/^\/([a-z0-9-]+)/) || [])[1];
-    if (named) {
-      var bySlug = candidates.filter(function (t) { return t.slug === named; })[0];
-      return bySlug ? { tasting: bySlug, by: 'link' } : null;
-    }
-    if (candidates.length === 1) return { tasting: candidates[0], by: 'link' };
+  if (description.indexOf(TASTINGS_LINK) !== -1) {
+    if (candidates.length === 1) return { tasting: candidates[0], by: 'date (bare link)' };
     var byTitle = candidates.filter(function (t) { return titleMatches_(t.title, ev.title); })[0];
-    return byTitle ? { tasting: byTitle, by: 'link' } : null;
+    return byTitle ? { tasting: byTitle, by: 'date and title (bare link)' } : null;
   }
   var fallback = candidates.filter(function (t) { return titleMatches_(t.title, ev.title); })[0];
   return fallback ? { tasting: fallback, by: 'title (fallback, no link)' } : null;
