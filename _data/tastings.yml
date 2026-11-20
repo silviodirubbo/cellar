@@ -530,7 +530,7 @@
   chapter_order: 4
   status: upcoming
   capacity: 6
-  cost_estimate: "25 CHF"
+  cost_estimate: "35 CHF"
   slides: true
   wines:
     - name: "Méthode Traditionnelle Extra Brut"
@@ -599,7 +599,7 @@
   chapter_order: 5
   status: upcoming
   capacity: 6
-  cost_estimate: "20 CHF"
+  cost_estimate: "30 CHF"
   slides: true
   wines:
     - name: "Coteau de Noiré"
