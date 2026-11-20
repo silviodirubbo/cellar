@@ -600,6 +600,10 @@
   status: upcoming
   capacity: 6
   cost_estimate: "30 CHF"
+  # Display override: shows "Fully booked" on the site and stories while
+  # availability.yml keeps the real count. Delete these four lines to undo;
+  # the daily status sync also deletes them once the tasting is past.
+  force_fully_booked: true
   slides: true
   wines:
     - name: "Coteau de Noiré"

@@ -7,6 +7,11 @@
   or "Fully booked" when no places are left.
   Renders nothing for a past tasting or one with no entry. Capacity comes
   from the tasting's own `capacity` field, default 6.
+  Display override: a tasting with `force_fully_booked: true` in
+  _data/tastings.yml shows "Fully booked" (avail_left 0) whatever its
+  entry says. Display only: availability.yml keeps the real count and the
+  calendar sync keeps updating it. Like every count, it stops showing once
+  the tasting is past, and the daily status sync deletes the line then.
   Also sets, for the caller (Jekyll includes share the page's variables):
     avail_left      places left, or nil when nothing is shown
     avail_capacity  the tasting's capacity
@@ -22,9 +27,14 @@
 {% if include.tasting.status == "past" %}{% assign avail_past = true %}{% endif %}
 {% if include.tasting.date and avail_date < avail_today %}{% assign avail_past = true %}{% endif %}
 {% assign avail_capacity = include.tasting.capacity | default: 6 %}
-{% if avail_entry and avail_past == false %}
+{% assign avail_show = false %}
+{% if avail_entry %}{% assign avail_show = true %}{% endif %}
+{% if include.tasting.force_fully_booked == true %}{% assign avail_show = true %}{% endif %}
+{% if avail_past %}{% assign avail_show = false %}{% endif %}
+{% if avail_show %}
   {% assign avail_taken = avail_entry.taken | default: 0 | at_least: 0 %}
   {% assign avail_left = avail_capacity | minus: avail_taken | at_least: 0 %}
+  {% if include.tasting.force_fully_booked == true %}{% assign avail_left = 0 %}{% endif %}
   <span class="avail-count{% if avail_left == 0 %} avail-count--full{% endif %}">
     {%- if avail_left == 0 -%}
       Fully booked

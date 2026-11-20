@@ -500,6 +500,7 @@ hr, .rule { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
 .home-next__date { font-size: 0.55rem; letter-spacing: 0.14em; }
 .home-next__title { font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.25; color: var(--ink-mid); }
 .home-next__row--first .home-next__title { font-size: 1.35rem; color: var(--ink); }
+.home-next__status { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); }
 .home-next__join {
   position: relative; z-index: 1;    /* sits above the whole-card link */
   align-self: flex-start;

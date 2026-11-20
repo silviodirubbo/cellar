@@ -92,6 +92,8 @@ permalink: /
           <div class="home-next__row home-next__row--first">
             <time class="home-next__date" datetime="{{ next.date }}">{% if next.date_tbd %}Date to be set{% else %}{{ next.date | date: "%a %-d %b %Y" }}{% endif %}</time>
             <span class="home-next__title">{{ next.title }}</span>
+            {% capture next_avail %}{% include availability.html tasting=next %}{% endcapture %}
+            {% if avail_left == 0 %}<span class="home-next__status">Fully booked</span>{% endif %}
             <a class="home-next__join" href="{{ '/tastings/' | relative_url }}#join-{{ next.slug }}">I'm coming →</a>
           </div>
           {% assign then = upcoming | slice: 1, 2 %}

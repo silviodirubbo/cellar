@@ -20,6 +20,7 @@
 //   - availability: every key in _data/availability.yml is a tasting
 //   - capacity: a whole number above 0 when present; an upcoming tasting
 //     without one gets a warning (the site then assumes 6)
+//   - force_fully_booked: true when present (a display override)
 //   - Story pages: tasting_slug, tasting_slug_a and tasting_slug_b point
 //     to existing tastings
 //   - status: a dated tasting in the past still marked upcoming (the daily
@@ -66,6 +67,7 @@ for (const t of tastings) {
   if (t.slides !== true && decks.has(s)) warn(`${where}: _tastings/${s}.html exists but slides is not true (a deck staged for review, unlinked until activated)`);
 
   if (t.capacity !== undefined && !(Number.isInteger(t.capacity) && t.capacity > 0)) err(`${where}: capacity must be a whole number above 0`);
+  if (t.force_fully_booked !== undefined && t.force_fully_booked !== true) err(`${where}: force_fully_booked must be true when present (delete the line to turn it off)`);
   if (t.status === 'upcoming' && t.capacity === undefined) warn(`${where}: upcoming without capacity (the site assumes 6)`);
 
   const d = iso(t.date);
