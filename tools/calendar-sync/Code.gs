@@ -199,8 +199,10 @@ function additionalGuests_(guest) {
 //   1. its description contains TASTINGS_LINK (the main rule), or
 //   2. its description lacks the link but its title matches the tasting
 //      title (the fallback, see titleMatches_).
-// When two tastings share a date, a linked event goes to the tasting whose
-// slug appears in the link, else to the one whose title matches.
+// A link that names a tasting (/tastings/<slug>/) only ever matches that
+// tasting; an invite still on an old date after a reschedule is skipped.
+// A bare tastings link matches the single tasting on that date, or, when
+// two share it, the one whose title matches.
 // Events on a tasting date that match neither way are skipped and logged.
 // When several events match the same tasting, the first (earliest start)
 // is kept and a warning is logged.
@@ -224,7 +226,7 @@ function matchEvents_(events, tastings) {
     if (!match) {
       Logger.log('Skipped "' + ev.title + '" on ' + ev.date + ': date matches ' +
         candidates.map(function (t) { return '"' + t.title + '"'; }).join(', ') +
-        ' but the description has no Cellar tastings link and the title does not match.');
+        ' but its Cellar tastings link names another tasting (or is missing) and the title does not match.');
       return;
     }
     if (kept.hasOwnProperty(match.tasting.slug)) {
@@ -243,10 +245,16 @@ function matchOne_(ev, candidates) {
   var description = String(ev.description || '').toLowerCase();
   var at = description.indexOf(TASTINGS_LINK);
   if (at !== -1) {
-    if (candidates.length === 1) return { tasting: candidates[0], by: 'link' };
     var rest = description.slice(at + TASTINGS_LINK.length);
-    var bySlug = candidates.filter(function (t) { return rest.indexOf('/' + t.slug) === 0; })[0];
-    if (bySlug) return { tasting: bySlug, by: 'link' };
+    // A link that names a tasting (/tastings/<slug>/) matches that tasting
+    // only, even when it is the only one on this date: an invite left on
+    // an old date after a reschedule must not count for another tasting.
+    var named = (rest.match(/^\/([a-z0-9-]+)/) || [])[1];
+    if (named) {
+      var bySlug = candidates.filter(function (t) { return t.slug === named; })[0];
+      return bySlug ? { tasting: bySlug, by: 'link' } : null;
+    }
+    if (candidates.length === 1) return { tasting: candidates[0], by: 'link' };
     var byTitle = candidates.filter(function (t) { return titleMatches_(t.title, ev.title); })[0];
     return byTitle ? { tasting: byTitle, by: 'link' } : null;
   }
