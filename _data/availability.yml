@@ -12,6 +12,10 @@
 #                site itself reads capacity from _data/tastings.yml
 #   updated_at:  UTC timestamp of the last change to this entry
 #
+#   pinned:      optional. true keeps the entry exactly as it is: the
+#                sync and manual runs leave it alone. Set by hand to hold a
+#                corrected count; delete the line to let the sync resume.
+#
 # A tasting with no entry here keeps the plain "N spots" display.
 # ─────────────────────────────────────────────────────────────
 
@@ -29,6 +33,7 @@ vouvray-montlouis:
   taken: 6
   capacity: 6
   updated_at: "2026-11-20T07:26:30Z"
+  pinned: true
 
 savennieres-bonnezeaux:
   taken: 5
@@ -39,6 +44,7 @@ chinon-bourgueil:
   taken: 3
   capacity: 6
   updated_at: "2026-11-20T07:26:29Z"
+  pinned: true
 
 saumur-champigny:
   taken: 5

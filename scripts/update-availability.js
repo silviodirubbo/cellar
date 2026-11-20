@@ -12,6 +12,10 @@
 // `clear` removes the tasting's entry, so the site falls back to the plain
 // "N spots" display.
 //
+// Pinned entries: an entry with `pinned: true` is left as it is, by the
+// calendar sync and by manual runs alike, so a hand-set count cannot be
+// overwritten. Delete the `pinned: true` line to let the sync update it again.
+//
 // Idempotent: when the stored taken and capacity already match, the file
 // is left byte for byte unchanged (updated_at included), so the workflow
 // finds nothing to commit. Capacity is read from the tasting's `capacity`
@@ -70,6 +74,7 @@ function writeAvailability(header, entries) {
   let out = header;
   for (const [slug, e] of entries) {
     out += `\n${slug}:\n  taken: ${e.taken}\n  capacity: ${e.capacity}\n  updated_at: "${e.updated_at}"\n`;
+    if (e.pinned === 'true') out += '  pinned: true\n';
   }
   fs.writeFileSync(AVAILABILITY_PATH, out, 'utf8');
 }
@@ -83,6 +88,12 @@ function main() {
   if (capacity === null) fail(`no tasting with slug "${slug}" in _data/tastings.yml`);
 
   const { header, entries } = readAvailability();
+
+  const pinned = entries.get(slug);
+  if (pinned && pinned.pinned === 'true') {
+    console.log(`availability.yml: ${slug} is pinned at ${pinned.taken}/${pinned.capacity}, left unchanged (delete its "pinned: true" line to let updates through)`);
+    return;
+  }
 
   if (String(rawTaken).trim().toLowerCase() === 'clear') {
     if (!entries.has(slug)) {
