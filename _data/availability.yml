@@ -26,9 +26,9 @@ sancerre-pouilly-fume:
   updated_at: "2026-11-17T18:55:36Z"
 
 vouvray-montlouis:
-  taken: 3
+  taken: 6
   capacity: 6
-  updated_at: "2026-11-20T00:21:09Z"
+  updated_at: "2026-11-20T07:26:30Z"
 
 savennieres-bonnezeaux:
   taken: 5
@@ -36,9 +36,9 @@ savennieres-bonnezeaux:
   updated_at: "2026-10-20T18:52:59Z"
 
 chinon-bourgueil:
-  taken: 6
+  taken: 3
   capacity: 6
-  updated_at: "2026-11-20T00:21:09Z"
+  updated_at: "2026-11-20T07:26:29Z"
 
 saumur-champigny:
   taken: 5
