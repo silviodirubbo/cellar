@@ -6,20 +6,8 @@ title: "Chinon & Bourgueil"
 # _includes/deck/wine-slide.html reads them from the data. Sources are in
 # the slide comments below. Each wine gets two slides: the topline
 # appellation map (map), then the detailed map (map_detail), each shown
-# once its file exists. The Vouvray maps are shared with the Vouvray &
-# Montlouis deck, not copied.
+# once its file exists.
 wine_notes:
-  - name: "Méthode Traditionnelle Extra Brut"
-    rows:
-      - label: "Dosage"
-        value: "Extra Brut, 1.3 g/L"
-      - label: "On lees"
-        value: "4 years"
-    map: "vouvray-montlouis/map_vouvray_aop.png"
-    map_tag: "Vouvray · AOP Area"
-    map_detail: "vouvray-montlouis/map_vouvray_communes.png"
-    map_detail_tag: "Vouvray · Communes"
-    qr: "chinon-bourgueil/qr_foreau.png"
   - name: "Coteau de Noiré"
     lieu_dit: "Coteau de Noiré"
     soil: "Clay-limestone, south-facing slope"
@@ -107,7 +95,6 @@ wine_notes:
   font-family: 'DM Mono', monospace; font-weight: 300; font-size: 9px;
   letter-spacing: .13em; text-transform: uppercase; color: var(--ink-light); line-height: 2;
 }
-.intro-divider { width: 1px; background: var(--rule); align-self: stretch; margin: 8px 0; }
 .intro-vline { width: 1px; height: 38px; background: var(--rule); margin: 36px auto; }
 .intro-throughline { font-size: 20px; font-weight: 300; font-style: italic; color: var(--green); max-width: 860px; }
 
@@ -161,8 +148,8 @@ wine_notes:
     <h1 class="cover-title">Chinon</h1>
     <div class="cover-subtitle">&amp; Bourgueil</div>
     <div class="cover-rule"></div>
-    <div class="cover-meta">Four wines · Four appellations · Two grapes</div>
-    <div class="cover-meta-gold">Foreau · Alliet · Domaine de la Butte · Amirault</div>
+    <div class="cover-meta">Three wines · Three appellations · One grape</div>
+    <div class="cover-meta-gold">Alliet · Domaine de la Butte · Amirault</div>
   </div>
   <div class="cover-credit">
     <div class="cover-credit-title">The Loire</div>
@@ -172,19 +159,13 @@ wine_notes:
 
 <!-- ─────────────────────────────────────────────────────────
      SLIDE 2 · THE GRAPES
-     Same component as the grapes slide in saumur-champigny.html.
-     Chenin Blanc for the opening sparkling Vouvray, Cabernet Franc for
-     the three reds (blends from tastings.yml).
+     Same component as the grapes slide in saumur-champigny.html, with a
+     single column: all three wines are 100% Cabernet Franc
+     (tastings.yml), one from each appellation.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-intro">
-  <div class="intro-label">The Grapes</div>
+  <div class="intro-label">The Grape</div>
   <div class="intro-grapes">
-    <div class="intro-grape-col">
-      <div class="ig-name">Chenin Blanc</div>
-      <div class="ig-direction">sparkling</div>
-      <div class="ig-apps">Vouvray</div>
-    </div>
-    <div class="intro-divider"></div>
     <div class="intro-grape-col">
       <div class="ig-name">Cabernet Franc</div>
       <div class="ig-direction">red</div>
@@ -192,7 +173,7 @@ wine_notes:
     </div>
   </div>
   <div class="intro-vline"></div>
-  <div class="intro-throughline">Chenin Blanc · Cabernet Franc</div>
+  <div class="intro-throughline">Cabernet Franc · three appellations</div>
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
@@ -209,12 +190,12 @@ wine_notes:
 
 <!-- ─────────────────────────────────────────────────────────
      SLIDE 4 · TOURAINE MAP
-     Image: assets/tastings/vouvray-montlouis/map_touraine.png (shared
-     with the Vouvray & Montlouis deck, not copied). The regional-map
+     Image: map_touraine.png, the shared Touraine file kept in the folder
+     of the deck that first used it, referenced here, not copied. The regional-map
      slot, as map_anjou_saumur.jpg in the Saumur & Champigny deck: it
-     shows all four appellations of the evening, Vouvray east of Tours
-     and Chinon, Bourgueil and Saint-Nicolas-de-Bourgueil to the west.
-     It follows the Loire overview of slide 3, as in the Vouvray deck.
+     shows the three appellations of the evening, Chinon, Bourgueil and
+     Saint-Nicolas-de-Bourgueil, west of Tours.
+     It follows the Loire overview of slide 3.
      ───────────────────────────────────────────────────────── -->
 <div class="slide slide-map" style="position:relative;">
   <img src="{{ site.baseurl }}/assets/tastings/vouvray-montlouis/map_touraine.png" alt="Touraine · Appellations" loading="lazy">
@@ -222,19 +203,16 @@ wine_notes:
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDES 5 TO 12 · THE FOUR WINES, two slides each, generated from
+     SLIDES 5 TO 10 · THE THREE WINES, two slides each, generated from
      tastings.yml
      Order, names, producers, vintages, appellations and blends come
      from the data; extras from wine_notes in the front matter. Per
      wine: slide A with the topline AOP map, slide B with the detailed
      vineyard map and the same panel.
-       5, 6    Extra Brut        Vouvray AOP, Vouvray communes
-       7, 8    Coteau de Noire   Chinon AOP, Chinon vineyards
-       9, 10   Perrieres         Bourgueil AOP, Bourgueil vineyards
-       11, 12  Le Vau Renou      Saint-Nicolas-de-Bourgueil AOP and vineyards
+       5, 6    Coteau de Noire   Chinon AOP, Chinon vineyards
+       7, 8    Perrieres         Bourgueil AOP, Bourgueil vineyards
+       9, 10   Le Vau Renou      Saint-Nicolas-de-Bourgueil AOP and vineyards
      Sources for the extras:
-     Extra Brut (Clos Naudin): dosage 1.33 g/L, four years on lees
-       (producer notes quoted by several merchants).
      Coteau de Noire (Alliet): steep south-facing clay-limestone slope
        (importer and merchant sheets, several agreeing).
      Perrieres (La Butte): clay over limestone on the slope (merchant
