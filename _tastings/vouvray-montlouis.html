@@ -6,8 +6,20 @@ title: "Vouvray & Montlouis"
 # _includes/deck/wine-slide.html reads them from the data. Sources are in
 # the slide comments below. Each wine gets two slides: the topline
 # appellation map (map), then the detailed map (map_detail), each shown
-# once its file exists.
+# once its file exists. Both Foreau wines share qr_foreau.png (one
+# domaine page), as qr_ogereau.png serves its producer in Saumur.
 wine_notes:
+  - name: "Méthode Traditionnelle Extra Brut"
+    rows:
+      - label: "Dosage"
+        value: "Extra Brut, 1.3 g/L"
+      - label: "On lees"
+        value: "4 years"
+    map: "vouvray-montlouis/map_vouvray_aop.png"
+    map_tag: "Vouvray · AOP Area"
+    map_detail: "vouvray-montlouis/map_vouvray_communes.png"
+    map_detail_tag: "Vouvray · Communes"
+    qr: "vouvray-montlouis/qr_foreau.png"
   - name: "Clos du Bourg Sec"
     style: "Sec"
     lieu_dit: "Clos du Bourg"
@@ -167,8 +179,8 @@ wine_notes:
     <h1 class="cover-title">Vouvray</h1>
     <div class="cover-subtitle">&amp; Montlouis</div>
     <div class="cover-rule"></div>
-    <div class="cover-meta">Four wines · Two appellations · One grape</div>
-    <div class="cover-meta-gold">Huet · Taille aux Loups · Chidaine · Foreau</div>
+    <div class="cover-meta">Five wines · Two appellations · One grape</div>
+    <div class="cover-meta-gold">Foreau · Huet · Taille aux Loups · Chidaine</div>
   </div>
   <div class="cover-credit">
     <div class="cover-credit-title">Bords de Loire</div>
@@ -181,8 +193,11 @@ wine_notes:
      Same layout, classes and CSS as the grape intro of
      _tastings/pinot-noir-across-regions.html (also used by
      muscadet.html and savennieres-bonnezeaux.html). All four wines are
-     100% Chenin Blanc (tastings.yml), so the grid carries the three
-     sweetness styles of the evening, each with its wines. Styles as
+     100% Chenin Blanc (tastings.yml), so the grid carries the four
+     styles of the evening, each with its wines: the sparkling first,
+     with the dosage term on its label (Extra Brut), then the three still
+     sweetness styles. Four columns set inline on the grid, as the Pinot
+     Noir deck sets its two. Styles as
      labelled (tastings.yml appellation field, and "Sec" in the Huet
      cuvee name); g/L figures are the usual residual sugar ceilings for
      each still-wine term. Banks: Vouvray on the right bank of the
@@ -193,10 +208,11 @@ wine_notes:
   <div class="intro-label">The Grape</div>
   <div class="intro-grapes">
     <div class="intro-grape-primary">Chenin Blanc</div>
-    <div class="intro-grape-secondary">From dry to sweet, on both banks of the Loire</div>
+    <div class="intro-grape-secondary">From sparkling to sweet, on both banks of the Loire</div>
   </div>
   <div class="intro-vline"></div>
-  <div class="intro-grid">
+  <div class="intro-grid" style="grid-template-columns: repeat(4, 1fr); max-width: 880px;">
+    <div><div class="ig-label">Sparkling</div><div class="ig-val"><em>Extra Brut</em><br>Méthode Traditionnelle</div></div>
     <div><div class="ig-label">Sec</div><div class="ig-val"><em>up to 4 g/L</em><br>Clos du Bourg Sec<br>Les Hauts de Husseau</div></div>
     <div><div class="ig-label">Demi-sec</div><div class="ig-val"><em>up to 12 g/L</em><br>Les Tuffeaux</div></div>
     <div><div class="ig-label">Moelleux</div><div class="ig-val"><em>up to 45 g/L</em><br>Moelleux Réserve</div></div>
@@ -229,16 +245,21 @@ wine_notes:
 </div>
 
 <!-- ─────────────────────────────────────────────────────────
-     SLIDES 5 TO 12 · THE FOUR WINES, two slides each, generated from
+     SLIDES 5 TO 14 · THE FIVE WINES, two slides each, generated from
      tastings.yml
      Order, names, producers, vintages, appellations and blends come
-     from the data (driest first, as listed there); extras from
+     from the data (the sparkling first, then driest to sweetest, as
+     listed there); extras from
      wine_notes in the front matter. Per wine: slide A with the topline
      AOP map, slide B with the detailed map and the same panel.
-       5, 6    Clos du Bourg Sec      Vouvray AOP, Vouvray communes
-       7, 8    Les Hauts de Husseau   Montlouis AOP, Montlouis vineyards
-       9, 10   Les Tuffeaux           Montlouis AOP, Montlouis vineyards
-       11, 12  Moelleux Reserve       Vouvray AOP, Vouvray communes Sources for the extras:
+       5, 6    Extra Brut             Vouvray AOP, Vouvray communes
+       7, 8    Clos du Bourg Sec      Vouvray AOP, Vouvray communes
+       9, 10   Les Hauts de Husseau   Montlouis AOP, Montlouis vineyards
+       11, 12  Les Tuffeaux           Montlouis AOP, Montlouis vineyards
+       13, 14  Moelleux Reserve       Vouvray AOP, Vouvray communes
+     Sources for the extras:
+     Extra Brut (Clos Naudin): dosage 1.33 g/L, four years on lees
+       (producer notes quoted by several merchants).
      Clos du Bourg Sec (Huet): walled Clos du Bourg on the Premiere
        Cote above Vouvray, about 6 ha, shallow stony clay-limestone over
        tuffeau (importer and merchant sheets, several agreeing).
