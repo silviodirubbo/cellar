@@ -6,7 +6,9 @@
   Page front matter: tasting_slug, number ("01".."07", omit for a
   chapterless one-off), story_bg (green|offwhite|loire), intro, wine_types
   (array, same order/length as the tasting's wines, each red|white),
-  closing, dots_chapter (optional override, see story/dots.html),
+  closing, closing_next (optional, true appends the next dated tasting
+  after this one, read from _data/tastings.yml, on a line of its own
+  as "Title, Friday 27 November."), dots_chapter (optional override, see story/dots.html),
   texture_image + texture_opacity (optional, see story/dots.html and
   tasting-reveal.html for the same mechanism).
   story_bg: loire is the Loire chapter's colour (#5B6670), used in place
@@ -35,12 +37,18 @@
           {% include story/bottle.html type=wtype %}
           <div>
             <div class="story-wine__name">{{ wine.name }}</div>
-            <div class="story-wine__meta">{{ wine.producer | upcase }} &middot; {{ wine.vintage }} &middot; {{ appel | upcase }}</div>
+            <div class="story-wine__meta">{{ wine.producer | upcase }} &middot; {{ wine.vintage }} &middot; {% if page.appellation_nowrap %}<span style="white-space: nowrap;">{{ appel | upcase }}</span>{% else %}{{ appel | upcase }}{% endif %}</div>
           </div>
         </div>
       {% endfor %}
     </div>
     <hr class="story-rule" style="margin-top: 8px; margin-bottom: 32px;">
-    <p class="story-italic" style="font-size: 38px;">{{ page.closing }}</p>
+    {% assign closing_tail = "" %}
+    {% if page.closing_next %}
+      {% assign later = site.data.tastings | where_exp: "t", "t.date > tasting.date" | where_exp: "t", "t.date_tbd != true" | sort: "date" %}
+      {% assign next_t = later | first %}
+      {% if next_t %}{% capture closing_tail %}<br>{{ next_t.title }}, {{ next_t.date | date: "%A %-d %B" }}.{% endcapture %}{% endif %}
+    {% endif %}
+    <p class="story-italic" style="font-size: 38px;">{{ page.closing }}{{ closing_tail }}</p>
   </div>
 </div>
