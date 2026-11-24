@@ -19,20 +19,32 @@
   the upcoming list), cta (list of lines above the link bar), hero (the
   hook set larger, as the slide's one focal point), texture_image and
   texture_opacity (the tasting's cover faded in behind the slide, the
-  same mechanism as recap.html).
+  same mechanism as recap.html), cta_hide_when_full (needs show_places:
+  the cta is left out while the tasting reads "Fully booked", since
+  there is nothing to sign up for).
+  Wine count: the token {wines} in hook, hook_em or body is replaced by
+  the tasting's number of wines in words ("five"), {Wines} by the same
+  word capitalised, so the count is always read from the data.
 {% endcomment %}
 {% assign tasting = site.data.tastings | where: "slug", page.tasting_slug | first %}
 {% assign chapter = nil %}
 {% if tasting.chapter %}{% assign chapter = site.chapters | where: "slug", tasting.chapter | first %}{% endif %}
+{% assign note_numbers = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve" | split: "," %}
+{% assign note_count = tasting.wines.size | default: 0 %}
+{% assign note_wines = note_numbers[note_count] | default: note_count | append: "" %}
+{% assign note_wines_cap = note_wines | capitalize %}
+{% assign note_hook = page.hook | replace: "{wines}", note_wines | replace: "{Wines}", note_wines_cap %}
+{% assign note_hook_em = page.hook_em | replace: "{wines}", note_wines | replace: "{Wines}", note_wines_cap %}
+{% assign note_body = page.body | join: "<br>" | replace: "{wines}", note_wines | replace: "{Wines}", note_wines_cap %}
 <div class="story story--{{ page.story_bg }}">
   {% if page.texture_image %}
     <div class="story-texture" style="background-image: url('{{ page.texture_image | relative_url }}'); opacity: {{ page.texture_opacity | default: 0.16 }};" aria-hidden="true"></div>
   {% endif %}
   <div class="story__inner story__inner--note{% if page.hero %} story__inner--note-hero{% endif %}">
     {% if page.label %}<p class="story-eyebrow">{{ page.label }}</p>{% endif %}
-    <h1 class="story-title story-hook">{{ page.hook }}<span class="story-hook__em">{{ page.hook_em }}</span></h1>
+    <h1 class="story-title story-hook">{{ note_hook }}<span class="story-hook__em">{{ note_hook_em }}</span></h1>
     {% if page.plain %}{% assign note_text = "story-note__plain" %}{% else %}{% assign note_text = "story-italic" %}{% endif %}
-    <p class="{{ note_text }} story-note__body">{{ page.body | join: "<br>" }}</p>
+    <p class="{{ note_text }} story-note__body">{{ note_body }}</p>
     <div class="story-note__foot">
       <hr class="story-rule story-note__rule">
       {% if page.chapter_tag and chapter %}<div class="story-upcoming__tag story-note__tag">{{ chapter.title }}</div>{% endif %}
@@ -41,16 +53,21 @@
         {% if chapter and page.chapter_tag != true %}<dt>Chapter</dt><dd>{{ chapter.title }}</dd>{% endif %}
         <dt>When</dt><dd>{{ tasting.date | date: "%a %-d %b" }}, {{ tasting.location }}{% if page.city %}, {{ page.city }}{% endif %}</dd>
       </dl>
+      {% assign note_full = false %}
       {% if page.show_places %}
         {% capture avail_html %}{% include availability.html tasting=tasting %}{% endcapture %}
         {% if avail_left == nil %}{% assign note_places = avail_capacity | append: " places" %}
-        {% elsif avail_left == 0 %}{% assign note_places = "Fully booked" %}
+        {% elsif avail_left == 0 %}{% assign note_places = "Fully booked" %}{% assign note_full = true %}
         {% elsif avail_left == 1 %}{% assign note_places = "1 place available" %}
         {% else %}{% assign note_places = avail_left | append: " places available" %}{% endif %}
-        <div class="story-upcoming__status story-note__places">{{ note_places }}</div>
+        {% assign note_cta = page.cta %}
+        {% if page.cta_hide_when_full and note_full %}{% assign note_cta = nil %}{% endif %}
+        <div class="story-upcoming__status story-note__places{% if note_cta == nil and page.glass == nil %} story-note__places--last{% endif %}">{{ note_places }}</div>
+      {% else %}
+        {% assign note_cta = page.cta %}
       {% endif %}
       {% if page.glass %}<p class="story-italic story-note__glass">{{ page.glass | join: "<br>" }}</p>{% endif %}
-      {% if page.cta %}<p class="{{ note_text }} story-note__cta">{{ page.cta | join: "<br>" }}</p>{% endif %}
+      {% if note_cta %}<p class="{{ note_text }} story-note__cta">{{ note_cta | join: "<br>" }}</p>{% endif %}
       {% include story/linkbar.html %}
     </div>
   </div>

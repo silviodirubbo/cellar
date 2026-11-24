@@ -497,6 +497,10 @@
 .story-note__tag { margin-bottom: 26px; }
 .story-note__places { margin-top: 30px; }
 .story-note__cta { margin: 48px 0 40px; }
+/* Place status as the last line above the link bar (no cta and no glass
+   line, e.g. a fully booked tasting with cta_hide_when_full): the cta's
+   bottom margin, so the status does not touch the bar. */
+.story-note__places--last { margin-bottom: 56px; }
 /* hero: the hook at the deck covers' title size (104px), for a teaser
    whose headline carries the slide. */
 .story__inner--note-hero .story-hook { font-size: 104px; line-height: 1.05; margin-bottom: 56px; }
