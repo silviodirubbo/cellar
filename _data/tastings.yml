@@ -534,7 +534,7 @@
   slides: true
   wines:
     - name: "Méthode Traditionnelle Extra Brut"
-      producer: "Clos Naudin / Domaine Foreau"
+      producer: "Domaine Foreau"
       vintage: 2019
       appellation: "Vouvray AOC, sparkling"
       blend: "100% Chenin Blanc"
@@ -570,7 +570,7 @@
       region: "Loire"
       image: "vouvray-montlouis/bottle_les-tuffeaux.png"
     - name: "Moelleux Réserve"
-      producer: "Clos Naudin / Domaine Foreau"
+      producer: "Domaine Foreau"
       vintage: 2018
       appellation: "Vouvray AOC, moelleux"
       blend: "100% Chenin Blanc"
