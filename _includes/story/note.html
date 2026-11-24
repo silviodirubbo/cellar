@@ -48,7 +48,7 @@
     <div class="story-note__foot">
       <hr class="story-rule story-note__rule">
       {% if page.chapter_tag and chapter %}<div class="story-upcoming__tag story-note__tag">{{ chapter.title }}</div>{% endif %}
-      <dl class="story-facts story-note__facts">
+      <dl class="story-facts story-note__facts{% if page.show_places != true and page.glass == nil and page.cta == nil %} story-note__last{% endif %}">
         <dt>Tasting</dt><dd>{{ tasting.title }}</dd>
         {% if chapter and page.chapter_tag != true %}<dt>Chapter</dt><dd>{{ chapter.title }}</dd>{% endif %}
         <dt>When</dt><dd>{{ tasting.date | date: "%a %-d %b" }}, {{ tasting.location }}{% if page.city %}, {{ page.city }}{% endif %}</dd>
@@ -62,7 +62,7 @@
         {% else %}{% assign note_places = avail_left | append: " places available" %}{% endif %}
         {% assign note_cta = page.cta %}
         {% if page.cta_hide_when_full and note_full %}{% assign note_cta = nil %}{% endif %}
-        <div class="story-upcoming__status story-note__places{% if note_cta == nil and page.glass == nil %} story-note__places--last{% endif %}">{{ note_places }}</div>
+        <div class="story-upcoming__status story-note__places{% if note_cta == nil and page.glass == nil %} story-note__last{% endif %}">{{ note_places }}</div>
       {% else %}
         {% assign note_cta = page.cta %}
       {% endif %}
