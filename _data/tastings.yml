@@ -552,7 +552,7 @@
       region: "Loire"
       image: "vouvray-montlouis/bottle_clos-du-bourg-sec.png"
     - name: "Les Hauts de Husseau"
-      producer: "Jacky Blot / Domaine de la Taille aux Loups"
+      producer: "Domaine de la Taille aux Loups"
       vintage: 2023
       appellation: "Montlouis-sur-Loire AOC, sec"
       blend: "100% Chenin Blanc"
