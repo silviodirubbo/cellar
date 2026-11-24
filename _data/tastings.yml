@@ -542,7 +542,7 @@
       country: France
       region: "Loire"
       image: "vouvray-montlouis/bottle_methode-traditionnelle-extra-brut.png"
-    - name: "Clos du Bourg Sec"
+    - name: "Clos du Bourg"
       producer: "Domaine Huet"
       vintage: 2023
       appellation: "Vouvray AOC"
