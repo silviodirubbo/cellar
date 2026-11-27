@@ -10,7 +10,11 @@
   after this one, read from _data/tastings.yml, on a line of its own
   as "Title, Friday 27 November."), dots_chapter (optional override, see story/dots.html),
   texture_image + texture_opacity (optional, see story/dots.html and
-  tasting-reveal.html for the same mechanism).
+  tasting-reveal.html for the same mechanism), wine_names and
+  wine_appellations (optional lists, same order as the wines: a
+  non-empty entry replaces that wine's name or appellation on this
+  slide only, _data/tastings.yml stays as it is; an empty "" keeps the
+  data value).
   story_bg: loire is the Loire chapter's colour (#5B6670), used in place
   of green for that chapter's green/light alternation.
   If the tasting has no chapter (site.chapters where: "slug" finds
@@ -32,11 +36,13 @@
     <div class="story-winelist">
       {% for wine in tasting.wines %}
         {% assign wtype = page.wine_types[forloop.index0] %}
-        {% assign appel = wine.appellation | remove: " DOCG" | remove: " AOC" | remove: " DOC" %}
+        {% assign wname = page.wine_names[forloop.index0] | default: wine.name %}
+        {% assign wappel = page.wine_appellations[forloop.index0] | default: wine.appellation %}
+        {% assign appel = wappel | remove: " DOCG" | remove: " AOC" | remove: " DOC" %}
         <div class="story-wine">
           {% include story/bottle.html type=wtype %}
           <div>
-            <div class="story-wine__name">{{ wine.name }}</div>
+            <div class="story-wine__name">{{ wname }}</div>
             <div class="story-wine__meta">{{ wine.producer | upcase }} &middot; {{ wine.vintage }} &middot; {% if page.appellation_nowrap %}<span style="white-space: nowrap;">{{ appel | upcase }}</span>{% else %}{{ appel | upcase }}{% endif %}</div>
           </div>
         </div>
